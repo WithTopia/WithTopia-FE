@@ -2,7 +2,7 @@
 ![waving](https://capsule-render.vercel.app/api?type=waving&height=300&text=WithTopia!&fontAlign=80&fontAlignY=40&color=gradient)
 
 
-<h1 style="text-align: center;">익명으로 즐기는 화상채팅!</h1>
+<h1 style="text-align: center;">🌿 익명으로 즐기는 화상채팅! 🌿</h1>
 
 
 ## Introduction of Project

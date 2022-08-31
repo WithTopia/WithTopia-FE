@@ -1,8 +1,13 @@
 import React from 'react'
+import Header from '../components/header/Header'
+import Myinfo from '../components/myinfo/Myinfo'
 
 const MainPage = () => {
   return (
-    <div>MainPage</div>
+    <div className='main-page'>
+      <Header></Header>
+      <Myinfo></Myinfo>
+    </div>
   )
 }
 

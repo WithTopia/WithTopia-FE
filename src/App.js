@@ -7,10 +7,11 @@ import Ranking from "./pages/Ranking";
 import Room from "./pages/Room";
 import CreateRoom from "./pages/CreateRoom";
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Routes>
         <Route path='/' element={<MainBoard></MainBoard>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
@@ -18,6 +19,7 @@ function App() {
         <Route path='/main' element={<MainPage></MainPage>}></Route>
         <Route path='/room' element={<Room></Room>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/create' element={<CreateRoom></CreateRoom>}></Route>
       </Routes>
     </div>

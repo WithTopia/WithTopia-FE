@@ -1,0 +1,14 @@
+.footer{
+    width: 100%;
+    margin-left: 50px;
+    opacity: 0.3;
+    display: flex;
+    .footer-left{
+        margin-right: 35px;
+        cursor: pointer;
+    }
+    .footer-right{
+        margin-left: 35px;
+        cursor: pointer;
+    }
+}

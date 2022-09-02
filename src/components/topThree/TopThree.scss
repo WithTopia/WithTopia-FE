@@ -1,0 +1,43 @@
+.top-three{
+    border-radius: 15px;
+    background-color: #E8F8FF;
+    padding: 24px;
+    font-size: 22px;
+    font-weight: bold;
+    min-height: 320px;
+    min-width: 350px;
+    max-width: 350px;
+    margin: 0 auto;
+    box-shadow: 5px 5px 3px gray;
+    .top-three-font{
+        color: black;
+        text-decoration: none;
+    }
+    .top-text-content{
+        display: flex;
+        .top-rank-text{
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .lion {
+            margin-left: 5px;
+            height: 25px;
+        }
+    }
+    .top-container{
+        border-radius: 15px;
+        background-color: white;
+        margin: 20px auto;
+        width: 80%;
+        padding: 10px;
+        .items{
+            padding-top: 7px;            
+            margin-left: 15px;
+            width: 96%;
+            margin-bottom: 5px;
+            font-size: 24px;
+            height: 32px;
+        }
+    }
+}

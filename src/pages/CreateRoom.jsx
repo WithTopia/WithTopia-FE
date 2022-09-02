@@ -1,9 +1,10 @@
 import React from 'react'
 
-const createRoom = () => {
+const CreateRoom = () => {
   return (
-    <div>createRoom</div>
+    <div className='create-room'>
+    </div>
   )
 }
 
-export default createRoom
+export default CreateRoom

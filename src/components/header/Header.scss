@@ -1,7 +1,32 @@
 .header{
-    width: 100%;
     .header-container{
-        height: 70px;
+        margin: 0 auto;
+        margin-top: 30px;
+        width: 86%;
+        height: 90px;
         background-color: tomato;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .haeder-left{
+            margin-left: 15px;
+            .header-logo{
+                width: 70px;
+            }
+        }
+        .haeder-right{
+            ul{
+                display: flex;
+                .items{
+                    margin-right: 30px;
+                    .items-link{
+                        font-weight: bold;
+                        color: black;
+                        font-size: 22px;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
     }
 }

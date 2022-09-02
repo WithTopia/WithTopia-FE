@@ -1,0 +1,19 @@
+.main-page{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    .main-content{
+        width: 86%;
+        margin: 10px auto 50px auto;
+        display: flex;
+        justify-content: space-between;
+        .some-people{
+            align-items: center;
+        }
+        .main-content-left{
+        }
+        .main-content-right{
+            width: 100%;
+        }
+    }
+}

@@ -8,6 +8,7 @@ import Room from "./pages/Room";
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateRoom from "./pages/CreateRoom";
+import Chattingbox from "./pages/ChattingBox"
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/room' element={<Room></Room>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/create' element={<CreateRoom></CreateRoom>}></Route>
+        <Route path='/chat' element={<Chattingbox></Chattingbox>}></Route>
       </Routes>
     </div>
   );

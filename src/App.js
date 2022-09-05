@@ -7,7 +7,8 @@ import Ranking from "./pages/Ranking";
 import Room from "./pages/Room";
 import Login from './pages/Login';
 import Register from './pages/Register';
-import FindPw from "./pages/FindPw"
+import FindPw from "./pages/FindPw";
+import UpdatePw from "./pages/UpdatePw";
 import CreateRoom from "./pages/CreateRoom";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/findpw' element={<FindPw></FindPw>}></Route>
+        <Route path='/updatepw' element={<UpdatePw></UpdatePw>}></Route>
         {/* <Route path='/create' element={<CreateRoom></CreateRoom>}></Route> */}
       </Routes>
     </div>

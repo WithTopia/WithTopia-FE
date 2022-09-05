@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import FindPw from "./pages/FindPw"
 import CreateRoom from "./pages/CreateRoom";
+import Chattingbox from "./pages/ChattingBox"
 
 const App = () => {
   return (

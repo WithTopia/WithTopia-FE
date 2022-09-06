@@ -1,9 +1,12 @@
 import React, { useState ,useEffect} from 'react'
 import axios from "axios"
 import { OpenVidu } from 'openvidu-browser'
+import { useCookies } from 'react-cookie';
+
 import { createBrowserHistory } from 'history'
 
 const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
+const loginUrl = process.env.REACT_APP_LOGIN
 const history = createBrowserHistory()
 
 const Room = () => {
@@ -11,12 +14,22 @@ const Room = () => {
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
   const [username, setUsername] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie']);
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
+
+  const login = async () =>{
+    const response = await axios.get(loginUrl, {
+      user:"publisher1",
+      pass:"pass"
+    },{withCredentials: true})
+    console.log(response)
+    return response; // The sessionId
+  }
   const getToken = async (sessionId) => {
     return createSession(sessionId)
     .then((sessionId) =>
@@ -172,7 +185,8 @@ const Room = () => {
 
   useEffect(()=>{
     window.addEventListener("beforeunload", onbeforeunload);
-    joinSession()
+    // joinSession()
+    login()
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
       // 채팅 닫기 등

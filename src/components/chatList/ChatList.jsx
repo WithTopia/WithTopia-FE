@@ -20,7 +20,7 @@ const ChatList = () => {
         <div className='chat-list-container'>
           <div className='chat-list-text2'>
             <div className='chat-text1'>지금 활동중인 위토들</div>
-            <div onClick={handleScreen} className="chat-text2"><MoveButton2 text={"방 만들기"}></MoveButton2></div>
+            <div onClick={handleScreen} className="chat-text2"><MoveButton2 text={"방 생성"}></MoveButton2></div>
           </div>
           {data.map((datas,index)=>{
             return(

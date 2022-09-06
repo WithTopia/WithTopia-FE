@@ -1,21 +1,35 @@
 import React, { useState ,useEffect} from 'react'
-import OpenViduSession from "openvidu-react"
 import axios from "axios"
 import { OpenVidu } from 'openvidu-browser'
+import { useCookies } from 'react-cookie';
 
-const APPLICATION_SERVER_URL = "https://3.35.133.225/"
+import { createBrowserHistory } from 'history'
+
+const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
+const loginUrl = process.env.REACT_APP_LOGIN
+const history = createBrowserHistory()
 
 const Room = () => {
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
   const [username, setUsername] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(['cookie']);
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
+  const [isConnect,setIsConnect] = useState(false)
 
+  const login = async () =>{
+    const response = await axios.get(loginUrl, {
+      user:"publisher1",
+      pass:"pass"
+    },{withCredentials: true})
+    console.log(response)
+    return response; // The sessionId
+  }
   const getToken = async (sessionId) => {
     return createSession(sessionId)
     .then((sessionId) =>
@@ -50,13 +64,8 @@ const Room = () => {
     setOV(newOV);
     setSession(newSession);
 
-    // 4. session에 connect하는 과정
     
-   }
-   const connection = (e) => {
-    e.preventDefault()
-    // 4-a token 생성
-    console.log(session)
+    // 그놈의 토큰 처리
     getToken(sessionId).then((token) => {
       session.connect(token, { clientData: username})
         .then(async () => {
@@ -102,7 +111,8 @@ const Room = () => {
         });
     })
   }
-  const stream = () =>{
+   const example = () =>{
+    // 4. session에 connect하는 과정
     session.on('streamCreated', (e) => {
       const newSubscriber = session.subscribe(
         e.stream,
@@ -114,6 +124,7 @@ const Room = () => {
       newSubscribers.push(newSubscriber);
   
       setSubscribers([...newSubscribers]);
+      setIsConnect(true)
     });
     // 1-2 session에서 disconnect한 사용자 삭제
     session.on('streamDestroyed', (e) => {
@@ -130,7 +141,7 @@ const Room = () => {
     session.on('exception', (exception) => {
       console.warn(exception);
     });
-  }
+   }
   
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
@@ -159,17 +170,35 @@ const Room = () => {
   const leaveSession = () => {
     session.disconnect()
   }
+  // 브라우저 새로고침, 종료, 라우트 변경
+  const onbeforeunload = (event) => {
+    event.preventDefault();
+    event.returnValue = "";
+    leaveSession();
+  };
+  // 뒤로가기;
+  useEffect(() => {
+    window.onpopstate = () => {
+      history.push("/");
+    };
+  });
+
   useEffect(()=>{
-    joinSession()
+    window.addEventListener("beforeunload", onbeforeunload);
+    // joinSession()
+    login()
+    return () => {
+      window.removeEventListener("beforeunload", onbeforeunload);
+      // 채팅 닫기 등
+    };
   },[])
   return (
     <div className='room'>
       <div>
-      {/* {session === undefined ? ( */}
         <div id="join">
           <div id="join-dialog">
               <h1> Join a video session </h1>
-              <form onSubmit={(e)=>connection(e)}>
+              <form>
                   <p>
                     <label>Participant: </label>
                     <input
@@ -196,20 +225,6 @@ const Room = () => {
               </form>
           </div>
       </div>
-      {/* ) : (
-          <div id="session">
-          <OpenViduSession
-            id="opv-session"
-            sessionName={session}
-            user={username}
-            token={token}
-            joinSession={sessionId}
-            leaveSession={publisher}
-            // error={this.handlerErrorEvent}
-            error={"error"}
-          />
-          </div>
-      )} */}
       </div>
     </div>
   )

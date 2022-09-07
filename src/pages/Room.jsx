@@ -7,6 +7,7 @@ import { createBrowserHistory } from 'history'
 
 const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
 const loginUrl = process.env.REACT_APP_LOGIN
+const loginUrl2 = process.env.REACT_APP_LOGIN2
 const history = createBrowserHistory()
 
 const Room = () => {
@@ -23,10 +24,7 @@ const Room = () => {
   const [isConnect,setIsConnect] = useState(false)
 
   const login = async () =>{
-    const response = await axios.get(loginUrl, {
-      user:"publisher1",
-      pass:"pass"
-    },{withCredentials: true})
+    const response = await axios.get(loginUrl,{withCredentials: true})
     console.log(response)
     return response; // The sessionId
   }
@@ -187,6 +185,7 @@ const Room = () => {
     window.addEventListener("beforeunload", onbeforeunload);
     // joinSession()
     login()
+    // login2()
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
       // 채팅 닫기 등

@@ -1,35 +1,34 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef , useState } from "react";
 import "./ChatBox.scss"
+import logo from "../../assets/cam.png"
 
 const Message = ({ message }) => {
-  const { currentUser } = useContext("AuthContext");
-  const { data } = useContext("ChatContext");
-
+  // const { currentUser } = useContext("AuthContext");
+  // const { data } = useContext("ChatContext");
+  const [owner, setOwner] = useState(false)
   const ref = useRef();
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    
   }, [message]);
 
   return (
-    <div
-      ref={ref}
-      className={`message ${message.senderId === currentUser.uid && "owner"}`}
-    >
-      <div className="messageInfo">
-        <img
-          src={
-            message.senderId === currentUser.uid
-              ? currentUser.photoURL
-              : data.user.photoURL
-          }
-          alt=""
-        />
-        <span>just now</span>
-      </div>
-      <div className="messageContent">
-        <p>{message.text}</p>
-        {message.img && <img src={message.img} alt="" />}
+    <div>
+      <div
+        ref={ref}
+        className={`message` + owner ? " owner" : ""}>
+        <div className="messageInfo">
+          <img
+            src={logo}
+            alt=""/>
+          <span>just now</span>
+        </div>
+        <div className="messageContent">
+          <p>{message}</p>
+          <p>{message}</p>
+          <p>{message}</p>
+          <p>{message}</p>
+        </div>
       </div>
     </div>
   );

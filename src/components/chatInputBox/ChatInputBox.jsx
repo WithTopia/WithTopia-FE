@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
-import Img from "../../assets/lion.png";
 import Attach from "../../assets/attach.png";
-import "./ChatInputBox.scss"
 
 const ChatInputBox = () => {
   const [text, setText] = useState("");
@@ -26,7 +24,7 @@ const ChatInputBox = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img src={Img} alt="" />
+          <img src={Attach} alt="" />
         </label>
         <button onClick={handleSend}>Send</button>
       </div>

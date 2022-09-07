@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import {over} from 'stompjs';
+import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
 import "./Chat.scss"
+import { useNavigate } from 'react-router-dom';
+import ChatDetail from './ChatDetail';
+import Cam from "../../assets/cam.png";
+import Add from "../../assets/add.png";
+import More from "../../assets/more.png";
+import ChatBox from "../chatBox/ChatBox"
+import ChatInputBox from "../chatInputBox/ChatInputBox"
+import "./ChatDetail.scss"
 
 var stompClient =null;
 const url = process.env.REACT_APP_SERVER_URL2
 
 const ChatRoom = () => {
+    const navigate = useNavigate()
     const [privateChats, setPrivateChats] = useState(new Map());     
     const [roomLists, setRoomLists] = useState(); 
-    // stompClient.debug= () => {};
     const [tab,setTab] =useState("CHATROOM");
     const [userData, setUserData] = useState({
-        username: '',
+        username: '바보',
         receivername: '',
         connected: false,
         message: '',
@@ -22,42 +30,30 @@ const ChatRoom = () => {
     const [message,setMessage] = useState("입장요")
     const [roomName,setRoomName] = useState("")
     const [roomId,setRoomId] = useState("")
-
+    const [getMessages,setGetMessages] = useState([])
     const createRooms = async () => {
         if (roomName===""){
             alert("방 제목을 입력해주세요.")
         }
         else{
             const repo = await axios.post(url+`/chat/room`,{name:roomName})
-            setRoomId(repo.data.roomId)
+            const id = String(repo.data.roomId)
+            setRoomId(id)
             setUserData({...userData,connected: true});
+            // navigate(`/chatdetail/${repo.data.roomId}`)
             setRoomName("")
-            subscribing()
+            // subscribing()
         }     
     }
-    const subscribing = () => {
+    const subscribing = (id) => {
         let content = {
             type:'ENTER',  
-            roomId:roomId,
+            roomId:id,
             sender:userData.username,
             message:message
         };
-        stompClient.subscribe(url+'/topic/chat/room/'+roomId, JSON.stringify(content));
-        // stompClient.subscribe(url+'/user/'+userData.username+'/private', onPrivateMessage);
-    }
-    const connect =()=>{
-        setUserData({...userData,connected: true});
-        let Sock = new SockJS(url);
-        stompClient = over(Sock);
-        // stompClient.connect({},()=>onConnected, onError);
-    }
-    const userJoin=()=>{
-        let chatMessage = {
-            type:'ENTER',  
-            roomId:roomId,
-            sender:userData.username
-        };
-        stompClient.send(url+"/app/chat/message", {}, JSON.stringify(chatMessage));
+        console.log(content)
+        stompClient.subscribe('/topic/chat/room/'+id, JSON.stringify(content));
     }
 
     const onMessageReceived = (payload)=>{
@@ -90,27 +86,27 @@ const ChatRoom = () => {
     const onError = (err) => {
         console.log(err)
     }
-    const enterRoom = (id) => {
-        let sender = prompt('대화명을 입력해주세요.');
-        if(sender !== "") {
-          localStorage.setItem('sender',sender);
-          localStorage.setItem('roomId',id);
-          window.location.href=url+"/chat/room/enter/"+roomId;
-        }
+    const enterRoom = async (id) => {
+        const repo = await axios.get(url+`/chat/room/${id}`)
+        console.log(repo)
+        console.log("방접속")
+        // navigate(`/chatdetail/${id}`)
+        setUserData({...userData,connected: true});
+        subscribing(id)
     }
     const handleMessage =(event)=>{
         const {value}=event.target;
         setUserData({...userData,"message": value});
     }
-    const sendValue=()=>{
+    const sendMessage = () =>{
         if (stompClient) {
             let chatMessage = {
                 sender: userData.username,
-                message: userData.message,
+                message: "폐하",
                 type:"TALK",
                 roomId:roomId
             };
-            stompClient.send("/app/chat/message", {}, JSON.stringify(chatMessage));
+            stompClient.send("/app/chat/message",{},JSON.stringify(chatMessage));
             setUserData({...userData,"message": ""});
             console.log(chatMessage,"success")
         }
@@ -118,7 +114,7 @@ const ChatRoom = () => {
 
     const sendPrivateValue=()=>{
         if (stompClient) {
-          var chatMessage = {
+          let chatMessage = {
             senderName: userData.username,
             receiverName:tab,
             message: userData.message,
@@ -140,30 +136,50 @@ const ChatRoom = () => {
     }
     const handleRoom = (e) => {
         setRoomName(e.target.value)
-    }    
+    }
+    const connect =()=>{
+        let Sock = new SockJS(url+"/ws/chat");
+        stompClient = Stomp.over(Sock);
+    }
     useEffect(() => {
+        findRoom()
         connect()
     }, []);
     return (
-    <div className="container">접속하기
-        <button onClick={findRoom}>방 전체 불러오기</button>
-        <div className="chat-box">
-            <div className='container1'>
-                <h1>방 만들기</h1>
-                <input type="text" placeholder='방 제목' value={roomName} onChange={handleRoom}></input>
-                <button onClick={createRooms}>방파기</button>
+        <>
+        {userData.connected ? 
+        <div className="chat">
+            <div className="chatInfo">
+                <span>조원영,서현웅...외 4명</span>
+                <div className="chatIcons">
+                    <img src={Cam} alt="" />
+                    <img src={Add} alt="" />
+                    <img src={More} alt="" />
+                </div>
             </div>
-        </div>
-        <ul>
-            {roomLists && roomLists.map((lists,index)=>{
-                return(
-                    <div key={index} className="room-list" onClick={()=>enterRoom(lists.roomId)}>
-                        <li>{lists.roomName}</li>
-                    </div>
-                )
-            })}
-        </ul>
-    </div>
+                <button onClick={sendMessage}>클릭!</button>
+                <ChatBox message={"massage"}></ChatBox>
+                <ChatInputBox></ChatInputBox>
+        </div> : 
+        <div className="container">접속하기
+            <div className="chat-box">
+                <div className='container1'>
+                    <h1>방 만들기</h1>
+                    <input type="text" placeholder='방 제목' value={roomName} onChange={handleRoom}></input>
+                    <button onClick={createRooms}>방파기</button>
+                </div>
+            </div>
+            <ul>
+                {roomLists && roomLists.map((lists,index)=>{
+                    return(
+                        <div key={index} className="room-list" onClick={()=>enterRoom(lists.roomId)}>
+                            <li>{lists.roomName}</li>
+                        </div>
+                    )
+                })}
+            </ul>
+        </div>}
+        </>
     )
 }
 

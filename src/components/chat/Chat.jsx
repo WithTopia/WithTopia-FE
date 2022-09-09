@@ -50,7 +50,7 @@ const ChatRoom = () => {
             message:"님이 입장하셨습니다."
         };
         console.log(content,"보냄")
-        stompClient.subscribe('/topic/chat/room/'+id, JSON.stringify(content));
+        stompClient.subscribe('/topic/chat/'+id, JSON.stringify(content));
     }
 
     const onMessageReceived = (id)=>{

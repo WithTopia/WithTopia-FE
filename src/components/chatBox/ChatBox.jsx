@@ -1,37 +1,44 @@
-import React, { useContext, useEffect, useRef , useState } from "react";
-import "./ChatBox.scss"
-import logo from "../../assets/cam.png"
+import React, { useEffect, useRef , useState } from "react";
+import "../chatInputBox/ChatInputBox.scss"
 
-const Message = ({ message }) => {
-  // const { currentUser } = useContext("AuthContext");
-  // const { data } = useContext("ChatContext");
+const ChatBox = ({ user , text}) => {
+  const [data , setData] = useState([])
   const [owner, setOwner] = useState(false)
   const ref = useRef();
-
-  useEffect(() => {
-    
-  }, [message]);
-
+  
+  const update = {
+    user:user,
+    message:text
+  }
+  const chatUpdate = () => {
+    setData([...data,update])
+  }
+  useEffect(()=>{
+    if(text !== ""){
+      chatUpdate()
+    }else {
+      setData([...data,{user:user,message:`${user} 님이 입장하셨습니다.`}])
+    }
+  }, [user,text]);
   return (
-    <div>
+    <div className="messages">
       <div
         ref={ref}
-        className={`message` + owner ? " owner" : ""}>
+        className={"message" + (owner ? " owner" : "")}>
         <div className="messageInfo">
-          <img
-            src={logo}
-            alt=""/>
-          <span>just now</span>
         </div>
         <div className="messageContent">
-          <p>{message}</p>
-          <p>{message}</p>
-          <p>{message}</p>
-          <p>{message}</p>
+          {data.map((datas,index)=>{
+            return(
+              <div key={index}>{user}
+                <p>{datas.message}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
   );
 };
 
-export default Message;
+export default ChatBox;

@@ -1,19 +1,10 @@
 import './App.css';
 import { useEffect } from 'react';
-// import { Routes, Route } from 'react-router-dom';
-// import MainPage from './pages/MainPage';
-// import MainBoard from "./pages/MainBoard";
-// import Profile from "./pages/Profile";
-// import Ranking from "./pages/Ranking";
-// import Room from "./pages/Room";
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-// import CreateRoom from "./pages/CreateRoom";
-// import Chattingbox from "./pages/ChattingBox"
 import Sidebar from './components/sideBar/SideBar';
 import Header from './components/header/Header';
 import Footer from './footer/Footer';
 import MainFrame from './components/mainBox/MainFrame';
+
 
 
 const App = () => {
@@ -32,6 +23,7 @@ const App = () => {
         <MainFrame></MainFrame>
       </div>
       <Footer></Footer>
+
     </div>
   );
 }

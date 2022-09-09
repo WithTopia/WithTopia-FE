@@ -37,7 +37,7 @@ const ChatList = () => {
   },[])
   return (
     <div>
-      {/* <div className='chat-list-text-content'>
+      <div className='chat-list-text-content'>
         <div className='chat-list-text'>함께 해요,</div>
         <img src={logo} className="withtopia"></img>
       </div>
@@ -47,7 +47,7 @@ const ChatList = () => {
             <div className='chat-text1'>지금 활동중인 위토들</div>
             <div onClick={handleScreen} className="chat-text2"><MoveButton2 text={"방 생성"}></MoveButton2></div>
           </div>
-          {/* {data.map((datas,index)=>{
+          {data.map((datas,index)=>{
             return(
               <div key={index} className='chat-item-lists'>
                 <a href='/main' className='chat-list-content'>
@@ -61,10 +61,10 @@ const ChatList = () => {
                 </a>
               </div>
             )
-          })} */}
+          })}
         </div>
       </div>
-      {pageOpen === true ? <AlertCreateRoom pageOpen={pageOpen} setPageOpen={setPageOpen}></AlertCreateRoom> : null} */}
+      {pageOpen === true ? <AlertCreateRoom pageOpen={pageOpen} setPageOpen={setPageOpen}></AlertCreateRoom> : null}
     </div>
   )
 }

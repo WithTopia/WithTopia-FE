@@ -5,7 +5,9 @@ import axios from 'axios'
 // import TopThree from "../components/topThree/TopThree"
 // import ChatList from '../components/chatList/ChatList'
 import "../assets/Global.scss"
-
+import Header from '../components/header/Header'
+import Footer from "../components/footer/Footer"
+import SideBar from "../components/sideBar/SideBar"
 
 const MainPage = () => {
   // const [chatRoom, setChatRoom] = useState([]);
@@ -30,19 +32,22 @@ const MainPage = () => {
 
   return (
     <div className='default-page-size'>
-      <div>mainPage :)
-      {/* <div>
+      <Header></Header>
+      {/* <div>mainPage :)
+      <div>
         {chatRoom.map((room) => (
           <div>
             <h4>id: {room.id} </h4>
           </div>
         ))}
-      </div> */}
+      </div>
         <div className='chat-room-bar'>
           채팅방 이름
           <button>참여하기</button>
         </div>
-      </div>
+      </div> */}
+      <SideBar></SideBar>
+      <Footer></Footer>
     </div>
   )
 }

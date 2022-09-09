@@ -1,8 +1,11 @@
 import React from 'react'
+import TopRanking from '../components/ranking/TopRanking'
 
 const Ranking = () => {
   return (
-    <div>Ranking</div>
+    <div>
+      <TopRanking/>
+    </div>
   )
 }
 

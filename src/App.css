@@ -6,3 +6,7 @@
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
+.layout{
+    display: flex;
+    margin: 0 auto;
+};

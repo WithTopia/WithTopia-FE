@@ -9,7 +9,7 @@ const Registerform = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(watch);
+  console.log(watch());
 
   // "nickname":  "닉네임",
   // "email": "이메일@naver.com",
@@ -19,10 +19,10 @@ const Registerform = () => {
 
   return (
     <div>
-      <div className="container">
+      <form className="rg-container">
         <p>회원가입</p>
-        <div className="login-box">
-          <div className="email-box">
+        <div className="register-box">
+          <div className="input-email-box">
             <input
               type="text"
               id="email"
@@ -31,15 +31,16 @@ const Registerform = () => {
               {...register("email", {
                 required: false,
                 //영문 대소문자,숫자,특수문자 -_. 을 포함한 이메일 형식
-                pattern: /^[0-9a-zA-Z-_.]*@[0-9a-zA-Z-_.]*.[a-zA-Z]{2,3}$/i,
+                pattern: /^[0-9a-zA-Z!@#-_.]*@[0-9a-zA-Z-_.]*\.[a-zA-Z]{2,3}$/i,
+                // validate: () => isEmailCheck(false)
               })}
             />
-            <span>
-              {errors.email && errors.email.type === "pattern" && (
-                <p> 이메일 형식만 로그인 가능합니다. </p>
-              )}
-            </span>
             <button type="button">메일 인증</button>
+            <p>
+              {errors.email && errors.email.type === 
+              "pattern" && <p> 이메일 형식만 로그인 가능합니다. </p>}
+            </p>
+            
             <input 
             type="text" 
             placeholder="  인증번호" 
@@ -51,7 +52,6 @@ const Registerform = () => {
           type="nickname" 
           placeholder="  닉네임을 입력하세요" 
           />
-
           <input
             type="password"
             id="password"
@@ -60,7 +60,7 @@ const Registerform = () => {
             {...register("password", {
               required: false,
               //최소 6 자, 대문자 하나 이상, 소문자 하나 및 숫자 하나
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+              pattern:/^[0-9a-zA-Z!@#-_.]{6,}$/,
             })}
           />
           <span>
@@ -90,7 +90,7 @@ const Registerform = () => {
           <button type="submit">회원가입</button>
           <button type="button">뒤로가기</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

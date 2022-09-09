@@ -7,7 +7,7 @@ const TopThree = () => {
     const top = [1,2,3,4,5]
     return (
         <div className='top-three'>
-            <a href='/rank' className='top-three-font'>
+            {/* <a href='/rank' className='top-three-font'>
             <div className='top-text-content'>
                 <div className='top-rank-text'>명예의 위토</div>
                 <img src={lion} className="lion"></img>
@@ -21,7 +21,7 @@ const TopThree = () => {
                     )
                 })}    
             </div>
-            </a>
+            </a> */}
         </div>
     )
 }

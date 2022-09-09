@@ -1,24 +1,48 @@
-import React from 'react'
-import Myinfo from '../components/myinfo/Myinfo'
-import TopThree from "../components/topThree/TopThree"
-import ChatList from '../components/chatList/ChatList'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+// import Myinfo from '../components/myinfo/Myinfo'
+// import TopThree from "../components/topThree/TopThree"
+// import ChatList from '../components/chatList/ChatList'
 import "../assets/Global.scss"
-import Footer from '../footer/Footer'
+
 
 const MainPage = () => {
+  // const [chatRoom, setChatRoom] = useState([]);
+  // const [page, setPage] = useState(1);
+
+  // const getChatRoom = async () => {
+  //   try{
+  //     let chatPull = await axios.get(
+  //       `https://주소를 넣어야하는데뭘넣는거지?/chatRoom?_page=${page}&_limit=6`
+  //     );
+  //     if(chatPull){
+  //       setChatRoom([...chatRoom, ...chatPull.data]);
+  //     }
+  //   }catch (error) {
+  //     console.log("error났다");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getChatRoom();
+  // },[]);
+
   return (
-    <div className='main-page'>
-      <div className='main-content'>
-        <div className='main-content-left'>
-          <Myinfo></Myinfo>
-          <div style={{marginLeft:"31px",marginBottom:"6px",fontSize:"23px",fontWeight:"bold"}}>{67}명의 위토들과 함께 하고 있습니다.</div>
-          <TopThree></TopThree>
-        </div>
-        <div className='main-content-right'>
-          <ChatList></ChatList>
+    <div className='default-page-size'>
+      <div>mainPage :)
+      {/* <div>
+        {chatRoom.map((room) => (
+          <div>
+            <h4>id: {room.id} </h4>
+          </div>
+        ))}
+      </div> */}
+        <div className='chat-room-bar'>
+          채팅방 이름
+          <button>참여하기</button>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   )
 }

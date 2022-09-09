@@ -15,9 +15,9 @@ const LoginForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({mode:"onChange"});
 
-  console.log(watch);
+  console.log(watch());
 
   const onSubmit = (payload) => {
     console.log("LV-1", payload);
@@ -27,7 +27,6 @@ const LoginForm = (props) => {
       navigate("/main");
     }, 300);
   };
-  console.log("LV-3");
 
   const goToRegister = () => {
     navigate("/Register");
@@ -40,7 +39,7 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* <img src="">logo 이미지</img> */}
       <div className="container">
         <div className="login-box">
@@ -52,7 +51,7 @@ const LoginForm = (props) => {
             {...register("email", {
               required: "이메일은 필수입니다.",
               //영문 대소문자,숫자,특수문자 -_. 을 포함한 이메일 형식
-              pattern: /^[0-9a-zA-Z-_.]*@[0-9a-zA-Z-_.]*\.[a-zA-Z]{2,3}$/i,
+              pattern: /^[0-9a-zA-Z!@#-_.]*@[0-9a-zA-Z-_.]*\.[a-zA-Z]{2,3}$/i,
             })}
           />
           {errors.email && errors.email.type === "pattern" && (
@@ -65,19 +64,21 @@ const LoginForm = (props) => {
             placeholder="password"
             {...register("password", {
               required: "비밀번호는 필수입니다.",
-              //최소 6 자, 대문자 하나 이상, 소문자 하나 및 숫자 하나
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+              pattern: /^[0-9a-zA-Z!@#-_.]{6,}$/,
             })}
           />
           {errors.password && errors.password.type === "pattern" && (
-            <p>영문, 숫자, 특수문자 혼합하여 8~16자리로 입력해주세요. </p>
+            <p>영문, 숫자 6자리 이상 입력해주세요. </p>
           )}
+          </div>          
           <div className="btn">
             <button type="submit">로그인</button>
             <button type="button" onClick={goToRegister}>
               이메일로 회원가입하기
             </button>
           </div>
+          <p> </p>
+          <span>소셜 계정으로 빠르게 로그인 하기</span>
           <div className="social-btn">
             <button type="button" onClick={goToGoogle} className="google">
               google 로그인
@@ -86,9 +87,8 @@ const LoginForm = (props) => {
               kakao 로그인
             </button>
           </div>
-        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

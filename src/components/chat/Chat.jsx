@@ -43,14 +43,15 @@ const ChatRoom = () => {
         
     } 
     const subscribing = (id) => {
-        let content = {
-            type:'ENTER',  
-            roomId:id,
-            sender:userData.username,
-            message:"님이 입장하셨습니다."
-        };
-        console.log(content,"보냄")
-        stompClient.subscribe('/topic/chat/'+id, JSON.stringify(content));
+        // let content = {
+        //     type:'ENTER',  
+        //     roomId:id,
+        //     sender:userData.username,
+        //     message:"님이 입장하셨습니다."
+        // };
+        stompClient.subscribe('/topic/chat/'+id,function(frame){
+            console.log("여기확인",JSON.parse(frame.body))
+        });
     }
 
     const onMessageReceived = (id)=>{
@@ -67,29 +68,12 @@ const ChatRoom = () => {
     }
     const enterRoom = async (id) => {
         setRoomId(id)
-        onMessageReceived(id)
+        // onMessageReceived(id)
         const repo = await axios.get(url+`/chat/room/${id}`)
         console.log(repo)
         setUserData({...userData,connected: true});
-        subscribing(id)
+        // subscribing(id)
     }
-    // const sendPrivateValue=()=>{
-    //     if (stompClient) {
-    //       let chatMessage = {
-    //         senderName: userData.username,
-    //         receiverName:tab,
-    //         message: userData.message,
-    //         status:"MESSAGE"
-    //       };
-          
-    //       if(userData.username !== tab){
-    //         privateChats.get(tab).push(chatMessage);
-    //         setPrivateChats(new Map(privateChats));
-    //       }
-    //       stompClient.send(url+"/app/private-message", {}, JSON.stringify(chatMessage));
-    //       setUserData({...userData,"message": ""});
-    //     }
-    // }
     const handleUsername=(e)=>{
         const {value}=e.target;
         setUserData({...userData,"username": value});
@@ -100,6 +84,9 @@ const ChatRoom = () => {
     const connect =()=>{
         let Sock = new SockJS(url+"/ws/chat");
         stompClient = Stomp.over(Sock);
+        stompClient.connect({},function(){
+            subscribing(1)
+        })
     }
 
     useEffect(() => {

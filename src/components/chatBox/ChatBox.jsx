@@ -1,25 +1,41 @@
 import React, { useEffect, useRef , useState } from "react";
-import "../chatInputBox/ChatInputBox.scss"
+import "../chat/Chat.scss"
+import axios from "axios";
+// import "../chatInputBox/ChatInputBox.scss"
 
-const ChatBox = ({ user , text}) => {
-  const [data , setData] = useState([])
+const url = process.env.REACT_APP_SERVER_URL2
+
+const ChatBox = ({ userData, except }) => {
+  const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
+  const [exceptData,setExceptData] = useState([]) // 남이 친 채팅
   const [owner, setOwner] = useState(false)
+
   const ref = useRef();
-  
+
   const update = {
-    user:user,
-    message:text
+    user:except.sender,
+    message:except.message
   }
-  const chatUpdate = () => {
-    setData([...data,update])
-  }
-  useEffect(()=>{
-    if(text !== ""){
-      chatUpdate()
-    }else {
-      setData([...data,{user:user,message:`${user} 님이 입장하셨습니다.`}])
+  
+  const compare = () =>{
+    if(userData.username === except.sender){
+      setExceptData([...exceptData,update])
+      setOwner(true)
+    }else if(userData.message===""){
+      console.log("반가워요")
+    }else if(userData.username !== except.sender){
+      setData([...exceptData,update])
+      setOwner(false) // 여기까지함
     }
-  }, [user,text]);
+  }  
+
+  useEffect(()=>{
+    if(except === ""){
+      console.log("nothing")
+    }
+    compare()
+  },[except])
+
   return (
     <div className="messages">
       <div
@@ -28,13 +44,24 @@ const ChatBox = ({ user , text}) => {
         <div className="messageInfo">
         </div>
         <div className="messageContent">
-          {data.map((datas,index)=>{
+          <div className="message-left">
+            {exceptData.map((datas,index)=>{
             return(
-              <div key={index}>{user}
+              <div key={index}>{datas.user}
                 <p>{datas.message}</p>
               </div>
             )
-          })}
+            })}
+          </div>
+          <div className="message-right">
+            {exceptData.map((datas,index)=>{
+            return(
+              <div key={index}>{datas.user}
+                <p>{datas.message}</p>
+              </div>
+            )
+            })}
+          </div>
         </div>
       </div>
     </div>

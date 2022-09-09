@@ -3,13 +3,38 @@ import logo from "../../assets/withtopia.png"
 import MoveButton2 from '../button/MoveButton2'
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import "./ChatList.scss"
+import { useEffect } from 'react'
+import axios from 'axios'
+
+const url = process.env.REACT_APP_SERVER_URL2
 
 const ChatList = () => {
-  const [data,setData] = useState([1,2,3,4,5,6])
+  const [data,setData] = useState()
   const [pageOpen,setPageOpen] = useState(false)
+
+  const SetRooms = () => {
+    // <ul>
+    //   {roomLists && roomLists.map((lists,index)=>{
+    //       return(
+    //           <div key={index} className="room-list" onClick={()=>enterRoom(lists.roomId)}>
+    //               <li>{lists.roomName}</li>
+    //           </div>
+    //       )
+    //   })}
+    // </ul>
+  }
+  
   const handleScreen = () => {
     setPageOpen((prev)=>!prev)
   }
+  const findRoom = async () => {
+    const repo = await axios.get(url+'/chat/rooms')
+    console.log(repo.data)
+    setData(repo.data)
+  }
+  useEffect(()=>{
+    findRoom()
+  },[])
   return (
     <div>
       <div className='chat-list-text-content'>
@@ -22,7 +47,7 @@ const ChatList = () => {
             <div className='chat-text1'>지금 활동중인 위토들</div>
             <div onClick={handleScreen} className="chat-text2"><MoveButton2 text={"방 생성"}></MoveButton2></div>
           </div>
-          {data.map((datas,index)=>{
+          {/* {data.map((datas,index)=>{
             return(
               <div key={index} className='chat-item-lists'>
                 <a href='/main' className='chat-list-content'>
@@ -36,7 +61,7 @@ const ChatList = () => {
                 </a>
               </div>
             )
-          })}
+          })} */}
         </div>
       </div>
       {pageOpen === true ? <AlertCreateRoom pageOpen={pageOpen} setPageOpen={setPageOpen}></AlertCreateRoom> : null}

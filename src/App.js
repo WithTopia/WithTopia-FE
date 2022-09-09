@@ -10,7 +10,7 @@ import Register from './pages/Register';
 import FindPw from "./pages/FindPw";
 import UpdatePw from "./pages/UpdatePw";
 import Room2 from './pages/Room2';
-import ChatDetail from './components/chat/ChatDetail';
+// import ChatDetail from './components/chat/ChatDetail';
 // import CreateRoom from "./pages/CreateRoom";
 
 
@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/findpw' element={<FindPw></FindPw>}></Route>
         <Route path='/updatepw' element={<UpdatePw></UpdatePw>}></Route>
         <Route path='/chat' element={<Room2></Room2>}></Route>
-        <Route path='/chatdetail/:id' element={<ChatDetail></ChatDetail>}></Route>
+        {/* <Route path='/chatdetail/:id' element={<ChatDetail></ChatDetail>}></Route> */}
         {/* <Route path='/create' element={<CreateRoom></CreateRoom>}></Route> */}
       </Routes>
     </div>

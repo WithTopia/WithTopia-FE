@@ -1,35 +1,37 @@
-.container{
+.rg-container{
     background-color: #E8F8FF;
     width: 400px;
     height: 450px;
-    margin: 20vh auto 0;
+    margin: 24vh auto 0;
     display: flex;
     flex-direction: column;
-    // align-content: space-between;
     justify-content: center;
-    // flex-wrap: nowrap;
     align-items: center;
 
-    .login-box{
+    .register-box{
         display: flex;
         flex-direction: column;
         margin: 20px auto;
         
-        >.email-box{
+        >.input-email-box{
           width: 250px;
-          height: 50%;
           margin-bottom: 0px;
           border: none;
           outline: none;
-          // background-color: red;
+          margin-bottom: 10px;
+
           >input{
             height:25px;
             font-size: 15px;
+            margin-top: 10px;
             outline: none;
-            margin-bottom: 15px;
             border: none;
             outline: none;
           }
+          >p{
+            font-size: small; 
+            color:red;
+          };
           >button{
             margin-left: 10px;
             width: 70px;

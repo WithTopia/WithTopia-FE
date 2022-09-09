@@ -37,7 +37,7 @@ const ChatList = () => {
   },[])
   return (
     <div>
-      <div className='chat-list-text-content'>
+      {/* <div className='chat-list-text-content'>
         <div className='chat-list-text'>함께 해요,</div>
         <img src={logo} className="withtopia"></img>
       </div>
@@ -64,9 +64,9 @@ const ChatList = () => {
           })} */}
         </div>
       </div>
-      {pageOpen === true ? <AlertCreateRoom pageOpen={pageOpen} setPageOpen={setPageOpen}></AlertCreateRoom> : null}
+      {pageOpen === true ? <AlertCreateRoom pageOpen={pageOpen} setPageOpen={setPageOpen}></AlertCreateRoom> : null} */}
     </div>
   )
 }
 
-export default ChatList
+export default ChatList;

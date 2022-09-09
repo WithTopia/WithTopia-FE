@@ -1,36 +1,29 @@
 import './App.css';
-import { Route,Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import MainBoard from "./pages/MainBoard";
-import Profile from "./pages/Profile";
-import Ranking from "./pages/Ranking";
-import Room from "./pages/Room";
-import Login from './pages/Login';
-import Register from './pages/Register';
-import FindPw from "./pages/FindPw";
-import UpdatePw from "./pages/UpdatePw";
-import Room2 from './pages/Room2';
-// import ChatDetail from './components/chat/ChatDetail';
-// import CreateRoom from "./pages/CreateRoom";
+import { useEffect } from 'react';
+import Sidebar from './components/sideBar/SideBar';
+import Header from './components/header/Header';
+import Footer from './footer/Footer';
+import MainFrame from './components/mainBox/MainFrame';
+
 
 
 const App = () => {
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  });
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<MainBoard></MainBoard>}></Route>
-        <Route path='/main' element={<MainPage></MainPage>}></Route>
-        <Route path='/profile' element={<Profile></Profile>}></Route>
-        <Route path='/rank' element={<Ranking></Ranking>}></Route>
-        <Route path='/room' element={<Room></Room>}></Route>
-        <Route path='/login' element={<Login></Login>}></Route>
-        <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/findpw' element={<FindPw></FindPw>}></Route>
-        <Route path='/updatepw' element={<UpdatePw></UpdatePw>}></Route>
-        <Route path='/chat' element={<Room2></Room2>}></Route>
-        {/* <Route path='/chatdetail/:id' element={<ChatDetail></ChatDetail>}></Route> */}
-        {/* <Route path='/create' element={<CreateRoom></CreateRoom>}></Route> */}
-      </Routes>
+      <Header/>
+      <div className='layout'>
+        <Sidebar></Sidebar>
+        <MainFrame></MainFrame>
+      </div>
+      <Footer></Footer>
+
     </div>
   );
 }

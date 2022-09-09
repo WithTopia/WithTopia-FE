@@ -1,19 +1,25 @@
-.main-page{
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    .main-content{
-        width: 86%;
-        margin: 10px auto 50px auto;
-        display: flex;
-        justify-content: space-between;
-        .some-people{
-            align-items: center;
-        }
-        .main-content-left{
-        }
-        .main-content-right{
-            width: 100%;
-        }
-    }
+.default-page-size{
+  height: 70vh;
+  width: 85vw;
+  box-shadow: 1px 1px 5px #e5d493;
+  // position: fixed;
+  border-radius: 20px;
+  margin: 10px 10px 10px 20px;
+  padding: 12px;
+  .chat-room-bar{
+    border: 2px solid #e5d493;
+    height: 70px;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    >button{
+      width: 100px;
+      height: 50px;
+      border: none;
+    };
+  };
 }

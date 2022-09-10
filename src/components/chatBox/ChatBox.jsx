@@ -1,41 +1,20 @@
 import React, { useEffect, useRef , useState } from "react";
-import "../chatInputBox/ChatInputBox.scss"
+import "../chat/Chat.scss"
 
-const ChatBox = ({ user , text}) => {
-  const [data , setData] = useState([])
-  const [owner, setOwner] = useState(false)
+const ChatBox = ({ data ,userData }) => {
   const ref = useRef();
-  
-  const update = {
-    user:user,
-    message:text
-  }
-  const chatUpdate = () => {
-    setData([...data,update])
-  }
-  useEffect(()=>{
-    if(text !== ""){
-      chatUpdate()
-    }else {
-      setData([...data,{user:user,message:`${user} 님이 입장하셨습니다.`}])
-    }
-  }, [user,text]);
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [data]);
+
   return (
-    <div className="messages">
-      <div
-        ref={ref}
-        className={"message" + (owner ? " owner" : "")}>
-        <div className="messageInfo">
-        </div>
-        <div className="messageContent">
-          {data.map((datas,index)=>{
-            return(
-              <div key={index}>{user}
-                <p>{datas.message}</p>
-              </div>
-            )
-          })}
-        </div>
+    <div
+      ref={ref}
+      className={`message ${data.user === userData.username && "owner"}`}>
+      <div className="messageInfo">
+      </div>
+      <div className="messageContent">{data.user}
+        {data.message === "" ? null : <p>{data.message}</p>}
       </div>
     </div>
   );

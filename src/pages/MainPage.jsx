@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Mainbar from '../components/mainBox/mainBoxBar/MainBar'
 import "../assets/Global.scss"
-
+import Header from '../components/header/Header'
+import Footer from "../components/footer/Footer"
+import SideBar from "../components/sideBar/SideBar"
 
 
 const MainPage = () => {
@@ -56,7 +58,7 @@ const MainPage = () => {
         
       </div>
     </>
-    
+
   )
 }
 

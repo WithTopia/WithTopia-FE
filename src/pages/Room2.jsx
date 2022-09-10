@@ -1,6 +1,5 @@
 import React from 'react'
 import Chat from '../components/chat/Chat'
-import ChatDetail from '../components/chat/ChatDetail'
 
 const Room2 = () => {
   return (

@@ -30,33 +30,41 @@ const MainPage = () => {
 
   return (
     <>
-    <div className='main-rank'>
-
-    </div>
-      <div className='default-page-size'>
-        <div className='main-page-title'>
-          함께하는 위토피아!
+    <Header/>
+    <div className='layout'>
+      <SideBar/>
+      <div>
+        <div className='main-rank'>
+          랭킹받네
+          </div>
+            <div className='default-page-size'>
+              <div className='main-page-title'>
+                함께하는 위토피아!
+              </div>
+              {/* <div>
+                {chatRoom.map((room) => (
+                  <div>
+                    <h4>id: {room.id} </h4>
+                  </div>
+                ))}
+              </div> */}
+          <div>
+            <Mainbar/>
+            <Mainbar/>
+            <Mainbar/>
+            <Mainbar/>
+            <Mainbar/>
+            <Mainbar/>
+          </div>
+          <div>
+            <button className='add-chatroom'>+</button>
+          </div>
         </div>
-        {/* <div>
-          {chatRoom.map((room) => (
-            <div>
-              <h4>id: {room.id} </h4>
-            </div>
-          ))}
-        </div> */}
-        <div>
-          <Mainbar/>
-          <Mainbar/>
-          <Mainbar/>
-          <Mainbar/>
-          <Mainbar/>
-          <Mainbar/>
-        </div>
-        <div>
-          <button className='add-chatroom'>+</button>
-        </div>
-        
       </div>
+      
+    </div>
+    
+      <Footer/>
     </>
 
   )

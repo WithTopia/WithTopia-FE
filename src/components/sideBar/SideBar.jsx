@@ -23,7 +23,7 @@ const Sidebar = () => {
         <div  className='user-profile'>
           <img src={samplePic} alt="profile" className='profile-img'/>
         </div>
-        <div className='user-name'>야생의 UserNick 님!</div>
+        <div className='user-name'>야생의  UserNick 님!</div>
         {/* <Profile src={profile}></Profile> */}
       </div>
       <div className='menu-txt'>Menu</div>

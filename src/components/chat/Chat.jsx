@@ -8,9 +8,9 @@ var stompClient =null;
 const url = process.env.REACT_APP_SERVER_URL2
 
 const ChatRoom = () => {
-    const [privateChats, setPrivateChats] = useState(new Map());     
+    const [except,setExcept] = useState("")  
     const [roomLists, setRoomLists] = useState(); 
-    const [tab,setTab] =useState("CHATROOM");
+    const [getOut,setGetOut] =useState("CHATROOM");
     const [userData, setUserData] = useState({
         username: '',
         receivername: '',
@@ -39,19 +39,12 @@ const ChatRoom = () => {
             }
         }     
     }
-    const submitName = () => {
-        
-    } 
     const subscribing = (id) => {
-        // let content = {
-        //     type:'ENTER',  
-        //     roomId:id,
-        //     sender:userData.username,
-        //     message:"님이 입장하셨습니다."
-        // };
-        stompClient.subscribe('/topic/chat/'+id,function(frame){
-            console.log("여기확인",JSON.parse(frame.body))
+        let content
+        content = stompClient.subscribe('/topic/chat/'+id,function(frame){
+            setExcept(JSON.parse(frame.body))
         });
+        setGetOut(content)
     }
 
     const onMessageReceived = (id)=>{
@@ -67,12 +60,10 @@ const ChatRoom = () => {
         console.log(err)
     }
     const enterRoom = async (id) => {
-        setRoomId(id)
-        // onMessageReceived(id)
+        setRoomId(id)        
         const repo = await axios.get(url+`/chat/room/${id}`)
-        console.log(repo)
         setUserData({...userData,connected: true});
-        // subscribing(id)
+        subscribing(id)
     }
     const handleUsername=(e)=>{
         const {value}=e.target;
@@ -85,7 +76,6 @@ const ChatRoom = () => {
         let Sock = new SockJS(url+"/ws/chat");
         stompClient = Stomp.over(Sock);
         stompClient.connect({},function(){
-            subscribing(1)
         })
     }
 
@@ -95,7 +85,7 @@ const ChatRoom = () => {
     }, []);
     return (
         <>
-        {userData.connected ? <ChatInputBox userData={userData} setUserData={setUserData} roomId={roomId} stompClient={stompClient}>
+        {userData.connected ? <ChatInputBox userData={userData} setUserData={setUserData} roomId={roomId} stompClient={stompClient} except={except} getOut={getOut} setGetOut={setGetOut}>
         </ChatInputBox> : 
         <div className="container">접속하기
             <div className="chat-box">

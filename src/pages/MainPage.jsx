@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-// import Myinfo from '../components/myinfo/Myinfo'
-// import TopThree from "../components/topThree/TopThree"
-// import ChatList from '../components/chatList/ChatList'
+import Mainbar from '../components/mainBox/mainBoxBar/MainBar'
 import "../assets/Global.scss"
 import Header from '../components/header/Header'
 import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
+
 
 const MainPage = () => {
   // const [chatRoom, setChatRoom] = useState([]);
@@ -31,24 +29,36 @@ const MainPage = () => {
   // },[]);
 
   return (
-    <div className='default-page-size'>
-      <Header></Header>
-      {/* <div>mainPage :)
-      <div>
-        {chatRoom.map((room) => (
-          <div>
-            <h4>id: {room.id} </h4>
-          </div>
-        ))}
-      </div>
-        <div className='chat-room-bar'>
-          채팅방 이름
-          <button>참여하기</button>
-        </div>
-      </div> */}
-      <SideBar></SideBar>
-      <Footer></Footer>
+    <>
+    <div className='main-rank'>
+
     </div>
+      <div className='default-page-size'>
+        <div className='main-page-title'>
+          함께하는 위토피아!
+        </div>
+        {/* <div>
+          {chatRoom.map((room) => (
+            <div>
+              <h4>id: {room.id} </h4>
+            </div>
+          ))}
+        </div> */}
+        <div>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+        </div>
+        <div>
+          <button className='add-chatroom'>+</button>
+        </div>
+        
+      </div>
+    </>
+
   )
 }
 

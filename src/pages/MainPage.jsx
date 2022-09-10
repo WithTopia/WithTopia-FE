@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-// import Myinfo from '../components/myinfo/Myinfo'
-// import TopThree from "../components/topThree/TopThree"
-// import ChatList from '../components/chatList/ChatList'
+import Mainbar from '../components/mainBox/mainBoxBar/MainBar'
 import "../assets/Global.scss"
+
 
 
 const MainPage = () => {
@@ -29,21 +27,36 @@ const MainPage = () => {
   // },[]);
 
   return (
-    <div className='default-page-size'>
-      <div>mainPage :)
-      {/* <div>
-        {chatRoom.map((room) => (
-          <div>
-            <h4>id: {room.id} </h4>
-          </div>
-        ))}
-      </div> */}
-        <div className='chat-room-bar'>
-          채팅방 이름
-          <button>참여하기</button>
-        </div>
-      </div>
+    <>
+    <div className='main-rank'>
+
     </div>
+      <div className='default-page-size'>
+        <div className='main-page-title'>
+          함께하는 위토피아!
+        </div>
+        {/* <div>
+          {chatRoom.map((room) => (
+            <div>
+              <h4>id: {room.id} </h4>
+            </div>
+          ))}
+        </div> */}
+        <div>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+          <Mainbar/>
+        </div>
+        <div>
+          <button className='add-chatroom'>+</button>
+        </div>
+        
+      </div>
+    </>
+    
   )
 }
 

@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
 import './SideBar.scss';
 import { Link } from "react-router-dom";
-import Sidebaritem from "./SidebarItem"
-// import profile from "../../assets/lion";
+import { 
+  AiOutlineHome, 
+  AiOutlineSmile, 
+  AiOutlineStar, 
+  AiOutlineTeam, 
+  AiOutlineSend,
+  AiOutlineExport } from "react-icons/ai";
+// import Sidebaritem from "./SidebarItem"
+// import HomeIcon from "../../assets/HomeIcon";
+import samplePic from "../../assets/profileSample.png";
 
 const Sidebar = () => {
-  const menus = [
-    { name: "Home", path: "/main" },
-    { name: "My Page", path: "/profile" },
-    { name: "Rank", path: "/rank" },
-    { name: "Friend", path:"/" },
-    { name: "Direct Message", path:"/" }
-  ];
-
-
+  const logout = () => {
+    console.log("bye");
+  };
+  
   return (
     <div className='sidebar'>
       <div className='side-profile'>
-        프로필
+        <div  className='user-profile'>
+          <img src={samplePic} alt="profile" className='profile-img'/>
+        </div>
+        <div className='user-name'>야생의 UserNick 님!</div>
         {/* <Profile src={profile}></Profile> */}
       </div>
       <div className='menu-txt'>Menu</div>
       <hr/>
       <div className='side-menu'>
-        {menus.map((menu, index) => {
-        return (
-          <Link to = {menu.path} key={index}>
-            <Sidebaritem menu={menu}/>
-          </Link>
-        );
-        })}
+        <p><AiOutlineHome color='rgb(153, 95, 7)'/><Link to="/main">Home</Link></p>
+        <p><AiOutlineSmile color='rgb(153, 95, 7)'/><Link to="/profile">My Page</Link></p>
+        <p><AiOutlineStar color='rgb(153, 95, 7)'/><Link to="/rank">Rank</Link></p>
+        <p><AiOutlineTeam color='rgb(153, 95, 7)'/><Link to="/">Friend</Link></p>
+        <p><AiOutlineSend color='rgb(153, 95, 7)'/><Link to="/">Direct Message</Link></p>
       </div>
-      
-      <div>
-        <button className='logout'>
+      <div className='logout-btn'>
+        <AiOutlineExport color= 'rgba(227, 220, 220, 0.933)'/>
+        <button className='logout' onClick={logout}>
           Log-out
         </button>
       </div>
-      
     </div>
   );
 }

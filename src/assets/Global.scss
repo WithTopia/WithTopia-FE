@@ -1,25 +1,37 @@
-.default-page-size{
-  height: 70vh;
-  width: 85vw;
+.main-rank{
+  height: 22vh;
   box-shadow: 1px 1px 5px #e5d493;
-  // position: fixed;
+  border-radius: 20px;
+  margin: 10px 10px 15px 20px;
+  padding: 12px;
+};
+.default-page-size{
+  max-width: 2500px;
+  height: 55vh;
+  width: calc(98vw - 300px);
+  box-shadow: 1px 1px 5px #e5d493;
   border-radius: 20px;
   margin: 10px 10px 10px 20px;
   padding: 12px;
-  .chat-room-bar{
-    border: 2px solid #e5d493;
-    height: 70px;
-    border-radius: 20px;
-    padding: 5px 20px 5px 20px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    >button{
-      width: 100px;
-      height: 50px;
-      border: none;
-    };
+
+  .main-page-title{
+    font-size: 30px;
+    margin: 20px 20px 40px 20px;
+    color: rgb(153, 95, 7);
+  };
+  
+
+
+  .add-chatroom{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 1px 1px 5px #978c5f;
+    position: absolute;
+    bottom: 8rem;
+    right: 3rem;
+    background: linear-gradient(151.46deg, #FFEBA3 7.86%, #FFCE75 74.65%);
   };
 }

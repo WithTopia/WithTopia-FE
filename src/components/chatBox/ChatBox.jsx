@@ -12,6 +12,15 @@ const ChatBox = ({ data ,userData }) => {
       ref={ref}
       className={`message ${data.user === userData.username && "owner"}`}>
       <div className="messageInfo">
+        {/* <img
+            src={
+              message.senderId === currentUser.uid
+                ? currentUser.photoURL
+                : data.user.photoURL
+            }
+            alt=""
+          />
+          <span>just now</span> */}
       </div>
       <div className="messageContent">{data.user}
         {data.message === "" ? null : <p>{data.message}</p>}

@@ -5,11 +5,11 @@ import "../assets/Global.scss"
 import Header from '../components/header/Header'
 import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
-
+import AlertCreateRoom from '../components/blackScreen/AlertCreateRoom'
 
 const MainPage = () => {
   // const [chatRoom, setChatRoom] = useState([]);
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(false);
 
   // const getChatRoom = async () => {
   //   try{
@@ -27,9 +27,11 @@ const MainPage = () => {
   // useEffect(() => {
   //   getChatRoom();
   // },[]);
-
+  const handlePage = () => {
+    setPage((prev)=>!prev)
+  }
   return (
-    <>
+    <div className='mainpage'>
     <Header/>
     <div className='layout'>
       <SideBar/>
@@ -57,16 +59,14 @@ const MainPage = () => {
             <Mainbar/>
           </div>
           <div>
-            <button className='add-chatroom'>+</button>
+            <button className='add-chatroom' onClick={handlePage}>+</button>
           </div>
         </div>
       </div>
-      
     </div>
-    
-      <Footer/>
-    </>
-
+    <Footer/>
+    {page ? <AlertCreateRoom page={page} setPage={setPage}></AlertCreateRoom> : null}
+    </div>
   )
 }
 

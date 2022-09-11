@@ -1,0 +1,103 @@
+.user-profile{
+    width: 100vw;
+}
+.profile-set{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    width: 100vw;
+    .user-profile-container{
+        height:76vh;
+        border-radius: 20px;
+        padding: 12px;
+        margin-top: 46px;
+        width: 1260px;
+        min-width: 1100px;
+        box-shadow: 1px 1px 5px #e5d493;
+        display: flex;
+        flex-direction: column;
+        h2{
+            font-size: 36px;
+            font-weight: bold;
+            padding: 67px 0 24px 46px;
+        }
+        .profile-container{
+            display: flex;
+            .profile-manage{
+                width: 350px;
+                height: 465px;
+                border: 1px solid black;
+                margin: 0 4px 20px 40px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 15px;
+                .profile-image{
+                    margin: 50px auto;
+                    width: 220px;
+                    border-radius: 50%;
+                }
+                .manage-container{
+                    width: 80%;
+                    margin: 0 auto;
+                    .profile-nickname{
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-left: 4px;
+                        margin-bottom: 5px;
+                    }
+                    .nickname-input{
+                        height: 38px;
+                        width: 100%;
+                        border-radius: 8px;
+                        outline: none;
+                    }
+                }
+            }
+            .profile-images-cont{
+                width: 1000px;
+                min-width: 900px;
+                height: 450px;
+                border: 1px solid black;
+                margin: 0 44px 20px 14px;
+                border-radius: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding-top: 15px;
+                img{
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    width: 190px;
+                    height: 190px;
+                }
+            }
+        }
+        .profile-btns{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            .btns-left{
+                margin-left: 100px;
+                button{
+                    width: 160px;
+                    height: 40px;
+                    font-size: 16px;
+                    border-radius: 8px;
+                    border:none;
+                }
+            }
+            .btns-right{
+                margin-right: 100px;
+                button{
+                    margin-left: 10px;
+                    width: 160px;
+                    height: 40px;
+                    font-size: 16px;
+                    border-radius: 8px;
+                    border:none;
+                }
+            }
+        }
+    }
+}

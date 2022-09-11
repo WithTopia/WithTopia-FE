@@ -3,10 +3,10 @@ import "./AlertCreateRoom.scss"
 import MoveButton1 from '../button/MoveButton1'
 import MoveButton2 from '../button/MoveButton2'
 
-const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
+const AlertCreateRoom = ({page,setPage}) => {
   const [check,unCheck] = useState(null)
   const handleScreen = () => {
-    setPageOpen((prev)=>!prev)
+    setPage((prev)=>!prev)
   }
   const handleCheck = (e) => {
     const checkboxs = document.getElementsByClassName("checkbox")
@@ -30,7 +30,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       <div className='create-container'>
         <div className='create-container-title'>방 생성</div>
         <form className='create-room-form'>
-          <input placeholder='  방 제목' type="text" className='room-input'></input>
+          <input placeholder=' 방 제목' type="text" className='room-input'></input>
           <div className='checkbox-container'>
             <input type="radio" className='checkbox' onClick={handlePointTrue} onChange={(e)=>handleCheck(e.target)}></input>
             <label className='checkbox-label'>공개</label>
@@ -38,7 +38,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
             <label className='checkbox-label'>비공개</label>
           </div>
           <select>
-            <option value="1" selected> 최대 인원수</option>
+            <option value="">최대 인원수</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

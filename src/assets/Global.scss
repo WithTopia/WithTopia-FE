@@ -1,32 +1,35 @@
+.mainpage{
+  width: 100vw;
+}
 .layout{
   display: flex;
   margin: 0 auto;
   justify-content: center;
-
+  width: 100vw;
   .main-rank{
-    max-width: 2500px;
-    height: 15vh;
+    max-width: 1260px;
+    height: 7vh;
     width: calc(98vw - 300px);
     box-shadow: 1px 1px 5px #e5d493;
     border-radius: 20px;
-    margin: 20px 10px 15px 30px;
+    margin: 31px 10px 15px 30px;
     padding: 12px;
   };
 
   .default-page-size{
-    max-width: 2500px;
+    max-width: 1260px;
     height: 70vh;
     width: calc(98vw - 300px);
     box-shadow: 1px 1px 5px #e5d493;
     border-radius: 20px;
-    margin: 10px 10px 10px 30px;
+    margin: 10px 10px 0 30px;
     padding: 12px;
     position: relative;
 
 
     .main-page-title{
       font-size: 30px;
-      margin: 20px 20px 40px 20px;
+      margin: 20px 20px 30px 20px;
       color: rgb(153, 95, 7);
     };
     

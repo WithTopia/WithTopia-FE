@@ -8,8 +8,7 @@
     transform: translate(-50%,-50%);
     z-index: 100;
     .create-container-title{
-        margin: 56px auto;
-        width: 150px;
+        margin: 50px auto;
         font-size: 35px;
         text-align: center;
         font-weight: bold;
@@ -24,17 +23,17 @@
             height: 40px;
             min-width: 440px;
             border-radius: 8px;
-            color : #4E7A8C;
-            background: #E8F8FF;
-            border: 2px solid rgb(69, 170, 242);
+            color : #815403;
+            background: white;
+            border: 2px solid #815403; 
             outline: none;
             margin-bottom: 40px;
         }
         select:hover{
-            border: 2px solid #4E7A8C;
+            border: 2px solid #815403;
         }
         select:focus{
-            border: 2px solid #4E7A8C;
+            border: 2px solid #815403;
         }
         .checkbox-container{
             margin-bottom: 20px;
@@ -44,26 +43,27 @@
             height: 40px;
             border-radius: 8px;
             color : #4E7A8C;
-            border: 2px solid rgb(69, 170, 242);
+            border: 2px solid #815403;
             margin-bottom: 20px;
-            background: #E8F8FF;
+            background: white;
             outline: none;
             padding: 0;
         }
         .room-input:hover{
-            border: 2px solid #4E7A8C;
+            border: 2px solid #815403;
         }
         .room-input:focus{
-            border: 2px solid #4E7A8C;
+            border: 2px solid #815403;
         }
         .checkbox{
+            accent-color:#815403;
             width: 20px;
             height: 20px;
             border-radius: 10px;
-            border: 1px solid #4E7A8C;
+            border: 1px solid #815403;
             margin-left: 40px;
             cursor: pointer;
-            background: rgb(99, 205, 218);
+            background: #815403;
         }
         .checkbox-label{
             font-size: 24px;
@@ -75,7 +75,7 @@
             font-size: 20px;
             // margin-left: 20px;
             margin-right: 60px;
-            background-color: #4E7A8C;
+            background-color: #815403;
             border: 1px solid white;
             color: white;
         }       

@@ -26,7 +26,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       alert("방 설정을 정확히 입력해주세요.")
     }
     e.preventDefault()
-    console.log(sendData)
     submitData()
   }
   const handleCheck = (e) => {
@@ -39,7 +38,11 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   }
   const submitData = async () =>{
     try{
-      const repo = await axios.post("/create/room",{sendData})
+      const repo = await axios.post("/create/room",{
+        roomTitle:sendData.roomTitle,
+        maxMember:sendData.maxMember,
+        status:sendData.status
+      })
       console.log(repo.data.data)
       setGetData(repo.data.data)
       navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId}})

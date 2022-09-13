@@ -3,13 +3,16 @@ import axios from "axios"
 import { OpenVidu } from 'openvidu-browser'
 import { createBrowserHistory } from 'history'
 import { useLocation } from 'react-router-dom'
+import VideoRecord from '../components/videoRecord/VideoRecord'
 
 const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
 const Room = () => {
   const location = useLocation();
-  console.log(location.state.token.slice(6))
+  // let tokenStuff = location.state.token.split("=")[2]
+  let tokenStuff = location.state.token
+  let sessionIds = location.state.sessionId
   const [session,setSession] = useState("")
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
@@ -43,80 +46,62 @@ const Room = () => {
       console.log(response.data)
       return response.data; // The token
   }
-  const joinSession2 = () => {
-    setToken(location.state.token.slice(6))
-    setSessionId(location.state.sessionId)
-    const newOV = new OpenVidu();
-    newOV.enableProdMode();
-    setOV(newOV);
-    let FRAME_RATE = 10;
-    OV.getUserMedia({
-      audioSource: false,
-      videoSource: undefined,
-      resolution: '1280x720',
-      frameRate: FRAME_RATE
-   })
-  }
   const joinSession = () => {
     setToken(location.state.token)
-    setSessionId(location.state.sessionId)
+    setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
     // socket 통신 과정에서 많은 log를 남기게 되는데 필요하지 않은 log를 띄우지 않게 하는 모드
     newOV.enableProdMode();
     // 2. initSesison 생성
     const newSession = newOV.initSession();
+    setSession(newSession)
     // JSON.parse(JSON.stringify(newSession))
     // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
     setOV(newOV);
-    
-    // tokenWork(newSession)
-    connectSession(newSession)
-    // let tokenStuff = location.state.token.split("=")[2]
-    let tokenStuff = location.state.token
     // 4. session에 connect하는 과정
-    console.log("000000")
-    console.log(session)
     newSession.on('streamCreated', (e) => {
-      console.log("101010")
       const newSubscriber = newSession.subscribe(
         e.stream,
         undefined
         // JSON.parse(e.stream.connection.data).clientData
       );
-      console.log("1111111")
+      
       const newSubscribers = subscribers;
       newSubscribers.push(newSubscriber);
-      console.log("2222222222")
+      
       setSubscribers([...subscribers,newSubscribers]);
       setIsConnect(true)
-      });
-      // 1-3 예외처리
-      newSession.on('exception', (exception) => {
-        console.warn(exception);
-      });
-      // 1-2 session에서 disconnect한 사용자 삭제
-      newSession.on('streamDestroyed', (e) => {
-        console.log("3333333333333")
-        if (e.stream.typeOfVideo === 'CUSTOM') {
-          deleteSubscriber(e.stream.streamManager);
-        } else {
-          setDestroyedStream(e.stream.streamManager);
-          setCheckMyScreen(true);
-        }
-      });
-      newSession.connect( tokenStuff, { clientData: username})
+    });
+    // 1-3 예외처리
+    newSession.on('exception', (exception) => {
+      console.warn(exception);
+    });
+    // 1-2 session에서 disconnect한 사용자 삭제
+    newSession.on('streamDestroyed', (e) => {
+      if (e.stream.typeOfVideo === 'CUSTOM') {
+        deleteSubscriber(e.stream.streamManager);
+      } else {
+        setDestroyedStream(e.stream.streamManager);
+        setCheckMyScreen(true);
+      }
+    });
+    tokenWork(newSession,newOV)
+  }
+  const tokenWork = (newSession,newOV) => {
+    // 그놈의 토큰 처리
+    newSession.connect( tokenStuff, { clientData: username})
       .then(async () => {
-        OV.getUserMedia({
+        newOV.getUserMedia({
           audioSource: false,
           videoSource: undefined,
-          resolution: '1280x720',
+          resolution: '640x480',
           frameRate: 10,
         })
-        .then((mediaStream) => {
-          let videoTrack = mediaStream.getVideoTracks()[0];
-          let newPublisher = OV.initPublisher(
-          username,
+      .then((mediaStream) => {
+        let videoTrack = mediaStream.getVideoTracks()[0];
+        let newPublisher = newOV.initPublisher(
+          undefined,
           {
             audioSource: undefined,  // The source of audio. If undefined default audio input
             videoSource: videoTrack, // The source of video. If undefined default video input
@@ -128,7 +113,6 @@ const Room = () => {
             mirror: true   // Whether to mirror your local video or not
           })
           // 4-b user media 객체 생성
-          
           newSession.publish(newPublisher)
           setPublisher(newPublisher)
         })
@@ -141,12 +125,6 @@ const Room = () => {
         );
       });
   }
-  const tokenWork = (newSession) => {
-    // 그놈의 토큰 처리
-  }
-  const connectSession = (newSession) =>{
-   
-  } 
   
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
@@ -156,23 +134,14 @@ const Room = () => {
       setSubscribers([...prevSubscribers]);
     }
   };
-  const handlerJoinSessionEvent = (e) => {
-    e.preventDefault()
-
-  }
-  const handlerLeaveSessionEvent = (e) => {
-    e.preventDefault()
-
-  }
-  const handleChangeUserName = (e) => {
-    e.preventDefault()
-    setUsername(e.target.value)
-  }
-  const handleSessionId = () => {
-    
-  }
+  
   const leaveSession = () => {
     session.disconnect()
+    session.unsubscribe(subscribers)
+    setSession(undefined);
+    setSubscribers([])
+    setSessionId("")
+    setPublisher(undefined)
   }
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = (event) => {
@@ -189,47 +158,17 @@ const Room = () => {
   },[]);
 
   useEffect(()=>{
-    // window.addEventListener("beforeunload", onbeforeunload);
+    window.addEventListener("beforeunload", onbeforeunload);
     joinSession()
-    // return () => {
-    //   window.removeEventListener("beforeunload", onbeforeunload);
-    //   // 채팅 닫기 등
-    // };
+    return () => {
+      window.removeEventListener("beforeunload", onbeforeunload);
+      // 채팅 닫기 등
+    };
   },[])
   return (
     <div className='room'>
-      {/* <div>
-        <div id="join">
-          <div id="join-dialog">
-              <h1> Join a video session </h1>
-              <form>
-                  <p>
-                    <label>Participant: </label>
-                    <input
-                        type="text"
-                        id="userName"
-                        value={username}
-                        onChange={handleChangeUserName}
-                        required
-                    />
-                  </p>
-                  <p>
-                      <label> Session: </label>
-                      <input
-                          type="text"
-                          id="sessionId"
-                          value={sessionId}
-                          onChange={handleChangeSessionId}
-                          required
-                      />
-                  </p>
-                  <p>
-                      <input name="commit" type="submit" value="JOIN" />
-                  </p>
-              </form>
-          </div>
-      </div>
-      </div> */}
+      <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
+      <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
     </div>
   )
 }

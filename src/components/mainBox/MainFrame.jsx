@@ -17,7 +17,7 @@ const MainFrame = () => {
         <Route path='/main' element={<MainPage></MainPage>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
         <Route path='/rank' element={<Ranking></Ranking>}></Route>
-        <Route path='/room' element={<Room></Room>}></Route>
+        <Route path='/room/:id' element={<Room></Room>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/chat' element={<Room2></Room2>}></Route>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./LoginForm.scss";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -37,7 +37,9 @@ const LoginForm = (props) => {
   const goToKakao = () => {
     navigate("/Kakao");
   };
+  useEffect(()=>{
 
+  },[])
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* <img src="">logo 이미지</img> */}

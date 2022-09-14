@@ -9,7 +9,8 @@ const Mainbar = ({ datas }) => {
   const enterRoom = async () => {
     try{
       const repo = await axios.get(url+`/room/${datas.sessionId}`)
-      return repo
+      console.log(repo)
+      // return repo
     }
     catch(error){
       console.log(error)
@@ -26,7 +27,8 @@ const Mainbar = ({ datas }) => {
         <div  className='bar-user-profile'>
           <img src={datas.roomMembers[0].profileImage} alt="profile" className='bar-profile-img'/>
         </div>
-        <a href={`/room/${datas.sessionId}`}><button onClick={enterRoom}>참여하기</button></a>
+        {/* <a href={`/room/${datas.sessionId}`}></a> */}
+        <button onClick={enterRoom}>참여하기</button>
       </div>
     </div>
   );

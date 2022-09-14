@@ -15,7 +15,7 @@ export const userLogin = createAsyncThunk(
     try {
       const { email, password } = payload;
 console.log("US-1", payload);
-      const response = await axios.post(`${URI.BASE}/member/login`, {
+      const response = await axios.post(`${URI.BASE}/member/login`, { // https://3.35.9.153:8080 / login
         email,
         password,
       }); //email,pw를 axios로 보낸다.

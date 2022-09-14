@@ -5,7 +5,7 @@ import axios from 'axios';
 import ChatInputBox from "../chatInputBox/ChatInputBox"
 
 var stompClient =null;
-const url = process.env.REACT_APP_SERVER_URL2
+const url = process.env.REACT_APP_SERVER_URL
 
 const ChatRoom = () => {
     const [except,setExcept] = useState("")  

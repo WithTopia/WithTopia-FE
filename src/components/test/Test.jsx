@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-const url = process.env.REACT_APP_SERVER_URL
+const url = process.env.REACT_APP_SERVER_URL2
 const Test = () => {
     const testData = async () => {
-        try{
+        try{ //  https://warmwinter.co.kr // login
             const repo = await axios.post(url+"/member/login",{
                 email:"sddsk1123@naver.com",
-                password:"gml493312!"
+                password:"qwer1234!"
             })
             console.log(repo)
             return repo.data

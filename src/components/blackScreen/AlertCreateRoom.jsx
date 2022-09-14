@@ -4,6 +4,7 @@ import MoveButton2 from '../button/MoveButton2'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const url = process.env.REACT_APP_SERVER_URL
 const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const navigate = useNavigate()
   const [check,unCheck] = useState(null)
@@ -38,7 +39,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   }
   const submitData = async () =>{
     try{
-      const repo = await axios.post("/create/room",{
+      const repo = await axios.post(url+"/create/room",{
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,
         status:sendData.status

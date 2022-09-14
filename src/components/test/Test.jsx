@@ -15,7 +15,7 @@ const Test = () => {
         }
     }
     useEffect(()=>{
-        testData()
+        // testData()
     },[])
     return (
     <div>

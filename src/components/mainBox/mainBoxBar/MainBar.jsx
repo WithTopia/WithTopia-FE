@@ -1,23 +1,32 @@
 import React from 'react';
-import samplePic from "../../../assets/profileSample.png";
 import "./MainBar.scss"
+import axios from 'axios'
 
-const Mainbar = () => {
+const url = process.env.REACT_APP_SERVER_URL
+
+const Mainbar = ({ datas }) => {
+  console.log(datas)
+  const enterRoom = async () => {
+    try{
+      const repo = await axios.get(url+`/room/${datas.sessionId}`)
+      return repo
+    }
+    catch(error){
+      console.log(error)
+    }
+        
+  }
   return (
-    <div>
-      <div>
-        <div className='chat-room-bar'>
-          채팅방 이름
-          <div className='bar-info-group'>
-            <div className='bar-count-user'>
-              4/6
-            </div>
-            <div  className='bar-user-profile'>
-              <img src={samplePic} alt="profile" className='bar-profile-img'/>
-            </div>
-            <button>참여하기</button>
-          </div>
+    <div className='chat-room-bar'>
+      {datas.roomTitle}
+      <div className='bar-info-group'>
+        <div className='bar-count-user'>
+          {datas.cntMember}/{datas.maxMember}
         </div>
+        <div  className='bar-user-profile'>
+          <img src={datas.roomMembers[0].profileImage} alt="profile" className='bar-profile-img'/>
+        </div>
+        <a href={`/room/${datas.sessionId}`}><button onClick={enterRoom}>참여하기</button></a>
       </div>
     </div>
   );

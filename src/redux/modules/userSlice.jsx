@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const URI = {
-  BASE: process.env.REACT_APP_BASE_URI,
+  BASE: process.env.REACT_APP_SERVER_URL2,
 };
 
 // const LOGIN = "user/LOGIN";//이게뭘까 export function UserLogIn(user) {//이게뭘까

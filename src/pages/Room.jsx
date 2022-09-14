@@ -1,9 +1,10 @@
 import React, { useState ,useEffect} from 'react'
-import axios from "axios"
+import Chat from "../components/chat/Chat"
 import { OpenVidu } from 'openvidu-browser'
 import { createBrowserHistory } from 'history'
 import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
+import Tempo from "../components/tempo/Tempo"
 
 const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -24,28 +25,6 @@ const Room = () => {
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
 
-  const getToken = async (sessionId) => { // openvidu 가 아닌 세션 토큰 발급
-    return createSession(sessionId)
-    .then((sessionId) =>
-      createToken(sessionId)
-    );
-  };
-  const createSession = async (sessionId) => {
-    const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
-        headers: { 'Content-Type': 'application/json', },
-    });
-    console.log(response.data)
-    return response.data; // The sessionId
-  }
-
-  const createToken = async (sessionId) => {
-      const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections', {}, {
-          headers: { 'Content-Type': 'application/json', },
-      });
-      setToken(response.data)
-      console.log(response.data)
-      return response.data; // The token
-  }
   const joinSession = () => {
     setToken(location.state.token)
     setSessionId(location.state.sessionId)  
@@ -144,9 +123,9 @@ const Room = () => {
     setPublisher(undefined)
   }
   // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = (event) => {
-    event.preventDefault();
-    event.returnValue = "";
+  const onbeforeunload = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
     leaveSession();
   };
 
@@ -167,8 +146,23 @@ const Room = () => {
   },[])
   return (
     <div className='room'>
-      <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
-      <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
+      
+      <div className='video-container'>
+        <h2>{location.state.roomTitle}</h2>
+        <hr></hr>
+        
+        <div className='video-chat'>
+          <div className='room-video'>
+            <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
+          </div>
+          <div className='room-chat'>
+            <Tempo></Tempo>
+          </div>
+        </div>
+      </div>
+      
+      
+      {/* <Chat></Chat> */}
     </div>
   )
 }

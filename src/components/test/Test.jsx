@@ -8,7 +8,7 @@ const Test = () => {
         try{
             const repo = await axios.post("/member/login",{
                 email:"sddsk1123@naver.com",
-                password:"gml"
+                password:"qwer1234!"
             })
             console.log(repo)
             return repo.data
@@ -21,12 +21,6 @@ const Test = () => {
     },[])
     return (
     <div>
-        {/* <h2>내놔.</h2>
-        <div className="악으로 깡으로 버텨라">
-            <form>
-                <button>버튼1</button>
-            </form>
-        </div> */}
     </div>
   )
 }

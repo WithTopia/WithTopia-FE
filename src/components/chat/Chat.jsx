@@ -73,7 +73,7 @@ const ChatRoom = () => {
         setRoomName(e.target.value)
     }
     const connect =()=>{
-        let Sock = new SockJS(url+"/ws/chat");
+        let Sock = new SockJS(url+"/wss");
         stompClient = Stomp.over(Sock);
         stompClient.connect({},function(){
         })

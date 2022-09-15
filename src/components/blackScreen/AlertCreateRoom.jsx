@@ -34,7 +34,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,
         status:sendData.status
-      },{headers:{"Authorization":token}})
+      },{headers:{"authorization":token}})
       setGetData(repo.data.data)
       navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
     }catch(error){

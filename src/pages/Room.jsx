@@ -9,9 +9,10 @@ import Tempo from "../components/tempo/Tempo"
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
+
 const Room = () => {
   const location = useLocation();
-  let tokenStuff = location.state.token
+  let tokenStuff = location.state.token  
   const [session,setSession] = useState("")
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");

@@ -14,21 +14,22 @@ export const userLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
-console.log("US-1", payload);
-      const response = await axios.post(`${URI.BASE}/member/login`, { // https://3.35.9.153:8080 / login
-        email,
-        password,
-      }); //email,pw를 axios로 보낸다.
-console.log("US-2", payload);
-      const accessToken = response.headers.authorization;
-      const refreshToken = response.headers[`refresh-token`];
 
+      const response = await axios.post(`${URI.BASE}/member/login`, {
+        email:email,
+        password: password,
+      }) //email,pw를 axios로 보낸다.
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err))
+      console.log(response.headers)
+      const accessToken = response.headers.authorization;
+      const refreshToken = response.headers.refreshtoken;
+      console.log(response.headers)
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       localStorage.setItem("email", response.payload);
       localStorage.setItem("nickname", response.payload); //payload로 안되면 data로 해보자.
       localStorage.setItem("userImgUrl", response.payload);
-console.log("US-3", payload);
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {

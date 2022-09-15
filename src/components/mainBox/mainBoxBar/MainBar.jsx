@@ -10,7 +10,7 @@ const Mainbar = ({ datas }) => {
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{
-      const repo = await axios.get(url+`/room/${datas.sessionId}`,{},{headers:{"Authorization":token}})
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,null,{headers:{"Authorization":token}})
       console.log(repo)
       // navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
     }

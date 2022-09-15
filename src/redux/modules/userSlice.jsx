@@ -14,23 +14,22 @@ export const userLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
-      const request = new XMLHttpRequest()
+      const req = new XMLHttpRequest();
       const response = await axios.post(`${URI.BASE}/member/login`, {
         email:email,
         password: password,
       })
+      req.open('GET', document.location, false);
+      req.send(null);
+      let headers = req.getAllResponseHeaders()
+      console.log(headers)
       
-      if(response){
-        request.open('GET', document.location, false);
-        request.send(null)
-        let headers = request.getAllResponseHeaders().toLocaleLowerCase()
-        console.log("응",headers)
-      }
+
       // localStorage.setItem("accessToken", accessToken);
       // localStorage.setItem("refreshtoken", refreshToken);
-      localStorage.setItem("email", response.payload);
-      localStorage.setItem("nickname", response.payload); //payload로 안되면 data로 해보자.
-      localStorage.setItem("userImgUrl", response.payload);
+      localStorage.setItem("email", response);
+      // localStorage.setItem("nickname", response.payload); //payload로 안되면 data로 해보자.
+      // localStorage.setItem("userImgUrl", response.payload);
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {

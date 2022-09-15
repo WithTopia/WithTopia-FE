@@ -4,7 +4,7 @@ import lion from "../../assets/lion2.png"
 import logo from "../../assets/crown.png"
 
 const TopThree = () => {
-    const top = [1,2,3,4,5]
+    const top = [1,2,3]
     return (
         <div className='top-three'>
             {/* <a href='/rank' className='top-three-font'>

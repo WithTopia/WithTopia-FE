@@ -5,7 +5,6 @@ import axios from 'axios'
 const url = process.env.REACT_APP_SERVER_URL
 
 const Mainbar = ({ datas }) => {
-  console.log(datas)
   const enterRoom = async () => {
     try{
       const repo = await axios.get(url+`/room/${datas.sessionId}`)

@@ -30,13 +30,11 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       alert("방 설정을 정확히 입력해주세요.")
     }
     try{
-      console.log(token)
       const repo = await axios.post(url+"/create/room",{
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,
         status:sendData.status
       },{headers:{"Authorization":token}})
-      console.log(repo)
       setGetData(repo.data.data)
       navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
     }catch(error){

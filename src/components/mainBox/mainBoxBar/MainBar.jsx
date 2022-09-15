@@ -3,11 +3,12 @@ import "./MainBar.scss"
 import axios from 'axios'
 
 const url = process.env.REACT_APP_SERVER_URL
+let token = localStorage.getItem("accessToken")
 
 const Mainbar = ({ datas }) => {
   const enterRoom = async () => {
     try{
-      const repo = await axios.get(url+`/room/${datas.sessionId}`)
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"Authorization":token}})
       console.log(repo)
       // return repo
     }

@@ -6,13 +6,11 @@ import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import Tempo from "../components/tempo/Tempo"
 
-const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
+const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
-
 
 const Room = () => {
   const location = useLocation();
-  // let tokenStuff = location.state.token.split("=")[2]
   let tokenStuff = location.state.token
   const [session,setSession] = useState("")
   const [OV, setOV] = useState();
@@ -26,9 +24,7 @@ const Room = () => {
   const [isConnect,setIsConnect] = useState(false)
 
   const joinSession = () => {
-    if(location.state.token){
-      setToken(location.state.token)  
-    }
+    setToken(location.state.token)  
     
     setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성

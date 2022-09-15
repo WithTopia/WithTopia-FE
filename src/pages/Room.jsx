@@ -26,7 +26,10 @@ const Room = () => {
   const [isConnect,setIsConnect] = useState(false)
 
   const joinSession = () => {
-    setToken(location.state.token)
+    if(location.state.token){
+      setToken(location.state.token)  
+    }
+    
     setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();

@@ -11,8 +11,8 @@ const Mainbar = ({ datas }) => {
     try{
       let token = localStorage.getItem("accessToken")
       const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token}})
-      console.log(repo)
-      // navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
+      console.log(repo.data.data.enterRoomToken)
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId}})
     }
     catch(error){
       console.log(error)

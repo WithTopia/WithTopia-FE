@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const url = process.env.REACT_APP_SERVER_URL
-let token = localStorage.getItem("accessToken")
+
 
 const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const navigate = useNavigate()
@@ -30,6 +30,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       alert("방 설정을 정확히 입력해주세요.")
     }
     try{
+      let token = localStorage.getItem("accessToken")
       const repo = await axios.post(url+"/create/room",{
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,

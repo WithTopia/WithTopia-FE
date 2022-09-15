@@ -4,12 +4,12 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const url = process.env.REACT_APP_SERVER_URL
-let token = localStorage.getItem("accessToken")
 
 const Mainbar = ({ datas }) => {
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{
+      let token = localStorage.getItem("accessToken")
       const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token}})
       console.log(repo)
       // navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})

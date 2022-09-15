@@ -1,16 +1,18 @@
 import React from 'react';
 import "./MainBar.scss"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const url = process.env.REACT_APP_SERVER_URL
 let token = localStorage.getItem("accessToken")
 
 const Mainbar = ({ datas }) => {
+  const navigate = useNavigate()
   const enterRoom = async () => {
     try{
       const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"Authorization":token}})
       console.log(repo)
-      // return repo
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
     }
     catch(error){
       console.log(error)

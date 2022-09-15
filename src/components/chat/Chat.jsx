@@ -8,6 +8,7 @@ var stompClient =null;
 const url = process.env.REACT_APP_SERVER_URL
 
 const ChatRoom = () => {
+    let token = localStorage.getItem("accessToken")
     const [except,setExcept] = useState("")  
     const [roomLists, setRoomLists] = useState(); 
     const [getOut,setGetOut] =useState("CHATROOM");
@@ -27,7 +28,7 @@ const ChatRoom = () => {
         }
         else{
             try{
-                const repo = await axios.post(url+`/chat/room`,{name:roomName})
+                const repo = await axios.post(url+`/create/room`,{name:roomName},{"Authorization":token})
                 const id = String(repo.data.roomId)
                 setRoomId(id)
                 setUserData({...userData,connected: true});
@@ -75,12 +76,14 @@ const ChatRoom = () => {
     const connect =()=>{
         let Sock = new SockJS(url+"/wss");
         stompClient = Stomp.over(Sock);
-        stompClient.connect({},function(){
+        stompClient.connect({
+            "Authorization":token
+        },function(){
         })
     }
 
     useEffect(() => {
-        findRoom()
+        // findRoom()
         connect()
     }, []);
     return (

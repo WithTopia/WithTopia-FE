@@ -67,14 +67,12 @@ const ChatList = () => {
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
             })}
-            
             <div
                 className="scrolldown"
                 ref={loadingRef}
                 style={{ height: "40px" }}>
                 {loading && "...Loading"}
             </div>
-            
         </div>
         <div>
             <button className='add-chatroom' onClick={handlePage}>+</button>

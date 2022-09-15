@@ -9,11 +9,11 @@ import Tempo from "../components/tempo/Tempo"
 const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
+
 const Room = () => {
   const location = useLocation();
   // let tokenStuff = location.state.token.split("=")[2]
   let tokenStuff = location.state.token
-  let sessionIds = location.state.sessionId
   const [session,setSession] = useState("")
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
@@ -26,7 +26,10 @@ const Room = () => {
   const [isConnect,setIsConnect] = useState(false)
 
   const joinSession = () => {
-    setToken(location.state.token)
+    if(location.state.token){
+      setToken(location.state.token)  
+    }
+    
     setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
@@ -146,7 +149,6 @@ const Room = () => {
   },[])
   return (
     <div className='room'>
-      
       <div className='video-container'>
         <h2>{location.state.roomTitle}</h2>
         <hr></hr>

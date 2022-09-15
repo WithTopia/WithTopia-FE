@@ -4,6 +4,9 @@ import MoveButton2 from '../button/MoveButton2'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const url = process.env.REACT_APP_SERVER_URL
+let token = localStorage.getItem("accessToken")
+
 const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const navigate = useNavigate()
   const [check,unCheck] = useState(null)
@@ -21,13 +24,24 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const handleScreen = () => {
     setPageOpen((prev)=>!prev)
   }
-  const submitRoom = (e) => {
+  const submitRoom = async (e) => {
+    e.preventDefault()
     if(sendData.roomTitle==="" || sendData.maxMember==="" || sendData.status === null){
       alert("방 설정을 정확히 입력해주세요.")
     }
-    e.preventDefault()
-    submitData()
+    try{
+      const repo = await axios.post(url+"/create/room",{
+        roomTitle:sendData.roomTitle,
+        maxMember:sendData.maxMember,
+        status:sendData.status
+      },{headers:{"Authorization":token}})
+      setGetData(repo.data.data)
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
+    }catch(error){
+      console.log(error)
+    }
   }
+
   const handleCheck = (e) => {
     const checkboxs = document.getElementsByClassName("checkbox")
     for(let i=0; i<checkboxs.length; i++){
@@ -36,20 +50,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       }
     }
   }
-  const submitData = async () =>{
-    try{
-      const repo = await axios.post("/create/room",{
-        roomTitle:sendData.roomTitle,
-        maxMember:sendData.maxMember,
-        status:sendData.status
-      })
-      console.log(repo.data.data)
-      setGetData(repo.data.data)
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
-    }catch(error){
-      console.log(error)
-    }
-  }
+
   const handleNums = (e) => {
     e.preventDefault()
     setSendData({...sendData,maxMember:e.target.value})

@@ -1,23 +1,36 @@
 import React from 'react';
-import samplePic from "../../../assets/profileSample.png";
 import "./MainBar.scss"
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
-const Mainbar = () => {
+const url = process.env.REACT_APP_SERVER_URL
+let token = localStorage.getItem("accessToken")
+
+const Mainbar = ({ datas }) => {
+  const navigate = useNavigate()
+  const enterRoom = async () => {
+    try{
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"Authorization":token}})
+      console.log(repo)
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{sessionId:repo.data.data.sessionId}})
+    }
+    catch(error){
+      console.log(error)
+    }
+        
+  }
   return (
-    <div>
-      <div>
-        <div className='chat-room-bar'>
-          채팅방 이름
-          <div className='bar-info-group'>
-            <div className='bar-count-user'>
-              4/6
-            </div>
-            <div  className='bar-user-profile'>
-              <img src={samplePic} alt="profile" className='bar-profile-img'/>
-            </div>
-            <button>참여하기</button>
-          </div>
+    <div className='chat-room-bar'>
+      {datas.roomTitle}
+      <div className='bar-info-group'>
+        <div className='bar-count-user'>
+          {datas.cntMember}/{datas.maxMember}
         </div>
+        <div  className='bar-user-profile'>
+          <img src={datas.roomMembers[0].profileImage} alt="profile" className='bar-profile-img'/>
+        </div>
+        {/* <a href={`/room/${datas.sessionId}`}></a> */}
+        <button onClick={enterRoom}>참여하기</button>
       </div>
     </div>
   );

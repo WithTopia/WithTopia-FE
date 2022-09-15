@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+const url = process.env.REACT_APP_SERVER_URL
+const email = "sddsk1123@naver.com"
 const Test = () => {
-    const [id,setId] = useState("sddsk1123@naver.com")
-    const [pw,setPw] = useState("gml")
     const testData = async () => {
-        try{
-            const repo = await axios.post("/member/login",{
+        try{ //  https://warmwinter.co.kr // login
+            const repo = await axios.post(url+"/member/login",{
                 email:"sddsk1123@naver.com",
                 password:"qwer1234!"
             })
@@ -16,8 +15,18 @@ const Test = () => {
            console.log(error)
         }
     }
+    const testData2 = async () => {
+        try{
+            const repo = await axios.post(url+"/member/email/request",{email:email})
+            console.log(repo)
+            // return repo.data
+        }catch(error){
+           console.log(error)
+        }
+    }
     useEffect(()=>{
-        testData()
+        // testData()
+        // testData2()
     },[])
     return (
     <div>

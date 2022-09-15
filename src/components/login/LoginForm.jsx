@@ -16,8 +16,7 @@ const LoginForm = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({mode:"onChange"});
-
-  console.log(watch());
+  // console.log(watch());
 
   const onSubmit = (payload) => {
     console.log("LV-1", payload);

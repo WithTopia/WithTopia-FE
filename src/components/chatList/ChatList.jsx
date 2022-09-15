@@ -70,7 +70,7 @@ const ChatList = () => {
             <div
                 className="scrolldown"
                 ref={loadingRef}
-                style={{ height: "45px" }}>
+                style={{ height: "50px" }}>
                 {loading && "...Loading"}
             </div>
         </div>

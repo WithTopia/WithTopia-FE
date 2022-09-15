@@ -12,7 +12,7 @@ const Mainbar = ({ datas }) => {
     try{
       const repo = await axios.get(url+`/room/${datas.sessionId}`,{},{headers:{"Authorization":token}})
       console.log(repo)
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{sessionId:repo.data.data.sessionId}})
+      // navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
     }
     catch(error){
       console.log(error)
@@ -29,7 +29,6 @@ const Mainbar = ({ datas }) => {
         <div  className='bar-user-profile'>
           <img src={datas.roomMembers[0].profileImage} alt="profile" className='bar-profile-img'/>
         </div>
-        {/* <a href={`/room/${datas.sessionId}`}></a> */}
         <button onClick={enterRoom}>참여하기</button>
       </div>
     </div>

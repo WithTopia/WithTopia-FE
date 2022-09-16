@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history'
 import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import Tempo from "../components/tempo/Tempo"
+import DividRecord from "../components/dividRecord/DividRecord"
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -26,7 +27,8 @@ const Room = () => {
 
   const joinSession = () => {
     setToken(location.state.token)  
-    
+    console.log("토큰",location.state.token)
+    console.log("아이디",location.state.sessionId)
     setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
@@ -74,7 +76,7 @@ const Room = () => {
         newOV.getUserMedia({
           audioSource: false,
           videoSource: undefined,
-          resolution: '640x480',
+          resolution: '240x180',
           frameRate: 10,
         })
       .then((mediaStream) => {
@@ -153,6 +155,7 @@ const Room = () => {
         <div className='video-chat'>
           <div className='room-video'>
             <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
+            <DividRecord subscribers={subscribers}></DividRecord>
           </div>
           <div className='room-chat'>
             <Tempo></Tempo>

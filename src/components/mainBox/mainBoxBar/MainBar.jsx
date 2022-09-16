@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom';
 const url = process.env.REACT_APP_SERVER_URL
 
 const Mainbar = ({ datas }) => {
+  console.log(datas)
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{
       let token = localStorage.getItem("accessToken")
-      const repo = await axios.get(url+`/room/${datas.sessionId}`,{},{headers:{"authorization":token}})
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token}})
       console.log(repo.data.data.enterRoomToken)
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId}})
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.enterRoomToken,sessionId:repo.data.data.sessionId}})
     }
     catch(error){
       console.log(error)

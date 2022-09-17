@@ -1,23 +1,25 @@
 import { useState ,useRef ,useEffect} from 'react'
 
-const DividRecord = ({subscribers}) => {
-    console.log("섭",subscribers)
+const DividRecord = ({sub}) => {
+    console.log("섭",sub)
     const videoRef = useRef()
     const [streamManager,setStreamManager] = useState("")
     const [subOn,setSubOn] = useState(false)
     
     useEffect(()=>{
-      if(subscribers.length !== 0){
+      
+      if(sub.length !== 0){
         // setStreamManager(publisher.stream.streamManager)
-        console.log(subscribers.stream.streamManager)
+        console.log("구독 정보",sub[0].stream.streamManager)
+        
         // console.log(publisher.stream)
-        subscribers.stream.streamManager.addVideoElement(videoRef.current)
-        console.log("구독 완료")
+        sub[0].stream.streamManager.addVideoElement(videoRef.current)
+        
         setSubOn(true)
       }else{
         console.log("구독 대기중 .. ")
       }
-    },[subscribers])
+    },[sub])
   return (
     <div className='dividrecord'>
       {subOn ? 

@@ -17,7 +17,7 @@ const Room = () => {
   const [session,setSession] = useState("")
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("현웅");
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
@@ -25,6 +25,8 @@ const Room = () => {
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
 
+
+  
   const joinSession = () => {
     setToken(location.state.token)  
     console.log("토큰",location.state.token)
@@ -54,6 +56,16 @@ const Room = () => {
       setSubscribers([...subscribers,newSubscribers]);
       setIsConnect(true)
     });
+    
+    // newSession.on("streamDestroyed", (e) => {
+    //   setOtherClose(true);
+    // });
+
+    // newSession.on("signal:close", (e) => {
+    //   console.log("세션", newSession);
+    //   setOtherClose(true);
+    // });
+
     // 1-3 예외처리
     newSession.on('exception', (exception) => {
       console.warn(exception);
@@ -139,10 +151,11 @@ const Room = () => {
   },[]);
 
   useEffect(()=>{
-    window.addEventListener("beforeunload", onbeforeunload);
+    // window.addEventListener("beforeunload", onbeforeunload);
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
+      leaveSession()
+      // window.removeEventListener("beforeunload", onbeforeunload);
       // 채팅 닫기 등
     };
   },[])

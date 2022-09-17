@@ -12,10 +12,10 @@ const VideoRecord = ({publisher,setPublisher}) => {
         console.log(publisher.stream.streamManager)
         // console.log(publisher.stream)
         publisher.stream.streamManager.addVideoElement(videoRef.current)
-        console.log("퍼블리싱")
+        console.log("퍼블리싱 완료")
         setStreamOn(true)
       }else{
-        console.log("대기중 .. ")
+        console.log("퍼블리싱 대기중 .. ")
       }
     },[publisher])
     

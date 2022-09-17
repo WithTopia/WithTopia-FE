@@ -1,11 +1,12 @@
 import React from 'react'
-import { useState ,useRef ,useEffect,createRef} from 'react'
+import { useState ,useRef ,useEffect} from 'react'
 
-const VideoRecord = ({publisher,setPublisher}) => {
+const VideoRecord = ({publisher}) => {
     const videoRef = useRef()
     const [streamManager,setStreamManager] = useState("")
     const [streamOn,setStreamOn] = useState(false)
-    console.log(publisher)
+    console.log("펍",publisher)
+    
     useEffect(()=>{
       if(publisher !== null){
         // setStreamManager(publisher.stream.streamManager)

@@ -37,7 +37,7 @@ const Room = () => {
     // socket 통신 과정에서 많은 log를 남기게 되는데 필요하지 않은 log를 띄우지 않게 하는 모드
     newOV.enableProdMode();
     // 2. initSesison 생성
-    const newSession = newOV.initSession();
+    var newSession = newOV.initSession();
     setSession(newSession)
     // JSON.parse(JSON.stringify(newSession))
     // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
@@ -134,6 +134,7 @@ const Room = () => {
     setSession(undefined);
     setSubscribers([])
     setSessionId("")
+    setOV(undefined)
     setPublisher(undefined)
   }
   // 브라우저 새로고침, 종료, 라우트 변경
@@ -154,6 +155,7 @@ const Room = () => {
     // window.addEventListener("beforeunload", onbeforeunload);
     joinSession()
     return () => {
+      console.log("나가")
       leaveSession()
       // window.removeEventListener("beforeunload", onbeforeunload);
       // 채팅 닫기 등
@@ -164,10 +166,14 @@ const Room = () => {
       <div className='video-container'>
         <h2>{location.state.roomTitle}</h2>
         <hr></hr>
-        
         <div className='video-chat'>
           <div className='room-video'>
-            <VideoRecord publisher={publisher} setPublisher={setPublisher}></VideoRecord>
+            <VideoRecord publisher={publisher}></VideoRecord>
+            {/* {subscribers.map((sub ,index)=>{
+              return(
+                
+              )
+            })} */}
             <DividRecord subscribers={subscribers}></DividRecord>
           </div>
           <div className='room-chat'>

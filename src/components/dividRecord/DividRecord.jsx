@@ -8,7 +8,7 @@ const DividRecord = ({sub}) => {
     
     useEffect(()=>{
       
-      if(sub.length !== 0){
+      if(sub[0]){
         // setStreamManager(publisher.stream.streamManager)
         console.log("구독 정보",sub[0].stream.streamManager)
         
@@ -22,7 +22,7 @@ const DividRecord = ({sub}) => {
     },[sub])
   return (
     <div className='dividrecord'>
-      {subOn ? 
+      {subOn === true ? 
       <video autoPlay={true} ref={videoRef}></video>
       : null}
     </div>

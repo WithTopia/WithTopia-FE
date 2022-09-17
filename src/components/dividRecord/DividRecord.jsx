@@ -1,7 +1,7 @@
 import { useState ,useRef ,useEffect} from 'react'
 
 const DividRecord = ({sub}) => {
-    console.log("섭",sub)
+    
     const videoRef = useRef()
     const [streamManager,setStreamManager] = useState("")
     const [subOn,setSubOn] = useState(false)

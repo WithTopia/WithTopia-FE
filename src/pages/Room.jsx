@@ -24,13 +24,6 @@ const Room = () => {
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
-
-
-  
-  
- 
-    
-  
   
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
@@ -111,7 +104,7 @@ const Room = () => {
       // 그놈의 토큰 처리
       newSession.connect( tokenStuff, { clientData: username})
         .then(async () => {
-          newOV.getUserMedia({
+          await newOV.getUserMedia({
             audioSource: false,
             videoSource: undefined,
             resolution: '240x180',
@@ -160,10 +153,13 @@ const Room = () => {
         <hr></hr>
         <div className='video-chat'>
           <div className='room-video'>
-            <VideoRecord publisher={publisher}></VideoRecord>
+            {publisher !== null ? (
+              <VideoRecord streamManager={publisher} check={true}></VideoRecord>
+            ) : null}
+            
             {subscribers.map((sub,index)=>{
               return(
-                <DividRecord sub={sub} key={index}></DividRecord>
+                <VideoRecord streamManager={sub} check={false} key={index}></VideoRecord>
               )
             })}
             

@@ -4,15 +4,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const url = process.env.REACT_APP_SERVER_URL
-let token = localStorage.getItem("accessToken")
 
 const Mainbar = ({ datas }) => {
+  console.log(datas)
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{
-      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"Authorization":token}})
-      console.log(repo)
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{sessionId:repo.data.data.sessionId}})
+      let token = localStorage.getItem("accessToken")
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token}})
+      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.enterRoomToken,sessionId:repo.data.data.sessionId}})
     }
     catch(error){
       console.log(error)
@@ -29,7 +29,6 @@ const Mainbar = ({ datas }) => {
         <div  className='bar-user-profile'>
           <img src={datas.roomMembers[0].profileImage} alt="profile" className='bar-profile-img'/>
         </div>
-        {/* <a href={`/room/${datas.sessionId}`}></a> */}
         <button onClick={enterRoom}>참여하기</button>
       </div>
     </div>

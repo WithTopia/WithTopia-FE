@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 const URI = {
   BASE: process.env.REACT_APP_SERVER_URL,
 };
@@ -14,23 +13,22 @@ export const userLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
-      const data = {email:email,password:password}
+      const datas = {email:email,password:password}
       fetch(`${URI.BASE}/member/login`,{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
         },
-        body:JSON.stringify(data)
+        body:JSON.stringify(datas)
       })
-      .then((res)=>{
-        let token = res.headers.get("authorization")
-        let refreshToken = res.headers.get("refreshtoken")
+      .then(response=>{
+        let token = response.headers.get("authorization")
+        let refreshToken = response.headers.get("refreshtoken")
         localStorage.setItem("accessToken", token);
         localStorage.setItem("refreshtoken", refreshToken);
+        const resp = response.json()
       })
-      // localStorage.setItem("email", response);
-      // localStorage.setItem("nickname", response.payload); //payload로 안되면 data로 해보자.
-      // localStorage.setItem("userImgUrl", response.payload);
+      
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

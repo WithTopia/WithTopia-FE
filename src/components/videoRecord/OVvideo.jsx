@@ -1,4 +1,5 @@
 import { useState ,useRef ,useEffect} from 'react'
+import {Link} from "react-router-dom"
 
 const OVvideo = ({streamManager,check}) => {
     const videoRef = useRef()
@@ -14,7 +15,11 @@ const OVvideo = ({streamManager,check}) => {
         // }
       },[streamManager])
     return (
-    <video ref={videoRef} autoPlay={true}></video>
+        <div>
+            <video ref={videoRef} autoPlay={true}></video>
+            <Link to="/main"><button>Emergency</button></Link>
+        </div>
+    
        
     )
 }

@@ -1,20 +1,18 @@
 import React, { useState ,useEffect} from 'react'
-import Chat from "../components/chat/Chat"
+// import Chat from "../components/chat/Chat"
 import { OpenVidu } from 'openvidu-browser'
-import { createBrowserHistory } from 'history'
 import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import Tempo from "../components/tempo/Tempo"
-import DividRecord from "../components/dividRecord/DividRecord"
+import { createBrowserHistory } from 'history';
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
-
 const Room = () => {
   const location = useLocation();
   let tokenStuff = location.state.token  
-  const [session,setSession] = useState(undefined)
+  const [session,setSession] = useState([])
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
   const [username, setUsername] = useState("현웅");
@@ -34,31 +32,10 @@ const Room = () => {
     }
   };
   
-  const leaveSession = () => {
-    session.disconnect()
-    session.unsubscribe(subscribers)
-    setSession(undefined);
-    setSubscribers([])
-    setSessionId("")
-    setOV(undefined)
-    setPublisher(undefined)
-  }
-  // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = (e) => {
-    e.preventDefault();
-    e.returnValue = "";
-    leaveSession();
-  };
-
-  // 뒤로가기;
-  // useEffect(() => {
-  //   window.onpopstate = () => {
-  //     history.push("/");
-  //   };
-  // },[]);
+  
 
   useEffect(()=>{
-    // window.addEventListener("beforeunload", onbeforeunload);
+    window.addEventListener("beforeunload", onbeforeunload);
     const joinSession = () => {
       setToken(location.state.token)  
       console.log("토큰",location.state.token)
@@ -69,7 +46,7 @@ const Room = () => {
       // socket 통신 과정에서 많은 log를 남기게 되는데 필요하지 않은 log를 띄우지 않게 하는 모드
       newOV.enableProdMode();
       // 2. initSesison 생성
-      let newSession = newOV.initSession();
+      const newSession = newOV.initSession();
       setSession(newSession)
       // JSON.parse(JSON.stringify(newSession))
       // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
@@ -140,13 +117,38 @@ const Room = () => {
     }
     joinSession()
     return () => {
-      onbeforeunload()
-      // window.removeEventListener("beforeunload", onbeforeunload);
+      // onbeforeunload()
+      window.removeEventListener("beforeunload", onbeforeunload);
       console.log("나가")
       
       // 채팅 닫기 등
     };
   },[])
+
+  const leaveSession = () => {
+    setTimeout(function(){
+      setSession(undefined);
+      setSubscribers([])
+      setSessionId("")
+      setOV(undefined)
+      setPublisher(undefined)
+    },1500)
+  }
+  // 브라우저 새로고침, 종료, 라우트 변경
+  const onbeforeunload = () => {
+    console.log(session)
+    session.disconnect()
+    session.unsubscribe(subscribers)
+    // e.preventDefault();
+    // e.returnValue = "";
+    leaveSession();
+  };
+
+  useEffect(() => {
+    window.onpopstate = () => {
+      history.push("/main");
+    };
+  },[]);
   return (
     <div className='room'>
       <div className='video-container'>
@@ -157,12 +159,12 @@ const Room = () => {
             {publisher !== null ? (
               <VideoRecord streamManager={publisher} check={true}></VideoRecord>
             ) : null}
-            <VideoRecord streamManager={subscribers[0]} check={true}></VideoRecord>
-            {/* {subscribers.map((sub,index)=>{
+            {/* <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord> */}
+            {subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>
               )
-            })} */}
+            })}
             
           </div>
           <div className='room-chat'>
@@ -170,8 +172,6 @@ const Room = () => {
           </div>
         </div>
       </div>
-      
-      
       {/* <Chat></Chat> */}
     </div>
   )

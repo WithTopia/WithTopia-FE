@@ -15,11 +15,7 @@ const OVvideo = ({streamManager,check}) => {
         // }    
       },[])
     return (
-        <div>
-            <video ref={videoRef} autoPlay={true} muted={true} hidden={false}></video>
-        </div>
-    
-       
+        <video ref={videoRef} autoPlay={true} muted={true} hidden={false}></video>
     )
 }
 

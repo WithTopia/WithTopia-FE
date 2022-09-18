@@ -148,6 +148,10 @@ const Room = () => {
       history.push("/main");
     };
   },[]);
+  useEffect(()=>{
+    console.log(subscribers)
+  },[subscribers])
+  
   return (
     <div className='room'>
       <div className='video-container'>
@@ -159,11 +163,14 @@ const Room = () => {
               <VideoRecord streamManager={publisher} check={true}></VideoRecord>
             ) : null}
             {/* <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord> */}
-            {subscribers.map((sub,index)=>{
+            {/* {subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>
               )
-            })}
+            })} */}
+            {subscribers.length !== 0 ? <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord> : null}
+            
+            
             
           </div>
           <div className='room-chat'>

@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const url = process.env.REACT_APP_SERVER_URL
 
 const Mainbar = ({ datas }) => {
-  console.log(datas)
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{
@@ -16,10 +15,12 @@ const Mainbar = ({ datas }) => {
     }
     catch(error){
       console.log(error)
-    }
-        
+    }     
   }
+
   return (
+    <>
+    {datas.status === false || datas.roomMembers.length === 0 ? null :
     <div className='chat-room-bar'>
       {datas.roomTitle}
       <div className='bar-info-group'>
@@ -31,7 +32,9 @@ const Mainbar = ({ datas }) => {
         </div>
         <button onClick={enterRoom}>참여하기</button>
       </div>
-    </div>
+    </div>}
+    
+    </>
   );
 }
 

@@ -58,7 +58,7 @@ const Room = () => {
   // },[]);
 
   useEffect(()=>{
-    window.addEventListener("beforeunload", onbeforeunload);
+    // window.addEventListener("beforeunload", onbeforeunload);
     const joinSession = () => {
       setToken(location.state.token)  
       console.log("토큰",location.state.token)
@@ -101,7 +101,8 @@ const Room = () => {
           setCheckMyScreen(true);
         }
       });
-      // 그놈의 토큰 처리
+      // 커넥팅 // 닉네임 받기~
+      setUsername(localStorage.getItem("nickname"))
       newSession.connect( tokenStuff, { clientData: username})
         .then(async () => {
           await newOV.getUserMedia({
@@ -139,9 +140,9 @@ const Room = () => {
     }
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
+      onbeforeunload()
+      // window.removeEventListener("beforeunload", onbeforeunload);
       console.log("나가")
-      leaveSession()
       
       // 채팅 닫기 등
     };
@@ -159,7 +160,7 @@ const Room = () => {
             
             {subscribers.map((sub,index)=>{
               return(
-                <VideoRecord streamManager={sub} check={false} key={index}></VideoRecord>
+                <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>
               )
             })}
             

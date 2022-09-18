@@ -6,12 +6,12 @@ const OVvideo = ({streamManager,check}) => {
     // const [streamOn,setStreamOn] = useState(false)
     console.log("펍",streamManager)
     useEffect(()=>{
-        if (check === true && streamManager !== null && videoRef.current){
+        if (streamManager !== null && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
         }
-        else if(check === false && streamManager !== null && videoRef.current){
-            streamManager[0].addVideoElement(videoRef.current)
-        }
+        // else if(check === false && streamManager !== null && videoRef.current){
+        //     streamManager[0].stream.streamManager.addVideoElement(videoRef.current)
+        // }
       },[streamManager])
     return (
     <video ref={videoRef} autoPlay={true}></video>

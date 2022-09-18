@@ -35,7 +35,7 @@ const Room = () => {
   
 
   useEffect(()=>{
-    window.addEventListener("beforeunload", onbeforeunload);
+    // window.addEventListener("beforeunload", onbeforeunload);
     const joinSession = () => {
       setToken(location.state.token)  
       console.log("토큰",location.state.token)
@@ -118,10 +118,8 @@ const Room = () => {
     joinSession()
     return () => {
       // onbeforeunload()
-      window.removeEventListener("beforeunload", onbeforeunload);
-      console.log("나가")
-      
-      // 채팅 닫기 등
+      onbeforeunload()
+      // window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
 
@@ -133,6 +131,7 @@ const Room = () => {
       setOV(undefined)
       setPublisher(undefined)
     },1500)
+    console.log("나가 ㅋㅋ")
   }
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = () => {

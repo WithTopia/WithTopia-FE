@@ -12,12 +12,11 @@ const OVvideo = ({streamManager,check}) => {
         }
         // else if(check === false && streamManager !== null && videoRef.current){
         //     streamManager[0].stream.streamManager.addVideoElement(videoRef.current)
-        // }
-      },[streamManager])
+        // }    
+      },[])
     return (
         <div>
             <video ref={videoRef} autoPlay={true}></video>
-            <Link to="/main"><button>Emergency</button></Link>
         </div>
     
        

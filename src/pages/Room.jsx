@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 // import Chat from "../components/chat/Chat"
 import { OpenVidu } from 'openvidu-browser'
-import { useLocation } from 'react-router-dom'
+import { useLocation ,Link } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import Tempo from "../components/tempo/Tempo"
 import { createBrowserHistory } from 'history';
@@ -171,6 +171,7 @@ const Room = () => {
             <Tempo></Tempo>
           </div>
         </div>
+        <Link to="/main"><button>Emergency</button></Link>
       </div>
       {/* <Chat></Chat> */}
     </div>

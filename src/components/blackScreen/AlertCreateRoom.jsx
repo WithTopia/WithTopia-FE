@@ -32,12 +32,14 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     }
     try{
       let token = localStorage.getItem("accessToken")
+      let refreshtoken = localStorage.getItem("refreshtoken")
       const repo = await axios.post(url+"/create/room",{
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,
         status:sendData.status
-      },{headers:{"authorization":token}})
+      },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       setGetData(repo.data.data)
+      localStorage.setItem("masterId",repo.data.data.masterId)
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle,masterId:repo.data.data.masterId,role:"master"}})
     }catch(error){

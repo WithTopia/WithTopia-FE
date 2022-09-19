@@ -39,12 +39,10 @@ const Room = () => {
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
-      console.log(localStorage.getItem("nickname"))
-      console.log(location.state.masterId)
-      if(location.state.masterId === localStorage.getItem("nickname")){
+      if(localStorage.getItem("masterId") === localStorage.getItem("nickname")){
         const getOutRoomMaster = await axios.delete(url+`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
-      }else if(location.state.masterId !== localStorage.getItem("nickname")){
+      }else{
         const getOutRoomUser = await axios.post(url+`/room/${location.state.sessionId}/member`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomUser)
       }
@@ -61,7 +59,7 @@ const Room = () => {
     setSubscribers([])
     setSessionId("")
     setOV(undefined)
-    setPublisher(undefined)
+    setPublisher(null)
   }
   useEffect(()=>{
     window.addEventListener("beforeunload", onbeforeunload);
@@ -75,7 +73,7 @@ const Room = () => {
       // socket 통신 과정에서 많은 log를 남기게 되는데 필요하지 않은 log를 띄우지 않게 하는 모드
       newOV.enableProdMode();
       // 2. initSesison 생성
-      var newsession = newOV.initSession();
+      const newsession = newOV.initSession();
       setSession(newsession)
       // JSON.parse(JSON.stringify(newSession))
       // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
@@ -108,8 +106,8 @@ const Room = () => {
         }
       });
       // 커넥팅 // 닉네임 받기~
-      
-      newsession.connect( tokenStuff, { clientData: localStorage.getItem("nickname")})
+      setUsername(localStorage.getItem("nickname"))
+      newsession.connect( tokenStuff, { clientData: username})
         .then(async () => {
           await newOV.getUserMedia({
             audioSource: false,
@@ -166,12 +164,12 @@ const Room = () => {
         <hr></hr>
         <div className='video-chat'>
           <div className='room-video'>
-            {publisher !== null && location.state.role === "master" ? (
-              <VideoRecord streamManager={publisher}></VideoRecord>
+            {publisher !== null ? (
+              <VideoRecord streamManager={publisher} check={true}></VideoRecord>
             ) : null}
-            {/* {subscribers.length !== 0 && location.state.role === "user" ? (
-              <VideoRecord streamManager={subscribers[0]}></VideoRecord>
-            ) : null} */}
+            {subscribers.length !== 0 ? (
+              <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord>
+            ) : null}
             {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>

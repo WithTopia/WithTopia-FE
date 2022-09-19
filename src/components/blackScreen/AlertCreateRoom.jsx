@@ -28,6 +28,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     e.preventDefault()
     if(sendData.roomTitle==="" || sendData.maxMember==="" || sendData.status === null){
       alert("방 설정을 정확히 입력해주세요.")
+      return
     }
     try{
       let token = localStorage.getItem("accessToken")

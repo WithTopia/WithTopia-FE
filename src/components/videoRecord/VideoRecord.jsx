@@ -1,11 +1,10 @@
 import React from 'react'
 import OVvideo from './OVvideo'
 
-const VideoRecord = ({streamManager ,check}) => {
-    console.log(check)
+const VideoRecord = ({streamManager }) => {
     return (
     <div className='video-record'>
-      <OVvideo streamManager={streamManager} check={check}></OVvideo>
+      <OVvideo streamManager={streamManager}></OVvideo>
     </div>
   )
 }

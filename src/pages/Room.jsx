@@ -16,7 +16,7 @@ const Room = () => {
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
-  const [username, setUsername] = useState("현웅");
+  const [username, setUsername] = useState("");
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
@@ -39,7 +39,9 @@ const Room = () => {
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
-      if(location.state.master === username){
+      console.log(localStorage.getItem("nickname"))
+      console.log(location.state.master)
+      if(location.state.master === localStorage.getItem("nickname")){
         const getOutRoomMaster = await axios.delete(url+`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
       }else{
@@ -106,8 +108,8 @@ const Room = () => {
         }
       });
       // 커넥팅 // 닉네임 받기~
-      setUsername(localStorage.getItem("nickname"))
-      newsession.connect( tokenStuff, { clientData: username})
+      
+      newsession.connect( tokenStuff, { clientData: localStorage.getItem("nickname")})
         .then(async () => {
           await newOV.getUserMedia({
             audioSource: false,
@@ -167,9 +169,9 @@ const Room = () => {
             {publisher !== null && location.state.role === "master" ? (
               <VideoRecord streamManager={publisher}></VideoRecord>
             ) : null}
-            {publisher !== null && location.state.role === "user" ? (
+            {/* {subscribers.length !== 0 && location.state.role === "user" ? (
               <VideoRecord streamManager={subscribers[0]}></VideoRecord>
-            ) : null}
+            ) : null} */}
             {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>

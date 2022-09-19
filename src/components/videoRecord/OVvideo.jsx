@@ -5,7 +5,7 @@ const OVvideo = ({streamManager}) => {
     const videoRef = useRef()
     // const [streamManager,setStreamManager] = useState("")
     // const [streamOn,setStreamOn] = useState(false)
-    console.log("펍",streamManager)
+    // console.log("펍",streamManager)
     useEffect(()=>{
         if (streamManager !== null && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
@@ -15,7 +15,7 @@ const OVvideo = ({streamManager}) => {
         // }    
       },[])
     return (
-        <video ref={videoRef} autoPlay={true} muted={true} hidden={false}></video>
+        <video ref={videoRef} autoPlay={true} muted={true}></video>
     )
 }
 

@@ -41,7 +41,12 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       setGetData(repo.data.data)
       localStorage.setItem("masterId",repo.data.data.masterId)
       navigate(`/room/${repo.data.data.sessionId}`,
-      {state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle,masterId:repo.data.data.masterId,role:"master"}})
+      {state:{
+        token:repo.data.data.token,
+        sessionId:repo.data.data.sessionId,
+        roomTitle:sendData.roomTitle,
+        masterId:repo.data.data.masterId,
+      }})
     }catch(error){
       console.log(error)
     }

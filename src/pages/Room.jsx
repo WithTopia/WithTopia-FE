@@ -169,14 +169,17 @@ const Room = () => {
         <hr></hr>
         <div className='video-chat'>
           <div className='room-video'>
-            {publisher !== null ? (
-              <VideoRecord streamManager={publisher} check={true}></VideoRecord>
+            {publisher !== null && location.state.role === "master" ? (
+              <VideoRecord streamManager={publisher}></VideoRecord>
             ) : null}
-            {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
+            {publisher !== null && location.state.role === "user" ? (
+              <VideoRecord streamManager={publisher}></VideoRecord>
+            ) : null}
+            {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>
               )
-            }) : null}
+            }) : null} */}
           </div>
           <div className='room-chat'>
             <Tempo></Tempo>

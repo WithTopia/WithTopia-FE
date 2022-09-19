@@ -36,14 +36,21 @@ const Room = () => {
   const onbeforeunload = async (e) => {
     e.preventDefault();
     e.returnValue = "";
-    if(location.state.master === username){
-      const getOutRoomMaster = await axios.delete(url+`/room/${location.state.sessionId}`)
-      console.log(getOutRoomMaster)
-    }else{
-      const getOutRoomUser = await axios.post(url+`/room/${location.state.sessionId}/member`)
-      console.log(getOutRoomUser)
+    try{
+      let token = localStorage.getItem("accessToken")
+      let refreshtoken = localStorage.getItem("refreshtoken")
+      if(location.state.master === username){
+        const getOutRoomMaster = await axios.delete(url+`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+        console.log(getOutRoomMaster)
+      }else{
+        const getOutRoomUser = await axios.post(url+`/room/${location.state.sessionId}/member`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+        console.log(getOutRoomUser)
+      }
+      leaveSession();
+    }catch(error){
+      localStorage.setItem("error",error)
+      console.log(error)
     }
-    leaveSession();
   };
   const leaveSession = () => {
     console.log("나가 ㅋㅋ")

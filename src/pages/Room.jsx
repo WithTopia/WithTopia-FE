@@ -5,6 +5,7 @@ import { useLocation ,Link } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import Tempo from "../components/tempo/Tempo"
 import { createBrowserHistory } from 'history';
+import axios from 'axios'
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -22,7 +23,6 @@ const Room = () => {
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
-  const [example,setExample] = useState(undefined)
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
     let index = prevSubscribers.indexOf(streamManager, 0);
@@ -33,15 +33,29 @@ const Room = () => {
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = (e) => {
+  const onbeforeunload = async (e) => {
     e.preventDefault();
     e.returnValue = "";
-    console.log("1")
+    if(location.state.master === username){
+      const getOutRoomMaster = await axios.delete(url+`/room/${location.state.sessionId}`)
+      console.log(getOutRoomMaster)
+    }else{
+      const getOutRoomUser = await axios.post(url+`/room/${location.state.sessionId}/member`)
+      console.log(getOutRoomUser)
+    }
     leaveSession();
   };
-  
+  const leaveSession = () => {
+    console.log("나가 ㅋㅋ")
+    // session.unsubscribe(subscribers)
+    // setSession(undefined);
+    setSubscribers([])
+    setSessionId("")
+    setOV(undefined)
+    setPublisher(undefined)
+  }
   useEffect(()=>{
-    // window.addEventListener("beforeunload", onbeforeunload);
+    window.addEventListener("beforeunload", onbeforeunload);
     const joinSession = () => {
       setToken(location.state.token)  
       console.log("토큰",location.state.token)
@@ -123,24 +137,16 @@ const Room = () => {
     }
     setTimeout(joinSession,1000)
     
+    
     return () => {
       // onbeforeunload()
-      leaveSession()
-      // window.removeEventListener("beforeunload", onbeforeunload);
+      window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  const leaveSession = () => {
-    console.log("2")
-    console.log(session)
-    session.disconnect()
-    console.log("나가 ㅋㅋ")
-    // session.unsubscribe(subscribers)
-    // setSession(undefined);
-    setSubscribers([])
-    setSessionId("")
-    setOV(undefined)
-    setPublisher(undefined)
-  }
+  useEffect(()=>{
+    console.log(publisher,"설")
+    console.log(subscribers,"구")
+  },[publisher,subscribers])
   
 
   // useEffect(() => {
@@ -159,16 +165,11 @@ const Room = () => {
             {publisher !== null ? (
               <VideoRecord streamManager={publisher} check={true}></VideoRecord>
             ) : null}
-            {/* <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord> */}
-            {/* {subscribers.map((sub,index)=>{
+            {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
               return(
                 <VideoRecord streamManager={subscribers[0]} check={false} key={index}></VideoRecord>
               )
-            })} */}
-            {subscribers.length !== 0 ? <VideoRecord streamManager={subscribers[0]} check={false}></VideoRecord> : null}
-            
-            
-            
+            }) : null}
           </div>
           <div className='room-chat'>
             <Tempo></Tempo>

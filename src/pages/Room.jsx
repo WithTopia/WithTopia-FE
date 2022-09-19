@@ -150,11 +150,6 @@ const Room = () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  useEffect(()=>{
-    console.log(publisher,"설")
-    console.log(subscribers,"구")
-  },[publisher,subscribers])
-  
 
   // useEffect(() => {
   //   window.onpopstate = () => {
@@ -173,7 +168,7 @@ const Room = () => {
               <VideoRecord streamManager={publisher}></VideoRecord>
             ) : null}
             {publisher !== null && location.state.role === "user" ? (
-              <VideoRecord streamManager={publisher}></VideoRecord>
+              <VideoRecord streamManager={subscribers[0]}></VideoRecord>
             ) : null}
             {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
               return(

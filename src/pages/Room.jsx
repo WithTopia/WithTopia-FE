@@ -175,7 +175,7 @@ const Room = () => {
             {subscribers.map((sub,index)=>{
               return(
                 <div className="sub" key={index}>
-                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[index]}></VideoRecord>
                 </div>
               )
             })}

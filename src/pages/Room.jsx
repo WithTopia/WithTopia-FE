@@ -24,7 +24,7 @@ const Room = () => {
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
-  const [roomNums,setRoomNums] = useState(1)
+  const [role,setRole] = useState(location.state.role)
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
     let index = prevSubscribers.indexOf(streamManager, 0);
@@ -167,25 +167,33 @@ const Room = () => {
         <h2>{location.state.roomTitle}</h2>
         <hr></hr>
         <div className='video-chat'>
-          <div className='room-video'>
-            {publisher !== null ? (
+          {role === "master" || subscribers.length > 0 ? (
+            <div className='room-video'>
+              {role === "master" && publisher !== null ? (
+                <div className="pub">
+                  <VideoRecord streamManager={publisher}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
+                </div>
+              ) : null}
+              {role === "user" && publisher !== null ? (
+                <div className='sub'>
+                  <VideoRecord streamManager={publisher}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+            {/* {publisher !== null && location.state.role === "master" ? (
               <div className="pub">
                 <VideoRecord streamManager={publisher}></VideoRecord>
               </div>
-            ) : null}
-            {subscribers.map((sub,index)=>{
-              return(
-                <div className="sub" key={index}>
-                  <VideoRecord streamManager={subscribers[roomNums]}></VideoRecord>
-                </div>
-              )
-            })}
-            {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{
-              return(
-                <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
-              )
-            }) : null} */}
-          </div>
+            ) : null} */}
+            {/* {publisher !== null && location.state.role === "user" ? (
+              <div className="pub">
+                <VideoRecord streamManager={publisher}></VideoRecord>
+                <VideoRecord stre></VideoRecord>
+              </div>
+            ) : null} */}
           <div className='room-chat'>
             <Tempo></Tempo>
           </div>

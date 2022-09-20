@@ -1,11 +1,15 @@
 import React from 'react'
 import OVvideo from './OVvideo'
 
-const VideoRecord = ({streamManager,index}) => {
-    console.log(index,"썹썹",streamManager)
-    return (
-      <OVvideo streamManager={streamManager}></OVvideo>
-    )
+const VideoRecord = ({streamManager}) => {
+  console.log(streamManager)  
+  return (
+    <div>
+      {streamManager !== undefined ? (
+        <OVvideo streamManager={streamManager}></OVvideo>
+      ) : null}
+    </div>
+  )
 }
 
 export default VideoRecord

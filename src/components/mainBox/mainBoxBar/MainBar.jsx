@@ -19,7 +19,8 @@ const Mainbar = ({ datas }) => {
         token:repo.data.data.enterRoomToken,
         sessionId:repo.data.data.sessionId,
         masterId:repo.data.data.nickname,
-        roomTitle:datas.roomTitle
+        roomTitle:datas.roomTitle,
+        role:"user"
       }})
     }
     catch(error){

@@ -46,6 +46,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         sessionId:repo.data.data.sessionId,
         roomTitle:sendData.roomTitle,
         masterId:repo.data.data.masterId,
+        role:"master"
       }})
     }catch(error){
       console.log(error)

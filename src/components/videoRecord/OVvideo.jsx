@@ -7,7 +7,7 @@ const OVvideo = ({streamManager}) => {
     // const [streamOn,setStreamOn] = useState(false)
     // console.log("펍",streamManager)
     useEffect(()=>{
-        if (streamManager !== null && videoRef.current){
+        if (streamManager !== undefined && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
         }
         // else if(check === false && streamManager !== null && videoRef.current){

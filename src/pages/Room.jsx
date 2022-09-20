@@ -87,7 +87,7 @@ const Room = () => {
       // const newSubscribers = subscribers;
       // newSubscribers.push(newSubscriber);
       
-      setSubscribers([...subscribers,newSubscriber]);
+      setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
     // 1-3 예외처리

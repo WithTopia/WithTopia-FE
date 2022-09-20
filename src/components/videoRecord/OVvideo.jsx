@@ -10,10 +10,7 @@ const OVvideo = ({streamManager}) => {
         if (streamManager !== undefined && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
         }
-        // else if(check === false && streamManager !== null && videoRef.current){
-        //     streamManager[0].stream.streamManager.addVideoElement(videoRef.current)
-        // }    
-      },[streamManager])
+      },[])
     return (
         <video ref={videoRef} autoPlay={true} muted={true}></video>
     )

@@ -84,10 +84,10 @@ const Room = () => {
         // JSON.parse(e.stream.connection.data).clientData
       );
       
-      const newSubscribers = subscribers;
-      newSubscribers.push(newSubscriber);
+      // const newSubscribers = subscribers;
+      // newSubscribers.push(newSubscriber);
       
-      setSubscribers([...subscribers,newSubscribers]);
+      setSubscribers([...subscribers,newSubscriber]);
       setIsConnect(true)
     });
     // 1-3 예외처리
@@ -154,7 +154,9 @@ const Room = () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-
+  useEffect(()=>{
+    console.log(subscribers)
+  },[subscribers])
   // useEffect(() => {
   //   window.onpopstate = () => {
   //     history.push("/main");
@@ -173,7 +175,7 @@ const Room = () => {
                   <VideoRecord streamManager={publisher}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>
@@ -183,7 +185,7 @@ const Room = () => {
                   <VideoRecord streamManager={publisher}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>

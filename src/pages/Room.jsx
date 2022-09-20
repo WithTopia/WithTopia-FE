@@ -104,7 +104,7 @@ const Room = () => {
     });
     // 커넥팅 // 닉네임 받기~
     let nickname = localStorage.getItem("nickname")
-    newsession.connect( tokenStuff, { clientData: nickname })
+    newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
         await newOV.getUserMedia({
           audioSource: false,
@@ -138,7 +138,6 @@ const Room = () => {
       .catch((error) => {
         console.warn(
           'There was an error connecting to the session:',
-          error,
           error.code,
           error.message
       );
@@ -175,8 +174,8 @@ const Room = () => {
             ) : null}
             {subscribers.map((sub,index)=>{
               return(
-                <div className="sub">
-                  <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
+                <div className="sub" key={index}>
+                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
                 </div>
               )
             })}

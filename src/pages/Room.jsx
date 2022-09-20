@@ -160,7 +160,6 @@ const Room = () => {
   //     history.push("/main");
   //   };
   // },[]);
-  
   return (
     <div className='room'>
       <div className='video-container'>
@@ -172,13 +171,21 @@ const Room = () => {
               {role === "master" && publisher !== null ? (
                 <div className="pub">
                   <VideoRecord streamManager={publisher}></VideoRecord>
-                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
+                  {subscribers.length > 0 ? subscribers.map((sub,index)=>{
+                    return(
+                      <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
+                    )
+                  }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
                   <VideoRecord streamManager={publisher}></VideoRecord>
-                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
+                  {subscribers.length > 0 ? subscribers.map((sub,index)=>{
+                    return(
+                      <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
+                    )
+                  }) : null}
                 </div>
               ) : null}
             </div>

@@ -24,6 +24,7 @@ const Room = () => {
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
+  const [roomNums,setRoomNums] = useState(1)
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
     let index = prevSubscribers.indexOf(streamManager, 0);
@@ -175,7 +176,7 @@ const Room = () => {
             {subscribers.map((sub,index)=>{
               return(
                 <div className="sub" key={index}>
-                  <VideoRecord streamManager={subscribers[index]}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[roomNums]}></VideoRecord>
                 </div>
               )
             })}

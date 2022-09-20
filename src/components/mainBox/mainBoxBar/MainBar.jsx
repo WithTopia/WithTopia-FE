@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const url = process.env.REACT_APP_SERVER_URL
 
 const Mainbar = ({ datas }) => {
+  console.log(datas)
   const navigate = useNavigate()
   const enterRoom = async () => {
     try{

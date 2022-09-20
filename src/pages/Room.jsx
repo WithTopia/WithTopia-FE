@@ -173,7 +173,7 @@ const Room = () => {
             ) : null}
             {subscribers.map((sub,index)=>{
               return(
-                <VideoRecord streamManager={sub} key={index}></VideoRecord>
+                <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
               )
             })}
             {/* {subscribers.length !== 0 ? subscribers.map((sub,index)=>{

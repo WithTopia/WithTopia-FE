@@ -2,6 +2,7 @@ import { useState ,useRef ,useEffect} from 'react'
 import {Link} from "react-router-dom"
 
 const OVvideo = ({streamManager}) => {
+    console.log(streamManager)
     const videoRef = useRef()
     // const [streamManager,setStreamManager] = useState("")
     // const [streamOn,setStreamOn] = useState(false)

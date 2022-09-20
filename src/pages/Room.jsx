@@ -172,17 +172,11 @@ const Room = () => {
               {role === "master" && publisher !== null ? (
                 <div className="pub">
                   <VideoRecord streamManager={publisher}></VideoRecord>
-                  {subscribers.map((sub,index)=>{
-                    <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
-                  })}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
                   <VideoRecord streamManager={publisher}></VideoRecord>
-                  {subscribers.map((sub,index)=>{
-                    <VideoRecord streamManager={subscribers[0]} key={index}></VideoRecord>
-                  })}
                 </div>
               ) : null}
             </div>

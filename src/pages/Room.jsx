@@ -173,14 +173,14 @@ const Room = () => {
                 <div className="pub">
                   <VideoRecord streamManager={publisher}></VideoRecord>
                   <VideoRecord streamManager={subscribers[0]}></VideoRecord>
-                  <VideoRecord streamManager={subscribers[1]}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
                   <VideoRecord streamManager={publisher}></VideoRecord>
                   <VideoRecord streamManager={subscribers[0]}></VideoRecord>
-                  <VideoRecord streamManager={subscribers[1]}></VideoRecord>
+                  <VideoRecord streamManager={subscribers[0]}></VideoRecord>
                 </div>
               ) : null}
             </div>

@@ -152,7 +152,12 @@ const Room = () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  
+  useEffect(()=>{
+    console.log(subscribers)
+  },[subscribers])
+  useEffect(()=>{
+    console.log(publisher)
+  },[publisher])
   // useEffect(() => {
   //   window.onpopstate = () => {
   //     history.push("/main");

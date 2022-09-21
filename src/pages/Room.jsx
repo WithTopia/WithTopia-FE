@@ -200,7 +200,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className='room-chat'>
-            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null}
+            {/* {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null} */}
           </div>  
         </div>
         <div className='video-setting'>

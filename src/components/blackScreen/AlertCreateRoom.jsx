@@ -28,17 +28,26 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     e.preventDefault()
     if(sendData.roomTitle==="" || sendData.maxMember==="" || sendData.status === null){
       alert("방 설정을 정확히 입력해주세요.")
+      return
     }
     try{
       let token = localStorage.getItem("accessToken")
+      let refreshtoken = localStorage.getItem("refreshtoken")
       const repo = await axios.post(url+"/create/room",{
         roomTitle:sendData.roomTitle,
         maxMember:sendData.maxMember,
         status:sendData.status
-      },{headers:{"authorization":token}})
-      console.log(repo)
+      },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       setGetData(repo.data.data)
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.token,sessionId:repo.data.data.sessionId,roomTitle:sendData.roomTitle}})
+      localStorage.setItem("masterId",repo.data.data.masterId)
+      navigate(`/room/${repo.data.data.sessionId}`,
+      {state:{
+        token:repo.data.data.token,
+        sessionId:repo.data.data.sessionId,
+        roomTitle:sendData.roomTitle,
+        masterId:repo.data.data.masterId,
+        role:"master"
+      }})
     }catch(error){
       console.log(error)
     }

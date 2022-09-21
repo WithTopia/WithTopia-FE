@@ -11,15 +11,26 @@ const Mainbar = ({ datas }) => {
   const enterRoom = async () => {
     try{
       let token = localStorage.getItem("accessToken")
-      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token}})
-      navigate(`/room/${repo.data.data.sessionId}`,{state:{token:repo.data.data.enterRoomToken,sessionId:repo.data.data.sessionId}})
+      let refreshtoken = localStorage.getItem("refreshtoken")
+      const repo = await axios.get(url+`/room/${datas.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+      console.log(repo.data)
+      navigate(`/room/${repo.data.data.sessionId}`,
+      {state:{
+        token:repo.data.data.enterRoomToken,
+        sessionId:repo.data.data.sessionId,
+        masterId:repo.data.data.nickname,
+        roomTitle:datas.roomTitle,
+        role:"user"
+      }})
     }
     catch(error){
       console.log(error)
-    }
-        
+    }     
   }
+
   return (
+    <>
+    {datas.status === false || datas.roomMembers.length === 0 ? null :
     <div className='chat-room-bar'>
       {datas.roomTitle}
       <div className='bar-info-group'>
@@ -31,7 +42,9 @@ const Mainbar = ({ datas }) => {
         </div>
         <button onClick={enterRoom}>참여하기</button>
       </div>
-    </div>
+    </div>}
+    
+    </>
   );
 }
 

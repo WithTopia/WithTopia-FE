@@ -14,20 +14,15 @@ export const userLogin = createAsyncThunk(
     try {
       const { email, password } = payload;
       const datas = {email:email,password:password}
-      fetch(`${URI.BASE}/member/login`,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify(datas)
-      })
-      .then(response=>{
-        let token = response.headers.get("authorization")
-        let refreshToken = response.headers.get("refreshtoken")
-        localStorage.setItem("accessToken", token);
-        localStorage.setItem("refreshtoken", refreshToken);
-        const resp = response.json()
-      })
+      const {data,headers} = await axios.post(`${URI.BASE}/member/login`, datas)
+      
+      let token = headers.authorization
+      let refreshToken = headers.refreshtoken
+      let nickname = data.nickname
+      
+      localStorage.setItem("nickname",nickname)
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("refreshtoken", refreshToken);
       
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {

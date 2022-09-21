@@ -1,0 +1,39 @@
+.pub{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.sub{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.video-content{
+    .video-contents{
+        display: flex;
+        justify-content:space-between;
+        height: 22px;
+        .video-username{
+            font-size: 20px;
+            font-weight: bold;   
+        }
+    }
+    .video-hidden{
+        width: 410px;
+        height: 290px;
+        border-radius: 12px;
+        border: none;
+        background-color: #FFEBA3;
+        display: flex;
+        img{
+            margin: 0 auto;
+            margin-top: 90px;
+            height: 100px;
+        }
+    }
+    .video-items{
+        border-radius: 12px;
+    }
+}

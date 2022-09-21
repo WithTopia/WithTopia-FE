@@ -54,7 +54,6 @@ const ChatList = () => {
         const observer = new IntersectionObserver(handleObserver, options);
         observer.observe(loadingRef.current);
     },[])
-    console.log(rooms)
     return (
     <div className='chat-list'>
         <div className='default-page-size'>

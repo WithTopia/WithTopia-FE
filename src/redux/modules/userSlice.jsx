@@ -1,18 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const URI = {
-  BASE: process.env.REACT_APP_SERVER_URL,
-};
 
-// const LOGIN = "user/LOGIN";//이게뭘까 export function UserLogIn(user) {//이게뭘까
-// console.log("UserLogIn");     return { type: LOGIN, user }; }
+
+// const URI = {
+//   BASE: process.env.REACT_APP_BASE_URI,
+// };
+const URL = process.env.REACT_APP_SERVER_URL
+
+
+//회원가입
+export const userRegister = createAsyncThunk(
+  "/member/signup",
+  async ({email,authKey,nickname,password,passwordConfirm}) => {
+    try{
+      console.log("1111",email);
+      const response = await axios.post(`${URL}/member/signup`, {
+        email : email,
+        authKey : authKey,
+        nickname : nickname,
+        password : password,
+        passwordConfirm : passwordConfirm,
+      });
+      console.log("2222",response.data);
+    }catch (error) {
+      console.log("3333",error);
+      }
+      
+  }
+)
 
 export const userLogin = createAsyncThunk(
   "/member/login",
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
+
       const datas = {email:email,password:password}
       const {data,headers} = await axios.post(`${URI.BASE}/member/login`, datas)
       
@@ -40,7 +64,7 @@ const userSlice = createSlice({
     },
     userLogout: (state, action) => {
       const userToken = localStorage.getItem("accessToken");
-      axios.delete(`${URI.BASE}/member/login`, {
+      axios.delete(`${URL}/member/login`, {
         headers: {
           Authorization: userToken,
         },
@@ -58,5 +82,5 @@ const userSlice = createSlice({
     },
   },
 });
-// export const { asyncUserName, userLogout } = userSlice.actions;
+export const { asyncUserName, userLogout } = userSlice.actions;
 export default userSlice.reducer;

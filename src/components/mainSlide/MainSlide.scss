@@ -1,0 +1,24 @@
+.rank-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+};
+.rank-profile{
+  // width: 20px;
+  // height: 30px;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+  overflow: hidden;
+  margin: 20px 20px;
+  .rank-profile-img{
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 100%;
+  };
+}

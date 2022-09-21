@@ -80,13 +80,65 @@
             color: white;
         }       
     }
+    select:focus{
+      border: 2px solid #815403;
+    }
+    .checkbox-container{
+      margin-bottom: 20px;
+    }
+    .room-input{
+      min-width:440px;
+      height: 40px;
+      border-radius: 8px;
+      color : #815403;
+      border: 2px solid #c7bca9;
+      margin-bottom: 20px;
+      background: #FFFF;
+      outline: none;
+      padding: 10px;
+    }
+    .room-input:hover{
+      border: 2px solid #FFD68B;
+    }
+    .room-input:focus{
+      border: 2px solid #815403;
+    }
+    .checkbox{
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      border: 1px solid #815403;
+      margin-left: 40px;
+      cursor: pointer;
+      background: #815403;
+    }
+    .checkbox-label{
+      font-size: 24px;
+      margin-right: 40px;
+    }
+    .create-room-btn{
+      color: #FFFF;
+      background-color: #815403;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      width: 90px;
+      height: 40px;
+      margin-right: 60px;
+      // margin-left: 20px;
+      cursor: pointer;
+      &:hover{
+        background-color: #FFD68B;
+      };
+    }    
+  }
 }
 .black-out{
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
 }

@@ -7,7 +7,6 @@ import Ranking from "../../pages/Ranking";
 import Room from "../../pages/Room";
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
-import Room2 from '../../pages/Room2';
 
 const MainFrame = () => {
   return (
@@ -20,7 +19,6 @@ const MainFrame = () => {
         <Route path='/room/:id' element={<Room></Room>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/chat' element={<Room2></Room2>}></Route>
       </Routes>
     </div>
   );

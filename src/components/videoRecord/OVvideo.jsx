@@ -1,23 +1,30 @@
-import { useState ,useRef ,useEffect} from 'react'
-import {Link} from "react-router-dom"
+import {useRef ,useEffect, useState} from 'react'
+import hiddenVideo from "../../assets/cam-off.png"
+import "./VideoRecord.scss"
 
-const OVvideo = ({streamManager}) => {
-    console.log(streamManager)
+const OVvideo = ({streamManager,hidden,mute,username}) => {
     const videoRef = useRef()
-    // const [streamManager,setStreamManager] = useState("")
-    // const [streamOn,setStreamOn] = useState(false)
-    // console.log("펍",streamManager)
     useEffect(()=>{
         if (streamManager !== undefined && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
         }
       },[])
+    const handelHidden = () => {
+        
+    }
     return (
-        <video ref={videoRef} autoPlay={true} muted={true}></video>
+        <div className='video-content'>
+            <div className='video-contents'>
+                <h3 className='video-username'>{username}</h3>
+                <div>like</div>
+            </div>
+            {hidden ? <div className='video-hidden'>
+                <img src={hiddenVideo}></img>
+            </div> : null}
+            <video ref={videoRef} autoPlay={true} muted={mute} hidden={hidden} className="video-items"></video>
+            
+        </div>
     )
 }
 
 export default OVvideo
-//  {/* {publisher === null || undefined ? null :
-//             <video autoPlay={true} ref={videoRef}></video>
-//         } */}

@@ -1,11 +1,17 @@
 import React, { useState ,useEffect ,useCallback} from 'react'
-// import Chat from "../components/chat/Chat"
+import Chat from "../components/chat/Chat"
 import { OpenVidu } from 'openvidu-browser'
-import { useLocation ,Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
-import Tempo from "../components/tempo/Tempo"
 import { createBrowserHistory } from 'history';
 import axios from 'axios'
+import "../components/videoRecord/VideoRecord.scss"
+import camon from "../assets/cam-on.png"
+import camoff from "../assets/cam-off.png"
+import micon from "../assets/mic-on.png"
+import micoff from "../assets/mic-off.png"
+import message from "../assets/messageIcon.png"
+import exit from "../assets/out.png"
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -13,11 +19,9 @@ const history = createBrowserHistory()
 const Room = () => {
   const location = useLocation();
   let tokenStuff = location.state.token
-  console.log(tokenStuff)
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
-  const [username, setUsername] = useState("");
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
@@ -25,6 +29,9 @@ const Room = () => {
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
   const [role,setRole] = useState(location.state.role)
+  const [mute,setMute] = useState(false)
+  const [hidden,setHidden] = useState(false)
+  const [chat,setChat] = useState(false)
   const deleteSubscriber = (streamManager) => {
     const prevSubscribers = subscribers;
     let index = prevSubscribers.indexOf(streamManager, 0);
@@ -33,7 +40,6 @@ const Room = () => {
       setSubscribers([...prevSubscribers]);
     }
   };
-
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = async (e) => {
     e.preventDefault();
@@ -55,9 +61,6 @@ const Room = () => {
     }
   };
   const leaveSession = () => {
-    console.log("나가 ㅋㅋ")
-    // session.unsubscribe(subscribers)
-    // setSession(undefined);
     setSubscribers([])
     setSessionId("")
     setOV(undefined)
@@ -68,8 +71,6 @@ const Room = () => {
     setSessionId(location.state.sessionId)  
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
-    // socket 통신 과정에서 많은 log를 남기게 되는데 필요하지 않은 log를 띄우지 않게 하는 모드
-    // newOV.enableProdMode();
     // 2. initSesison 생성
     const newsession = newOV.initSession();
     setSession(newsession)
@@ -81,12 +82,7 @@ const Room = () => {
       const newSubscriber = newsession.subscribe(
         e.stream,
         undefined
-        // JSON.parse(e.stream.connection.data).clientData
       );
-      
-      // const newSubscribers = subscribers;
-      // newSubscribers.push(newSubscriber);
-      
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -103,14 +99,14 @@ const Room = () => {
         setCheckMyScreen(true);
       }
     });
-    // 커넥팅 // 닉네임 받기~
+    // 커넥팅 닉네임 받기~
     let nickname = localStorage.getItem("nickname")
     newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
         await newOV.getUserMedia({
           audioSource: false,
           videoSource: undefined,
-          resolution: '240x180',
+          resolution: '410x290',
           frameRate: 10,
         })
       .then((mediaStream) => {
@@ -132,8 +128,6 @@ const Room = () => {
             newsession.publish(newPublisher);
             setPublisher(newPublisher)
           });
-          // newsession.publish(newPublisher)
-          // setPublisher(newPublisher)
         })
       })
       .catch((error) => {
@@ -144,19 +138,21 @@ const Room = () => {
       );
     });
   },[session])
+
+  const handleCam = () => {
+    setHidden((prev)=>!prev)
+  }
+  const handleMic = () => [
+    setMute((prev)=>!prev)
+  ]
   useEffect(()=>{
     window.addEventListener("beforeunload", onbeforeunload);
-    
     joinSession()
-    // setTimeout(,1000)
     return () => {
-      // onbeforeunload()
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  useEffect(()=>{
-    console.log(subscribers)
-  },[subscribers])
+  
   // useEffect(() => {
   //   window.onpopstate = () => {
   //     history.push("/main");
@@ -165,51 +161,54 @@ const Room = () => {
   return (
     <div className='room'>
       <div className='video-container'>
-        <h2>{location.state.roomTitle}</h2>
+        <div className='video-header'>
+          <h2>{location.state.roomTitle}</h2>
+          <div className='video-sets'>
+            <img src={message} className="message-control"></img>
+            <a href='/main'><img src={exit} className="out"></img></a>
+          </div>
+        </div>   
         <hr></hr>
         <div className='video-chat'>
           {role === "master" || subscribers.length > 0 ? (
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={hidden} mute={mute} username={location.state.masterId}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={hidden} mute={mute} username={location.state.masterId} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
-                  <VideoRecord streamManager={publisher}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={hidden} mute={mute} username={location.state.masterId}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={hidden} mute={mute} username={location.state.masterId} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
             </div>
           ) : null}
-            {/* {publisher !== null && location.state.role === "master" ? (
-              <div className="pub">
-                <VideoRecord streamManager={publisher}></VideoRecord>
-              </div>
-            ) : null} */}
-            {/* {publisher !== null && location.state.role === "user" ? (
-              <div className="pub">
-                <VideoRecord streamManager={publisher}></VideoRecord>
-                <VideoRecord stre></VideoRecord>
-              </div>
-            ) : null} */}
           <div className='room-chat'>
-            <Tempo></Tempo>
-          </div>
+            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null}
+          </div>  
         </div>
-        <a href="/main"><button>Emergency</button></a>
+        <div className='video-setting'>
+          {role === "master" && publisher !== null ? 
+            <>
+              {hidden ? <img src={camoff} onClick={handleCam}></img> : 
+                <img src={camon} onClick={handleCam}></img>}
+              {mute ? <img src={micoff} onClick={handleMic}></img> :
+                <img src={micon} onClick={handleMic}></img>}
+            </>
+           : null}
+        </div>
       </div>
-      {/* <Chat></Chat> */}
     </div>
   )
 }

@@ -25,6 +25,7 @@ const Room = () => {
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
+  const [subscriber, setSubscriber] = useState("");
   const [destroyedStream,setDestroyedStream] = useState("")
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
@@ -33,6 +34,7 @@ const Room = () => {
   const [hidden,setHidden] = useState(false)
   const [chat,setChat] = useState(false)
   const deleteSubscriber = (streamManager) => {
+    console.log("삭제를 위한",streamManager)
     const prevSubscribers = subscribers;
     let index = prevSubscribers.indexOf(streamManager, 0);
     if (index > -1) {
@@ -83,6 +85,7 @@ const Room = () => {
         e.stream,
         undefined
       );
+      setSubscriber(subscriber)
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -200,7 +203,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className='room-chat'>
-            {/* {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null} */}
+            {/* {publisher!== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null} */}
           </div>  
         </div>
         <div className='video-setting'>

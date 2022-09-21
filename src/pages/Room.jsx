@@ -34,8 +34,9 @@ const Room = () => {
   const [hidden,setHidden] = useState(false)
   const [chat,setChat] = useState(false)
   const deleteSubscriber = (streamManager) => {
-    console.log("삭제를 위한",streamManager)
+    console.log("체크1",streamManager)
     const prevSubscribers = subscribers;
+    console.log("체크2",prevSubscribers)
     let index = prevSubscribers.indexOf(streamManager, 0);
     if (index > -1) {
       prevSubscribers.splice(index, 1);

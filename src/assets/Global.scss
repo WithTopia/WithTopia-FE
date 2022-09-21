@@ -51,9 +51,7 @@
           margin-right: 15px;
         }
       }
-    }
-    
-    
+    }    
     hr{
       z-index: 2;
       background-color: #815403;
@@ -68,10 +66,8 @@
       height: 76vh;
       align-items: center;
       .room-chat{
-        
       }
       .room-video{
-        
       }
     }
     .video-setting{
@@ -89,7 +85,6 @@
         cursor: pointer;
       }
     }
-    
     .video-record{
       // width : 100%;
       // height : 17.4vh;
@@ -99,6 +94,5 @@
       // top : -7.5px;
       // z-index:8;
     }
-    
   }
 }

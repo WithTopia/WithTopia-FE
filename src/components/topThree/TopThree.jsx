@@ -2,9 +2,24 @@ import React from 'react';
 import "./TopThree.scss";
 import lion from "../../assets/lion2.png"
 import logo from "../../assets/crown.png"
+import { useState } from 'react';
 
 const TopThree = () => {
-    const top = [1,2,3,4,5]
+    const [topRanker,setTopRanker] = useState([{
+        rank:1,
+        name:"Hyun",
+        img:"https://hanghae99-wonyoung.s3.ap-northeast-2.amazonaws.com/original.jpeg",
+    },
+    {
+        rank:2,
+        name:"Hyun",
+        img:"https://hanghae99-wonyoung.s3.ap-northeast-2.amazonaws.com/original.jpeg",
+    },
+    {
+        rank:3,
+        name:"Hyun",
+        img:"https://hanghae99-wonyoung.s3.ap-northeast-2.amazonaws.com/original.jpeg",
+    }])
     return (
         <div className='top-three'>
             {/* <a href='/rank' className='top-three-font'>

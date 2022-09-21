@@ -1,39 +1,85 @@
 .create-container{
-  border-radius: 20px;
-  width: 550px;
-  height: 450px;
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 100;
-  .create-container-title{
-    margin: 56px auto;
-    width: 150px;
-    font-size: 35px;
-    text-align: center;
-    font-weight: bold;
-  }
-  .create-room-form{
-    width: 76%;
-    margin: 0 auto;
-    text-align: center;
-    select{
-      -moz-appearance: none;
-      display: block;
-      height: 40px;
-      min-width: 440px;
-      border-radius: 8px;
-      color : #815403;
-      background: #FFFF;
-      border: 2px solid #c7bca9;
-      outline: none;
-      margin-bottom: 40px;
-      padding: 10px;
+    width: 550px;
+    height: 450px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 100;
+    .create-container-title{
+        margin: 50px auto;
+        font-size: 35px;
+        text-align: center;
+        font-weight: bold;
     }
-    select:hover{
-      border: 2px solid #FFD68B;
+    .create-room-form{
+        width: 76%;
+        margin: 0 auto;
+        text-align: center;
+        select{
+            -moz-appearance: none;
+            display: block;
+            height: 40px;
+            min-width: 440px;
+            border-radius: 8px;
+            color : #815403;
+            background: white;
+            border: 2px solid #815403; 
+            outline: none;
+            margin-bottom: 40px;
+        }
+        select:hover{
+            border: 2px solid #815403;
+        }
+        select:focus{
+            border: 2px solid #815403;
+        }
+        .checkbox-container{
+            margin-bottom: 20px;
+        }
+        .room-input{
+            min-width:440px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #815403;
+            margin-bottom: 20px;
+            background: white;
+            outline: none;
+            padding: 0;
+        }
+        .room-input:hover{
+            border: 2px solid #815403;
+        }
+        .room-input:focus{
+            border: 2px solid #815403;
+        }
+        .checkbox{
+            accent-color:#815403;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            border: 1px solid #815403;
+            margin-left: 40px;
+            cursor: pointer;
+            background: #815403;
+        }
+        .checkbox-label{
+            font-size: 24px;
+            margin-right: 40px;
+        }
+        .create-room-btn{
+            border-radius: 10px;
+            padding: 10px 40px 10px 40px;
+            font-size: 20px;
+            width: 145px;
+            // margin-left: 20px;
+            margin-right: 20px;
+            background-color: #815403;
+            border: 1px solid white;
+            color: white;
+        }       
+
     }
     select:focus{
       border: 2px solid #815403;
@@ -87,7 +133,7 @@
       };
     }    
   }
-}
+
 .black-out{
   position: fixed;
   top: 0;

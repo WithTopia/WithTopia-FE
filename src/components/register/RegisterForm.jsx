@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
 import "./RegisterForm.scss";
 import { useForm } from "react-hook-form";
@@ -238,3 +239,5 @@ const Registerform = () => {
 };
 
 export default Registerform;
+=======
+>>>>>>> origin/second-merge

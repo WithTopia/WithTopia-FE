@@ -12,6 +12,7 @@ import micon from "../assets/mic-on.png"
 import micoff from "../assets/mic-off.png"
 import message from "../assets/messageIcon.png"
 import exit from "../assets/out.png"
+import { current } from '@reduxjs/toolkit'
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -33,14 +34,17 @@ const Room = () => {
   const [mute,setMute] = useState(false)
   const [hidden,setHidden] = useState(false)
   const [chat,setChat] = useState(false)
-  const deleteSubscriber = (streamManager) => {
+  const deleteSubscriber = (streamManager,id) => {
     console.log("체크1",streamManager)
+    console.log("체크2",id)
     const prevSubscribers = subscribers;
-    console.log("체크2",prevSubscribers)
     let index = prevSubscribers.indexOf(streamManager, 0);
     if (index > -1) {
+      console.log("지우기")
       prevSubscribers.splice(index, 1);
-      setSubscribers([...prevSubscribers]);
+      setSubscribers(current=>current.filter(sub=>{
+        return sub.stream.session.options.sessionId !== id
+      }));
     }
   };
   // 브라우저 새로고침, 종료, 라우트 변경
@@ -97,7 +101,7 @@ const Room = () => {
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
-        deleteSubscriber(e.stream.streamManager);
+        deleteSubscriber(e.stream.streamManager,e.stream.session.options.sessionId);
       } else {
         setDestroyedStream(e.stream.streamManager);
         setCheckMyScreen(true);

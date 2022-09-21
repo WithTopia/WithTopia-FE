@@ -1,92 +1,99 @@
 .create-container{
-    width: 550px;
-    height: 450px;
-    background-color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 100;
-    .create-container-title{
-        margin: 56px auto;
-        width: 150px;
-        font-size: 35px;
-        text-align: center;
-        font-weight: bold;
+  border-radius: 20px;
+  width: 550px;
+  height: 450px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+  .create-container-title{
+    margin: 56px auto;
+    width: 150px;
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .create-room-form{
+    width: 76%;
+    margin: 0 auto;
+    text-align: center;
+    select{
+      -moz-appearance: none;
+      display: block;
+      height: 40px;
+      min-width: 440px;
+      border-radius: 8px;
+      color : #815403;
+      background: #FFFF;
+      border: 2px solid #c7bca9;
+      outline: none;
+      margin-bottom: 40px;
+      padding: 10px;
     }
-    .create-room-form{
-        width: 76%;
-        margin: 0 auto;
-        text-align: center;
-        select{
-            -moz-appearance: none;
-            display: block;
-            height: 40px;
-            min-width: 440px;
-            border-radius: 8px;
-            color : #4E7A8C;
-            background: #E8F8FF;
-            border: 2px solid rgb(69, 170, 242);
-            outline: none;
-            margin-bottom: 40px;
-        }
-        select:hover{
-            border: 2px solid #4E7A8C;
-        }
-        select:focus{
-            border: 2px solid #4E7A8C;
-        }
-        .checkbox-container{
-            margin-bottom: 20px;
-        }
-        .room-input{
-            min-width:440px;
-            height: 40px;
-            border-radius: 8px;
-            color : #4E7A8C;
-            border: 2px solid rgb(69, 170, 242);
-            margin-bottom: 20px;
-            background: #E8F8FF;
-            outline: none;
-            padding: 0;
-        }
-        .room-input:hover{
-            border: 2px solid #4E7A8C;
-        }
-        .room-input:focus{
-            border: 2px solid #4E7A8C;
-        }
-        .checkbox{
-            width: 20px;
-            height: 20px;
-            border-radius: 10px;
-            border: 1px solid #4E7A8C;
-            margin-left: 40px;
-            cursor: pointer;
-            background: rgb(99, 205, 218);
-        }
-        .checkbox-label{
-            font-size: 24px;
-            margin-right: 40px;
-        }
-        .create-room-btn{
-            border-radius: 10px;
-            padding: 10px 40px 10px 40px;
-            font-size: 20px;
-            // margin-left: 20px;
-            margin-right: 60px;
-            background-color: #4E7A8C;
-            border: 1px solid white;
-            color: white;
-        }       
+    select:hover{
+      border: 2px solid #FFD68B;
     }
+    select:focus{
+      border: 2px solid #815403;
+    }
+    .checkbox-container{
+      margin-bottom: 20px;
+    }
+    .room-input{
+      min-width:440px;
+      height: 40px;
+      border-radius: 8px;
+      color : #815403;
+      border: 2px solid #c7bca9;
+      margin-bottom: 20px;
+      background: #FFFF;
+      outline: none;
+      padding: 10px;
+    }
+    .room-input:hover{
+      border: 2px solid #FFD68B;
+    }
+    .room-input:focus{
+      border: 2px solid #815403;
+    }
+    .checkbox{
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      border: 1px solid #815403;
+      margin-left: 40px;
+      cursor: pointer;
+      background: #815403;
+    }
+    .checkbox-label{
+      font-size: 24px;
+      margin-right: 40px;
+    }
+    .create-room-btn{
+      color: #FFFF;
+      background-color: #815403;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      width: 90px;
+      height: 40px;
+      margin-right: 60px;
+      // margin-left: 20px;
+      cursor: pointer;
+      &:hover{
+        background-color: #FFD68B;
+      };
+    }    
+  }
 }
 .black-out{
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
 }

@@ -5,7 +5,9 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/modules/userSlice";
 import { useNavigate } from "react-router-dom";
 
+
 const LoginForm = (props) => {
+  
   //userSlice로 전달
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,8 +18,6 @@ const LoginForm = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({mode:"onChange"});
-
-  console.log(watch());
 
   const onSubmit = (payload) => {
     console.log("LV-1", payload);
@@ -31,11 +31,19 @@ const LoginForm = (props) => {
   const goToRegister = () => {
     navigate("/Register");
   };
+//google 로그인
+  const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_CLIENT_ID
+  const GOOGLE_REDIRECT_URI = process.env.REACT_APP_GOOGLE_REDIRECT_URI
+  const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_API_KEY}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile`;
   const goToGoogle = () => {
-    navigate("/Google");
+    window.location.href = GOOGLE_AUTH_URL
   };
+//kakao 로그인
+  const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_API_KEY
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   const goToKakao = () => {
-    navigate("/Kakao");
+    window.location.href = KAKAO_AUTH_URL
   };
 
   return (
@@ -51,7 +59,7 @@ const LoginForm = (props) => {
             {...register("email", {
               required: "이메일은 필수입니다.",
               //영문 대소문자,숫자,특수문자 -_. 을 포함한 이메일 형식
-              pattern: /^[0-9a-zA-Z!@#-_.]*@[0-9a-zA-Z-_.]*\.[a-zA-Z]{2,3}$/i,
+              pattern: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{1,8}$/i,
             })}
           />
           {errors.email && errors.email.type === "pattern" && (
@@ -64,7 +72,7 @@ const LoginForm = (props) => {
             placeholder="password"
             {...register("password", {
               required: "비밀번호는 필수입니다.",
-              pattern: /^[0-9a-zA-Z!@#-_.]{6,}$/,
+              pattern: /^[0-9a-zA-Z]{6,}$/,
             })}
           />
           {errors.password && errors.password.type === "pattern" && (

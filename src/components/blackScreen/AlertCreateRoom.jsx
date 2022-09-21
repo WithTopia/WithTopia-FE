@@ -47,7 +47,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
             <option value="6">6</option>
           </select>
           <button className='create-room-btn'>네</button>
-          <MoveButton2 text={"아니요"}></MoveButton2>
+          <MoveButton2 className='cancel-room-btn' text={"아니요"}></MoveButton2>
         </form>
       </div>
       <div className='black-out' onClick={handleScreen}></div>

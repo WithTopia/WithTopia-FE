@@ -110,9 +110,9 @@
         }
     }
 
-    .input {
+    .input-box {
         height: 50px;
-        background-color: white;
+        background-color: #FFF9E2;
         padding: 10px;
         display: flex;
         align-items: center;
@@ -123,7 +123,7 @@
             width: 100%;
             border: none;
             outline: none;
-            color: #2f2d52;
+            color: #FFF9E2;
             font-size: 18px;
 
             &::placeholder {

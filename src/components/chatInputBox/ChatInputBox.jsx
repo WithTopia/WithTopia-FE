@@ -1,13 +1,10 @@
 import ChatBox from "../chatBox/ChatBox";
 import { useState ,useEffect } from "react";
-import Attach from "../../assets/attach.png";
-import Cam from "../../assets/cam.png";
-import Add from "../../assets/add.png";
-import More from "../../assets/more.png";
-import naga from "../../assets/naga.png";
 import axios from "axios";
+import close from "../../assets/x.png"
+import send from "../../assets/Vector.png"
 
-const url = process.env.REACT_APP_SERVER_URL2
+const url = process.env.REACT_APP_SERVER_URL
 
 const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut}) => { // 채팅 인풋 박스
   String(roomId)
@@ -63,12 +60,11 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
   return(
     <div className="chat">
       <div className="chatInfo">
-        <span>조원영,서현웅...외 4명</span>
+        <span>
+          Chat
+        </span>
         <div className="chatIcons">
-            <img src={Cam} alt="" />
-            <img src={Add} alt="" />
-            <img src={More} alt="" />
-            <a href="/chat" onClick={()=>handleOut} className="getout"><img className="naga" src={naga} alt=""/></a>
+          <img className="naga" src={close} alt=""/>
         </div>
       </div>
       <div className="messages">
@@ -90,11 +86,10 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
             id="file"
             onChange={(e) => setImg(e.target.files[0])}
             />
-            <label htmlFor="file">
-            
+            {/* <label htmlFor="file">
             <img src={Attach} alt="" />
-            </label>
-            <button onClick={sendMessage}>Send</button>
+            </label> */}
+            <img src={send} onClick={sendMessage}></img>
           </div>
         </div>
       </div>

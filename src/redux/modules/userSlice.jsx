@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
+
 // const URI = {
 //   BASE: process.env.REACT_APP_BASE_URI,
 // };
@@ -30,27 +31,23 @@ export const userRegister = createAsyncThunk(
   }
 )
 
-
 export const userLogin = createAsyncThunk(
   "/member/login",
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
-      const response = await axios.post(`${URL}/member/login`, {
-        email,
-        password,
-      }); //email,pw를 axios로 보낸다.
 
-      // const accessToken = response.headers.authorization;
-      // const refreshToken = response.headers[`refresh-token`];
-
-      // localStorage.setItem("accessToken", accessToken);
-      // localStorage.setItem("refreshtoken", refreshToken);
-      localStorage.setItem("email", response.payload);
-      localStorage.setItem("nickname", response.payload); //payload로 안되면 data로 해보자.
-      localStorage.setItem("userImgUrl", response.payload);
-
-
+      const datas = {email:email,password:password}
+      const {data,headers} = await axios.post(`${URI.BASE}/member/login`, datas)
+      
+      let token = headers.authorization
+      let refreshToken = headers.refreshtoken
+      let nickname = data.nickname
+      
+      localStorage.setItem("nickname",nickname)
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("refreshtoken", refreshToken);
+      
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

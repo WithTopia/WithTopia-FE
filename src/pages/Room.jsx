@@ -37,7 +37,7 @@ const Room = () => {
   const [userMute,setUserMute] = useState(false)
   const [userHidden,setUserHidden] = useState(false)
 
-  const [chat,setChat] = useState(false) // 채팅창
+  const [chat,setChat] = useState(true) // 채팅창
   const deleteSubscriber = (streamManager,id) => {
     console.log("지우기 시도")
     try{
@@ -174,6 +174,9 @@ const Room = () => {
     setUserMute((prev)=>!prev)
     subscriber.subscribeToAudio(userMute);
   }
+  const handleVideo = () => {
+    setChat((prev)=>!prev)
+  }
 
   useEffect(()=>{ // 시작과 종료를 알리는
     window.addEventListener("beforeunload", onbeforeunload); 
@@ -193,7 +196,7 @@ const Room = () => {
         <div className='video-header'>
           <h2>{location.state.roomTitle}</h2>
           <div className='video-sets'>
-            <img src={message} className="message-control"></img>
+            <img src={message} className="message-control" onClick={handleVideo}></img>
             <a href='/main'><img src={exit} className="out"></img></a>
           </div>
         </div>   
@@ -224,7 +227,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className='room-chat'>
-            {/* {publisher!== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null} */}
+            {publisher !== null && chat === true ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId} setChat={setChat}></Chat> : null}
           </div>  
         </div>
         {/* <div className='video-setting'>

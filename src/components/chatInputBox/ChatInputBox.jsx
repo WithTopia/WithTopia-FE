@@ -6,7 +6,7 @@ import send from "../../assets/Vector.png"
 
 const url = process.env.REACT_APP_SERVER_URL
 
-const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut}) => { // 채팅 인풋 박스
+const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut,setChat}) => { // 채팅 인풋 박스
   String(roomId)
   const [img, setImg] = useState(null);
   const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
@@ -44,6 +44,10 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
       setUserData({...userData,"message": ""});
     }
   }
+
+  const handleChat = () =>{
+    setChat((prev)=>!prev)
+  }
   const handleMessage =(e)=>{
       const {value}= e.target;
       setUserData({...userData,"message": value});
@@ -64,7 +68,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
           Chat
         </span>
         <div className="chatIcons">
-          <img className="naga" src={close} alt=""/>
+          <img className="naga" src={close} alt="" onClick={handleChat}/>
         </div>
       </div>
       <div className="messages">

@@ -92,6 +92,7 @@ const Room = () => {
         e.stream,
         undefined
       );
+      console.log(newSubscriber)
       const nick = newSubscriber.session.connection.data
       if(nick.substr(-2) === nickname){
         setSubscriber(newSubscriber)

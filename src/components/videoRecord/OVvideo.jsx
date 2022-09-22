@@ -14,7 +14,7 @@ const OVvideo = ({streamManager,role}) => {
     return (
         <div className='video-content'>
             <div className='video-contents'>
-                <h3 className='video-username'>{streamManager.stream.connection.data}</h3>
+                <h3 className='video-username'>{streamManager.stream.connection.data.substr(-2)}</h3>
                 <div className='video-likes'>
                     {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"}
                     <img src={like} alt=""></img>

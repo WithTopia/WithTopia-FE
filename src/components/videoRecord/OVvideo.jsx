@@ -13,7 +13,7 @@ const OVvideo = ({streamManager,role}) => {
             
         }
       },[])
-    console.log(streamManager.stream.videoActive)
+    console.log(streamManager.stream.audioActive)
     return (
         <div className='video-content'>
             <div className='video-contents'>
@@ -28,7 +28,7 @@ const OVvideo = ({streamManager,role}) => {
             <div className='video-hidden'>
                 <img src={hiddenVideo} alt=""></img>
             </div>} */}
-            <video ref={videoRef} autoPlay={true} muted={!streamManager.stream.audioActive} hidden={!streamManager.stream.videoActive} className="video-items"></video>
+            <video ref={videoRef} autoPlay={true} muted={streamManager.stream.audioActive} hidden={!streamManager.stream.videoActive} className="video-items"></video>
         </div>
     )
 }

@@ -156,12 +156,13 @@ const Room = () => {
     publisher.publishAudio(mute)
   }
   const handleUserCam = () => {
-    setUserMute((prev)=>!prev)
-    subscriber.subscribeToAudio(userMute);
-  }
-  const handleUserMic = () => {
     setUserHidden((prev)=>!prev)
     subscriber.subscribeToVideo(userHidden);
+    
+  }
+  const handleUserMic = () => {
+    setUserMute((prev)=>!prev)
+    subscriber.subscribeToAudio(userMute);
   }
 
   useEffect(()=>{ // 시작과 종료를 알리는
@@ -221,16 +222,16 @@ const Room = () => {
             <>
               {hidden ? <img src={camoff} onClick={handleCam}></img> : 
                 <img src={camon} onClick={handleCam}></img>}
-              {mute ? <img src={micoff} onClick={handleMic}></img> :
-                <img src={micon} onClick={handleMic}></img>}
+              {mute ? <img src={micon} onClick={handleMic}></img> : 
+                <img src={micoff} onClick={handleMic}></img>}
             </>
            : null}
           {role === "user" && publisher !== null ?  // 유저 전용 마이크 및 캠 바꾸기
             <>
               {userHidden ? <img src={camoff} onClick={handleUserCam}></img> : 
                 <img src={camon} onClick={handleUserCam}></img>}
-              {userMute ? <img src={micoff} onClick={handleUserMic}></img> :
-                <img src={micon} onClick={handleUserMic}></img>}
+              {userMute ? <img src={micon} onClick={handleUserMic}></img> : 
+                <img src={micoff} onClick={handleUserMic}></img>}
             </>
            : null}
         </div>

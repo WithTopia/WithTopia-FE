@@ -192,20 +192,20 @@ const Room = () => {
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
-                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>

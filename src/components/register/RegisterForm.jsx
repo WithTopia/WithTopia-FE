@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userRegister } from "../../redux/modules/userSlice";
 import axios from "axios";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
   // "email": "이메일@naver.com", 
   // "emailConfirm" :  "123456"
@@ -38,14 +39,19 @@ const Registerform = () => {
   //버튼 onClick을 누르면 실행
   const onEmailRequest = async () => {
     try{ 
-      alert("인증메일이 발송되었습니다. 메일 도착까지 최대 5분이 소요될 수 있습니다.")
       console.log("입력값:",email);
+      alert("이메일 인증을 진행합니다")
       const data = await axios.post(`${URL}/member/email/request`, {
         email
       })
+      console.log(data);
+      console.log(data.data);
+      console.log(data.data.data);
+      alert(data.data.data);
     } 
     catch(error){
-      console.log("333");
+      console.log("333",error);
+      alert(error.response.data.errormessage)
     }
   };
   
@@ -67,15 +73,20 @@ const Registerform = () => {
         email: email,
         authKey: authKey
       })
-      if (data.data === true && authKey !== ""){
+      console.log(data.data);
+      if (data.data.data === true && authKey !== ""){
         alert("인증되었습니다");
         setAuthKey(authKey)
+        console.log(data);
+        console.log(data.data);
+        console.log(data.data.data);
         setAuthKeyCheck({...authKeyCheck, authKeyCheckstatus : true});
-      } else if (data.data !== true){
+      } else if (data.data.data !== true){
         alert("인증번호를 확인해주세요");
       };
     } catch(error){
       console.log(error)
+      alert(error.response.data.errormessage)
     };
   };
   
@@ -93,18 +104,19 @@ const Registerform = () => {
   const onNickCheck = async () => {
     try{
       console.log("잡은 nick:",nicknameIn);
-      console.log(watch());
       const data = await axios.post(`${URL}/member/nickname`,{
         nickname : nicknameIn
       })
-      console.log(data.data);
-      if(data.data === false && nicknameIn !== ""){
+      if(data.data.data === false && nicknameIn !== ""){
         alert("사용가능한 닉네임 입니다");
+        console.log(data);
+        console.log(data.data);
+        console.log(data.data.data);
         setNickname(nicknameIn)
         setNickCheck({...nickCheck, nickCheckStatus : false})
-      }else if(data.data !== false) {
+      }else if(data.data.data !== false) {
         alert("사용불가한 닉네임 입니다");
-        console.log(data.data);
+        console.log(data.data.data);
       }
     }catch(error){
       console.log(error);
@@ -112,6 +124,30 @@ const Registerform = () => {
   };
   
   //비밀번호
+  const [ pwType, stePwType ] = useState({
+    type: "password",
+    visible: false
+  });
+  const [ pwType2, stePwType2 ] = useState({
+    type: "password",
+    visible: false
+  });
+  const handlePwType = event => {
+    stePwType(() => {
+      if(!pwType.visible) {
+        return {type: "text", visible: true};
+      }
+      return {type: "password", visible: false};
+    })
+  }
+  const handlePwType2 = event => {
+    stePwType2(() => {
+      if(!pwType2.visible) {
+        return {type: "text", visible: true};
+      }
+      return {type: "password", visible: false};
+    })
+  }
   const [ password, setPassword ] = useState("");
   const onPasswordHandler = (event) => {
     event.preventDefault();
@@ -134,22 +170,28 @@ const Registerform = () => {
   const onSubmitRegister = () => {
     const pw = password.search(/[0-9]/g);
     const pw2 = password.search(/[a-z]/ig);
+    const reg = password.search(/[!@#$%^&*]/gi);
 
     if ( email === "" || authKey === "" || nicknameIn === "" || password === "" || passwordConfirm === "" ){
       alert ("빈칸없이 작성해주세요")
     }else if( authKey.length >= 6 && authKeyCheck.authKeyCheckstatus === true ? false : true ) {
       alert ("이메일 인증을 진행해주세요")
-    }else if ( nickCheck.nickCheckStatus === true ? true : false ) {
+    }else if ( nickCheck.nickCheckStatus !== false ) {
       alert ("닉네임 중복확인은 필수입니다")
-    }else if ( pw < 0 || pw2 < 0 || password.length < 5){
-      alert ("비밀번호는 영문, 숫자 조합으로 6자 이상만 가능합니다.")
+    }else if ( pw < 0 || pw2 < 0 || reg < 0 ) {
+      alert ("비밀번호는 영문, 숫자 조합만 가능합니다.")
+    }else if ( password.length < 8 || password.length > 20){
+      alert ("비밀번호는 8자 이상 20자 이하만 가능합니다.")
     }else if ( password !== passwordConfirm ){
       alert ("동일한 비밀번호를 입력해주세요")
-    }else{
-    dispatch(userRegister(data));
-    console.log("/member/signup으로 보냄",data);
-    alert("회원가입 성공")
-    navigate("/login");
+    }else if(authKeyCheck.authKeyCheckstatus !== true || nickCheck.nickCheckStatus !== false){
+      console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
+      alert ("모든 인증을 완료해주세요")
+    }else {
+      dispatch(userRegister(data));
+      console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
+      console.log("/member/signup으로 보냄",data);
+      navigate("/login");
     }
   }
 
@@ -205,26 +247,28 @@ const Registerform = () => {
           </div>
 {/*------------> 패스워드 <------------*/}
           <div className="input-password-box">
-            <input
-            type="password"
-            name="password"
-            onChange={onPasswordHandler}
-            placeholder="  password"
-            />
-            <span>
-              {errors.password && errors.password.type === "pattern" && (
-              <p>영문, 숫자 6자리 이상으로 입력해주세요. </p>)}
-            </span>
-            <input
-            type="password"
-            name="passwordCheck"
-            onChange={onPasswordConfirmHandler}
-            placeholder="  passwordCheck"
-            />
-            <span>
-              {errors.password !== errors.passwordCheck && (
-              <p>동일한 비밀번호를 입력해주세요. </p>)}
-            </span>
+            <div>
+              <input
+              type={pwType.type}
+              name="password"
+              onChange={onPasswordHandler}
+              placeholder="  영문, 숫자, 특수문자 8~20자리"
+              />
+              <span onClick={handlePwType}>
+              {pwType.visible ? <AiOutlineEye/> : <AiOutlineEyeInvisible/>}
+              </span>
+            </div>
+            <div>
+              <input
+              type={pwType2.type}
+              name="passwordCheck"
+              onChange={onPasswordConfirmHandler}
+              placeholder="  re - 영문, 숫자, 특수문자 8~20자리"
+              />
+              <span onClick={handlePwType2}>
+              {pwType2.visible ? <AiOutlineEye/> :<AiOutlineEyeInvisible/>}
+              </span>
+            </div>
           </div>
         </div>
 {/*------------> 소셜로그인 <------------*/}        

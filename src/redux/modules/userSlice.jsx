@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // const URI = {
 //   BASE: process.env.REACT_APP_BASE_URI,
 // };
 const URL = process.env.REACT_APP_SERVER_URL
+
 
 //회원가입
 export const userRegister = createAsyncThunk(
@@ -20,11 +21,14 @@ export const userRegister = createAsyncThunk(
         password : password,
         passwordConfirm : passwordConfirm,
       });
-      console.log("2222",response.data);
+      console.log("2222",response.data.data);
+      console.log(response)
+      alert("가입을 축하드립니다. 메인 화면으로 이동합니다")
     }catch (error) {
       console.log("3333",error);
-      }
-      
+      alert(error.response.data.errormessage)
+    }
+    console.log("4444",email);
   }
 )
 

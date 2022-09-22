@@ -6,6 +6,7 @@ import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
 import ChatList from '../components/chatList/ChatList'
 import TopThree from '../components/topThree/TopThree'
+import Mainslide from '../components/mainSlide/MainSlide'
 
 const MainPage = () => {
   return (
@@ -15,7 +16,7 @@ const MainPage = () => {
         <SideBar/>
         <div>
           <div className='main-rank'>
-            <TopThree></TopThree>
+            <Mainslide></Mainslide>
           </div>
           <ChatList></ChatList>
         </div>

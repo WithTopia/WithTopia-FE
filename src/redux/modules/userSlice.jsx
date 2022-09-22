@@ -38,7 +38,7 @@ export const userLogin = createAsyncThunk(
       
       let token = headers.authorization
       let refreshToken = headers.refreshtoken
-      let nickname = data.nickname
+      let nickname = data.data.nickname
       
       localStorage.setItem("nickname",nickname)
       localStorage.setItem("accessToken", token);

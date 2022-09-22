@@ -5,6 +5,7 @@ import unlike from "../../assets/unlike.png"
 import "./VideoRecord.scss"
 
 const OVvideo = ({streamManager,hidden,mute,role}) => {
+    console.log(streamManager)
     console.log("캠 on off",hidden)
     console.log("마이크 on off",mute)
     const videoRef = useRef()
@@ -19,9 +20,8 @@ const OVvideo = ({streamManager,hidden,mute,role}) => {
     return (
         <div className='video-content'>
             <div className='video-contents'>
-                {role === "master" ?
-                    <h3 className='video-username'>{streamManager.session.connection.data}</h3> : 
-                    <h3 className='video-username'>{streamManager.stream.connection.data}</h3>}
+                
+                <h3 className='video-username'>{streamManager.stream.connection.data}</h3>
                 <div className='video-likes'>
                     {mute ? "마이크 킴" : "마이크 끔"}
                     <img src={like} alt=""></img>
@@ -30,7 +30,7 @@ const OVvideo = ({streamManager,hidden,mute,role}) => {
             </div>
             {hidden ? null : 
             <div className='video-hidden'>
-                <img src={hiddenVideo}></img>
+                <img src={hiddenVideo} alt=""></img>
             </div>}
             <video ref={videoRef} autoPlay={true} muted={mute} hidden={!hidden} className="video-items"></video>
         </div>

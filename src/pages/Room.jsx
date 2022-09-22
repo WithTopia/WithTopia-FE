@@ -96,6 +96,7 @@ const Room = () => {
       // 커넥팅 닉네임 받기~
       let nickname = localStorage.getItem("nickname")
       if(nick.split("%")[2] === nickname){
+        console.log(nick.split("%")[2])
         setSubscriber(newSubscriber)
         console.log(newSubscriber)
       }

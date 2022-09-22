@@ -38,7 +38,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
         type:"TALK",
         roomId:roomId
       };
-      stompClient.send(`/app/chat/${roomId}`,{},JSON.stringify(chatMessage));
+      stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       // setText(userData.message)
       // setUser(userData.username)
       setUserData({...userData,"message": ""});

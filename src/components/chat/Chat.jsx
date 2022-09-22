@@ -36,6 +36,7 @@ const Chat = ({nickname,roomName,success,sessionId,setChat}) => {
         content = stompClient.subscribe('/topic/chat/'+sessionId,function(frame){
             setExcept(JSON.parse(frame.body))
         });
+        stompClient.send("/sub/chat/"+sessionId,{},JSON.stringify({type:"ENTER",roomId:sessionId,sender:nickname}))
         setGetOut(content)
     }
 

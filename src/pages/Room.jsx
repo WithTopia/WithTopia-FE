@@ -156,12 +156,12 @@ const Room = () => {
     publisher.publishAudio(mute)
   }
   const handleUserCam = () => {
-    setMute((prev)=>!prev)
-    subscriber.subscribeToAudio(mute);
+    setUserMute((prev)=>!prev)
+    subscriber.subscribeToAudio(userMute);
   }
   const handleUserMic = () => {
-    setHidden((prev)=>!prev)
-    subscriber.subscribeToVideo(hidden);
+    setUserHidden((prev)=>!prev)
+    subscriber.subscribeToVideo(userHidden);
   }
 
   useEffect(()=>{ // 시작과 종료를 알리는
@@ -192,20 +192,20 @@ const Room = () => {
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive} role={location.state.role}></VideoRecord>
+                  <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index} role={location.state.role}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
-                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive} role={location.state.role}></VideoRecord>
+                  <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index} role={location.state.role}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>
@@ -227,9 +227,9 @@ const Room = () => {
            : null}
           {role === "user" && publisher !== null ?  // 유저 전용 마이크 및 캠 바꾸기
             <>
-              {hidden ? <img src={camoff} onClick={handleUserCam}></img> : 
+              {userHidden ? <img src={camoff} onClick={handleUserCam}></img> : 
                 <img src={camon} onClick={handleUserCam}></img>}
-              {mute ? <img src={micoff} onClick={handleUserMic}></img> :
+              {userMute ? <img src={micoff} onClick={handleUserMic}></img> :
                 <img src={micon} onClick={handleUserMic}></img>}
             </>
            : null}

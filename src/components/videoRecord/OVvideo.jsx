@@ -4,35 +4,31 @@ import like from "../../assets/like.png"
 import unlike from "../../assets/unlike.png"
 import "./VideoRecord.scss"
 
-const OVvideo = ({streamManager,hidden,mute,role}) => {
+const OVvideo = ({streamManager,role}) => {
     console.log(streamManager)
-    console.log("캠 on off",hidden)
-    console.log("마이크 on off",mute)
     const videoRef = useRef()
     useEffect(()=>{
         if (streamManager !== undefined && videoRef.current){
             streamManager.addVideoElement(videoRef.current)
+            
         }
       },[])
-    const handelHidden = () => {
-        
-    }
+    console.log(streamManager.stream.videoActive)
     return (
         <div className='video-content'>
             <div className='video-contents'>
-                
                 <h3 className='video-username'>{streamManager.stream.connection.data}</h3>
                 <div className='video-likes'>
-                    {mute ? "마이크 킴" : "마이크 끔"}
+                    {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"}
                     <img src={like} alt=""></img>
                     <img src={unlike} alt=""></img>
                 </div>
             </div>
-            {hidden ? null : 
+            {/* {streamManager.stream.videoActive ? null : 
             <div className='video-hidden'>
                 <img src={hiddenVideo} alt=""></img>
-            </div>}
-            <video ref={videoRef} autoPlay={true} muted={mute} hidden={!hidden} className="video-items"></video>
+            </div>} */}
+            <video ref={videoRef} autoPlay={true} muted={!streamManager.stream.audioActive} hidden={!streamManager.stream.videoActive} className="video-items"></video>
         </div>
     )
 }

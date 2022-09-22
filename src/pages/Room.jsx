@@ -92,8 +92,10 @@ const Room = () => {
         e.stream,
         undefined
       );
-      if(newSubscriber.session.connection.data === nickname){
-        setSubscriber(newSubscriber)  
+      const nick = newSubscriber.session.connection.data
+      if(nick.substr(-2) === nickname){
+        setSubscriber(newSubscriber)
+        console.log(newSubscriber)
       }
       
       setSubscribers(current=>[...current,newSubscriber]);

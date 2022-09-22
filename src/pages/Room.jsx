@@ -90,7 +90,7 @@ const Room = () => {
         e.stream,
         undefined
       );
-      // setSubscriber(newSubscriber)
+      setSubscriber(newSubscriber)
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -156,10 +156,12 @@ const Room = () => {
     publisher.publishAudio(mute)
   }
   const handleUserCam = () => {
+    console.log(subscriber)
     setUserHidden((prev)=>!prev)
     subscriber.subscribeToVideo(userHidden);
   }
   const handleUserMic = () => {
+    console.log(subscriber)
     setUserMute((prev)=>!prev)
     subscriber.subscribeToAudio(userMute);
   }
@@ -204,7 +206,6 @@ const Room = () => {
                 <div className='sub'>
                   <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
-                    setSubscriber(sub)
                     return(
                       <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
                     )

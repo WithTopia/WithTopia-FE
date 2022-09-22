@@ -16,7 +16,8 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
     message:except.message
   }
 
-  const handleOut = async () => { //나가기 , 나중에 delete 될 예정
+  const handleOut = async () => { //나가기
+    stompClient.send("/sub/chat/"+roomId,{},JSON.stringify({type:"EXIT",roomId:roomId,sender:userData.username}))
     try{
       const repo = await axios.put(url+`/chat/room/${roomId}/exit`)
       console.log(repo)

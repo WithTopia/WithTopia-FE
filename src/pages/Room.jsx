@@ -12,6 +12,7 @@ import micon from "../assets/mic-on.png"
 import micoff from "../assets/mic-off.png"
 import message from "../assets/messageIcon.png"
 import exit from "../assets/out.png"
+import FootBar from '../components/videoRecord/FootBar'
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -94,12 +95,11 @@ const Room = () => {
       console.log(newSubscriber)
       let nick = newSubscriber.stream.session.connection.data
       // 커넥팅 닉네임 받기~
-      
-      if(nick.split("%")[2] === nickname){
-        console.log(nick.split("%")[2])
-        setSubscriber(newSubscriber)
-        console.log(newSubscriber)
-      }
+      // if(nick.split("%")[2] === nickname){
+      //   console.log(nick.split("%")[2])
+      //   setSubscriber(newSubscriber)
+      //   console.log(newSubscriber)
+      // }
       
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
@@ -206,7 +206,7 @@ const Room = () => {
                   <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index} role={location.state.role} ></VideoRecord>
                     )
                   }) : null}
                 </div>
@@ -227,24 +227,9 @@ const Room = () => {
             {/* {publisher!== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={true} sessionId={location.state.sessionId}></Chat> : null} */}
           </div>  
         </div>
-        <div className='video-setting'>
-          {role === "master" && publisher !== null ?  // 방장 전용 마이크 및 캠 바꾸기
-            <>
-              {hidden ? <img src={camoff} onClick={handleCam}></img> : 
-                <img src={camon} onClick={handleCam}></img>}
-              {mute ? <img src={micoff} onClick={handleMic}></img> : 
-                <img src={micon} onClick={handleMic}></img>}
-            </>
-           : null}
-          {role === "user" && publisher !== null ?  // 유저 전용 마이크 및 캠 바꾸기
-            <>
-              {userHidden ? <img src={camoff} onClick={handleUserCam}></img> : 
-                <img src={camon} onClick={handleUserCam}></img>}
-              {userMute ? <img src={micoff} onClick={handleUserMic}></img> : 
-                <img src={micon} onClick={handleUserMic}></img>}
-            </>
-           : null}
-        </div>
+        {/* <div className='video-setting'>
+          
+        </div> */}
       </div>
     </div>
   )

@@ -14,9 +14,9 @@ const OVvideo = ({streamManager,role}) => {
     return (
         <div className='video-content'>
             <div className='video-contents'>
-                <h3 className='video-username'>{streamManager.stream.connection.data.substr(-2)}</h3>
+                <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
-                    {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"}
+                    {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     <img src={like} alt=""></img>
                     <img src={unlike} alt=""></img>
                 </div>
@@ -25,9 +25,10 @@ const OVvideo = ({streamManager,role}) => {
             <div className='video-hidden'>
                 <img src={hiddenVideo} alt=""></img>
             </div>} */}
-            <video ref={videoRef} autoPlay={true} muted={!streamManager.stream.audioActive} hidden={!streamManager.stream.videoActive} className="video-items"></video>
+            <video ref={videoRef} autoPlay={true}  className="video-items"></video>
         </div>
     )
 }
 
 export default OVvideo
+// muted={!streamManager.stream.audioActive} hidden={!streamManager.stream.videoActive}

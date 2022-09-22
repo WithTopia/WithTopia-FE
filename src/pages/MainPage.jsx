@@ -5,7 +5,6 @@ import Header from '../components/header/Header'
 import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
 import ChatList from '../components/chatList/ChatList'
-import Test from '../components/test/Test'
 import TopThree from '../components/topThree/TopThree'
 
 const MainPage = () => {
@@ -19,7 +18,6 @@ const MainPage = () => {
             <TopThree></TopThree>
           </div>
           <ChatList></ChatList>
-          <Test></Test>
         </div>
       </div>
       <Footer/>

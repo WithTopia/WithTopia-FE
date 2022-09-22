@@ -73,7 +73,7 @@ const LoginForm = (props) => {
             placeholder="password"
             {...register("password", {
               required: "비밀번호는 필수입니다.",
-              pattern: /^[0-9a-zA-Z]{6,}$/,
+              pattern: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$/,
             })}
           />
           {errors.password && errors.password.type === "pattern" && (

@@ -2,13 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
-
 // const URI = {
 //   BASE: process.env.REACT_APP_BASE_URI,
 // };
 const URL = process.env.REACT_APP_SERVER_URL
-
 
 //회원가입
 export const userRegister = createAsyncThunk(
@@ -31,14 +28,11 @@ export const userRegister = createAsyncThunk(
   }
 )
 
-
-
 export const userLogin = createAsyncThunk(
   "/member/login",
   async (payload, thunkAPI) => {
     try {
       const { email, password } = payload;
-
       const datas = {email:email,password:password}
       const {data,headers} = await axios.post(`${URL}/member/login`, datas)
       
@@ -50,8 +44,7 @@ export const userLogin = createAsyncThunk(
       localStorage.setItem("accessToken", token);
       localStorage.setItem("refreshtoken", refreshToken);
       
-
-      return thunkAPI.fulfillWithValue(payload);
+      // return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

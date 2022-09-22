@@ -12,7 +12,6 @@ import micon from "../assets/mic-on.png"
 import micoff from "../assets/mic-off.png"
 import message from "../assets/messageIcon.png"
 import exit from "../assets/out.png"
-import { current } from '@reduxjs/toolkit'
 
 const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
@@ -26,19 +25,19 @@ const Room = () => {
   const [token,setToken] = useState("")
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
-  const [subscriber, setSubscriber] = useState("");
-  const [destroyedStream,setDestroyedStream] = useState("")
+  const [subscriber, setSubscriber] = useState(null);
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false)
   const [role,setRole] = useState(location.state.role)
+
   const [mute,setMute] = useState(false)
   const [hidden,setHidden] = useState(false)
-  const [chat,setChat] = useState(false)
+  const [userMute,setUserMute] = useState(false)
+  const [userHidden,setUserHidden] = useState(false)
+
+  const [chat,setChat] = useState(false) // 채팅창
   const deleteSubscriber = (streamManager,id) => {
-    console.log("체크1",streamManager)
-    console.log("체크2",id)
-    const prevSubscribers = subscribers;
-    let index = prevSubscribers.indexOf(streamManager, 0);
+    console.log("지우기 시도")
     try{
       console.log("지우기")
       setSubscribers(current=>current.filter(sub=>{
@@ -47,13 +46,6 @@ const Room = () => {
     }catch(error){
       console.log(error)
     }
-    // if (index > -1) {
-    //   console.log("지우기")
-    //   prevSubscribers.splice(index, 1);
-    //   setSubscribers(current=>current.filter(sub=>{
-    //     return sub.stream.session.options.sessionId !== id
-    //   }));
-    // }
   };
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = async (e) => {
@@ -98,7 +90,7 @@ const Room = () => {
         e.stream,
         undefined
       );
-      setSubscriber(subscriber)
+      setSubscriber(newSubscriber)
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -111,7 +103,7 @@ const Room = () => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
         deleteSubscriber(e.stream.streamManager,e.stream.session.options.sessionId);
       } else {
-        setDestroyedStream(e.stream.streamManager);
+        console.log("지우기 실패 ?")
         setCheckMyScreen(true);
       }
     });
@@ -157,23 +149,28 @@ const Room = () => {
 
   const handleCam = () => {
     setHidden((prev)=>!prev)
+    publisher.publishVideo(hidden)
   }
-  const handleMic = () => [
+  const handleMic = () => {
     setMute((prev)=>!prev)
-  ]
-  useEffect(()=>{
-    window.addEventListener("beforeunload", onbeforeunload);
+    publisher.publishAudio(mute)
+  }
+  const handleUserCam = () => {
+    setMute((prev)=>!prev)
+    subscriber.subscribeToAudio(mute);
+  }
+  const handleUserMic = () => {
+    setHidden((prev)=>!prev)
+    subscriber.subscribeToVideo(hidden);
+  }
+
+  useEffect(()=>{ // 시작과 종료를 알리는
+    window.addEventListener("beforeunload", onbeforeunload); 
     joinSession()
     return () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  useEffect(()=>{
-    console.log(subscribers)
-  },[subscribers])
-  useEffect(()=>{
-    console.log(publisher)
-  },[publisher])
   // useEffect(() => {
   //   window.onpopstate = () => {
   //     history.push("/main");
@@ -195,20 +192,20 @@ const Room = () => {
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher} hidden={hidden} mute={mute} username={location.state.masterId}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={hidden} mute={mute} username={location.state.masterId} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
-                  <VideoRecord streamManager={publisher} hidden={hidden} mute={mute} username={location.state.masterId}></VideoRecord>
+                  <VideoRecord streamManager={publisher} hidden={publisher.stream.videoActive} mute={publisher.stream.audioActive}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} hidden={hidden} mute={mute} username={location.state.masterId} key={index}></VideoRecord>
+                      <VideoRecord streamManager={sub} hidden={sub.stream.videoActive} mute={sub.stream.audioActive} key={index}></VideoRecord>
                     )
                   }) : null}
                 </div>
@@ -220,12 +217,20 @@ const Room = () => {
           </div>  
         </div>
         <div className='video-setting'>
-          {role === "master" && publisher !== null ? 
+          {role === "master" && publisher !== null ?  // 방장 전용 마이크 및 캠 바꾸기
             <>
               {hidden ? <img src={camoff} onClick={handleCam}></img> : 
                 <img src={camon} onClick={handleCam}></img>}
               {mute ? <img src={micoff} onClick={handleMic}></img> :
                 <img src={micon} onClick={handleMic}></img>}
+            </>
+           : null}
+          {role === "user" && publisher !== null ?  // 유저 전용 마이크 및 캠 바꾸기
+            <>
+              {hidden ? <img src={camoff} onClick={handleUserCam}></img> : 
+                <img src={camon} onClick={handleUserCam}></img>}
+              {mute ? <img src={micoff} onClick={handleUserMic}></img> :
+                <img src={micon} onClick={handleUserMic}></img>}
             </>
            : null}
         </div>

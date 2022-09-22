@@ -95,7 +95,7 @@ const Room = () => {
       console.log(newSubscriber)
       let nick = newSubscriber.stream.session.connection.data
       
-      if(nick.split("=")[2] === nickname){
+      if(nick.split("%")[2] === nickname){
         setSubscriber(newSubscriber)
         console.log(newSubscriber)
       }

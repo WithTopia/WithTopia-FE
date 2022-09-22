@@ -17,8 +17,7 @@ const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
 const Room = () => {
-  // 커넥팅 닉네임 받기~
-  let nickname = localStorage.getItem("nickname")
+  
   const location = useLocation();
   let tokenStuff = location.state.token
   const [session,setSession] = useState(undefined)
@@ -94,7 +93,8 @@ const Room = () => {
       );
       console.log(newSubscriber)
       let nick = newSubscriber.stream.session.connection.data
-      
+      // 커넥팅 닉네임 받기~
+      let nickname = localStorage.getItem("nickname")
       if(nick.split("%")[2] === nickname){
         setSubscriber(newSubscriber)
         console.log(newSubscriber)

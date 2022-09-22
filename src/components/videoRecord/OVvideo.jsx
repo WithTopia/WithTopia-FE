@@ -5,15 +5,12 @@ import unlike from "../../assets/unlike.png"
 import "./VideoRecord.scss"
 
 const OVvideo = ({streamManager,role}) => {
-    console.log(streamManager)
     const videoRef = useRef()
     useEffect(()=>{
         if (streamManager !== undefined && videoRef.current){
-            streamManager.addVideoElement(videoRef.current)
-            
+            streamManager.addVideoElement(videoRef.current)        
         }
       },[])
-    console.log(streamManager.stream.audioActive)
     return (
         <div className='video-content'>
             <div className='video-contents'>

@@ -17,6 +17,8 @@ const url = process.env.REACT_APP_SERVER_URL
 const history = createBrowserHistory()
 
 const Room = () => {
+  // 커넥팅 닉네임 받기~
+  let nickname = localStorage.getItem("nickname")
   const location = useLocation();
   let tokenStuff = location.state.token
   const [session,setSession] = useState(undefined)
@@ -90,7 +92,10 @@ const Room = () => {
         e.stream,
         undefined
       );
-      setSubscriber(newSubscriber)
+      if(newSubscriber.session.connection.data === nickname){
+        setSubscriber(newSubscriber)  
+      }
+      
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -107,8 +112,7 @@ const Room = () => {
         setCheckMyScreen(true);
       }
     });
-    // 커넥팅 닉네임 받기~
-    let nickname = localStorage.getItem("nickname")
+    
     newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
         await newOV.getUserMedia({

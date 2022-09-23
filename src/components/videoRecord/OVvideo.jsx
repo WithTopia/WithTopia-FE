@@ -1,12 +1,18 @@
 import {useRef ,useEffect, useState} from 'react'
 import like from "../../assets/like.png"
 import unlike from "../../assets/unlike.png"
+import likeYet from "../../assets/yetlike.png"
+import unlikeYet from "../../assets/yetunlike.png"
 import "./VideoRecord.scss"
 import axios from 'axios'
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role}) => {
     const [vote,setVote] = useState(false)
+    const [complete,setComplete] = useState("")
+    const checkVoted = () => {
+
+    }
     const handleVoteLike = (e) => {
         e.preventDefault()
         setVote(true)
@@ -28,8 +34,10 @@ const OVvideo = ({streamManager,role}) => {
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             if(req.data.errormessage){
                 alert(req.data.errormessage)
+                return
             }
             console.log(req)
+            setComplete("complete")
         }catch(error){
             console.log(error)
         }
@@ -46,8 +54,11 @@ const OVvideo = ({streamManager,role}) => {
                 <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
-                    <img src={like} alt="" onClick={handleVoteLike}></img>
-                    <img src={unlike} alt="" onClick={handleVoteUnlike}></img>
+                    {complete === "" ? <>
+                        <img src={likeYet} alt="" onClick={handleVoteLike}></img>
+                        <img src={unlikeYet} alt="" onClick={handleVoteUnlike}></img></> : <>
+                        <img src={like} alt="" onClick={checkVoted}></img>
+                        <img src={unlike} alt="" onClick={checkVoted}></img></> }
                 </div>
             </div>
             {/* {streamManager.stream.videoActive ? null : 

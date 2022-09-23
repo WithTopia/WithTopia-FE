@@ -27,9 +27,8 @@ const OVvideo = ({streamManager,role,nickname}) => {
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             if(req.data.errormessage){
                 alert(req.data.errormessage)
-            }else if(!req.data.errormessage){
-                alert("투표 성공")
             }
+            console.log(req)
         }catch(error){
             console.log(error)
         }

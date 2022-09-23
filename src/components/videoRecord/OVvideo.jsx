@@ -5,7 +5,7 @@ import "./VideoRecord.scss"
 import axios from 'axios'
 // import hiddenVideo from "../../assets/cam-off.png"
 
-const OVvideo = ({streamManager,role,nickname}) => {
+const OVvideo = ({streamManager,role}) => {
     const [vote,setVote] = useState(false)
     const handleVoteLike = (e) => {
         e.preventDefault()
@@ -18,11 +18,13 @@ const OVvideo = ({streamManager,role,nickname}) => {
         handleVote()
     }
     const handleVote = async () => {
+        let nick = streamManager.stream.connection.data.split("%")[2]
+        console.log(nick)
         let token = localStorage.getItem("accessToken")
         let refreshtoken = localStorage.getItem("refreshtoken")
         try{
             const req = await axios.post("/vote",{
-                nickname:nickname,
+                nickname:nick,
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             if(req.data.errormessage){

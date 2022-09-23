@@ -205,20 +205,20 @@ const Room = () => {
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher} role={location.state.role} nickname={nickname}></VideoRecord>
+                  <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} key={index} role={location.state.role} nickname={nickname}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>
               ) : null}
               {role === "user" && publisher !== null ? (
                 <div className='sub'>
-                  <VideoRecord streamManager={publisher} role={location.state.role} nickname={nickname}></VideoRecord>
+                  <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
-                      <VideoRecord streamManager={sub} key={index} role={location.state.role} nickname={nickname}></VideoRecord>
+                      <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
                     )
                   }) : null}
                 </div>

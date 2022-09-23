@@ -55,10 +55,10 @@ const Room = () => {
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
-      if(localStorage.getItem("masterId") === localStorage.getItem("nickname")){
+      if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
-      }else{
+      }else if(role === "user"){
         const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomUser)
       }

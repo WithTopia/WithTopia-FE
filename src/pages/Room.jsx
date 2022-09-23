@@ -41,15 +41,15 @@ const Room = () => {
     console.log("체크2",id)
     console.log("체크3",newsession)
     console.log("지우기 시도")
-    // try{
-    //   console.log("지우기")
-    //   setSubscribers(current=>current.filter(sub=>{
-    //     return sub.stream.session.options.sessionId !== id
-    //   }));
-    //   setCheckMyScreen(false)
-    // }catch(error){
-    //   console.log(error)
-    // }
+    try{
+      console.log("지우기")
+      setSubscribers(current=>current.filter(sub=>{
+        return sub.stream.session.options.sessionId !== id
+      }));
+      setCheckMyScreen(false)
+    }catch(error){
+      console.log(error)
+    }
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
@@ -98,6 +98,7 @@ const Room = () => {
         e.stream,
         undefined
       );
+      console.log(newSubscriber)
       // let nick = newSubscriber.stream.session.connection.data
       // 커넥팅 닉네임 비교 ( 보류 )
       // if(nick.split("%")[2] === nickname){

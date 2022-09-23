@@ -43,6 +43,7 @@ const Room = () => {
       setSubscribers(current=>current.filter(sub=>{
         return sub.stream.session.options.sessionId !== id
       }));
+      setCheckMyScreen(false)
     }catch(error){
       console.log(error)
     }
@@ -69,6 +70,7 @@ const Room = () => {
     }
   };
   const leaveSession = () => {
+    setCheckMyScreen(false)
     setSubscribers([])
     setSessionId("")
     setOV(undefined)
@@ -226,7 +228,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
-            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat}></Chat> : null}
+            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
           </div>  
         </div>
         {/* <div className='video-setting'>

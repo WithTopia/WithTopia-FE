@@ -7,7 +7,7 @@ import ChatInputBox from "../chatInputBox/ChatInputBox"
 var stompClient = null;
 let url = process.env.REACT_APP_SERVER_URL
 
-const Chat = ({nickname,roomName,success,sessionId,setChat}) => {
+const Chat = ({nickname,roomName,success,sessionId,setChat,checkMyScreen}) => {
     let token = localStorage.getItem("accessToken")
     const [except,setExcept] = useState("")    
     const [getOut,setGetOut] =useState("CHATROOM");
@@ -55,9 +55,9 @@ const Chat = ({nickname,roomName,success,sessionId,setChat}) => {
                 roomId={sessionId}
                 stompClient={stompClient}
                 except={except}
-                getOut={getOut}
                 setGetOut={setGetOut}
-                setChat={setChat}>
+                setChat={setChat}
+                checkMyScreen={checkMyScreen}>
             </ChatInputBox>
         </>
     )

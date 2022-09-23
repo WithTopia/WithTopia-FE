@@ -4,7 +4,7 @@ import axios from "axios";
 import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
 
-const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut,setChat}) => { // 채팅 인풋 박스
+const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen}) => { // 채팅 인풋 박스
   String(roomId)
   const [img, setImg] = useState(null);
   const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
@@ -13,12 +13,12 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
     user:except.sender,
     message:except.message
   }
-
+  
   const handleOut = async () => {     // 나가기
     stompClient.send("/sub/chat/"+roomId,{},JSON.stringify({type:"EXIT",roomId:roomId,sender:userData.username}))
     try{
-      const repo = await axios.put(`/chat/room/${roomId}/exit`)
-      console.log(repo)
+      // const repo = await axios.put(`/chat/room/${roomId}/exit`)
+      // console.log(repo)
       // getOut.unsubscribe()
       stompClient.disconnect({},function(){
         console.log('연결 해제.')
@@ -51,6 +51,12 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
       const {value}= e.target;
       setUserData({...userData,"message": value});
   }
+
+  useEffect(()=>{
+    if(checkMyScreen === false){
+      handleOut()
+    }
+  },[])
   useEffect(()=>{
     if(except.message === ""){
       console.log("nothing")

@@ -36,14 +36,13 @@ const Room = () => {
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
 
-  const deleteSubscriber = (streamManager,id,newsession) => {
-    console.log("체크1",streamManager)
+  const deleteSubscriber = (streamManagerId,id,newsession) => {
     console.log("체크2",id)
     console.log("체크3",newsession)
-    console.log("지우기 시도")
+    console.log("지우기 시도") // 99 
     try{
       console.log("지우기")
-      setSubscribers(current=>current.filter((sub)=> sub.stream.session.options.sessionId !== id )); //e.stream.session.options.sessionId
+      setSubscribers(current=>current.filter((sub)=> sub.stream.streamManager.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
       setCheckMyScreen(false)
     }catch(error){
       console.log(error)
@@ -112,7 +111,7 @@ const Room = () => {
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
-        deleteSubscriber(e.stream.streamManager,e.stream.session.options.sessionId,newsession);
+        deleteSubscriber(e.stream.streamManager.connection.connectionId,e.stream.session.options.sessionId);
       } else {
         console.log("지우기 실패 ?")
         setCheckMyScreen(true);

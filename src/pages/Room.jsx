@@ -71,13 +71,14 @@ const Room = () => {
     }
   };
   const leaveSession = () => {
+    console.log("세션 치우기")
     setCheckMyScreen(false)
     setSubscribers([])
     setSessionId("")
     setOV(undefined)
     setPublisher(null)
   }
-  const joinSession = useCallback(() => { // openvidu 세션 생성하기
+  const joinSession = () => { // openvidu 세션 생성하기
     setToken(location.state.token)
     setSessionId(location.state.sessionId)
     // 1. openvidu 객체 생성
@@ -155,7 +156,7 @@ const Room = () => {
           error.message
       );
     });
-  },[session])
+  }
 
   // 보류
   // const handleCam = () => {

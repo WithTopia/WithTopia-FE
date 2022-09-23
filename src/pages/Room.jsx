@@ -38,6 +38,8 @@ const Room = () => {
   // const [userHidden,setUserHidden] = useState(false)
 
   const deleteSubscriber = (streamManager,id) => {
+    console.log("체크1",streamManager)
+    console.log("체크2",id)
     console.log("지우기 시도")
     try{
       console.log("지우기")
@@ -53,7 +55,7 @@ const Room = () => {
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = async (e) => {
     e.preventDefault();
-    // e.returnValue = "";
+    e.returnValue = "";
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
@@ -186,18 +188,17 @@ const Room = () => {
   },[])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    // window.addEventListener("beforeunload", onbeforeunload); 
+    window.addEventListener("beforeunload", onbeforeunload); 
     joinSession()
     return () => {
-      // window.removeEventListener("beforeunload", onbeforeunload);
-      onbeforeunload()
+      window.removeEventListener("beforeunload", onbeforeunload);
     };
-  },[session])
-  useEffect(() => {
-    window.onpopstate = () => {
-      history.push("/main");
-    };
-  },[]);
+  },[])
+  // useEffect(() => {
+  //   window.onpopstate = () => {
+  //     history.push("/main");
+  //   };
+  // },[]);
   return (
     <div className='room'>
       <div className='video-container'>

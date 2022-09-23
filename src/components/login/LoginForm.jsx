@@ -77,7 +77,7 @@ const LoginForm = (props) => {
             })}
           />
           {errors.password && errors.password.type === "pattern" && (
-            <p>영문, 숫자 6자리 이상 입력해주세요. </p>
+            <p>영문, 숫자, 특수문자 8~20자리 입력해주세요. </p>
           )}
           </div>          
           <div className="btn">

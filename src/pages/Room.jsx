@@ -53,7 +53,7 @@ const Room = () => {
   // 브라우저 새로고침, 종료, 라우트 변경
   const onbeforeunload = async (e) => {
     e.preventDefault();
-    e.returnValue = "";
+    // e.returnValue = "";
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
@@ -65,7 +65,7 @@ const Room = () => {
         const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomUser)
       }
-      navigate("/main")
+      // navigate("/main")
     }catch(error){
       console.log(error)
     }
@@ -186,12 +186,13 @@ const Room = () => {
   },[])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", onbeforeunload); 
+    // window.addEventListener("beforeunload", onbeforeunload); 
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
+      // window.removeEventListener("beforeunload", onbeforeunload);
+      onbeforeunload()
     };
-  },[])
+  },[session])
   useEffect(() => {
     window.onpopstate = () => {
       history.push("/main");

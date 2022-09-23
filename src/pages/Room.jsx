@@ -19,7 +19,6 @@ const Room = () => {
   const location = useLocation();
   const navigate = useNavigate()
   let nickname = localStorage.getItem("nickname")
-  
   let tokenStuff = location.state.token
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();
@@ -41,11 +40,13 @@ const Room = () => {
     console.log("체크1",streamManager)
     console.log("체크2",id)
     console.log("지우기 시도")
+    console.log(subscribers)
     try{
       console.log("지우기")
       setSubscribers(current=>current.filter(sub=>{
         return sub.stream.session.options.sessionId !== id
       }));
+      console.log(subscribers)
       setCheckMyScreen(false)
     }catch(error){
       console.log(error)
@@ -59,7 +60,7 @@ const Room = () => {
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
-      console.log(role)
+      
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
@@ -237,7 +238,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
-            {/* {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null} */}
+            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
           </div>  
         </div>
         {/* <div className='video-setting'>

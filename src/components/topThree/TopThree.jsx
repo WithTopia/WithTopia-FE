@@ -1,7 +1,7 @@
 import React from 'react';
 import "./TopThree.scss";
-import lion from "../../assets/lion2.png"
-import logo from "../../assets/crown.png"
+// import lion from "../../assets/lion2.png"
+// import logo from "../../assets/crown.png"
 import { useState } from 'react';
 
 const TopThree = () => {

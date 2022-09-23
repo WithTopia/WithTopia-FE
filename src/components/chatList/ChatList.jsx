@@ -4,8 +4,6 @@ import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
 
-const url = process.env.REACT_APP_SERVER_URL
-
 const ChatList = () => {
     const [rooms,setRooms] = useState("")
     const [page, setPage] = useState(1);
@@ -27,7 +25,7 @@ const ChatList = () => {
 
     const findRoom = async () => {
         try{
-            const repo = await axios.get(url+`/rooms/${pageRef.current}`)
+            const repo = await axios.get(`/rooms/${pageRef.current}`)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
         }catch(error){

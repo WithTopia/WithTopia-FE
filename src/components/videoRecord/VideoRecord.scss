@@ -19,6 +19,16 @@
             font-size: 20px;
             font-weight: bold;   
         }
+        .video-likes{
+            span{
+                font-size: 22px;
+            }
+            img{
+                width: 20px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
     }
     .video-hidden{
         width: 410px;

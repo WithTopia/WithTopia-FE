@@ -1,11 +1,13 @@
 import React from 'react'
 import OVvideo from './OVvideo'
 
-const VideoRecord = ({streamManager,hidden,mute,username}) => {
+
+
+const VideoRecord = ({streamManager,role}) => {
   return (
     <div>
       {streamManager !== undefined ? (
-        <OVvideo streamManager={streamManager} hidden={hidden} mute={mute} username={username}></OVvideo>
+        <OVvideo streamManager={streamManager} role={role}></OVvideo>
       ) : null}
     </div>
   )

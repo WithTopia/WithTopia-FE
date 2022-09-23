@@ -4,9 +4,7 @@ import axios from "axios";
 import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
 
-const url = process.env.REACT_APP_SERVER_URL
-
-const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut}) => { // 채팅 인풋 박스
+const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen}) => { // 채팅 인풋 박스
   String(roomId)
   const [img, setImg] = useState(null);
   const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
@@ -15,11 +13,12 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
     user:except.sender,
     message:except.message
   }
-
-  const handleOut = async () => { //나가기 , 나중에 delete 될 예정
+  
+  const handleOut = async () => {     // 나가기
+    stompClient.send("/sub/chat/"+roomId,{},JSON.stringify({type:"EXIT",roomId:roomId,sender:userData.username}))
     try{
-      const repo = await axios.put(url+`/chat/room/${roomId}/exit`)
-      console.log(repo)
+      // const repo = await axios.put(`/chat/room/${roomId}/exit`)
+      // console.log(repo)
       // getOut.unsubscribe()
       stompClient.disconnect({},function(){
         console.log('연결 해제.')
@@ -38,33 +37,41 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
         type:"TALK",
         roomId:roomId
       };
-      stompClient.send(`/app/chat/${roomId}`,{},JSON.stringify(chatMessage));
+      stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       // setText(userData.message)
       // setUser(userData.username)
       setUserData({...userData,"message": ""});
     }
   }
+
+  const handleChat = () =>{
+    setChat((prev)=>!prev)
+  }
   const handleMessage =(e)=>{
       const {value}= e.target;
       setUserData({...userData,"message": value});
   }
+
+  useEffect(()=>{
+    if(checkMyScreen === false){
+      handleOut()
+    }
+  },[])
   useEffect(()=>{
     if(except.message === ""){
       console.log("nothing")
     }else{
       setData([...data,update]) 
     }
-    
-  },[except])
-  console.log(except)
+  },[except])  
   return(
     <div className="chat">
-      <div className="chatInfo">
+      <div className="chatInfo-box">
         <span>
           Chat
         </span>
         <div className="chatIcons">
-          <img className="naga" src={close} alt=""/>
+          <img className="naga" src={close} alt="" onClick={handleChat}/>
         </div>
       </div>
       <div className="messages">
@@ -72,7 +79,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
           <ChatBox data={data} userData={userData} key={index}></ChatBox>
         ))}
       </div>
-      <div className="input">
+      <div className="input-box">
         <input
             type="text"
             placeholder="Type something..."

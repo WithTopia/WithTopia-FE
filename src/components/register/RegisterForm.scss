@@ -1,0 +1,143 @@
+
+.rg-container {
+  background-color: #FFEBA3;
+  width: 450px;
+  height: 550px;
+  margin: 24vh auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #646464;
+
+  .register-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0 ;
+// 이메일
+    .input-email-box {
+      width: 250px;
+      border: none;
+      outline: none;
+      margin-bottom: 10px;
+      gap: 20px;
+      input {
+        font-size: 15px;
+        width: 250px;
+        height: 30px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 3px;
+        outline: none;
+      };
+      p {
+        height: 15px;
+        margin-top: 5px;
+        font-size: 12px;
+        color: red;
+      };
+      button {
+        color: #646464;
+        width: 250px;
+        height: 25px;
+        border: none;
+        outline: none;
+        background-color: #FFD68B;
+        box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
+        &:hover {
+          background-color: #D7B16D;
+          color: rgb(2, 2, 2);
+          box-shadow: 0 0 4px #646464;
+        };
+      }
+    };
+// 닉네임
+    .input-nick-box{
+      width: 250px;
+      border: none;
+      outline: none;
+      margin-bottom: 10px;
+      gap: 20px;
+      input {
+        font-size: 15px;
+        width: 250px;
+        height: 30px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 3px;
+        outline: none;
+      };
+      p {
+        height: 15px;
+        margin-top: 5px;
+        font-size: 12px;
+        color: red;
+      };
+      button {
+        color: #646464;
+        width: 250px;
+        height: 25px;
+        border: none;
+        outline: none;
+        background-color: #FFD68B;
+        box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
+        &:hover {
+          background-color: #D7B16D;
+          color: rgb(2, 2, 2);
+          box-shadow: 0 0 4px #646464;
+        };
+      }
+    };
+// 비밀번호
+    .input-password-box{
+      input {
+        font-size: 15px;
+        width: 250px;
+        height: 30px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 3px;
+        outline: none;
+      };
+      p {
+        height: 15px;
+        margin-top: 5px;
+        font-size: 12px;
+        color: red;
+      };
+      // #passwordCheck{
+        
+      // };
+    };
+  };
+// 회원가입
+  .btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+    button {
+      color: #646464;
+      width: 250px;
+      height: 30px;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      background-color: #FFD68B;
+      box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
+      &:hover {
+        background-color: #D7B16D;
+        color: rgb(2, 2, 2);
+        box-shadow: 0 0 4px #646464;
+      };
+    };
+  };
+};
+

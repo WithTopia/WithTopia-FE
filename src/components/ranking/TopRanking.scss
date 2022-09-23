@@ -1,0 +1,38 @@
+.rank-box{
+  max-width: 2500px;
+  height: 86vh;
+  width: calc(98vw - 300px);
+  box-shadow: 1px 1px 5px #e5d493;
+  border-radius: 20px;
+  margin: 20px 10px 15px 30px;
+  padding: 12px;
+
+  .rank-top3{
+    font-size: 30px;
+    margin: 20px;
+  };
+  hr{
+    border: 0.1px solid rgb(214, 214, 214);
+    margin: 0 10px 30px 10px;
+  };
+  .rank-piece{
+    // background-color: #e5d493;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    margin: 10px;
+    border: 1px solid #e5d493;
+    border-radius: 10px;
+    padding: 3px 30px;
+    img{
+      width: 30px;
+      margin: 10px;
+    };
+  };
+
+  .rank-etc{
+    font-size: 20px;
+    margin-top: 20px;
+  };
+};

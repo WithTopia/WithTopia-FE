@@ -50,7 +50,7 @@ const OVvideo = ({streamManager,role}) => {
         if (streamManager !== undefined && videoRef.current){
             streamManager.addVideoElement(videoRef.current)        
         }
-    },[])
+    },[streamManager])
     return (
         <div className='video-content'>
             <div className='video-contents'>

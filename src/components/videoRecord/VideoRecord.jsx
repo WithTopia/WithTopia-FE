@@ -3,11 +3,11 @@ import OVvideo from './OVvideo'
 
 
 
-const VideoRecord = ({streamManager,role}) => {
+const VideoRecord = ({streamManager,role,nickname}) => {
   return (
     <div>
       {streamManager !== undefined ? (
-        <OVvideo streamManager={streamManager} role={role}></OVvideo>
+        <OVvideo streamManager={streamManager} role={role} nickname={nickname}></OVvideo>
       ) : null}
     </div>
   )

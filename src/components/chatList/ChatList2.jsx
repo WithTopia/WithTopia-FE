@@ -5,8 +5,6 @@ import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import "./ChatList.scss"
 import axios from 'axios'
 
-const url = process.env.REACT_APP_SERVER_URL2
-
 const ChatList = () => {
   const [data,setData] = useState()
   const [pageOpen,setPageOpen] = useState(false)

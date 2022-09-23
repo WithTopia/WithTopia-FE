@@ -4,8 +4,6 @@ import axios from "axios";
 import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
 
-const url = process.env.REACT_APP_SERVER_URL
-
 const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,setGetOut,setChat}) => { // 채팅 인풋 박스
   String(roomId)
   const [img, setImg] = useState(null);
@@ -16,10 +14,10 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
     message:except.message
   }
 
-  const handleOut = async () => { //나가기
+  const handleOut = async () => {     // 나가기
     stompClient.send("/sub/chat/"+roomId,{},JSON.stringify({type:"EXIT",roomId:roomId,sender:userData.username}))
     try{
-      const repo = await axios.put(url+`/chat/room/${roomId}/exit`)
+      const repo = await axios.put(`/chat/room/${roomId}/exit`)
       console.log(repo)
       // getOut.unsubscribe()
       stompClient.disconnect({},function(){
@@ -59,12 +57,10 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
     }else{
       setData([...data,update]) 
     }
-    
-  },[except])
-  console.log(except)
+  },[except])  
   return(
     <div className="chat">
-      <div className="chatInfo">
+      <div className="chatInfo-box">
         <span>
           Chat
         </span>
@@ -77,7 +73,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,getOut,set
           <ChatBox data={data} userData={userData} key={index}></ChatBox>
         ))}
       </div>
-      <div className="input">
+      <div className="input-box">
         <input
             type="text"
             placeholder="Type something..."

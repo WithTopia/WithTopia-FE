@@ -13,10 +13,6 @@ import axios from "axios";
   // "passwordConfirm" : "123456",
 
 const Registerform = () => {
-  // const URI = {
-  //   BASE: process.env.REACT_APP_BASE_URI,
-  // };
-  const URL = process.env.REACT_APP_SERVER_URL
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -40,7 +36,7 @@ const Registerform = () => {
     try{ 
       alert("인증메일이 발송되었습니다. 메일 도착까지 최대 5분이 소요될 수 있습니다.")
       console.log("입력값:",email);
-      const data = await axios.post(`${URL}/member/email/request`, {
+      const data = await axios.post(`/member/email/request`, {
         email
       })
     } 
@@ -63,7 +59,7 @@ const Registerform = () => {
   const onConfirmNum = async () => {
     try{
       console.log("입력값:",authKey);
-      const data = await axios.post(`${URL}/member/email/confirm`, {
+      const data = await axios.post(`/member/email/confirm`, {
         email: email,
         authKey: authKey
       })
@@ -94,7 +90,7 @@ const Registerform = () => {
     try{
       console.log("잡은 nick:",nicknameIn);
       console.log(watch());
-      const data = await axios.post(`${URL}/member/nickname`,{
+      const data = await axios.post(`/member/nickname`,{
         nickname : nicknameIn
       })
       console.log(data.data);

@@ -1,7 +1,7 @@
 import React, { useState ,useEffect ,useCallback} from 'react'
 import Chat from "../components/chat/Chat"
 import { OpenVidu } from 'openvidu-browser'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
 import { createBrowserHistory } from 'history';
 import axios from 'axios'
@@ -17,6 +17,7 @@ const history = createBrowserHistory()
 
 const Room = () => {
   const location = useLocation();
+  const navigate = useNavigate()
   let nickname = localStorage.getItem("nickname")
   
   let tokenStuff = location.state.token
@@ -59,13 +60,13 @@ const Room = () => {
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
+        leaveSession();
       }else if(role === "user"){
         const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomUser)
       }
-      leaveSession();
+      navigate("/main")
     }catch(error){
-      localStorage.setItem("error",error)
       console.log(error)
     }
   };
@@ -78,7 +79,7 @@ const Room = () => {
   }
   const joinSession = useCallback(() => { // openvidu 세션 생성하기
     setToken(location.state.token)
-    setSessionId(location.state.sessionId)  
+    setSessionId(location.state.sessionId)
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
     // 2. initSesison 생성
@@ -179,6 +180,9 @@ const Room = () => {
   const handleChat = () => { // 채팅창 여닫이
     setChat((prev)=>!prev)
   }
+  useEffect(()=>{
+
+  },[])
 
   useEffect(()=>{ // 시작과 종료를 알리는
     window.addEventListener("beforeunload", onbeforeunload); 
@@ -187,11 +191,11 @@ const Room = () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
-  // useEffect(() => {
-  //   window.onpopstate = () => {
-  //     history.push("/main");
-  //   };
-  // },[]);
+  useEffect(() => {
+    window.onpopstate = () => {
+      history.push("/main");
+    };
+  },[]);
   return (
     <div className='room'>
       <div className='video-container'>

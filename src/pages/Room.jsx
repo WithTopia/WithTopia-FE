@@ -100,6 +100,7 @@ const Room = () => {
       //   setSubscriber(newSubscriber)
       //   console.log(newSubscriber)
       // }
+      console.log("입장~")
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });

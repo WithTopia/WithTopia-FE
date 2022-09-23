@@ -36,8 +36,12 @@ const OVvideo = ({streamManager,role}) => {
                 alert(req.data.errormessage)
                 return
             }
-            console.log(req)
-            setComplete("complete")
+            if(req.data.data.statusMsg){
+                setComplete("complete")
+                alert("인기도 투표 완료")
+            }
+            console.log(req.data.data.statusMsg)
+            
         }catch(error){
             console.log(error)
         }

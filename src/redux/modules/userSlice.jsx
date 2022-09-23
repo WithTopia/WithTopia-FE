@@ -23,7 +23,7 @@ export const userRegister = createAsyncThunk(
       });
       console.log("2222",response.data.data);
       console.log(response)
-      alert("가입을 축하드립니다. 메인 화면으로 이동합니다")
+      
     }catch (error) {
       console.log("3333",error);
       alert(error.response.data.errormessage)

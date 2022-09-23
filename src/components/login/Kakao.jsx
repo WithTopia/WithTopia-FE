@@ -15,6 +15,7 @@ const Kakao = () => {
       const accessToken = response.headers.authorization;
       const refreshToken = response.headers[`refresh-token`];
       console.log(KAKAO_CODE);
+      console.log(response);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
 

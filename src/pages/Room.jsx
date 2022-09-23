@@ -36,13 +36,13 @@ const Room = () => {
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
 
-  const deleteSubscriber = (streamManagerId,id) => {
+  const deleteSubscriber = (streamManagerId,id,newsession) => {
     console.log("체크2",id)
     console.log("체크3",streamManagerId)
     console.log("지우기 시도") // 99 
     try{
       console.log("지우기")
-      setSubscribers(subscribers.filter(sub=> sub.stream.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
+      setSubscribers(current=>current.filter((sub)=> sub.stream.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
       setCheckMyScreen(false)
     }catch(error){
       console.log(error)
@@ -184,8 +184,8 @@ const Room = () => {
   }
 
   useEffect(()=>{
-
-  },[])
+    console.log(subscribers)
+  },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
     window.addEventListener("beforeunload", onbeforeunload); 

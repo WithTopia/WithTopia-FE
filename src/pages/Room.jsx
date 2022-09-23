@@ -36,21 +36,20 @@ const Room = () => {
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
 
-  const deleteSubscriber = (streamManager,id) => {
+  const deleteSubscriber = (streamManager,id,newsession) => {
     console.log("체크1",streamManager)
     console.log("체크2",id)
+    console.log("체크3",newsession)
     console.log("지우기 시도")
-    console.log(subscribers)
-    try{
-      console.log("지우기")
-      setSubscribers(current=>current.filter(sub=>{
-        return sub.stream.session.options.sessionId !== id
-      }));
-      console.log(subscribers)
-      setCheckMyScreen(false)
-    }catch(error){
-      console.log(error)
-    }
+    // try{
+    //   console.log("지우기")
+    //   setSubscribers(current=>current.filter(sub=>{
+    //     return sub.stream.session.options.sessionId !== id
+    //   }));
+    //   setCheckMyScreen(false)
+    // }catch(error){
+    //   console.log(error)
+    // }
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
@@ -110,20 +109,20 @@ const Room = () => {
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
-    // 1-3 예외처리
-    newsession.on('exception', (exception) => {
-      console.warn(exception);
-    });
+    
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
-        deleteSubscriber(e.stream.streamManager,e.stream.session.options.sessionId);
+        deleteSubscriber(e.stream.streamManager,e.stream.session.options.sessionId,newsession);
       } else {
         console.log("지우기 실패 ?")
         setCheckMyScreen(true);
       }
     });
-    
+    // 1-3 예외처리
+    newsession.on('exception', (exception) => {
+      console.warn(exception);
+    });
     newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
         await newOV.getUserMedia({
@@ -185,6 +184,7 @@ const Room = () => {
   const handleChat = () => { // 채팅창 여닫이
     setChat((prev)=>!prev)
   }
+
   useEffect(()=>{
 
   },[])

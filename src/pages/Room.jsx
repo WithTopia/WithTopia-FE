@@ -43,9 +43,7 @@ const Room = () => {
     console.log("지우기 시도")
     try{
       console.log("지우기")
-      setSubscribers(current=>current.filter(sub=>{
-        return sub.stream.session.options.sessionId !== id
-      }));
+      setSubscribers(current=>current.filter((sub)=> sub.stream.session.options.sessionId !== id )); //e.stream.session.options.sessionId
       setCheckMyScreen(false)
     }catch(error){
       console.log(error)

@@ -237,7 +237,7 @@ const Room = () => {
             </div>
           ) : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
-            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
+            {/* {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null} */}
           </div>  
         </div>
         {/* <div className='video-setting'>

@@ -42,7 +42,7 @@ const Room = () => {
     console.log("지우기 시도") // 99 
     try{
       console.log("지우기")
-      setSubscribers(current=>current.filter((sub)=> sub.stream.streamManager.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
+      setSubscribers(current=>current.filter((sub)=> sub.stream.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
       setCheckMyScreen(false)
     }catch(error){
       console.log(error)
@@ -111,7 +111,7 @@ const Room = () => {
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
-        deleteSubscriber(e.stream.streamManager.connection.connectionId,e.stream.session.options.sessionId);
+        deleteSubscriber(e.stream.connection.connectionId,e.stream.session.options.sessionId);
       } else {
         console.log("지우기 실패 ?")
         setCheckMyScreen(true);

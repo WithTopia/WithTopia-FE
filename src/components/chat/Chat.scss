@@ -19,7 +19,7 @@
   box-shadow: 2px 2px 2px 2px rgba(199, 134, 16, 0.25);
   min-width: 300px;
   border-radius: 10px;
-  .chatInfo {
+  .chatInfo-box {
     border-radius: 10px;
     height: 30px;
     background-color: #FFEBA2;
@@ -49,7 +49,7 @@
     background-color: white;
     padding: 10px;
     height: 62vh;
-    width: 17vw;
+    min-width: 17vw;
     overflow-y: auto;
     
     .message {
@@ -94,8 +94,8 @@
         .messageContent {
           align-items: flex-end;
           p {
-            background-color: #8da4f1;
-            color: white;
+            background-color: #FFEBA3;
+            color: black;
             border-radius: 10px 0px 10px 10px;
           }
         }
@@ -114,8 +114,8 @@
   }
 
 
-  .input {
-    height: 30px;
+  .input-box {
+    height: 50px;
     background-color: #FFF9E2;
     padding: 10px;
     display: flex;
@@ -148,7 +148,7 @@
         border: none;
         padding: 10px 15px;
         color: white;
-        background-color: #8da4f1;
+        background-color: #FFD68B;
         cursor: pointer;
       }
     }

@@ -20,9 +20,13 @@
             font-weight: bold;   
         }
         .video-likes{
+            span{
+                font-size: 22px;
+            }
             img{
                 width: 20px;
-                margin-left: 15px;
+                margin-left: 10px;
+                cursor: pointer;
             }
         }
     }

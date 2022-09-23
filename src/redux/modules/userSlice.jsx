@@ -2,19 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// const URI = {
-//   BASE: process.env.REACT_APP_BASE_URI,
-// };
-const URL = process.env.REACT_APP_SERVER_URL
-
-
 //회원가입
 export const userRegister = createAsyncThunk(
   "/member/signup",
   async ({email,authKey,nickname,password,passwordConfirm}) => {
     try{
       console.log("1111",email);
-      const response = await axios.post(`${URL}/member/signup`, {
+      const response = await axios.post(`/member/signup`, {
         email : email,
         authKey : authKey,
         nickname : nickname,
@@ -38,7 +32,7 @@ export const userLogin = createAsyncThunk(
     try {
       const { email, password } = payload;
       const datas = {email:email,password:password}
-      const {data,headers} = await axios.post(`${URL}/member/login`, datas)
+      const {data,headers} = await axios.post(`/member/login`, datas)
       
       let token = headers.authorization
       let refreshToken = headers.refreshtoken
@@ -64,7 +58,7 @@ const userSlice = createSlice({
     },
     userLogout: (state, action) => {
       const userToken = localStorage.getItem("accessToken");
-      axios.delete(`${URL}/member/login`, {
+      axios.delete(`/member/login`, {
         headers: {
           Authorization: userToken,
         },

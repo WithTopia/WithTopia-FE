@@ -86,7 +86,6 @@ const LoginForm = (props) => {
               이메일로 회원가입하기
             </button>
           </div>
-          <p> </p>
           <span>소셜 계정으로 빠르게 로그인 하기</span>
           <div className="social-btn">
             <button type="button" onClick={goToGoogle} className="google">

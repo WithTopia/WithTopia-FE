@@ -14,10 +14,6 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
   // "passwordConfirm" : "123456",
 
 const Registerform = () => {
-  // const URI = {
-  //   BASE: process.env.REACT_APP_BASE_URI,
-  // };
-  const URL = process.env.REACT_APP_SERVER_URL
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -40,8 +36,7 @@ const Registerform = () => {
   const onEmailRequest = async () => {
     try{ 
       console.log("입력값:",email);
-      alert("이메일 인증을 진행합니다")
-      const data = await axios.post(`${URL}/member/email/request`, {
+      const data = await axios.post(`/member/email/request`, {
         email
       })
       console.log(data);
@@ -69,7 +64,7 @@ const Registerform = () => {
   const onConfirmNum = async () => {
     try{
       console.log("입력값:",authKey);
-      const data = await axios.post(`${URL}/member/email/confirm`, {
+      const data = await axios.post(`/member/email/confirm`, {
         email: email,
         authKey: authKey
       })
@@ -104,7 +99,8 @@ const Registerform = () => {
   const onNickCheck = async () => {
     try{
       console.log("잡은 nick:",nicknameIn);
-      const data = await axios.post(`${URL}/member/nickname`,{
+      console.log(watch());
+      const data = await axios.post(`/member/nickname`,{
         nickname : nicknameIn
       })
       if(data.data.data === false && nicknameIn !== ""){

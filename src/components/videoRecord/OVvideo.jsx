@@ -19,7 +19,6 @@ const OVvideo = ({streamManager,role}) => {
     }
     const handleVote = async () => {
         let nick = streamManager.stream.connection.data.split("%")[2]
-        console.log(nick)
         let token = localStorage.getItem("accessToken")
         let refreshtoken = localStorage.getItem("refreshtoken")
         try{
@@ -46,7 +45,6 @@ const OVvideo = ({streamManager,role}) => {
             <div className='video-contents'>
                 <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
-                    <span>25</span>
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     <img src={like} alt="" onClick={handleVoteLike}></img>
                     <img src={unlike} alt="" onClick={handleVoteUnlike}></img>

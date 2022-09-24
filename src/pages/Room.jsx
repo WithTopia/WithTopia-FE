@@ -36,7 +36,7 @@ const Room = () => {
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
 
-  const deleteSubscriber = (streamManagerId,id,newsession) => {
+  const deleteSubscriber = (streamManagerId,id) => {
     console.log("체크2",id)
     console.log("체크3",streamManagerId)
     console.log("지우기 시도") // 99 
@@ -56,7 +56,6 @@ const Room = () => {
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")
-      
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
@@ -95,14 +94,6 @@ const Room = () => {
         e.stream,
         undefined
       );
-      console.log(newSubscriber)
-      // let nick = newSubscriber.stream.session.connection.data
-      // 커넥팅 닉네임 비교 ( 보류 )
-      // if(nick.split("%")[2] === nickname){
-      //   console.log(nick.split("%")[2])
-      //   setSubscriber(newSubscriber)
-      //   console.log(newSubscriber)
-      // }
       console.log("입장~")
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)

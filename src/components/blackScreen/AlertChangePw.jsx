@@ -1,5 +1,5 @@
 import React from 'react'
-import "./AlertChangePw.scss"
+import "./AlertInputPw.scss"
 
 const AlertChangePw = ({page,setPage}) => {
     const handleScreen = () => {

@@ -54,7 +54,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         password:sendData.password
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       console.log(repo)
-      if(repo.data.errormessage){
+      if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
         alert("로그인을 해주세요 !")
         navigate("/login")
         return

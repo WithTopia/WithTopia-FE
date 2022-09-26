@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //회원가입
@@ -28,7 +27,7 @@ export const userRegister = createAsyncThunk(
 
 export const userLogin = createAsyncThunk(
   "/member/login",
-  async (payload, thunkAPI) => {
+  async (payload, thunkAPI ) => {
     try {
       const { email, password } = payload;
       const datas = {email:email,password:password}
@@ -41,10 +40,15 @@ export const userLogin = createAsyncThunk(
       localStorage.setItem("nickname",nickname)
       localStorage.setItem("accessToken", token);
       localStorage.setItem("refreshtoken", refreshToken);
-      
-      // return thunkAPI.fulfillWithValue(payload);
+      window.location.href = "/main"
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error)
+      if(error.response.data.errormessage === "로그인에 실패했습니다."){
+        alert("로그인에 실패했습니다.")
+        return 
+      }
+      // return thunkAPI.rejectWithValue(error);
     }
   }
 );

@@ -1,46 +1,41 @@
 .rank{
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
   .rank-top{
     // background-color: rgb(230, 221, 155);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 90%;
-    padding-left: 50px;
+    width: 100%;
+    padding-left: 20px;
   };
   .top-WithTo{
-    font-size: 50px;
+    font-size: 36px;
     color: #815403;
   }
   .rank-wrap{
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-
+    margin-right: 30px;
+    
     .rank-profile{
-      flex-direction: column;
-      overflow: hidden;
-      margin: 0px 30px;
+      display: flex;
+      // margin: 0px 30px;
+      
       .rank-profile-img{
-        display: inline-block;
-        width: 100%;
-        height: 60px;
-        overflow: hidden;
-        object-fit: cover;
+        height: 58px;
+        width: 58px;
+        margin-left:80px;
+        margin-right: 7px;
         border-radius: 100%;
       };
       .rank-text {
-        display: flex;
-        justify-content: flex;
-        flex-direction: column;
-        align-items: center;
+        margin-top: 23px;
+        margin-right: 5px;
         color: #815403;
+      }
+      .rank-nick{
+        margin-top: 23px;
+        color: #815403;
+        margin-right: 25px;
       }
     }
   }

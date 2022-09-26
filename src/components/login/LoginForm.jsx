@@ -20,13 +20,8 @@ const LoginForm = (props) => {
     formState: { errors },
   } = useForm({mode:"onChange"});
 
-  const onSubmit = (payload) => {
-    console.log("LV-1", payload);
+  const onSubmit = (payload,thunkAPI) => {
     dispatch(userLogin(payload));
-    console.log("LV-2", payload);
-    setTimeout(() => {
-      navigate("/main");
-    }, 300);
   };
 
   const goToRegister = () => {

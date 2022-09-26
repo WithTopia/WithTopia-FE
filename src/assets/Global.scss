@@ -9,9 +9,8 @@
   width: 100vw;
   height: 100vh;
   .main-rank{
-    max-width: 1260px;
-    height: 8vh;
-    width: calc(98vw - 300px);
+    min-width: 1260px;
+    min-height: 7vh;
     box-shadow: 1px 1px 5px #E5D493;
     border-radius: 20px;
     margin: 31px 10px 15px 0;

@@ -32,7 +32,6 @@ const ChatList = () => {
         }catch(error){
             console.log(error)
         }
-        
     }
     const handleObserver = (entities, observer) => {
         const y = entities[0].boundingClientRect.y;

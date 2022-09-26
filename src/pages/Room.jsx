@@ -183,12 +183,14 @@ const Room = () => {
   const reIssue = async () => {
     try{
       const repo = await axios.get(`/member/reissue`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-      console.log(repo)
+      localStorage.setItem("accessToken",repo.headers.authorization)
     }catch(error){
       console.log(error)
     }
   }
-  setInterval(reIssue(),3000)
+  setInterval(()=>{
+    reIssue()
+  },60000*10)
 
   // useEffect(() => {
   //   window.onpopstate = () => {

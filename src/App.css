@@ -1,19 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@600&family=Noto+Sans+KR:wght@400;500;700&family=Pacifico&family=Poppins:wght@200;300;400;500&family=Roboto:wght@300;400;500;700;900&display=swap');
-.App{
-    font-family: 'Edu VIC WA NT Beginner', cursive;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-family: 'Pacifico', cursive;
-    font-family: 'Poppins', sans-serif;
-    font-family: 'Roboto', sans-serif;
+@font-face {
+    font-family: 'Cafe24Ssukssuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Ssukssuk.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .layout{
-    
-    /* display: flex;
-    margin: 0 auto; */
+
 };
 
 *{
+    font-family: 'Cafe24Ssukssuk';
     box-sizing: border-box;
 };
 

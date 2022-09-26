@@ -7,10 +7,16 @@ import "./AlertInputPw.scss"
 const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
   const navigate = useNavigate()
   const [password,setPassword] = useState("")
-  const submitPassword = async () => {
+  const submitPassword = async (e) => {
+    e.preventDefault()
     try{
       const repo = await axios.post(`/room/${datas.sessionId}`,{password:password},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-      console.log(repo.data)
+      if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
+        alert("로그인을 해주세요 !")
+        console.log("??????????")
+        navigate("/login")
+        return
+      }
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.enterRoomToken,
@@ -22,6 +28,13 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
     }
     catch(error){
       console.log(error)
+      if(error.response.data.errormessage==="방이 존재하지않습니다."){
+        alert("방이 존재하지 않습니다.")
+        alertPwOff((prev)=>!prev)
+      }
+      if(error.response.data.errormessage==="비밀번호가 틀립니다."){
+        alert("비밀번호가 틀립니다.")
+      }
     }     
   }
 
@@ -37,10 +50,10 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
         <form>
           <label>비밀번호 입력</label>
           <input placeholder=' 비밀번호' type="text" className='create-input' value={password} onChange={onChangePw}></input>
+          <button onClick={handleScreen}>X</button>
           <button onClick={submitPassword}>입력하기</button>
         </form>
       </div>
-      
       <div className='black-out' onClick={handleScreen}></div>
     </div>
   )

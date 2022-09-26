@@ -13,7 +13,7 @@ const Header = () => {
   const [loading, setLoading] = useState(false);
   const [prevY, setPrevY] = useState(0);
   const [pageOpen,setPageOpen] = useState(false)
-
+  
   let dataRef = useRef({});
   let loadingRef = useRef(null);
   let prevYRef = useRef({});

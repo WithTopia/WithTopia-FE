@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Header from "../header/Header"
 import SideBar from "../sideBar/SideBar"
 import "./UserProfile.scss"
@@ -7,6 +7,7 @@ import logo from "../../assets/profileSample.png"
 import AlertChangePw from '../blackScreen/AlertChangePw';
 
 const Userprofile = () => {
+  const imgRef = useRef(null);
   const [page,setPage] = useState(false)
   const handlePage1 = () => {
     setPage((prev)=>!prev)
@@ -27,7 +28,7 @@ const Userprofile = () => {
               </div>
             </div>
             <div className='profile-images-cont'>
-              <img src={logo} alt=''></img>
+              <img src={logo} alt='' ref={imgRef} onError={() => {return (imgRef.current.src = "")}}></img>
               <img src={logo} alt=''></img>
               <img src={logo} alt=''></img>
               <img src={logo} alt=''></img>

@@ -3,6 +3,7 @@ import "./ChatList.scss"
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
+import NoRoom from "../../assets/no-room.png"
 
 const ChatList = () => {
     const [rooms,setRooms] = useState("")
@@ -59,7 +60,7 @@ const ChatList = () => {
                 함께하는 위토피아!
             </div>
             {rooms.length === 0 ?
-                <div className='empty-rooms'>방이 존재하지 않아요 !</div> : rooms.map((datas,index)=>{
+                <img src={NoRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )

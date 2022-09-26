@@ -20,6 +20,8 @@ const Room = () => {
   const navigate = useNavigate()
   let nickname = localStorage.getItem("nickname")
   let tokenStuff = location.state.token
+  let refreshtoken = localStorage.getItem("refreshtoken")
+  let accessToken = localStorage.getItem("accessToken")
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();
   const [sessionId, setSessionId] = useState("");
@@ -36,10 +38,7 @@ const Room = () => {
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
 
-  const deleteSubscriber = (streamManagerId,id,newsession) => {
-    console.log("체크2",id)
-    console.log("체크3",streamManagerId)
-    console.log("지우기 시도") // 99 
+  const deleteSubscriber = (streamManagerId) => {
     try{
       console.log("지우기")
       setSubscribers(current=>current.filter((sub)=> sub.stream.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
@@ -50,22 +49,16 @@ const Room = () => {
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = async (e) => {
-    e.preventDefault();
-    e.returnValue = "";
+  const onbeforeunload = async () => {
     try{
-      let token = localStorage.getItem("accessToken")
-      let refreshtoken = localStorage.getItem("refreshtoken")
-      
       if(role === "master"){
-        const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+        const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
         leaveSession();
       }else if(role === "user"){
-        const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+        const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
         console.log("유저 나가",getOutRoomUser)
       }
-      // navigate("/main")
     }catch(error){
       console.log(error)
     }
@@ -95,14 +88,6 @@ const Room = () => {
         e.stream,
         undefined
       );
-      console.log(newSubscriber)
-      // let nick = newSubscriber.stream.session.connection.data
-      // 커넥팅 닉네임 비교 ( 보류 )
-      // if(nick.split("%")[2] === nickname){
-      //   console.log(nick.split("%")[2])
-      //   setSubscriber(newSubscriber)
-      //   console.log(newSubscriber)
-      // }
       console.log("입장~")
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
@@ -111,7 +96,7 @@ const Room = () => {
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
-        deleteSubscriber(e.stream.connection.connectionId,e.stream.session.options.sessionId);
+        deleteSubscriber(e.stream.connection.connectionId);
       } else {
         console.log("지우기 실패 ?")
         setCheckMyScreen(true);
@@ -194,6 +179,17 @@ const Room = () => {
       window.removeEventListener("beforeunload", onbeforeunload);
     };
   },[])
+
+  const reIssue = async () => {
+    try{
+      const repo = await axios.get(`/member/reissue`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      console.log(repo)
+    }catch(error){
+      console.log(error)
+    }
+  }
+  setInterval(reIssue(),3000)
+
   // useEffect(() => {
   //   window.onpopstate = () => {
   //     history.push("/main");

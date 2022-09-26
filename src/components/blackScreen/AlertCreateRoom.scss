@@ -8,10 +8,10 @@
     transform: translate(-50%,-50%);
     z-index: 100;
     .create-container-title{
-        margin: 50px auto;
-        font-size: 35px;
-        text-align: center;
-        font-weight: bold;
+      margin: 30px auto;
+      font-size: 35px;
+      text-align: center;
+      font-weight: bold;
     }
     .create-room-form{
         width: 76%;
@@ -27,7 +27,7 @@
             background: white;
             border: 2px solid #815403; 
             outline: none;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         select:hover{
             border: 2px solid #815403;
@@ -38,7 +38,7 @@
         .checkbox-container{
             margin-bottom: 20px;
         }
-        .room-input{
+        .create-input{
             min-width:440px;
             height: 40px;
             border-radius: 8px;
@@ -48,11 +48,14 @@
             outline: none;
             padding: 0;
         }
-        .room-input:hover{
+        .create-input:hover{
             border: 2px solid #815403;
         }
-        .room-input:focus{
+        .create-input:focus{
             border: 2px solid #815403;
+        }
+        .create-input:disabled{
+          background-color: #868e96;
         }
         .checkbox{
             accent-color:#815403;
@@ -85,9 +88,9 @@
       border: 2px solid #815403;
     }
     .checkbox-container{
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
-    .room-input{
+    .create-input{
       min-width:440px;
       height: 40px;
       border-radius: 8px;
@@ -98,10 +101,10 @@
       outline: none;
       padding: 10px;
     }
-    .room-input:hover{
+    .create-input:hover{
       border: 2px solid #FFD68B;
     }
-    .room-input:focus{
+    .create-input:focus{
       border: 2px solid #815403;
     }
     .checkbox{
@@ -117,7 +120,7 @@
       font-size: 24px;
       margin-right: 40px;
     }
-    .create-room-btn{
+    .create-room-btn2{
       color: #FFFF;
       background-color: #815403;
       border-radius: 10px;

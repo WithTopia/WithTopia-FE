@@ -28,8 +28,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
     }
   }
 
-  const sendMessage = (e) =>{
-    e.preventDefault()
+  const sendMessage = () =>{
     if (stompClient) {
       let chatMessage = {
         sender: userData.username,
@@ -48,10 +47,14 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
     setChat((prev)=>!prev)
   }
   const handleMessage =(e)=>{
-      const {value}= e.target;
-      setUserData({...userData,"message": value});
+    const {value}= e.target;
+    setUserData({...userData,"message": value});
   }
-
+  const handleEnter = (e) =>{
+    if (e.key === "Enter") {
+      sendMessage()
+    }
+  }
   useEffect(()=>{
     if(checkMyScreen === false){
       handleOut()
@@ -85,6 +88,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
             placeholder="Type something..."
             onChange={handleMessage}
             value={userData.message}
+            onKeyDown={handleEnter}
         />
           <div className="send">
             <input

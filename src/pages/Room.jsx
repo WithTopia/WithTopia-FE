@@ -188,7 +188,7 @@ const Room = () => {
       console.log(error)
     }
   }
-  // setInterval(reIssue(),3000)
+  setInterval(reIssue(),3000)
 
   // useEffect(() => {
   //   window.onpopstate = () => {

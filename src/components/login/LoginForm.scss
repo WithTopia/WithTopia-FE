@@ -1,22 +1,26 @@
 .container{
-    background-color: #ffe396;
+    background-color: #FFEBA3;
     width: 400px;
-    height: 450px;
+    height: 550px;
     margin: 24vh auto 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    
+    -webkit-user-drag: none;
+    .logo{
+      width: 250px;
+      height: 80px;
+      margin: 20px 0 30px 0;
+    }
     .login-box{
       margin-bottom: 10px;
-      // background-color: #fff067;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      >input{
+      input{
       margin-bottom: 10px;
       font-size: 15px;
       width: 250px;
@@ -25,7 +29,7 @@
       border-radius: 3px;
       outline: none;
       };
-      >p{
+      p{
         font-size: 12px;
         margin-bottom: 5px;
         color: red;
@@ -48,18 +52,19 @@
     justify-content: center;
     cursor: pointer;
     margin-bottom: 10px;
-
-    > button{
+    color: #815403;
+    button{
       width: 250px;
       height: 30px;
       border: none;
       border-radius: 3px;
       margin-bottom: 10px;
+      color: #815403;
       background-color: #FFEBA3;
       box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
       &:hover{
         background-color: #815403;
-        color: rgb(2, 2, 2);
+        color: rgb(255, 255, 255);
         box-shadow: 0px 0px 4px #646464;
       };
     };
@@ -71,13 +76,14 @@
     justify-content: center;
     cursor: pointer;
     margin-top: 10px;
-        
+    color: #646464;
     .google{
       width: 250px;
       height: 30px;
       border: none;
       border-radius: 3px;
       margin-bottom: 10px;
+      color: #646464;
       background-color: #f9f9f9;
       box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
       &:hover{
@@ -93,6 +99,7 @@
       border: none;
       border-radius: 3px;
       margin-bottom: 10px;
+      color: #646464;
       background-color: #FFEB33;
       box-shadow: -0.5px -0.5px 4px hsl(0, 0%, 66%);
       &:hover{

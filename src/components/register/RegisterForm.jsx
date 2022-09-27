@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { userRegister } from "../../redux/modules/userSlice";
 import axios from "axios";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import hiWT from '../../assets/hiWT.png';
 
   // "email": "이메일@naver.com", 
   // "emailConfirm" :  "123456"
@@ -193,7 +194,7 @@ const Registerform = () => {
 
   //뒤로가기
   const goToMain = () => {
-    navigate('/')
+    navigate('/login')
   };
 
 
@@ -204,6 +205,7 @@ const Registerform = () => {
   return (
     <div>
       <form className="rg-container" onSubmit={handleSubmit(onSubmitRegister)}>
+        <img src={hiWT} alt='' className="logo"/>
         <p>회원가입</p>
         <div className="register-box">
 {/*------------> 이메일<------------*/}          
@@ -213,18 +215,13 @@ const Registerform = () => {
             onChange={onEmail} 
             placeholder="  이메일을 입력하세요"
             />
-            <button type="button" onClick={onEmailRequest}>메일 인증</button>
-            <p>
-            {errors.email && errors.email.type === 
-            "pattern" && <p> 이메일 형식만 로그인 가능합니다. </p>}
-            </p>
-            
+            <button type="button" onClick={onEmailRequest} className='mail-btn1'>메일 인증</button>
             <input type="text" 
             name="authKey"
             onChange={onConfirm} 
             placeholder="  인증번호" 
             />
-            <button type="button" onClick={onConfirmNum}>인증 확인</button>
+            <button type="button" onClick={onConfirmNum} className='mail-btn1'>인증 확인</button>
           </div>
 {/*------------> 닉네임 <------------*/}
           <div className="input-nick-box">
@@ -259,7 +256,7 @@ const Registerform = () => {
               type={pwType2.type}
               name="passwordCheck"
               onChange={onPasswordConfirmHandler}
-              placeholder="  re - 영문, 숫자, 특수문자 8~20자리"
+              placeholder="  re-영문, 숫자, 특수문자 8~20자리"
               />
               <span onClick={handlePwType2}>
               {pwType2.visible ? <AiOutlineEye/> :<AiOutlineEyeInvisible/>}

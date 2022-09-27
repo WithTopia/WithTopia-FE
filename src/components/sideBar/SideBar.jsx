@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SideBar.scss";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineSmile,
@@ -17,7 +17,24 @@ const Sidebar = () => {
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
 
-  const logout = () => {
+  const logout = async() => {
+    try{
+      const out = await axios.post(`/member/logout`,{
+      headers:{"authorization":token,"refreshtoken":refreshtoken}
+    })
+    console.log(out)
+    // localStorage.removeItem("authorization");
+    localStorage.clear();
+    if(out.data.data === "로그아웃에 성공했습니다."){
+      alert(out.data.data)
+      window.location.href = "/login"
+    }if(out.data.errormessage === "로그인을 해주세요."){
+      alert(out.data.errormessage)
+      window.location.href = "/login"
+    }
+    }catch(error){
+    console.log(error);
+    }
   };
   const registerUser = async () => {
     try {
@@ -38,6 +55,7 @@ const Sidebar = () => {
     registerUser()
   },[])
 
+
   return (
     <div className="sidebar">
       <div className="side-profile">
@@ -52,11 +70,11 @@ const Sidebar = () => {
         <div className="menu-txt">Menu</div>
         <hr/>
         <div className="side-menu">
-          <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/><Link to="/main" className='side-link'>Home</Link></p></a>
-          <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/><Link to="/profile" className='side-link'>Profile Management</Link></p></a>
-          <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/><Link to="/rank" className='side-link'>Rank</Link></p></a>
-          <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Friend</Link></p></a>
-          <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Direct Message</Link></p></a>
+          <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
+          <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile</p></a>
+          <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
+          <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a>
+          <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/> Description</p></a>
         </div>
       </div>
       <div className="logout-btn">

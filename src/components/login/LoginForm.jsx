@@ -1,10 +1,10 @@
-
 import React from "react";
 import "./LoginForm.scss";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/modules/userSlice";
 import { useNavigate } from "react-router-dom";
+import hiWT from "../../assets/hiWT.png";
 
 
 const LoginForm = (props) => {
@@ -46,6 +46,7 @@ const LoginForm = (props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* <img src="">logo 이미지</img> */}
       <div className="container">
+        <img src={hiWT} alt='' className="logo"/>
         <div className="login-box">
           <input
             type="text"

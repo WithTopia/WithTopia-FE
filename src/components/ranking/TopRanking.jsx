@@ -70,7 +70,7 @@ const Topranking = () => {
                 </div>
                 <div className='rank-center'>
                   <img src={ranks.profileImage} alt="profile" className='bar-profile-img'/>
-                  <div className='rank-nickname'>{ranks.nickName}</div>
+                  <div className='rank-nickname'>{ranks.nickName.split('_',1)}</div>
                 </div>
                 <div className='rank-right'>
                   <img src={like} className='rank-like' alt='rank'></img>

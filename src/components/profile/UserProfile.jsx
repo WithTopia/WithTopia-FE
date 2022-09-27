@@ -84,6 +84,7 @@ const Userprofile = () => {
       }
     }catch(error){
       console.log(error)
+      
     }
   }
 

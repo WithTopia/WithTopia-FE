@@ -36,6 +36,12 @@ const Mainbar = ({ datas }) => {
     }
     catch(error){
       console.log(error)
+      if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
+        alert("이미 입장한 멤버입니다.")
+      }
+      if(error.response.data.errormessage === "방이 존재하지않습니다."){
+        alert("방이 존재하지 않습니다.")
+      }
     }
   }
 
@@ -55,7 +61,7 @@ const Mainbar = ({ datas }) => {
             )
           })}
         </div>
-        {datas.password === null ? <button onClick={enterRoom}>참여하기</button> : <button onClick={enterPw}>참여하기</button>}
+        {datas.password === "" ? <button onClick={enterRoom} className="access-btn">참여하기</button> : <button onClick={enterPw} className="access-btn">참여하기</button>}
         {alertPwOn ? <AlertInputPw alertPwOn={alertPwOn} alertPwOff={alertPwOff} token={token} refreshtoken={refreshtoken} datas={datas}></AlertInputPw> : null}
       </div>
     </div>}

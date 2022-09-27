@@ -47,7 +47,7 @@ const Room = () => {
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = async () => {
+  const leaveload = async () => {
     try{
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
@@ -162,7 +162,7 @@ const Room = () => {
   window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
     leaveSession()
   }
-  
+
   const handleChat = () => { // 채팅창 여닫이
     setChat((prev)=>!prev)
   }
@@ -172,10 +172,10 @@ const Room = () => {
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", onbeforeunload); 
+    window.addEventListener("beforeunload", leaveload); 
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
+      window.removeEventListener("beforeunload", leaveload);
     };
   },[])
 

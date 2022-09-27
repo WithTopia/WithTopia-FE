@@ -40,15 +40,19 @@
         border-radius: 50%;
       };
     };
-    button{
+    .access-btn{
+      font-size: 16px;
+      background-color: rgb(249, 223, 151);    
+      color: #815403;
+      font-weight: bold;
       border-radius: 20px;
       width: 100px;
       height: 40px;
       border: none;
       &:hover{
-        background-color: rgb(249, 223, 151);
+        background-color: #815403;
+        color: white
       };
     };
   };
-  
 };

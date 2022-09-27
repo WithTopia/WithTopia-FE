@@ -26,13 +26,13 @@ const Header = () => {
     setPageOpen((prev)=>!prev)
   }
 
-  const searchPage = async () => {
+  const searchPage = async () => { //room/search/1?keyword="keyword"
     try{
-        const repo = await axios.get(`/rooms/search/${pageRef.current}`)
-        setRooms([...dataRef.current,...repo.data.data.content])
-        setLoading(false);
+      const repo = await axios.get(`/rooms/search/${pageRef.current}=${search}`)
+      setRooms([...dataRef.current,...repo.data.data.content])
+      setLoading(false);
     }catch(error){
-        console.log(error)
+      console.log(error)
     }
       
   }

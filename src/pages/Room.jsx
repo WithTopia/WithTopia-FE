@@ -23,9 +23,7 @@ const Room = () => {
   let refreshtoken = localStorage.getItem("refreshtoken")
   let accessToken = localStorage.getItem("accessToken")
   const [session,setSession] = useState(undefined)
-  const [OV, setOV] = useState();
-  const [sessionId, setSessionId] = useState("");
-  const [token,setToken] = useState("")
+  const [OV, setOV] = useState();  
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
   const [subscriber, setSubscriber] = useState(null);
@@ -49,7 +47,7 @@ const Room = () => {
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
-  const onbeforeunload = async () => {
+  const leaveload = async () => {
     try{
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
@@ -67,13 +65,10 @@ const Room = () => {
     console.log("세션 치우기")
     setCheckMyScreen(false)
     setSubscribers([])
-    setSessionId("")
     setOV(undefined)
     setPublisher(null)
   }
   const joinSession = () => { // openvidu 세션 생성하기
-    setToken(location.state.token)
-    setSessionId(location.state.sessionId)
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
     // 2. initSesison 생성
@@ -164,6 +159,10 @@ const Room = () => {
   //   subscriber.subscribeToAudio(userMute);
   // }
 
+  window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
+    leaveSession()
+  }
+
   const handleChat = () => { // 채팅창 여닫이
     setChat((prev)=>!prev)
   }
@@ -173,10 +172,10 @@ const Room = () => {
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", onbeforeunload); 
+    window.addEventListener("beforeunload", leaveload); 
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", onbeforeunload);
+      window.removeEventListener("beforeunload", leaveload);
     };
   },[])
 

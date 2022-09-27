@@ -4,10 +4,8 @@ import MainFrame from './components/mainBox/MainFrame';
 
 const App = () => {
   return (
-    <div>
-      <div className='layout'>
-        <MainFrame></MainFrame>
-      </div>
+    <div>      
+      <MainFrame></MainFrame>
     </div>
   );
 }

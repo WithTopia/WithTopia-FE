@@ -20,27 +20,35 @@
     display: inline-block;
     overflow: hidden;
     margin: 10px 0;
-    .sideBar-login{
-      border: 2px solid #FFAA10;
-      border-radius: 50px;
-      background-color: #fff0c9;
-      box-shadow: 3px 3px 0px #ffaa10;
-      color: #FFAA10;
-      font-size: 18px;
-      font-weight: bold;
-      font-family: Arial, Helvetica, sans-serif;
-      width: 150px;
-      height: 40px;
-      &:hover{
-        border: 3px solid #FFAA10;
+    a{
+      text-decoration: none;
+      .sideBar-login{
+        border: 2px solid #FFAA10;
         border-radius: 50px;
         background-color: #fff0c9;
-        box-shadow: 1px 1px 0px #FFAA10;
-        box-shadow: inset 1px 1px 0px #ffdd9e;
+        box-shadow: 3px 3px 0px #ffaa10;
         color: #FFAA10;
-        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 150px;
+        height: 40px;
+        display:block;
+        flex-direction: row;
+        margin: 60% auto;
+        
+        &:hover{
+          border: 3px solid #FFAA10;
+          border-radius: 50px;
+          background-color: #fff0c9;
+          box-shadow: 1px 1px 0px #FFAA10;
+          box-shadow: inset 1px 1px 0px #ffdd9e;
+          color: #FFAA10;
+          cursor: pointer;
+        }
       }
     }
+    
     .user-profile{
       display: inline-block;
       width: 200px;
@@ -54,6 +62,7 @@
         overflow: hidden;
         object-fit: cover;
         border-radius: 50%;
+        -webkit-user-drag: none;
       };
       
     };

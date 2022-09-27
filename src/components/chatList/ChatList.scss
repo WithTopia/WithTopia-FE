@@ -1,6 +1,6 @@
 .default-page-size {
     max-width: 1260px;
-    height: 70vh;
+    height: 69vh;
     width: calc(98vw - 300px);
     box-shadow: 1px 1px 5px #e5d493;
     border-radius: 20px;
@@ -29,8 +29,8 @@
     position: absolute;
     font-size: 30px;
     color: gray;
-    bottom: 3rem;
-    right: 5rem;
+    bottom: 3%;
+    right: 1%;
     background: linear-gradient(151.46deg, #FFEBA3 7.86%, #FFCE75 74.65%);
 };
 .default-page-size::-webkit-scrollbar{

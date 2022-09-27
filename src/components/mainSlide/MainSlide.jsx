@@ -32,14 +32,14 @@ const Mainslide = () => {
             return(
               <div className='rank-profile' key={index}>
                 {index === 0 ? <><img src={topRank !== "" ? topRank.profileImage : null} alt='profile' className='rank-profile-img'/>
-                              <div className='rank-text'>{topRank.likeCnt}Pt</div>
-                              <div className='rank-nick'>{topRank.nickname}</div></> :
+                              {/* <div className='rank-text'>{topRank.likeCnt}Pt</div> */}
+                              <div className='rank-nick'>{topRank.nickname.split('_',1)}</div></> :
                 index === 1 ? <><img src={topRank !== "" ? topRank.profileImage : null} alt='profile' className='rank-profile-img'/>
-                              <div className='rank-text'>{topRank.likeCnt}Pt</div>
-                              <div className='rank-nick'>{topRank.nickname}</div></> :
+                              {/* <div className='rank-text'>{topRank.likeCnt}Pt</div> */}
+                              <div className='rank-nick'>{topRank.nickname.split('_',1)}</div></> :
                 index === 2 ? <><img src={topRank !== "" ? topRank.profileImage : null} alt='profile' className='rank-profile-img'/>
-                              <div className='rank-text'>{topRank.likeCnt}Pt</div>
-                              <div className='rank-nick'>{topRank.nickname}</div></> : null}
+                              {/* <div className='rank-text'>{topRank.likeCnt}Pt</div> */}
+                              <div className='rank-nick'>{topRank.nickname.split('_',1)}</div></> : null}
 
               </div> 
           )}) : null}

@@ -9,12 +9,20 @@
   width: 100vw;
   height: 100vh;
   .main-rank{
-    min-width: 90%;
-    min-height: 7vh;
+    min-width: 97.5%;
+    min-height: 9vh;
+    max-width: 97.5%;
+    max-height: 9vh;
     box-shadow: 1px 1px 5px #E5D493;
     border-radius: 20px;
     margin: 31px 10px 15px 0;
     padding: 12px;
+    .rank{
+      // display: flex;
+      margin: 25px auto;
+      // justify-content: center;
+      // align-items: center;
+    }
   };
 };
 .room{

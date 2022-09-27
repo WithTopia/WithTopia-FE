@@ -16,7 +16,7 @@ export const userRegister = createAsyncThunk(
       });
       console.log("2222",response.data.data);
       console.log(response)
-      
+      alert("회원가입에 성공했습니다 :)")
     }catch (error) {
       console.log("3333",error);
       alert(error.response.data.errormessage)
@@ -46,7 +46,9 @@ export const userLogin = createAsyncThunk(
       console.log(error)
       if(error.response.data.errormessage === "로그인에 실패했습니다."){
         alert("로그인에 실패했습니다.")
-        return 
+      }
+      if(error.message === "Request failed with status code 500"){
+        alert("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
       }
       // return thunkAPI.rejectWithValue(error);
     }

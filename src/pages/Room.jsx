@@ -23,9 +23,10 @@ const Room = () => {
   let refreshtoken = localStorage.getItem("refreshtoken")
   let accessToken = localStorage.getItem("accessToken")
   const [session,setSession] = useState(undefined)
-  const [OV, setOV] = useState(undefined);
+  const [OV, setOV] = useState();  
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
+  const [subscriber, setSubscriber] = useState(null);
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false) // 커넥팅 체크
   const [role,setRole] = useState(location.state.role) // 역할군
@@ -46,23 +47,12 @@ const Room = () => {
   };
 
   // 브라우저 새로고침, 종료, 라우트 변경
-  const leaving = async () => {
-    
-  };
-  const leaveSession = useCallback (async() => {
-    const leaveSessionMaster = () => {
-      setCheckMyScreen(false)
-      setSubscribers([])
-      setOV(undefined)
-      setSession(undefined)
-      setPublisher(null)
-    }
+  const onbeforeunload = async () => {
     try{
       if(role === "master"){
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
-        console.log("찍는 중")
-        leaveSessionMaster()    
+        leaveSession();
       }else if(role === "user"){
         const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
         console.log("유저 나가",getOutRoomUser)
@@ -70,21 +60,34 @@ const Room = () => {
     }catch(error){
       console.log(error)
     }
-  },[session])
+  };
+  const leaveSession = () => {
+    console.log("세션 치우기")
+    setCheckMyScreen(false)
+    setSubscribers([])
+    setOV(undefined)
+    setPublisher(null)
+  }
   const joinSession = () => { // openvidu 세션 생성하기
     // 1. openvidu 객체 생성
     const newOV = new OpenVidu();
     // 2. initSesison 생성
     const newsession = newOV.initSession();
-    
+    setSession(newsession)
+    // JSON.parse(JSON.stringify(newSession))
+    // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
+    setOV(newOV);
+    // 4. session에 connect하는 과정
     newsession.on('streamCreated', (e) => {
       const newSubscriber = newsession.subscribe(
         e.stream,
         undefined
       );
+      console.log("입장~")
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
+    
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
@@ -98,17 +101,9 @@ const Room = () => {
     newsession.on('exception', (exception) => {
       console.warn(exception);
     });
-    // 3. 미팅을 종료하거나 뒤로가기 등의 이벤트를 통해 세션을 disconnect 해주기 위해 state에 저장
-    setSession(newsession)
-    // 4. session에 connect하는 과정
-    setOV(newOV);
-  }
-
-  const connection = useCallback (() => {
-    if(session !== undefined && OV !== undefined){
-    session.connect( tokenStuff, { clientData: nickname })    
+    newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
-        await OV.getUserMedia({
+        await newOV.getUserMedia({
           audioSource: false,
           videoSource: undefined,
           resolution: '410x290',
@@ -116,7 +111,7 @@ const Room = () => {
         })
       .then((mediaStream) => {
         let videoTrack = mediaStream.getVideoTracks()[0];
-        let newPublisher = OV.initPublisher(
+        let newPublisher = newOV.initPublisher(
           undefined,
           {
             audioSource: undefined,  // The source of audio. If undefined default audio input
@@ -130,7 +125,7 @@ const Room = () => {
           })
           // 4-b user media 객체 생성
           newPublisher.once("accessAllowed", () => {
-            session.publish(newPublisher);
+            newsession.publish(newPublisher);
             setPublisher(newPublisher)
           });
         })
@@ -140,9 +135,9 @@ const Room = () => {
           'There was an error connecting to the session:',
           error.code,
           error.message
-      )}
-    )}
-  },[session])
+      );
+    });
+  }
 
   // 보류
   // const handleCam = () => {
@@ -164,6 +159,10 @@ const Room = () => {
   //   subscriber.subscribeToAudio(userMute);
   // }
 
+  window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
+    leaveSession()
+  }
+  
   const handleChat = () => { // 채팅창 여닫이
     setChat((prev)=>!prev)
   }
@@ -172,21 +171,13 @@ const Room = () => {
     console.log(subscribers)
   },[subscribers])
 
-
-  window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
-    leaveSession()
-  }
-
-  useEffect(()=>{   // start
+  useEffect(()=>{ // 시작과 종료를 알리는
+    window.addEventListener("beforeunload", onbeforeunload); 
     joinSession()
+    return () => {
+      window.removeEventListener("beforeunload", onbeforeunload);
+    };
   },[])
-
-  useEffect(()=>{
-    connection()
-    return ()=>{
-      leaveSession()
-    }
-  },[session])
 
   const reIssue = async () => {
     try{
@@ -200,6 +191,11 @@ const Room = () => {
     reIssue()
   },60000*10)
 
+  // useEffect(() => {
+  //   window.onpopstate = () => {
+  //     history.push("/main");
+  //   };
+  // },[]);
   return (
     <div className='room'>
       <div className='video-container'>

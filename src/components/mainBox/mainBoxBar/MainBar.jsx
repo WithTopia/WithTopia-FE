@@ -9,7 +9,6 @@ const Mainbar = ({ datas }) => {
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)
-  console.log(datas)
   const navigate = useNavigate()
 
   const enterPw = () => {

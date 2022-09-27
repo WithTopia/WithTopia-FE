@@ -1,21 +1,46 @@
-import React,{ useState , useEffect ,useRef} from 'react'
+import React,{ useState , useEffect , useRef } from 'react'
 import "./ChatList.scss"
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
 import NoRoom from "../../assets/no-room.png"
 
-const ChatList = () => {
+const ChatList = ({search}) => {
+    console.log(search)
+    const [main,setMain] = useState(false)
     const [rooms,setRooms] = useState("")
+    const [searchRoom,setSearchRoom] = useState("")
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false); // use this if you want the box to say "loading...". Forgot this lol.
     const [prevY, setPrevY] = useState(0);
     const [pageOpen,setPageOpen] = useState(false)
 
+    const searchPage = async () => {
+        try{
+          const repo = await axios.get(`/rooms/search/${pageRef.current}?keyword=${search}`)
+          if(repo.data.statusMsg === "정상"){
+            setSearchRoom([...searchRef.current,...repo.data.data.content])
+          }
+          // setRooms([...dataRef.current,...repo.data.data.content])
+          setLoading(false);
+        }catch(error){
+          console.log(error)
+          if(error.response.data.errormessage==="검색 결과가 없습니다."){
+            alert("검색 결과가 없습니다.")
+            return
+          }
+        } 
+    }
+
+
+
+    let searchRef = useRef({})
     let dataRef = useRef({});
     let loadingRef = useRef(null);
     let prevYRef = useRef({});
     let pageRef = useRef({});
+
+    searchRef.current = searchRoom
     dataRef.current = rooms;
     pageRef.current = page;
     prevYRef.current = prevY;
@@ -41,16 +66,25 @@ const ChatList = () => {
         }
         setPrevY(y);
     };
+
     useEffect(()=>{
-        findRoom()
-        setPage(pageRef.current + 1);
-        let options = {
-            root: null,
-            rootMargin: "0px",
-            threshold: 1.0,
-        };
-        const observer = new IntersectionObserver(handleObserver, options);
-        observer.observe(loadingRef.current);
+        if(main === true){
+            searchPage()
+        }
+    })
+    
+    useEffect(()=>{
+        if(main === false){
+            findRoom()
+            setPage(pageRef.current + 1);
+            let options = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 1.0,
+            };
+            const observer = new IntersectionObserver(handleObserver, options);
+            observer.observe(loadingRef.current);
+        }
     },[])
     return (
     <div className='chat-list'>
@@ -64,6 +98,12 @@ const ChatList = () => {
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
             })}
+            {searchRoom.length === 0 ?
+                null : searchRoom.map((datas,index)=>{
+                return(
+                    <Mainbar datas={datas} key={index}></Mainbar>
+                )}
+            )}
             <div
                 className="scrolldown"
                 ref={loadingRef}

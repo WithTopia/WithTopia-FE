@@ -26,7 +26,6 @@ const Sidebar = () => {
         setCheck(false)
       }
       if(repo.data.statusMsg === "정상"){
-        console.log(repo.data)
         setData(repo.data.data)
         setCheck(true)
       }
@@ -52,11 +51,11 @@ const Sidebar = () => {
         <div className="menu-txt">Menu</div>
         <hr/>
         <div className="side-menu">
-          <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/><Link to="/main" className='side-link'>Home</Link></p></a>
-          <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/><Link to="/profile" className='side-link'>Profile Management</Link></p></a>
-          <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/><Link to="/rank" className='side-link'>Rank</Link></p></a>
-          <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Friend</Link></p></a>
-          <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Direct Message</Link></p></a>
+          <a href='/main' className='side-link'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
+          <a href='/profile' className='side-link'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile Management</p></a>
+          <a href='/rank' className='side-link'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
+          <a href='/' className='side-link'><p><AiOutlineTeam color="rgb(153, 95, 7)"/>Friend</p></a>
+          <a href='/' className='side-link'><p><AiOutlineSend color="rgb(153, 95, 7)"/>Direct Message</p></a>
         </div>
       </div>
       <div className="logout-btn">

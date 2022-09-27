@@ -24,7 +24,9 @@
 
 ### 주요 기능 구현📍
 #### 💻**FE**
+
 > WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
+
 > Gamification 요소로 도입한 회원간 랭킹 시스템
 
 

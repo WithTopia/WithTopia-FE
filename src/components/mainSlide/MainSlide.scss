@@ -18,6 +18,7 @@
     
     .rank-profile{
       display: flex;
+      align-items: stretch;
       // margin: 0px 30px;
       
       .rank-profile-img{
@@ -32,11 +33,13 @@
         margin-top: 23px;
         margin-right: 5px;
         color: #815403;
+        align-items: stretch;
       }
       .rank-nick{
-        margin-top: 23px;
+        margin-top: 25px;
         color: #815403;
         margin-right: 25px;
+        align-items: stretch;
       }
     }
   }

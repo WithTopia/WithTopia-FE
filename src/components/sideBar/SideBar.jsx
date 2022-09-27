@@ -37,6 +37,7 @@ const Sidebar = () => {
   useEffect(()=>{
     registerUser()
   },[])
+
   return (
     <div className="sidebar">
       <div className="side-profile">
@@ -45,17 +46,17 @@ const Sidebar = () => {
             <img src={data !== "" ? data.profileImage : null} alt="profile" className="profile-img"/>
           </div>
           <div className="user-name">환영합니다. {data.nickName}님!</div></> : 
-          <a href="/login"><button className="sideBar-login">Login</button></a>}
+          <a href="/login"><button className="sideBar-login">LOG IN</button></a>}
       </div>
       <div className="menu-box">
         <div className="menu-txt">Menu</div>
         <hr/>
         <div className="side-menu">
-          <p><AiOutlineHome color="rgb(153, 95, 7)"/><Link to="/main">Home</Link></p>
-          <p><AiOutlineSmile color="rgb(153, 95, 7)"/><Link to="/profile">Profile Management</Link></p>
-          <p><AiOutlineStar color="rgb(153, 95, 7)"/><Link to="/rank">Rank</Link></p>
-          <p><AiOutlineTeam color="rgb(153, 95, 7)"/><Link to="/">Friend</Link></p>
-          <p><AiOutlineSend color="rgb(153, 95, 7)"/><Link to="/">Direct Message</Link></p>
+          <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/><Link to="/main" className='side-link'>Home</Link></p></a>
+          <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/><Link to="/profile" className='side-link'>Profile Management</Link></p></a>
+          <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/><Link to="/rank" className='side-link'>Rank</Link></p></a>
+          <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Friend</Link></p></a>
+          <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/><Link to="/" className='side-link'>Direct Message</Link></p></a>
         </div>
       </div>
       <div className="logout-btn">

@@ -1,0 +1,22 @@
+.scroll-btn{
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  // z-index: 1;
+  .top-btn{
+    position: absolute;
+    font-weight: bold;
+    font-size: 15px;
+    padding :15px 10px;
+    color:rgb(251, 193, 56);
+    background-color: #ffff;
+    border: 0px solid #ffff;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    &:hover{
+      color :#ffff;
+      background-color: rgb(251, 193, 56);
+    }
+  }
+}

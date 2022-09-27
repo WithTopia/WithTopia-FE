@@ -26,13 +26,12 @@
     };
     .bar-user-profile{
       display: flex;
-      
       width: 250px;
       height: 40px;
       overflow: hidden;
       
       .bar-profile-img{
-        
+        -webkit-user-drag: none;
         margin: 0 auto;
         height: 36px;
         overflow: hidden;

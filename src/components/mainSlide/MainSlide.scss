@@ -1,6 +1,10 @@
 .rank{
+  // background-color: rgb(230, 221, 155);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
   .rank-top{
-    // background-color: rgb(230, 221, 155);
     display: flex;
     justify-content: space-between;
     align-items: center;

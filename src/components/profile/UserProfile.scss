@@ -5,7 +5,7 @@
     display: flex;
     margin: 0 auto;
     justify-content: center;
-    width: 100vw;
+    width: 90vw;
     .user-profile-container{
         height:76vh;
         border-radius: 20px;
@@ -26,8 +26,8 @@
             .profile-manage{
                 min-width: 255px;
                 height: 465px;
-                border: 1px solid black;
-                margin: 0 0 20px 40px;
+                box-shadow: 1px 1px 5px #E5D493;
+                margin: 0 0 20px 50px;
                 display: flex;
                 flex-direction: column;
                 border-radius: 15px;
@@ -35,6 +35,7 @@
                     margin: 50px auto;
                     width: 220px;
                     border-radius: 50%;
+                    -webkit-user-drag: none;
                 }
                 .manage-container{
                     width: 80%;
@@ -54,11 +55,12 @@
                 }
             }
             .profile-images-cont{
-                
-                min-width: 900px;
+              -webkit-user-drag: none;
+                // min-width: 900px;
+                width: 800px;
                 height: 450px;
-                border: 1px solid black;
-                margin: 0 44px 20px 14px;
+                box-shadow: 1px 1px 5px #E5D493;
+                margin: 0 44px 20px 84px;
                 border-radius: 15px;
                 display: flex;
                 flex-wrap: wrap;
@@ -68,6 +70,7 @@
                     margin: 0 auto;
                     border-radius: 50%;
                     height: 170px;
+                    -webkit-user-drag: none;
                 }
             }
         }

@@ -80,6 +80,13 @@ const Userprofile = () => {
         profileImage : targetImage,
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       console.log(repo)
+      const accessToken = repo.headers.authorization;
+      const refreshToken = repo.headers.refreshtoken;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshtoken", refreshToken);
+      if(repo.data.errormessage === "닉네임 양식에 맞지 않습니다."){
+        alert("닉네임은 2자 이상 12자 미만입니다")
+      }
       if(repo.data.statusMsg === "정상"){
         alert("변경되었습니다.")
         navigate("/main")
@@ -104,10 +111,10 @@ const Userprofile = () => {
           <h2>Profile Management</h2>
           <div className='profile-container'>
             <div className='profile-manage'>
-              <img src={targetImage === "" ? userData.profileImage : targetImage} className='profile-image' alt=''></img>
+              <img src={targetImage === "" ? userData.profileImage : targetImage}  className='profile-image' alt=''></img>
               <div className='manage-container'>
                 <div className='profile-nickname'>닉네임</div>
-                <input className='nickname-input' placeholder={userData.nickName} type="text" value={nickName} onChange={handleNickName}></input>
+                <input className='nickname-input' type="text" value={userData.nickName} onChange={handleNickName}></input>
               </div>
             </div>
             <div className='profile-images-cont'>

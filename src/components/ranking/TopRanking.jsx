@@ -4,7 +4,7 @@ import crown from '../../assets/crown.png';
 import crown2 from '../../assets/crown2.png';
 import crown3 from '../../assets/crown3.png';
 import crown4 from '../../assets/crown4.png';
-import like from "../../assets/like.png"
+import like from "../../assets/like.png";
 import axios from 'axios';
 
 const Topranking = () => {
@@ -58,14 +58,20 @@ const Topranking = () => {
         <hr/>
           {rank !== "" ? rank.map((ranks,index)=>{
             return(
-              <div className='rank-piece' key={index}>
+              <div className={
+                index === 0 ? 'rankTop' :
+                index === 1 ? 'rankTop' :
+                index === 2 ? 'rankTop' : 'rank-piece'} key={index}>
                 <div className='rank-left'>
+
                   {index === 0 ? <img src={crown} alt="crown" className='crown'/> :
                     index === 1 ? <img src={crown2} alt="crown" className='crown'/> : 
                     index === 2 ? <img src={crown3} alt="crown" className='crown'/> :
                     index === 3 ? <img src={crown4} alt="crown" className='crown'/> :
                     index === 4 ? <img src={crown4} alt="crown" className='crown'/> : null}
-                  {index < 5 ? <div className='rank-top-ranking'>{index+1+"등"}</div> : <div className='rank-low-ranking'>{index+1+"등"}</div>}
+                  
+                  {index < 5 ? <div className='rank-top-ranking'>{index+1+"등"}</div> : 
+                  <div className='rank-low-ranking'>{index+1+"등"}</div>}
                   
                 </div>
                 <div className='rank-center'>

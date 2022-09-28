@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./MainBoard.scss";
 import detail1 from "../../assets/detail1.webp";
 import detail2 from "../../assets/detail2.webp";
@@ -10,9 +10,10 @@ import Scrolltotop from '../button/scrollToTop';
 
 const Mainboard = () => {
   const navigate = useNavigate();
-
+  const [token,setToken] = useState(localStorage.getItem("accessToken") === true)
+  // let token = localStorage.getItem("accessToken")
   const goToLogin = () => {
-    navigate("/Login");
+    token === true ? navigate("/main") : navigate("/Login")
   };
 
   return (

@@ -3,7 +3,6 @@ import "./ChatList.scss"
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
-import NoRoom from "../../assets/no-room.png"
 import colorRoom from "../../assets/color-room.webp";
 import blackRoom from "../../assets/black-room.webp";
 import colorSearch from "../../assets/color-search.webp";
@@ -63,7 +62,7 @@ const ChatList = () => {
                 함께하는 위토피아!
             </div>
             {rooms.length === 0 ?
-                <img src={NoRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
+                <img src={blackRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )

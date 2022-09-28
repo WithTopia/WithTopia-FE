@@ -19,9 +19,8 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
     try{
       // const repo = await axios.put(`/chat/room/${roomId}/exit`)
       // console.log(repo)
-      // getOut.unsubscribe()
-      stompClient.disconnect({},function(){
-        console.log('연결 해제.')
+      stompClient.disconnect(()=>{
+        stompClient.unsubscribe("sub-0")
       })
     }catch(error){
       console.log(error)

@@ -33,7 +33,7 @@ const Room = () => {
   const [chat,setChat] = useState(true) // 채팅창
   // 신고 기능 관련
   const [report,setReport] = useState(false)
-  const [nicknames,setNickNames] = useState([])
+  const [nicknames,setNickNames] = useState(null)
   // 뮤트, 히든 기능 관련
   // const [mute,setMute] = useState(false)
   // const [hidden,setHidden] = useState(false)
@@ -143,9 +143,10 @@ const Room = () => {
   }
 
   const getUserName = async () => {
+    setNickNames(null)
     try{
       const repo = await axios.get(`/report?sessionID=${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-      setNickNames([...nicknames,repo.data.data])
+      setNickNames(repo.data.data)
     }catch(error){
       console.log(error)
     }
@@ -212,7 +213,7 @@ const Room = () => {
 
   useEffect(() => {
     getUserName()
-  },[]);
+  },[publisher,subscribers]);
   return (
     <div className='room'>
       <div className='video-container'>

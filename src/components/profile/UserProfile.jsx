@@ -28,7 +28,9 @@ const Userprofile = () => {
     console.log(url)
   }
   const [nickName, setNickName] = useState('');
-
+  console.log(userData);
+  console.log(userData.nickName);
+  // console.log(userData.nickName.split('_',1));
   const getMyProfile = async () => {
     try {
       const data = await axios.get(`/member/mypage`,{headers:{"authorization":token,"refreshtoken":refreshtoken}});

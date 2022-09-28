@@ -1,5 +1,5 @@
 import './Header.scss';
-import wtLogo from "../../assets/logo.png";
+import WTlogo1 from "../../assets/WTlogo1.webp";
 import searchIcon from "../../assets/searchIcon.png"
 import axios from 'axios';
 import { useEffect, useState ,useRef } from 'react';
@@ -81,7 +81,7 @@ const Header = () => {
   return (
     <div className='top-header'>
       <div className='header-wrap'>
-        <a href='/main'><img src={wtLogo} className="wtLogo" alt="wtLogo"></img></a>
+        <a href='/main'><img src={WTlogo1} className="wtLogo" alt="wtLogo"></img></a>
         <form>
           <input type="search" className="search-input" value={search} onChange={onChangeSearch} onKeyDown={handleEnter} placeholder="search by chat room"/>
           <img src={searchIcon} className="search" alt="search" onClick={searchPage}></img>

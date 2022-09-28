@@ -4,12 +4,13 @@ import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
 import NoRoom from "../../assets/no-room.png"
+import { useNavigate } from 'react-router-dom'
 
 const ChatList = ({search}) => {
     console.log(search)
-    
+    const navigate = useNavigate()
     const [rooms,setRooms] = useState("")
-    const [searchRoom,setSearchRoom] = useState("")
+    const [searchRoomCheck,setSearchRoomCheck] = useState(false)
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false); // use this if you want the box to say "loading...". Forgot this lol.
     const [prevY, setPrevY] = useState(0);
@@ -22,7 +23,7 @@ const ChatList = ({search}) => {
             if(repo.data.statusMsg === "정상"){
                 setRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
-            
+                setSearchRoomCheck(true)
         }
         }catch(error){
             console.log(error)
@@ -33,13 +34,11 @@ const ChatList = ({search}) => {
         } 
     }
 
-    let searchRef = useRef({})
     let dataRef = useRef({});
     let loadingRef = useRef(null);
     let prevYRef = useRef({});
     let pageRef = useRef({});
 
-    searchRef.current = searchRoom
     dataRef.current = rooms;
     pageRef.current = page;
     prevYRef.current = prevY;
@@ -51,11 +50,11 @@ const ChatList = ({search}) => {
     const findRoom = async () => {
         try{
             console.log("이쪽")
-            const repo = await axios.get(`/rooms/${pageRef.current}`)
+            const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
             console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
-            
+            setSearchRoomCheck(false)
         }catch(error){
             console.log(error)
         }
@@ -80,15 +79,7 @@ const ChatList = ({search}) => {
             };
             const observer = new IntersectionObserver(handleObserver, options);
             observer.observe(loadingRef.current);
-        }
-        
-    },[])
-    // console.log("빈.. 널",search)
-    useEffect(()=>{
-        if(search === null || search === ""){
-            console.log("d")
-        }
-        else{
+        }else{
             searchPage()
             setPage(pageRef.current + 1);
             let options = {
@@ -108,7 +99,7 @@ const ChatList = ({search}) => {
                 함께하는 위토피아!
             </div>
             {rooms.length === 0 ?
-                <img src={NoRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
+                <img src={searchRoomCheck ? NoRoom : NoRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )

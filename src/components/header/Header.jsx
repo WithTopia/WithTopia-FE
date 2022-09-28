@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
   const [search,setSearch] = useState("")
-  let search2 = ""
 
   const searchPage = async () => {
     navigate("/main",{state:{search:search}})
     setSearch("")
   }
 
+  
   const onChangeSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -23,6 +23,10 @@ const Header = () => {
       searchPage()
     }
   };
+
+  window.onbeforeunload=function(){ //
+    setSearch("")
+  }
 
   return (
     <div className='top-header'>

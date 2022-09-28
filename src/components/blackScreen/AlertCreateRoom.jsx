@@ -101,9 +101,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     setSendData({...sendData,status:true})
     unCheck(true)
   }
-  useEffect(()=>{
-    console.log(check)
-  },[check])
   
   return (
     <div className='alert-create-room'>

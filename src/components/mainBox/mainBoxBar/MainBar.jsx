@@ -6,6 +6,7 @@ import AlertInputPw from '../../blackScreen/AlertInputPw';
 import { useState } from 'react';
 
 const Mainbar = ({ datas }) => {
+  console.log(datas)
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)

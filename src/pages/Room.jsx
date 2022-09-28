@@ -33,7 +33,6 @@ const Room = () => {
   const [chat,setChat] = useState(true) // 채팅창
   // 신고 기능 관련
   const [report,setReport] = useState(false)
-  const [ids,setIds] = useState([])
   const [nicknames,setNickNames] = useState([])
   // 뮤트, 히든 기능 관련
   // const [mute,setMute] = useState(false)
@@ -92,7 +91,6 @@ const Room = () => {
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
-    
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
@@ -144,6 +142,15 @@ const Room = () => {
     });
   }
 
+  const getUserName = async () => {
+    try{
+      const repo = await axios.get(`/report?sessionID=${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      setNickNames([...nicknames,repo.data.data])
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   // 보류
   // const handleCam = () => {
   //   setHidden((prev)=>!prev)
@@ -181,16 +188,17 @@ const Room = () => {
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", leaveload); 
+    window.addEventListener("beforeunload", leaveload()); 
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", leaveload);
+      window.removeEventListener("beforeunload", leaveload());
     };
   },[])
 
   const reIssue = async () => {
     try{
       const repo = await axios.get(`/member/reissue`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      localStorage.removeItem("accessToken");
       localStorage.setItem("accessToken",repo.headers.authorization)
     }catch(error){
       console.log(error)
@@ -203,11 +211,7 @@ const Room = () => {
   },60000*10)
 
   useEffect(() => {
-    setIds([...ids,location.state.memberId])
-  },[]);
-
-  useEffect(() => {
-    // setNickNames([...nicknames,location.state.memberId])
+    getUserName()
   },[]);
   return (
     <div className='room'>
@@ -246,7 +250,7 @@ const Room = () => {
               ) : null}
             </div>
           ) : null}
-          {report ? <Report setReport={setReport} id={ids} nickname={nickname}></Report> : null}
+          {report ? <Report setReport={setReport} nickname={nickname} nicknames={nicknames}></Report> : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
             {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
           </div>

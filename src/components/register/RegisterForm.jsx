@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { userRegister } from "../../redux/modules/userSlice";
 import axios from "axios";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import hiWT from '../../assets/hiWT.png';
+import WTlogo1 from '../../assets/WTlogo1.webp';
 
   // "email": "이메일@naver.com", 
   // "emailConfirm" :  "123456"
@@ -205,7 +205,7 @@ const Registerform = () => {
   return (
     <div>
       <form className="rg-container" onSubmit={handleSubmit(onSubmitRegister)}>
-        <img src={hiWT} alt='' className="logo"/>
+        <img src={WTlogo1} alt='' className="logo"/>
         <p>회원가입</p>
         <div className="register-box">
 {/*------------> 이메일<------------*/}          

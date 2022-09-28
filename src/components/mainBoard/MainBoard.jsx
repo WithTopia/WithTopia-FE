@@ -1,7 +1,7 @@
 import React from 'react';
 import "./MainBoard.scss";
-import detail1 from "../../assets/detail1.png";
-import detail2 from "../../assets/detail2.png";
+import detail1 from "../../assets/detail1.webp";
+import detail2 from "../../assets/detail2.webp";
 import { useNavigate } from 'react-router-dom';
 import Scrolltotop from '../button/scrollToTop';
 

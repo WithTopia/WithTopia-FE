@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/modules/userSlice";
 import { useNavigate } from "react-router-dom";
-import hiWT from "../../assets/hiWT.png";
+import WTlogo1 from "../../assets/WTlogo1.webp";
 
 
 const LoginForm = (props) => {
@@ -46,7 +46,7 @@ const LoginForm = (props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* <img src="">logo 이미지</img> */}
       <div className="container">
-        <img src={hiWT} alt='' className="logo"/>
+        <img src={WTlogo1} alt='' className="logo"/>
         <div className="login-box">
           <input
             type="text"

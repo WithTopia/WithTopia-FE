@@ -63,7 +63,7 @@ const Sidebar = () => {
           <div className="user-profile">
             <img src={data !== "" ? data.profileImage : null} alt="profile" className="profile-img"/>
           </div>
-          <div className="user-name">환영합니다. {data.nickName}님!</div></> : 
+          <div className="user-name">환영합니다. {data.nickName.split('_',1)}님!</div></> : 
           <a href="/login"><button className="sideBar-login">LOG IN</button></a>}
       </div>
       <div className="menu-box">

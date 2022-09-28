@@ -37,9 +37,15 @@ const Mainbar = ({ datas }) => {
       console.log(error)
       if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
         alert("이미 입장한 멤버입니다.")
+        return
       }
       if(error.response.data.errormessage === "방이 존재하지않습니다."){
         alert("방이 존재하지 않습니다.")
+        return
+      }
+      if(error.response.data.errormessage === "방이 가득찼습니다."){
+        alert("방이 가득찼습니다.")
+        return
       }
     }
   }

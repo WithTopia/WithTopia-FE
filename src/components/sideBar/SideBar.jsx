@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SideBar.scss";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineSmile,
@@ -12,6 +12,7 @@ import samplePic from "../../assets/profileSample.png";
 import axios from "axios";
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   const [data,setData] = useState("")
   const [check,setCheck] = useState(false)
   let token = localStorage.getItem("accessToken")
@@ -27,10 +28,10 @@ const Sidebar = () => {
     localStorage.clear();
     if(out.data.data === "로그아웃에 성공했습니다."){
       alert(out.data.data)
-      window.location.href = "/login"
+      navigate("/login")
     }if(out.data.errormessage === "로그인을 해주세요."){
       alert(out.data.errormessage)
-      window.location.href = "/login"
+      navigate("/login")
     }
     }catch(error){
     console.log(error);
@@ -69,19 +70,11 @@ const Sidebar = () => {
         <div className="menu-txt">Menu</div>
         <hr/>
         <div className="side-menu">
-<<<<<<< HEAD
-          <a href='/main' className='side-link'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
-          <a href='/profile' className='side-link'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile Management</p></a>
-          <a href='/rank' className='side-link'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
-          <a href='/' className='side-link'><p><AiOutlineTeam color="rgb(153, 95, 7)"/>Friend</p></a>
-          <a href='/' className='side-link'><p><AiOutlineSend color="rgb(153, 95, 7)"/>Direct Message</p></a>
-=======
           <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
           <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile</p></a>
           <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
           <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a>
           <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/> Description</p></a>
->>>>>>> 8f5a0b99540901b9b2fa24e4b184483692e2fcb7
         </div>
       </div>
       <div className="logout-btn">

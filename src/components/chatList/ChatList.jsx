@@ -7,7 +7,7 @@ import NoRoom from "../../assets/no-room.png"
 
 const ChatList = ({search}) => {
     console.log(search)
-    const [main,setMain] = useState(false)
+    
     const [rooms,setRooms] = useState("")
     const [searchRoom,setSearchRoom] = useState("")
     const [page, setPage] = useState(1);
@@ -17,22 +17,21 @@ const ChatList = ({search}) => {
 
     const searchPage = async () => {
         try{
-          const repo = await axios.get(`/rooms/search/${pageRef.current}?keyword=${search}`)
-          if(repo.data.statusMsg === "정상"){
-            setSearchRoom([...searchRef.current,...repo.data.data.content])
-          }
-          // setRooms([...dataRef.current,...repo.data.data.content])
-          setLoading(false);
+            const repo = await axios.get(`/rooms/${pageRef.current}?keyword=${search}`)
+            console.log(repo)
+            if(repo.data.statusMsg === "정상"){
+                setRooms([...dataRef.current,...repo.data.data.content])
+                setLoading(false);
+            
+        }
         }catch(error){
-          console.log(error)
-          if(error.response.data.errormessage==="검색 결과가 없습니다."){
-            alert("검색 결과가 없습니다.")
-            return
-          }
+            console.log(error)
+            if(error.response.data.errormessage==="검색 결과가 없습니다."){
+                alert("검색 결과가 없습니다.")
+                return
+            }
         } 
     }
-
-
 
     let searchRef = useRef({})
     let dataRef = useRef({});
@@ -51,9 +50,12 @@ const ChatList = ({search}) => {
 
     const findRoom = async () => {
         try{
+            console.log("이쪽")
             const repo = await axios.get(`/rooms/${pageRef.current}`)
+            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
+            
         }catch(error){
             console.log(error)
         }
@@ -66,15 +68,9 @@ const ChatList = ({search}) => {
         }
         setPrevY(y);
     };
-
-    useEffect(()=>{
-        if(main === true){
-            searchPage()
-        }
-    })
     
     useEffect(()=>{
-        if(main === false){
+        if(search === null || search === ""){
             findRoom()
             setPage(pageRef.current + 1);
             let options = {
@@ -85,7 +81,26 @@ const ChatList = ({search}) => {
             const observer = new IntersectionObserver(handleObserver, options);
             observer.observe(loadingRef.current);
         }
+        
     },[])
+    // console.log("빈.. 널",search)
+    useEffect(()=>{
+        if(search === null || search === ""){
+            console.log("d")
+        }
+        else{
+            searchPage()
+            setPage(pageRef.current + 1);
+            let options = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 1.0,
+            };
+            const observer = new IntersectionObserver(handleObserver, options);
+            observer.observe(loadingRef.current);
+        }
+    },[])
+    
     return (
     <div className='chat-list'>
         <div className='default-page-size'>
@@ -98,12 +113,12 @@ const ChatList = ({search}) => {
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
             })}
-            {searchRoom.length === 0 ?
+            {/* {searchRoom.length === 0 && search !== null ?
                 null : searchRoom.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )}
-            )}
+            )} */}
             <div
                 className="scrolldown"
                 ref={loadingRef}

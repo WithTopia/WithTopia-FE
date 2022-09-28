@@ -160,7 +160,7 @@ const Room = () => {
   // }
 
   window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
-    leaveSession()
+    leaveload()
   }
 
   const handleChat = () => { // 채팅창 여닫이

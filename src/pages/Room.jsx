@@ -1,5 +1,6 @@
 import React, { useState ,useEffect ,useCallback} from 'react'
 import Chat from "../components/chat/Chat"
+import Report from "../components/blackScreen/Report"
 import { OpenVidu } from 'openvidu-browser'
 import { useLocation, useNavigate } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
@@ -8,6 +9,7 @@ import axios from 'axios'
 import "../components/videoRecord/VideoRecord.scss"
 import message from "../assets/messageIcon.png"
 import exit from "../assets/out.png"
+import siren from "../assets/siren.png"
 // import camon from "../assets/cam-on.png"
 // import camoff from "../assets/cam-off.png"
 // import micon from "../assets/mic-on.png"
@@ -22,20 +24,21 @@ const Room = () => {
   let tokenStuff = location.state.token
   let refreshtoken = localStorage.getItem("refreshtoken")
   let accessToken = localStorage.getItem("accessToken")
+
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();  
   const [publisher, setPublisher] = useState(null);
   const [subscribers, setSubscribers] = useState([]);
-  const [subscriber, setSubscriber] = useState(null);
   const [checkMyScreen,setCheckMyScreen] = useState("")
   const [isConnect,setIsConnect] = useState(false) // 커넥팅 체크
   const [role,setRole] = useState(location.state.role) // 역할군
   const [chat,setChat] = useState(true) // 채팅창
+  const [report,setReport] = useState(false)
   // const [mute,setMute] = useState(false)
   // const [hidden,setHidden] = useState(false)
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
-
+  console.log(location.state.memberId)
   const deleteSubscriber = (streamManagerId) => {
     try{
       console.log("지우기")
@@ -167,6 +170,10 @@ const Room = () => {
     setChat((prev)=>!prev)
   }
 
+  const handleReport = () => {
+    setReport((prev)=>!prev)
+  }
+
   useEffect(()=>{
     console.log(subscribers)
   },[subscribers])
@@ -202,6 +209,8 @@ const Room = () => {
         <div className='video-header'>
           <h2>{location.state.roomTitle}</h2>
           <div className='video-sets'>
+            <img src={siren} className="siren" onClick={handleReport}></img>
+            
             <img src={message} className="message-control" onClick={handleChat}></img>
             <a href='/main'><img src={exit} className="out"></img></a>
           </div>
@@ -232,9 +241,11 @@ const Room = () => {
               ) : null}
             </div>
           ) : null}
+          {report ? <Report setReport={setReport}></Report> : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
             {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
-          </div>  
+          </div>
+          
         </div>
         {/* <div className='video-setting'>
         </div> */}

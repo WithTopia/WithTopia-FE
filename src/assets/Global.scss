@@ -27,6 +27,7 @@
 };
 .room{
   width: 100vw;
+  height: 100vh;
   .video-container{
     position: absolute;
     top: 50%;
@@ -35,7 +36,7 @@
     width: 90vw;
     height: 86vh;
     background-color:#FFEBA3;
-    z-index: -1;
+    z-index: 1000;
     padding: 30px;
     border-radius: 15px;
     .video-header{
@@ -52,10 +53,15 @@
             width: 35px;
           }
         }
+        .siren{
+          width: 35px;
+          margin-right: 12px;
+          cursor: pointer;
+        }
         .message-control{
           height: 31px;
           width: 35px;
-          margin-right: 15px;
+          margin-right: 12px;
           cursor: pointer;
         }
       }

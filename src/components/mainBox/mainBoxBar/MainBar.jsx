@@ -27,9 +27,9 @@ const Mainbar = ({ datas }) => {
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.enterRoomToken,
-        sessionId:repo.data.data.sessionId,
-        masterId:repo.data.data.nickname,
+        sessionId:repo.data.data.sessionId,        
         roomTitle:datas.roomTitle,
+        memberId:repo.data.data.roomMemberResponseDtoList[0].member,
         role:"user"
       }})
     }

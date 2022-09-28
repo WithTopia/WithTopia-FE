@@ -53,7 +53,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         status:sendData.status,
         password:sendData.password
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-      console.log(repo)
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
         alert("로그인을 해주세요 !")
         navigate("/login")
@@ -66,7 +65,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         token:repo.data.data.token,
         sessionId:repo.data.data.sessionId,
         roomTitle:sendData.roomTitle,
-        masterId:repo.data.data.masterId,
+        memberId:repo.data.data.roomMemberResponseDtoList[0].member,
         role:"master"
       }})
 

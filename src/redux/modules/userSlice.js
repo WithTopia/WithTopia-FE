@@ -47,6 +47,9 @@ export const userLogin = createAsyncThunk(
       if(error.response.data.errormessage === "로그인에 실패했습니다."){
         alert("로그인에 실패했습니다.")
       }
+      if(error.response.data.errormessage === "사용자가 존재하지않습니다."){
+        alert("사용자가 존재하지않습니다.")
+      }
       if(error.message === "Request failed with status code 500"){
         alert("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
       }

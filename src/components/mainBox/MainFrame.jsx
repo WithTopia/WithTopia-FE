@@ -7,6 +7,8 @@ import Ranking from "../../pages/Ranking";
 import Room from "../../pages/Room";
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
+import Kakao from '../login/Kakao';
+import Google from '../login/Google';
 
 const MainFrame = () => {
   return (
@@ -19,6 +21,8 @@ const MainFrame = () => {
         <Route path='/room/:id' element={<Room></Room>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/member/login/kakao' element={<Kakao></Kakao>}></Route>
+        <Route path='/member/login/google' element={<Google></Google>}></Route>
       </Routes>
     </div>
   );

@@ -43,6 +43,10 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         return
       }
     }
+    if(sendData.roomTitle.length < 2 || sendData.roomTitle.length > 14){
+      alert("방 제목 길이는 2~14글자로 해주세요.")
+      return
+    }
     try{
       let token = localStorage.getItem("accessToken")
       let refreshtoken = localStorage.getItem("refreshtoken")

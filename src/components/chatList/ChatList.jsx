@@ -5,6 +5,10 @@ import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
 import NoRoom from "../../assets/no-room.png"
 import { useNavigate } from 'react-router-dom'
+import colorRoom from "../../assets/color-room.webp";
+import blackRoom from "../../assets/black-room.webp";
+import colorSearch from "../../assets/color-search.webp";
+import blackSearch from "../../assets/black-search.webp";
 
 const ChatList = ({search}) => {
     console.log(search)

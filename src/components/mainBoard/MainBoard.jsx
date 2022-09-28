@@ -2,6 +2,9 @@ import React from 'react';
 import "./MainBoard.scss";
 import detail1 from "../../assets/detail1.webp";
 import detail2 from "../../assets/detail2.webp";
+import detail3 from "../../assets/detail3.webp";
+import detail4 from "../../assets/detail4.webp";
+import detail5 from "../../assets/detail5.webp";
 import { useNavigate } from 'react-router-dom';
 import Scrolltotop from '../button/scrollToTop';
 
@@ -20,6 +23,9 @@ const Mainboard = () => {
           <button className='main-btn' onClick={goToLogin}>LOG IN</button>
         </div>
         <img src={detail2} alt='' className='main2'/>
+        <img src={detail3} alt='' className='main2'/>
+        <img src={detail4} alt='' className='main2'/>
+        <img src={detail5} alt='' className='main2'/>
       </div>
       <Scrolltotop/>
     </div>

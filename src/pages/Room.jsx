@@ -97,7 +97,7 @@ const Room = () => {
         deleteSubscriber(e.stream.connection.connectionId);
       } else {
         console.log("지우기 실패 ?")
-        setCheckMyScreen(true);
+        // setCheckMyScreen(true);
       }
     });
     // 1-3 예외처리

@@ -23,7 +23,7 @@ const Mainbar = ({ datas }) => {
         navigate("/login")
         return
       }
-      console.log(repo)
+      console.log(repo.data.data.roomMemberResponseDtoList[0].member)
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.enterRoomToken,

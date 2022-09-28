@@ -15,8 +15,6 @@ import siren from "../assets/siren.png"
 // import micon from "../assets/mic-on.png"
 // import micoff from "../assets/mic-off.png"
 
-const history = createBrowserHistory()
-
 const Room = () => {
   const location = useLocation();
   const navigate = useNavigate()
@@ -24,7 +22,7 @@ const Room = () => {
   let tokenStuff = location.state.token
   let refreshtoken = localStorage.getItem("refreshtoken")
   let accessToken = localStorage.getItem("accessToken")
-
+  // 오픈비듀 관련
   const [session,setSession] = useState(undefined)
   const [OV, setOV] = useState();  
   const [publisher, setPublisher] = useState(null);
@@ -33,12 +31,15 @@ const Room = () => {
   const [isConnect,setIsConnect] = useState(false) // 커넥팅 체크
   const [role,setRole] = useState(location.state.role) // 역할군
   const [chat,setChat] = useState(true) // 채팅창
+  // 신고 기능 관련
   const [report,setReport] = useState(false)
+  const [nicknames,setNickNames] = useState(null)
+  // 뮤트, 히든 기능 관련
   // const [mute,setMute] = useState(false)
   // const [hidden,setHidden] = useState(false)
   // const [userMute,setUserMute] = useState(false)
   // const [userHidden,setUserHidden] = useState(false)
-  console.log(location.state.memberId)
+
   const deleteSubscriber = (streamManagerId) => {
     try{
       console.log("지우기")
@@ -90,7 +91,6 @@ const Room = () => {
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
-    
     // 1-2 session에서 disconnect한 사용자 삭제
     newsession.on('streamDestroyed', (e) => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
@@ -142,6 +142,16 @@ const Room = () => {
     });
   }
 
+  const getUserName = async () => {
+    setNickNames(null)
+    try{
+      const repo = await axios.get(`/report?sessionID=${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      setNickNames(repo.data.data)
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   // 보류
   // const handleCam = () => {
   //   setHidden((prev)=>!prev)
@@ -189,20 +199,21 @@ const Room = () => {
   const reIssue = async () => {
     try{
       const repo = await axios.get(`/member/reissue`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      localStorage.removeItem("accessToken");
       localStorage.setItem("accessToken",repo.headers.authorization)
     }catch(error){
       console.log(error)
     }
   }
+
   setInterval(()=>{
     reIssue()
+    console.log("reIssue !")
   },60000*10)
 
-  // useEffect(() => {
-  //   window.onpopstate = () => {
-  //     history.push("/main");
-  //   };
-  // },[]);
+  useEffect(() => {
+    getUserName()
+  },[publisher,subscribers]);
   return (
     <div className='room'>
       <div className='video-container'>
@@ -210,7 +221,6 @@ const Room = () => {
           <h2>{location.state.roomTitle}</h2>
           <div className='video-sets'>
             <img src={siren} className="siren" onClick={handleReport}></img>
-            
             <img src={message} className="message-control" onClick={handleChat}></img>
             <a href='/main'><img src={exit} className="out"></img></a>
           </div>
@@ -241,7 +251,7 @@ const Room = () => {
               ) : null}
             </div>
           ) : null}
-          {report ? <Report setReport={setReport}></Report> : null}
+          {report ? <Report setReport={setReport} nickname={nickname} nicknames={nicknames}></Report> : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
             {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
           </div>

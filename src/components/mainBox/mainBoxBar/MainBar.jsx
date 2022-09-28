@@ -6,6 +6,7 @@ import AlertInputPw from '../../blackScreen/AlertInputPw';
 import { useState } from 'react';
 
 const Mainbar = ({ datas }) => {
+  console.log(datas)
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)
@@ -23,13 +24,13 @@ const Mainbar = ({ datas }) => {
         navigate("/login")
         return
       }
-      console.log(repo)
+      
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.enterRoomToken,
-        sessionId:repo.data.data.sessionId,        
+        sessionId:repo.data.data.sessionId, 
         roomTitle:datas.roomTitle,
-        memberId:repo.data.data.roomMemberResponseDtoList[0].member,
+        memberId:repo.data.data.roomMemberId,
         role:"user"
       }})
     }

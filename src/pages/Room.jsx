@@ -188,10 +188,10 @@ const Room = () => {
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", leaveload()); 
+    window.addEventListener("beforeunload", leaveload); 
     joinSession()
     return () => {
-      window.removeEventListener("beforeunload", leaveload());
+      window.removeEventListener("beforeunload", leaveload);
     };
   },[])
 

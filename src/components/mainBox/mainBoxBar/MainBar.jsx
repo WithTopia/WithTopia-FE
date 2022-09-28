@@ -9,7 +9,6 @@ const Mainbar = ({ datas }) => {
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)
-  console.log(datas)
   const navigate = useNavigate()
 
   const enterPw = () => {
@@ -28,9 +27,9 @@ const Mainbar = ({ datas }) => {
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.enterRoomToken,
-        sessionId:repo.data.data.sessionId,
-        masterId:repo.data.data.nickname,
+        sessionId:repo.data.data.sessionId,        
         roomTitle:datas.roomTitle,
+        memberId:repo.data.data.roomMemberResponseDtoList[0].member,
         role:"user"
       }})
     }
@@ -38,9 +37,15 @@ const Mainbar = ({ datas }) => {
       console.log(error)
       if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
         alert("이미 입장한 멤버입니다.")
+        return
       }
       if(error.response.data.errormessage === "방이 존재하지않습니다."){
         alert("방이 존재하지 않습니다.")
+        return
+      }
+      if(error.response.data.errormessage === "방이 가득찼습니다."){
+        alert("방이 가득찼습니다.")
+        return
       }
     }
   }

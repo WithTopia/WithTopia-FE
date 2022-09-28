@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SideBar.scss";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineHome,
   AiOutlineSmile,
@@ -12,6 +12,7 @@ import samplePic from "../../assets/profileSample.png";
 import axios from "axios";
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   const [data,setData] = useState("")
   const [check,setCheck] = useState(false)
   let token = localStorage.getItem("accessToken")
@@ -27,10 +28,10 @@ const Sidebar = () => {
     localStorage.clear();
     if(out.data.data === "로그아웃에 성공했습니다."){
       alert(out.data.data)
-      window.location.href = "/login"
+      navigate("/login")
     }if(out.data.errormessage === "로그인을 해주세요."){
       alert(out.data.errormessage)
-      window.location.href = "/login"
+      navigate("/login")
     }
     }catch(error){
     console.log(error);
@@ -43,7 +44,6 @@ const Sidebar = () => {
         setCheck(false)
       }
       if(repo.data.statusMsg === "정상"){
-        console.log(repo.data)
         setData(repo.data.data)
         setCheck(true)
       }

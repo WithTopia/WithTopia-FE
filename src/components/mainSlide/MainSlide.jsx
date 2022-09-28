@@ -11,7 +11,6 @@ const Mainslide = () => {
   const mainRank = async () => {
     try{
       const repo = await axios.get(`/top`)
-      console.log(repo.data.data)
       setTopRank(repo.data.data)
     }
     catch(error) {

@@ -197,11 +197,6 @@ const Registerform = () => {
     navigate('/login')
   };
 
-
-
-
-
-
   return (
     <div>
       <form className="rg-container" onSubmit={handleSubmit(onSubmitRegister)}>

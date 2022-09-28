@@ -3,7 +3,6 @@ import "./ChatList.scss"
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
-import NoRoom from "../../assets/no-room.png"
 import { useNavigate } from 'react-router-dom'
 import colorRoom from "../../assets/color-room.webp";
 import blackRoom from "../../assets/black-room.webp";
@@ -103,7 +102,7 @@ const ChatList = ({search}) => {
                 함께하는 위토피아!
             </div>
             {rooms.length === 0 ?
-                <img src={searchRoomCheck ? NoRoom : NoRoom} className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
+                <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )

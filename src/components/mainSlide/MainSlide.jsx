@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './MainSlide.scss'
-import samplePic from "../../assets/profileSample.png";
 import axios from 'axios';
 
 const Mainslide = () => {
@@ -40,7 +39,6 @@ const Mainslide = () => {
                 index === 2 ? <><img src={topRank !== "" ? topRank.profileImage : null} alt='profile' className='rank-profile-img'/>
                               {/* <div className='rank-text'>{topRank.likeCnt}Pt</div> */}
                               <div className='rank-nick'>{topRank.nickname.split('_',1)}</div></> : null}
-
               </div> 
           )}) : null}
           </div>

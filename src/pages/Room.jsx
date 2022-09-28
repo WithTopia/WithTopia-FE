@@ -15,8 +15,6 @@ import siren from "../assets/siren.png"
 // import micon from "../assets/mic-on.png"
 // import micoff from "../assets/mic-off.png"
 
-const history = createBrowserHistory()
-
 const Room = () => {
   const location = useLocation();
   const navigate = useNavigate()
@@ -210,7 +208,6 @@ const Room = () => {
           <h2>{location.state.roomTitle}</h2>
           <div className='video-sets'>
             <img src={siren} className="siren" onClick={handleReport}></img>
-            
             <img src={message} className="message-control" onClick={handleChat}></img>
             <a href='/main'><img src={exit} className="out"></img></a>
           </div>
@@ -241,7 +238,7 @@ const Room = () => {
               ) : null}
             </div>
           ) : null}
-          {report ? <Report setReport={setReport}></Report> : null}
+          {report ? <Report setReport={setReport} id={location.state.masterId} nickname={nickname}></Report> : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
             {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
           </div>

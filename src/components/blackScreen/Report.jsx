@@ -1,7 +1,9 @@
 import React from 'react'
 import "./Report.scss"
 
-const Report = ({setReport}) => {
+const Report = ({setReport,id,nickname}) => {
+    console.log(id)
+    console.log(nickname)
     const handleReport = () => {
         setReport((prev)=>!prev)
     }

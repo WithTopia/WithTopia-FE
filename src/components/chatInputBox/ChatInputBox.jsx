@@ -62,11 +62,8 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
         receive:tName.payload.banSlice.targetName
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
-      // setText(userData.message)
-      // setUser(userData.username)
       setUserData({...userData,"message": ""});
       if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
-        handleOut()
         alert("추방 당하셨습니다.")
         navigate("/main")
         return
@@ -96,6 +93,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       }
       else{
         kickMessage()
+        handleOut()
       }
     }
   },[tName])

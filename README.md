@@ -15,15 +15,16 @@
 ### Who📍
 
 #### FE
- <a href="https://github.com/nevergettingold" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=서현웅🍎 &color=61dafb&style=for-the-badge&>"/></a>
- <a href="https://github.com/nevergettingold" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=김혜진🥑 &color=61dafb&style=for-the-badge&>"/></a>
+ <a href="https://github.com/hyunwung" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=서현웅🍎 &color=61dafb&style=for-the-badge&>"/></a>
+ <a href="https://github.com/Kim-wonder" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=김혜진🥑 &color=61dafb&style=for-the-badge&>"/></a>
  
  #### BE
- <a href="https://github.com/minjoo-kou" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=조원영🍋 &color=08CE5D&style=for-the-badge&>"/></a>
- <a href="https://github.com/minjoo-kou" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지성🍊 &color=08CE5D&style=for-the-badge&>"/></a>
-<a href="https://github.com/minjoo-kou" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지영🍒&color=08CE5D&style=for-the-badge&>"/></a>
+ <a href="https://github.com/ckstn0225" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=조원영🍋 &color=08CE5D&style=for-the-badge&>"/></a>
+ <a href="https://github.com/neya0" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지성🍊 &color=08CE5D&style=for-the-badge&>"/></a>
+ <a href="https://github.com/picjoy" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지영🍒 &color=08CE5D&style=for-the-badge&>"/></a>
 
-#### Design <img width="180"  src="https://img.shields.io/static/v1?label=Design&message=정지현🥦 &color=FF7F50&style=for-the-badge&>"/></a>
+#### Design 
+<img width="180"  src="https://img.shields.io/static/v1?label=Design&message=정지현🥦 &color=FF7F50&style=for-the-badge&>"/></a>
 <br />
 
 ### How📍

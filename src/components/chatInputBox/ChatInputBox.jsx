@@ -87,7 +87,9 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   useEffect(()=>{
-    kickMessage()
+    if(location.state.targetName!==undefined){
+      kickMessage()
+    }
   },[location.state.targetName])
 
   useEffect(()=>{

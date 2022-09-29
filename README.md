@@ -85,10 +85,10 @@
 -----
 
 ### 주요 기능 설명📍
-#### 💻**FE**
-
-
-#### 💻**BE**
+<details>
+<summary> <b>아키텍쳐 바로보기</b> </summary>
+    <img src="https://user-images.githubusercontent.com/103446802/193084387-0a04c848-b153-4a7e-8888-29a2f9ff2c8b.jpeg"> 
+</details>
 
 ----
 
@@ -102,7 +102,21 @@
 -----
 
 ### 프로젝트 진행하면서 느낀점📍
-#### 💻**FE**
 
-#### 💻**BE** 
+<a href="https://github.com/hyunwung" target="_blank"><img src="https://img.shields.io/badge/서현웅🍎-7190FD?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/Kim-wonder" target="_blank"><img src="https://img.shields.io/badge/김혜진🥑-49D1A4?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/ckstn0225" target="_blank"><img src="https://img.shields.io/badge/조원영🍋-FF4343?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/neya0" target="_blank"><img src="https://img.shields.io/badge/강지성🍊-E187F0?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/picjoy" target="_blank"><img src="https://img.shields.io/badge/강지영🍒-FFF53C?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+
 

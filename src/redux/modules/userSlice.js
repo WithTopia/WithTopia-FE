@@ -53,6 +53,9 @@ export const userLogin = createAsyncThunk(
       if(error.message === "Request failed with status code 500"){
         alert("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
       }
+      if(error.response.data.errormessage === "삭제된 회원입니다."){
+        alert(error.response.data.errormessage)
+      }
       // return thunkAPI.rejectWithValue(error);
     }
   }

@@ -79,10 +79,10 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="logout-btn">
-          <AiOutlineExport color= "rgba(227, 220, 220, 0.933)"/>
-          <button className="logout" onClick={logout}>
-            Log-out
-          </button>
+        <button className="logout" onClick={logout}>
+          LOGOUT
+        </button>
+          
         </div>
     </div>
   );

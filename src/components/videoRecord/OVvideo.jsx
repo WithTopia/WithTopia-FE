@@ -72,7 +72,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
                     {/* {role === "master" ? <img src={ban} className="video-ban" onClick={handleBan}></img> : null} */}
-                    <img src={ban} className="video-ban" onClick={handleBan}></img>
+                    {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     {complete === "" ? <>
                         <img src={likeYet} alt="" onClick={handleVoteLike}></img>

@@ -28,6 +28,7 @@ const Registerform = () => {
 
 //이메일 인증메일 보내기
   const [ email, setEmail ] = useState("");
+  const [loading,setLoading] = useState(false)
   //onChange => setState에 value값을 담음
   const onEmail = (event) => {
     event.preventDefault();
@@ -40,10 +41,10 @@ const Registerform = () => {
       const data = await axios.post(`/member/email/request`, {
         email
       })
-      console.log(data);
-      console.log(data.data);
-      console.log(data.data.data);
-      alert(data.data.data);
+      if(data.data.data === "인증번호 전송 완료! 이메일을 확인해주세요."){
+        alert(data.data.data);
+        setLoading(true)
+      }
     } 
     catch(error){
       console.log("333",error);
@@ -210,7 +211,7 @@ const Registerform = () => {
             onChange={onEmail} 
             placeholder="  이메일을 입력하세요"
             />
-            <button type="button" onClick={onEmailRequest} className='mail-btn1'>메일 인증</button>
+            <button type="button" onClick={onEmailRequest} className='mail-btn1' disabled={loading}>메일 인증</button>
             <input type="text" 
             name="authKey"
             onChange={onConfirm} 

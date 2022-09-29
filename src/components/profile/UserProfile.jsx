@@ -67,8 +67,8 @@ const Userprofile = () => {
 
   const postProfile = async () => {
     try{
-      if(nickName.length < 2){
-        alert("최소 두글자 이상 입력해주세요.")
+      if(nickName.length < 2 || nickName.length > 6){
+        alert("2자 이상 6자 이하로 입력해주세요.")
         return
       }
       if(nickName.includes(" ")){
@@ -85,7 +85,7 @@ const Userprofile = () => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       if(repo.data.errormessage === "닉네임 양식에 맞지 않습니다."){
-        alert("닉네임은 2자 이상 12자 미만입니다")
+        alert("닉네임은 2자 이상 6자 미만입니다")
       }
       if(repo.data.statusMsg === "정상"){
         alert("변경되었습니다.")
@@ -96,7 +96,7 @@ const Userprofile = () => {
       
     }
   }
-
+  console.log(userData.nickName)
   useEffect(()=>{
     getMyProfile()
     getImages()
@@ -114,7 +114,7 @@ const Userprofile = () => {
               <img src={targetImage === "" ? userData.profileImage : targetImage}  className='profile-image' alt=''></img>
               <div className='manage-container'>
                 <div className='profile-nickname'>닉네임</div>
-                <input className='nickname-input' type="text" value={nickName} onChange={handleNickName}></input>
+                <input className='nickname-input' type="text" defaultValue={userData.nickName === undefined ? "" : userData.nickName} onChange={handleNickName} maxLength={5}></input>
               </div>
             </div>
             <div className='profile-images-cont'>

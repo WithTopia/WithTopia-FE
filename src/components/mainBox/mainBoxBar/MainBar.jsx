@@ -30,7 +30,7 @@ const Mainbar = ({ datas }) => {
         token:repo.data.data.enterRoomToken,
         sessionId:repo.data.data.sessionId, 
         roomTitle:datas.roomTitle,
-        memberId:repo.data.data.roomMemberId,
+        // memberId:repo.data.data.roomMemberId,
         role:"user"
       }})
     }

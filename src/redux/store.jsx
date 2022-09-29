@@ -1,14 +1,14 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userSlice from "./modules/userSlice";
+import banSlice from "./modules/banSlice";
 import thunk from "redux-thunk";
-
-
 
 const middlewares = [thunk];
 
 // 리듀서 통합
 const rootReducer = combineReducers({
     userSlice,
+    banSlice,
 });
 // 스토어 연결
 const store = configureStore({

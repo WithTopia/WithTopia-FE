@@ -6,13 +6,10 @@ import { userLogin } from "../../redux/modules/userSlice";
 import { useNavigate } from "react-router-dom";
 import logo_empty from "../../assets/logo_empty.webp";
 
-
 const LoginForm = (props) => {
-  
   //userSlice로 전달
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const {
     watch,
     register,

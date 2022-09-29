@@ -52,13 +52,16 @@ const Room = () => {
 
   // 브라우저 새로고침, 종료, 라우트 변경
   const leaveload = async () => {
+    let accessToken2 = localStorage.getItem("accessToken")
     try{
       if(role === "master"){
-        const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+        setCheckMyScreen(false)
+        const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken2,"refreshtoken":refreshtoken}})
         console.log(getOutRoomMaster)
         leaveSession();
       }else if(role === "user"){
-        const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+        setCheckMyScreen(false)
+        const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":accessToken2,"refreshtoken":refreshtoken}})
         console.log("유저 나가",getOutRoomUser)
       }
     }catch(error){
@@ -67,7 +70,6 @@ const Room = () => {
   };
   const leaveSession = () => {
     console.log("세션 치우기")
-    setCheckMyScreen(false)
     setSubscribers([])
     setOV(undefined)
     setPublisher(null)
@@ -97,7 +99,7 @@ const Room = () => {
         deleteSubscriber(e.stream.connection.connectionId);
       } else {
         console.log("지우기 실패 ?")
-        setCheckMyScreen(true);
+        // setCheckMyScreen(true);
       }
     });
     // 1-3 예외처리
@@ -109,7 +111,7 @@ const Room = () => {
         await newOV.getUserMedia({
           audioSource: false,
           videoSource: undefined,
-          resolution: '410x290',
+          resolution: '380x240',
           frameRate: 10,
         })
       .then((mediaStream) => {
@@ -142,10 +144,11 @@ const Room = () => {
     });
   }
 
-  const getUserName = async () => {
+  const getUserName = async () => { // 유저 계속 갱신
     setNickNames(null)
     try{
       const repo = await axios.get(`/report?sessionID=${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+      console.log(repo.data.data)
       setNickNames(repo.data.data)
     }catch(error){
       console.log(error)
@@ -172,6 +175,10 @@ const Room = () => {
   //   subscriber.subscribeToAudio(userMute);
   // }
 
+  const handleBanUser = () => {
+    console.log("아이디 눌림")
+  }
+
   window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
     leaveload()
   }
@@ -180,21 +187,9 @@ const Room = () => {
     setChat((prev)=>!prev)
   }
 
-  const handleReport = () => {
+  const handleReport = () => { // 신고 창 여닫이
     setReport((prev)=>!prev)
   }
-
-  useEffect(()=>{
-    console.log(subscribers)
-  },[subscribers])
-
-  useEffect(()=>{ // 시작과 종료를 알리는
-    window.addEventListener("beforeunload", leaveload); 
-    joinSession()
-    return () => {
-      window.removeEventListener("beforeunload", leaveload);
-    };
-  },[])
 
   const reIssue = async () => {
     try{
@@ -206,14 +201,27 @@ const Room = () => {
     }
   }
 
+  useEffect(()=>{
+    console.log(subscribers)
+  },[subscribers])
+
+  useEffect(()=>{ // 시작과 종료를 알리는
+    // window.addEventListener("beforeunload", leaveload); 
+    joinSession()
+    return () => {
+      // window.removeEventListener("beforeunload", leaveload);
+    };
+  },[])
+
   setInterval(()=>{
     reIssue()
     console.log("reIssue !")
-  },60000*10)
+  },60000 * 10)
 
   useEffect(() => {
     getUserName()
   },[publisher,subscribers]);
+
   return (
     <div className='room'>
       <div className='video-container'>
@@ -231,7 +239,7 @@ const Room = () => {
             <div className='room-video'>
               {role === "master" && publisher !== null ? (
                 <div className="pub">
-                  <VideoRecord streamManager={publisher} role={location.state.role}></VideoRecord>
+                  <VideoRecord streamManager={publisher} role={location.state.role} nicknames={nicknames}></VideoRecord>
                   {subscribers.length > 0 ? subscribers.map((sub,index)=>{
                     return(
                       <VideoRecord streamManager={sub} key={index} role={location.state.role}></VideoRecord>
@@ -253,7 +261,15 @@ const Room = () => {
           ) : null}
           {report ? <Report setReport={setReport} nickname={nickname} nicknames={nicknames}></Report> : null}
           <div className={"room-chat" + (chat ? "" : " none")}>
-            {publisher !== null ? <Chat nickname={localStorage.getItem("nickname")} roomName={location.state.roomTitle} success={chat} sessionId={location.state.sessionId} setChat={setChat} checkMyScreen={checkMyScreen}></Chat> : null}
+            {publisher !== null ?
+              <Chat nickname={localStorage.getItem("nickname")}
+                roomName={location.state.roomTitle}
+                success={chat}
+                sessionId={location.state.sessionId}
+                setChat={setChat}
+                checkMyScreen={checkMyScreen}
+                nicknames={nicknames}>
+              </Chat> : null}
           </div>
           
         </div>

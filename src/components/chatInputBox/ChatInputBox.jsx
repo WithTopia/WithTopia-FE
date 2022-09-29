@@ -3,25 +3,37 @@ import { useState ,useEffect } from "react";
 import axios from "axios";
 import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addNickName } from "../../redux/modules/banSlice"
 
-const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen}) => { // 채팅 인풋 박스
-  String(roomId)
+const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen,nicknames}) => { // 채팅 인풋 박스
+  const tName = useSelector(addNickName)
   const [img, setImg] = useState(null);
   const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
+  const [targetName,setTargetName] = useState("") //tName.payload.banSlice.targetName
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const update = {
     user:except.sender,
     message:except.message
   }
-  
-  const handleOut = async () => {     // 나가기
-    stompClient.send("/sub/chat/"+roomId,{},JSON.stringify({type:"EXIT",roomId:roomId,sender:userData.username}))
+  // 나가기
+  const handleOut = () => {
+    console.log("사실 디스커넥트를 안하고 있었던거라면 ?")
+    stompClient.unsubscribe("sub-0")
+    if(stompClient){
+      let chatMessage = {
+        sender: userData.username,
+        type:"EXIT",
+        roomId:roomId
+      };
+      stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage))
+      setUserData({...userData,"message": ""});
+    }
     try{
-      // const repo = await axios.put(`/chat/room/${roomId}/exit`)
-      // console.log(repo)
-      // getOut.unsubscribe()
-      stompClient.disconnect({},function(){
-        console.log('연결 해제.')
+      stompClient.disconnect(()=>{   
       })
     }catch(error){
       console.log(error)
@@ -37,9 +49,26 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
         roomId:roomId
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
-      // setText(userData.message)
-      // setUser(userData.username)
       setUserData({...userData,"message": ""});
+    }
+  }
+
+  const kickMessage = () =>{
+    if (stompClient) {
+      let chatMessage = {
+        sender: userData.username,
+        type:"BEN",
+        roomId:roomId,
+        receive:tName.payload.banSlice.targetName
+      };
+      stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
+      setUserData({...userData,"message": ""});
+      console.log(tName.payload.banSlice.targetName,localStorage.getItem("nickname"))
+      if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
+        alert("추방 당하셨습니다.")
+        navigate("/main")
+        return
+      }
     }
   }
 
@@ -55,6 +84,21 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       sendMessage()
     }
   }
+
+  useEffect(()=>{
+    console.log(tName.payload.banSlice.targetName)
+    if(tName.payload.banSlice.targetName !== ""){
+      if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
+        alert("방장은 추방될 수 없습니다.")
+        return
+      }
+      else{
+        kickMessage()
+        handleOut()
+      }
+    }
+  },[tName])
+
   useEffect(()=>{
     if(checkMyScreen === false){
       handleOut()

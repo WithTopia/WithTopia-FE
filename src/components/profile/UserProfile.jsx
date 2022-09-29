@@ -135,7 +135,7 @@ const Userprofile = () => {
               <img src={targetImage === "" ? userData.profileImage : targetImage}  className='profile-image' alt=''></img>
               <div className='manage-container'>
                 <div className='profile-nickname'>닉네임</div>
-                <input className='nickname-input' type="text" placeholder={userData.nickName} value={nickName} onChange={handleNickName}></input>
+                <input className='nickname-input' type="text" value={nickName} onChange={handleNickName}></input>
                 <button className="withdrawal" onClick={onExit}>회원탈퇴</button>
               </div>
             </div>

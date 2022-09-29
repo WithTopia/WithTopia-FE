@@ -65,12 +65,16 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         token:repo.data.data.token,
         sessionId:repo.data.data.sessionId,
         roomTitle:sendData.roomTitle,
-        memberId:repo.data.data.roomMemberResponseDtoList[0].member,
+        // memberId:repo.data.data.roomMemberResponseDtoList[0].member,
         role:"master"
       }})
-
     }catch(error){
       console.log(error)
+      if(error){
+        alert("로그인이 만료되었습니다.")
+        navigate("/login")
+        return
+      }
     }
   }
 

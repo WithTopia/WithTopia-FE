@@ -63,6 +63,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       setUserData({...userData,"message": ""});
+      console.log(tName.payload.banSlice.targetName,localStorage.getItem("nickname"))
       if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
         alert("추방 당하셨습니다.")
         navigate("/main")

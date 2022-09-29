@@ -8,7 +8,6 @@ export const targetName = createSlice({
             state.targetName = action.payload
         }
     }
-
 })
 
 export const { addNickName } = targetName.actions

@@ -4,15 +4,17 @@ import axios from "axios";
 import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { addNickName ,targetName} from "../../redux/modules/banSlice"
 
 const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen,nicknames}) => { // 채팅 인풋 박스
+  const tName = useSelector(addNickName)
   const [img, setImg] = useState(null);
   const [data , setData] = useState([]) // 내가 친 채팅 및 유저관리
+  const [targetName,setTargetName] = useState("") //tName.payload.banSlice.targetName
   const location = useLocation()
   const navigate = useNavigate()
 
-  console.log(location.state.banAuth)
-  console.log(location.state.targetName)
   const update = {
     user:except.sender,
     message:except.message
@@ -52,13 +54,12 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   const kickMessage = () =>{
-    alert(roomId)
     if (stompClient) {
       let chatMessage = {
         sender: userData.username,
         type:"BEN",
         roomId:roomId,
-        receive:location.state.targetName
+        receive:targetName
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       // setText(userData.message)
@@ -87,13 +88,13 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   useEffect(()=>{
-    if(location.state.targetName!==undefined){
+    if(tName.payload.banSlice.targetName !== ""){
+      setTargetName(tName.payload.banSlice.targetName)
       kickMessage()
     }
-  },[location.state.targetName])
+  },[tName])
 
   useEffect(()=>{
-    alert(checkMyScreen)
     if(checkMyScreen === false){
       handleOut()
     }

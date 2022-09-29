@@ -3,25 +3,28 @@ import like from "../../assets/like.png"
 import unlike from "../../assets/unlike.png"
 import likeYet from "../../assets/yetlike.png"
 import unlikeYet from "../../assets/yetunlike.png"
+import { useDispatch } from "react-redux";
+import { targetName ,addNickName} from "../../redux/modules/banSlice";
 import "./VideoRecord.scss"
 import axios from 'axios'
 import ban from "../../assets/ban.png"
-import { useNavigate } from 'react-router-dom'
+
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
-    const navigate = useNavigate()
-    
     const [vote,setVote] = useState(false)
     const [complete,setComplete] = useState("")
+    const dispatch = useDispatch();
+
     const checkVoted = () => {
         alert("이미 투표 하셨습니다.")
     }
     const handleBan = () => {
         console.log("working !")
-        navigate("/room/:id",{state:{
-            targetName:streamManager.stream.connection.data.split("%")[2]
-        }})
+        dispatch(addNickName(streamManager.stream.connection.data.split("%")[2]))
+        // navigate("/room/:id",{state:{
+        //     targetName:streamManager.stream.connection.data.split("%")[2]
+        // }})
     }
     const handleVoteLike = (e) => {
         e.preventDefault()

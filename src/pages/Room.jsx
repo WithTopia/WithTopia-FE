@@ -216,7 +216,7 @@ const Room = () => {
   setInterval(()=>{
     reIssue()
     console.log("reIssue !")
-  },6000 * 10)
+  },60000 * 10)
 
   useEffect(() => {
     getUserName()

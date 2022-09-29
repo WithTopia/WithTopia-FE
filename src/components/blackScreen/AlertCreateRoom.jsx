@@ -72,6 +72,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
       console.log(error)
       if(error){
         alert("로그인이 만료되었습니다.")
+        navigate("/login")
         return
       }
     }

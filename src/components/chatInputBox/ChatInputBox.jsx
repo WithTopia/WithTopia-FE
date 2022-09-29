@@ -52,6 +52,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   const kickMessage = () =>{
+    alert(roomId)
     if (stompClient) {
       let chatMessage = {
         sender: userData.username,
@@ -64,10 +65,11 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       // setUser(userData.username)
       setUserData({...userData,"message": ""});
       if(location.state.targetName === localStorage.getItem("nickname")){
+        handleOut()
         alert("추방 당하셨습니다.")
         navigate("/main")
         return
-      } 
+      }
     }
   }
 

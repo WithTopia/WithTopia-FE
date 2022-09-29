@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Kakao = () => {
+  
   const location = useLocation();
   const navigate = useNavigate();
   const KAKAO_CODE = location.search.split("=")[1];
@@ -18,13 +19,17 @@ const Kakao = () => {
       console.log(response);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
-      localStorage.setItem("email", response.data.data.nickname);
-      localStorage.setItem("nickname", response.data.data.email);
+      localStorage.setItem("email", response.data.data.email);
+      localStorage.setItem("nickname", response.data.data.nickname);
       // localStorage.setItem("userImgUrl", response.payload);
       
       navigate("/main");
     }catch (error) {
       console.log(error);
+      if(error.response.data.errormessage === "이미 탈퇴한 멤버입니다."){
+        alert(error.response.data.errormessage)
+        navigate("/")
+      }
     }
   }
   useEffect(() => {
@@ -33,7 +38,6 @@ const Kakao = () => {
 
     return (
         <div>
-          잠시만 기다려주세요 🤗
         </div>
     );
 }

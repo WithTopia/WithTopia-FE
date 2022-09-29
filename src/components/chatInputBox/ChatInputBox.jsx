@@ -93,6 +93,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   },[location.state.targetName])
 
   useEffect(()=>{
+    alert(checkMyScreen)
     if(checkMyScreen === false){
       handleOut()
     }

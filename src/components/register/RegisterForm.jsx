@@ -7,6 +7,7 @@ import { userRegister } from "../../redux/modules/userSlice";
 import axios from "axios";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import logo_empty from '../../assets/logo_empty.webp';
+import Loding from '../button/Loding';
 
   // "email": "이메일@naver.com", 
   // "emailConfirm" :  "123456"
@@ -27,14 +28,17 @@ const Registerform = () => {
   } = useForm();
 
 //이메일 인증메일 보내기
+  const [ loading, setLoading ] = useState(null);
   const [ email, setEmail ] = useState("");
   //onChange => setState에 value값을 담음
   const onEmail = (event) => {
     event.preventDefault();
     setEmail(event.target.value);
   }
+
   //버튼 onClick을 누르면 실행
   const onEmailRequest = async () => {
+    setLoading(true);
     try{ 
       console.log("입력값:",email);
       const data = await axios.post(`/member/email/request`, {
@@ -44,10 +48,16 @@ const Registerform = () => {
       console.log(data.data);
       console.log(data.data.data);
       alert(data.data.data);
+      setLoading(false)
     } 
     catch(error){
       console.log("333",error);
       alert(error.response.data.errormessage)
+      if(error.response.data.errormessage === "이메일 양식을 맞춰주세요"){
+        setLoading(false)
+      }else{
+        setLoading(false)
+      }
     }
   };
   
@@ -173,6 +183,8 @@ const Registerform = () => {
       alert ("빈칸없이 작성해주세요")
     }else if( authKey.length >= 6 && authKeyCheck.authKeyCheckstatus === true ? false : true ) {
       alert ("이메일 인증을 진행해주세요")
+    }else if ( nicknameIn.length < 2 || nicknameIn.length > 6 ) {
+      alert ("닉네임은 2자~6자 입니다")
     }else if ( nickCheck.nickCheckStatus !== false ) {
       alert ("닉네임 중복확인은 필수입니다")
     }else if ( pw < 0 || pw2 < 0 || reg < 0 ) {
@@ -210,6 +222,7 @@ const Registerform = () => {
             onChange={onEmail} 
             placeholder="  이메일을 입력하세요"
             />
+            {loading && <Loding/>}
             <button type="button" onClick={onEmailRequest} className='mail-btn1'>메일 인증</button>
             <input type="text" 
             name="authKey"

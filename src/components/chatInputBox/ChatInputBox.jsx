@@ -5,7 +5,7 @@ import close from "../../assets/x.png"
 import send from "../../assets/Vector.png"
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { addNickName ,targetName} from "../../redux/modules/banSlice"
+import { addNickName } from "../../redux/modules/banSlice"
 
 const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen,nicknames}) => { // 채팅 인풋 박스
   const tName = useSelector(addNickName)
@@ -59,13 +59,13 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
         sender: userData.username,
         type:"BEN",
         roomId:roomId,
-        receive:targetName
+        receive:tName.payload.banSlice.targetName
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       // setText(userData.message)
       // setUser(userData.username)
       setUserData({...userData,"message": ""});
-      if(location.state.targetName === localStorage.getItem("nickname")){
+      if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
         handleOut()
         alert("추방 당하셨습니다.")
         navigate("/main")
@@ -88,9 +88,15 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   useEffect(()=>{
+    console.log(tName.payload.banSlice.targetName)
     if(tName.payload.banSlice.targetName !== ""){
-      setTargetName(tName.payload.banSlice.targetName)
-      kickMessage()
+      if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
+        alert("방장은 추방될 수 없습니다.")
+        return
+      }
+      else{
+        kickMessage()
+      }
     }
   },[tName])
 

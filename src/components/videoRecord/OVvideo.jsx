@@ -12,6 +12,7 @@ import ban from "../../assets/ban.png"
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
+    console.log(nicknames)
     const [vote,setVote] = useState(false)
     const [complete,setComplete] = useState("")
     const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     }
     const handleBan = () => {
         console.log("working !")
-        dispatch(addNickName(streamManager.stream.connection.data.split("%")[2]))
+        let nick = streamManager.stream.connection.data.split("%")[2]
+        dispatch(addNickName(nick))
         // navigate("/room/:id",{state:{
         //     targetName:streamManager.stream.connection.data.split("%")[2]
         // }})

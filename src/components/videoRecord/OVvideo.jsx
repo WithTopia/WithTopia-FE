@@ -5,13 +5,23 @@ import likeYet from "../../assets/yetlike.png"
 import unlikeYet from "../../assets/yetunlike.png"
 import "./VideoRecord.scss"
 import axios from 'axios'
+import ban from "../../assets/ban.png"
+import { useNavigate } from 'react-router-dom'
 // import hiddenVideo from "../../assets/cam-off.png"
 
-const OVvideo = ({streamManager,role}) => {
+const OVvideo = ({streamManager,role,nicknames}) => {
+    const navigate = useNavigate()
+    
     const [vote,setVote] = useState(false)
     const [complete,setComplete] = useState("")
     const checkVoted = () => {
-
+        alert("이미 투표 하셨습니다.")
+    }
+    const handleBan = () => {
+        console.log("working !")
+        navigate("/room/:id",{state:{
+            targetName:streamManager.stream.connection.data.split("%")[2]
+        }})
     }
     const handleVoteLike = (e) => {
         e.preventDefault()
@@ -56,6 +66,8 @@ const OVvideo = ({streamManager,role}) => {
             <div className='video-contents'>
                 <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
+                    {role === "master" ? null : <img src={ban} className="video-ban" onClick={handleBan}></img>}
+                    {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     {complete === "" ? <>
                         <img src={likeYet} alt="" onClick={handleVoteLike}></img>

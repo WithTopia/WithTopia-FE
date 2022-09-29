@@ -1,6 +1,6 @@
 import './App.css';
-import { useEffect } from 'react';
 import MainFrame from './components/mainBox/MainFrame';
+import Swal from "sweetalert2"
 
 const App = () => {
   return (

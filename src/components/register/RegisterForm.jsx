@@ -8,6 +8,7 @@ import axios from "axios";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import logo_empty from '../../assets/logo_empty.webp';
 import Loding from '../button/Loding';
+import Swal from "sweetalert2"
 
   // "email": "이메일@naver.com", 
   // "emailConfirm" :  "123456"
@@ -46,14 +47,14 @@ const Registerform = () => {
         email
       })
       if(data.data.data === "인증번호 전송 완료! 이메일을 확인해주세요."){
-        alert(data.data.data);
+        Swal.fire(data.data.data)
         setWaiting(true)
       }
       setLoading(false)
     } 
     catch(error){
       console.log("333",error);
-      alert(error.response.data.errormessage)
+      Swal.fire(error.response.data.errormessage)
       if(error.response.data.errormessage === "이메일 양식을 맞춰주세요"){
         setLoading(false)
       }else{
@@ -82,18 +83,18 @@ const Registerform = () => {
       })
       console.log(data.data);
       if (data.data.data === true && authKey !== ""){
-        alert("인증되었습니다");
+        Swal.fire("인증되었습니다")
         setAuthKey(authKey)
         console.log(data);
         console.log(data.data);
         console.log(data.data.data);
         setAuthKeyCheck({...authKeyCheck, authKeyCheckstatus : true});
       } else if (data.data.data !== true){
-        alert("인증번호를 확인해주세요");
+        Swal.fire("인증번호를 확인해주세요")
       };
     } catch(error){
       console.log(error)
-      alert(error.response.data.errormessage)
+      Swal.fire(error.response.data.errormessage)
     };
   };
   
@@ -116,14 +117,14 @@ const Registerform = () => {
         nickname : nicknameIn
       })
       if(data.data.data === false && nicknameIn !== ""){
-        alert("사용가능한 닉네임 입니다");
+        Swal.fire("사용가능한 닉네임 입니다")
         console.log(data);
         console.log(data.data);
         console.log(data.data.data);
         setNickname(nicknameIn)
         setNickCheck({...nickCheck, nickCheckStatus : false})
       }else if(data.data.data !== false) {
-        alert("사용불가한 닉네임 입니다");
+        Swal.fire("사용불가한 닉네임 입니다")
         console.log(data.data.data);
       }
     }catch(error){
@@ -181,22 +182,22 @@ const Registerform = () => {
     const reg = password.search(/[!@#$%^&*]/gi);
 
     if ( email === "" || authKey === "" || nicknameIn === "" || password === "" || passwordConfirm === "" ){
-      alert ("빈칸없이 작성해주세요")
+      Swal.fire("빈칸없이 작성해주세요")
     }else if( authKey.length >= 6 && authKeyCheck.authKeyCheckstatus === true ? false : true ) {
-      alert ("이메일 인증을 진행해주세요")
+      Swal.fire("이메일 인증을 진행해주세요")
     }else if ( nicknameIn.length < 2 || nicknameIn.length > 6 ) {
-      alert ("닉네임은 2자~6자 입니다")
+      Swal.fire("닉네임은 2자~6자 입니다")
     }else if ( nickCheck.nickCheckStatus !== false ) {
-      alert ("닉네임 중복확인은 필수입니다")
+      Swal.fire("닉네임 중복확인은 필수입니다")
     }else if ( pw < 0 || pw2 < 0 || reg < 0 ) {
-      alert ("비밀번호는 영문, 숫자 조합만 가능합니다.")
+      Swal.fire("비밀번호는 영문, 숫자 조합만 가능합니다.")
     }else if ( password.length < 8 || password.length > 20){
-      alert ("비밀번호는 8자 이상 20자 이하만 가능합니다.")
+      Swal.fire("비밀번호는 8자 이상 20자 이하만 가능합니다.")
     }else if ( password !== passwordConfirm ){
-      alert ("동일한 비밀번호를 입력해주세요")
+      Swal.fire("동일한 비밀번호를 입력해주세요")
     }else if(authKeyCheck.authKeyCheckstatus !== true || nickCheck.nickCheckStatus !== false){
       console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
-      alert ("모든 인증을 완료해주세요")
+      Swal.fire("모든 인증을 완료해주세요")
     }else {
       dispatch(userRegister(data));
       console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)

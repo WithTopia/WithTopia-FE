@@ -8,7 +8,7 @@ import { targetName ,addNickName} from "../../redux/modules/banSlice";
 import "./VideoRecord.scss"
 import axios from 'axios'
 import ban from "../../assets/ban.png"
-
+import Swal from "sweetalert2"
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
@@ -18,7 +18,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     const dispatch = useDispatch();
 
     const checkVoted = () => {
-        alert("이미 투표 하셨습니다.")
+        Swal.fire("이미 투표 하셨습니다.")
     }
     const handleBan = () => {
         console.log("working !")
@@ -48,12 +48,12 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             if(req.data.errormessage){
-                alert(req.data.errormessage)
+                Swal.fire(req.data.errormessage)
                 return
             }
             if(req.data.statusMsg){
                 setComplete("complete")
-                alert("인기도 투표 완료")
+                Swal.fire("인기도 투표 완료")
             }
             console.log(req.data.statusMsg)
         }catch(error){

@@ -4,6 +4,7 @@ import MoveButton2 from '../button/MoveButton2'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import Swal from "sweetalert2"
 
 const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const handlePw = (e) => {
     e.preventDefault();
     if(check === null){
-      alert("공개 여부를 선택해주세요.")
+      Swal.fire("공개 여부를 선택해주세요.")
       return
     }
     
@@ -34,12 +35,12 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const submitRoom = async (e) => {
     e.preventDefault()
     if(sendData.roomTitle==="" || sendData.maxMember==="" || sendData.status === null){
-      alert("방 설정을 정확히 입력해주세요.")
+      Swal.fire("방 설정을 정확히 입력해주세요.")
       return
     }
     if(check === false){
       if(sendData.password.length < 4 || sendData.password.length > 12){
-        alert("비밀번호는 영어문자,숫자로 4~12자리를 입력해주세요.")
+        Swal.fire("비밀번호는 영어문자,숫자로 4~12자리를 입력해주세요.")
         return
       }
     }
@@ -54,7 +55,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         password:sendData.password
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
-        alert("로그인을 해주세요 !")
+        Swal.fire("로그인을 해주세요 !")
         navigate("/login")
         return
       }
@@ -71,7 +72,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     }catch(error){
       console.log(error)
       if(error){
-        alert("로그인이 만료되었습니다.")
+        Swal.fire("로그인이 만료되었습니다.")
         navigate("/login")
         return
       }

@@ -6,6 +6,7 @@ import send from "../../assets/Vector.png"
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addNickName } from "../../redux/modules/banSlice"
+import Swal from "sweetalert2"
 
 const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,checkMyScreen,nicknames}) => { // 채팅 인풋 박스
   const tName = useSelector(addNickName)
@@ -65,7 +66,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       setUserData({...userData,"message": ""});
       console.log(tName.payload.banSlice.targetName,localStorage.getItem("nickname"))
       if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
-        alert("추방 당하셨습니다.")
+        Swal.fire("추방 당하셨습니다.")
         navigate("/main")
         return
       }
@@ -85,19 +86,19 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
     }
   }
 
-  useEffect(()=>{
-    console.log(tName.payload.banSlice.targetName)
-    if(tName.payload.banSlice.targetName !== ""){
-      if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
-        alert("방장은 추방될 수 없습니다.")
-        return
-      }
-      else{
-        kickMessage()
-        handleOut()
-      }
-    }
-  },[tName])
+  // useEffect(()=>{
+  //   console.log(tName.payload.banSlice.targetName)
+  //   if(tName.payload.banSlice.targetName !== ""){
+  //     if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
+  //       Swal.fire("방장은 추방될 수 없습니다.")
+  //       return
+  //     }
+  //     else{
+  //       kickMessage()
+  //       handleOut()
+  //     }
+  //   }
+  // },[tName])
 
   useEffect(()=>{
     if(checkMyScreen === false){

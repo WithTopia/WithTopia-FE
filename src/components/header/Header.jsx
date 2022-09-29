@@ -3,6 +3,8 @@ import logo_empty from "../../assets/logo_empty.webp";
 import searchIcon from "../../assets/searchIcon.png"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2"
+import "sweetalert2/src/sweetalert2.scss"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ const Header = () => {
 
   const searchPage = async () => {
     if(search.length < 2){
-      alert("방제목 길이는 최소 2글자 입니다.")
+      Swal.fire("방제목 길이는 최소 2글자 입니다.")
       return
     }else{
       navigate("/main",{state:{search:search}})

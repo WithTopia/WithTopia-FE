@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./AlertInputPw.scss"
+import Swal from "sweetalert2"
+import "sweetalert2/src/sweetalert2.scss"
 
 const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
   const navigate = useNavigate()
@@ -13,10 +15,10 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
       console.log(datas)
       const repo = await axios.post(`/room/${datas.sessionId}`,{password:password},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       if(repo.data.errormessage === "Token이 유효하지 않습니다."){
-        alert("재로그인 해주세요.")
+        Swal.fire("로그인을 해주세요.")
       }
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
-        alert("로그인을 해주세요 !")
+        Swal.fire("로그인을 해주세요.")
         console.log("??????????")
         navigate("/login")
         return
@@ -33,14 +35,14 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
     catch(error){
       console.log(error)
       if(error.response.data.errormessage === "방이 존재하지않습니다."){
-        alert("방이 존재하지 않습니다.")
+        Swal.fire("방이 존재하지 않습니다.")
         alertPwOff((prev)=>!prev)
       }
       if(error.response.data.errormessage === "비밀번호가 틀립니다."){
-        alert("비밀번호가 틀립니다.")
+        Swal.fire("비밀번호가 틀립니다.")
       }
       if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
-        alert("이미 입장한 멤버입니다.")
+        Swal.fire("이미 입장한 멤버입니다.")
       }
     }     
   }

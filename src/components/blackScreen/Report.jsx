@@ -1,6 +1,7 @@
 import "./Report.scss"
 import { useState } from "react"
 import axios from "axios"
+import Swal from "sweetalert2"
 
 const Report = ({setReport,nickname,nicknames}) => {
     let refreshtoken = localStorage.getItem("refreshtoken")
@@ -30,14 +31,14 @@ const Report = ({setReport,nickname,nicknames}) => {
         formData.append("content", texts);
         formData.append("toNickname", name);
         if(texts === ""){
-            alert("내용을 입력해주세요.")
+            Swal.fire("내용을 입력해주세요.")
             return
         }
         try{
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
             console.log(repo.data.statusMsg)
             if(repo.data.statusMsg === "정상"){
-                alert("보내기 성공하였습니다.")
+                Swal.fire("보내기 성공하였습니다.")
                 setReport((prev)=>!prev)
                 return
             }
@@ -45,7 +46,7 @@ const Report = ({setReport,nickname,nicknames}) => {
         }catch(error){
             console.log(error)
             if(error.errormessage==="사용자를 찾을 수 없습니다."){
-                alert("사용자를 찾을 수 없습니다. 재로그인 부탁드립니다.")
+                Swal.fire("사용자를 찾을 수 없습니다. 재로그인 부탁드립니다.")
                 return
             }
         }

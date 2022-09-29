@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2"
 
 const Kakao = () => {
   
@@ -27,7 +28,7 @@ const Kakao = () => {
     }catch (error) {
       console.log(error);
       if(error.response.data.errormessage === "이미 탈퇴한 멤버입니다."){
-        alert(error.response.data.errormessage)
+        Swal.fire(error.response.data.errormessage)
         navigate("/")
       }
     }

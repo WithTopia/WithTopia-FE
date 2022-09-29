@@ -8,8 +8,8 @@ import {
   AiOutlineTeam,
   AiOutlineSend,
   AiOutlineExport } from "react-icons/ai";
-import samplePic from "../../assets/profileSample.png";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 const Sidebar = () => {
   const navigate = useNavigate()
@@ -27,10 +27,10 @@ const Sidebar = () => {
     // localStorage.removeItem("authorization");
     localStorage.clear();
     if(out.data.data === "로그아웃에 성공했습니다."){
-      alert(out.data.data)
+      Swal.fire(out.data.data)
       navigate("/login")
     }if(out.data.errormessage === "로그인을 해주세요."){
-      alert(out.data.errormessage)
+      Swal.fire(out.data.errormessage)
       navigate("/login")
     }
     }catch(error){

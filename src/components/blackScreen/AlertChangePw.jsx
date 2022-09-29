@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import "./AlertChangePw.scss"
 import {useNavigate} from "react-router-dom"
+import Swal from "sweetalert2"
 
 const AlertChangePw = ({page,setPage}) => {
   const navigate = useNavigate()
@@ -26,13 +27,13 @@ const AlertChangePw = ({page,setPage}) => {
     },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
     console.log(repo)
     if(repo.data.statusMsg === "정상"){
-      alert("변경 되었습니다.")
+      Swal.fire("변경 되었습니다.")
       navigate("/main")
       return
     }
     }catch(error){
       if(error.response.data.errormessage ==="패스워드가 일치하지않습니다."){
-        alert("패스워드가 일치하지 않습니다.")
+        Swal.fire("패스워드가 일치하지 않습니다.")
       }
     }
   }

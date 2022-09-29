@@ -8,6 +8,7 @@ import colorRoom from "../../assets/color-room.webp";
 import blackRoom from "../../assets/black-room.webp";
 import colorSearch from "../../assets/color-search.webp";
 import blackSearch from "../../assets/black-search.webp";
+import Swal from "sweetalert2"
 
 const ChatList = ({search}) => {
     console.log(search)
@@ -31,7 +32,7 @@ const ChatList = ({search}) => {
         }catch(error){
             console.log(error)
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
-                alert("검색 결과가 없습니다.")
+                Swal.fire("검색 결과가 없습니다.")
                 return
             }
         } 

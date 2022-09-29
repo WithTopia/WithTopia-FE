@@ -35,9 +35,7 @@ const Registerform = () => {
     event.preventDefault();
     setEmail(event.target.value);
   }
-  // useEffect(() => {
-  //   setLoading(true);
-  // },[ onEmailRequest() ])
+
   //버튼 onClick을 누르면 실행
   const onEmailRequest = async () => {
     setLoading(true);

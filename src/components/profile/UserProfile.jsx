@@ -97,6 +97,27 @@ const Userprofile = () => {
     }
   }
 
+  const onExit = async () => {
+    try{
+      const res = await axios.put(`/member/leave`,{},{
+        headers : {"authorization":token,"refreshtoken":refreshtoken}
+      })
+      console.log(res)
+      if(res.data.data ==="success"){
+        alert("탈퇴요청이 정상 접수 되었습니다. 보안을 위해 회원정보는 3일 후 완전삭제 됩니다. 이용해주셔서 감사합니다 :)")
+        localStorage.clear();
+        navigate("/")
+      }
+        if(res.data.errormessage === "탈퇴한지 3일이 경과하지 않았습니다."){
+        alert(res.data.errormessage)
+        localStorage.clear();
+        navigate("/")
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   useEffect(()=>{
     getMyProfile()
     getImages()
@@ -114,7 +135,8 @@ const Userprofile = () => {
               <img src={targetImage === "" ? userData.profileImage : targetImage}  className='profile-image' alt=''></img>
               <div className='manage-container'>
                 <div className='profile-nickname'>닉네임</div>
-                <input className='nickname-input' type="text" value={userData.nickName} onChange={handleNickName}></input>
+                <input className='nickname-input' type="text" placeholder={userData.nickName} value={nickName} onChange={handleNickName}></input>
+                <button className="withdrawal" onClick={onExit}>회원탈퇴</button>
               </div>
             </div>
             <div className='profile-images-cont'>

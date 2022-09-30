@@ -29,8 +29,6 @@ const Userprofile = () => {
   const handleBlock = (url) => {
     setTargetImage(url)
   }
-
-  const [nickName, setNickName] = useState('');
   const getMyProfile = async () => {
     try {
       const data = await axios.get(`/member/mypage`,{headers:{"authorization":token,"refreshtoken":refreshtoken}});

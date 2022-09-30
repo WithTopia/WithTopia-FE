@@ -17,10 +17,10 @@ export const userRegister = createAsyncThunk(
       });
       console.log("2222",response.data.data);
       console.log(response)
-      Swal.fire("회원가입에 성공했습니다 :)")
+      Swal.fire({title:"회원가입에 성공했습니다 :)",confirmButtonColor:"#FFD68B"})
     }catch (error) {
       console.log("3333",error);
-      Swal.fire(error.response.data.errormessage)
+      Swal.fire({title:"빈 칸 없이 작성해주세요",confirmButtonColor:"#FFD68B"})
     }
     console.log("4444",email);
   }
@@ -46,16 +46,16 @@ export const userLogin = createAsyncThunk(
     } catch (error) {
       console.log(error)
       if(error.response.data.errormessage === "로그인에 실패했습니다."){
-        Swal.fire("로그인에 실패했습니다.")
+        Swal.fire({title:"로그인에 실패했습니다.",confirmButtonColor:"#FFD68B"})
       }
       if(error.response.data.errormessage === "사용자가 존재하지않습니다."){
-        Swal.fire("사용자가 존재하지않습니다.")
+        Swal.fire({title:"사용자가 존재하지않습니다.",confirmButtonColor:"#FFD68B"})
       }
       if(error.message === "Request failed with status code 500"){
-        Swal.fire("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
+        Swal.fire({title:"회원정보가 없습니다. 회원가입 후 다시 시도해주세요",confirmButtonColor:"#FFD68B"})
       }
       if(error.response.data.errormessage === "삭제된 회원입니다."){
-        Swal.fire(error.response.data.errormessage)
+        Swal.fire({title:"삭제된 회원입니다.",confirmButtonColor:"#FFD68B"})
       }
       // return thunkAPI.rejectWithValue(error);
     }

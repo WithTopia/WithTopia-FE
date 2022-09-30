@@ -37,7 +37,7 @@ const ChatList = () => {
         }catch(error){
             console.log(error)
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
-                Swal.fire("검색 결과가 없습니다.")
+                Swal.fire({title:"검색 결과가 없습니다.",confirmButtonColor:"#FFD68B"})
                 return
             }
         } 

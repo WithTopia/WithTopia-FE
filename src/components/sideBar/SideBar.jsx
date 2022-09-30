@@ -27,10 +27,10 @@ const Sidebar = () => {
     // localStorage.removeItem("authorization");
     localStorage.clear();
     if(out.data.data === "로그아웃에 성공했습니다."){
-      Swal.fire(out.data.data)
+      .fire({title:"로그아웃에 성공했습니다.",confirmButtonColor:"#FFD68B"})
       navigate("/login")
     }if(out.data.errormessage === "로그인을 해주세요."){
-      Swal.fire(out.data.errormessage)
+      Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
       navigate("/login")
     }
     }catch(error){

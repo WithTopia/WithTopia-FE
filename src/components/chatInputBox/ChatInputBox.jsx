@@ -66,7 +66,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       setUserData({...userData,"message": ""});
       console.log(tName.payload.banSlice.targetName,localStorage.getItem("nickname"))
       if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
-        Swal.fire("추방 당하셨습니다.")
+        Swal.fire({title:"추방 당하셨습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/main")
         return
       }
@@ -90,7 +90,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   //   console.log(tName.payload.banSlice.targetName)
   //   if(tName.payload.banSlice.targetName !== ""){
   //     if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
-  //       Swal.fire("방장은 추방될 수 없습니다.")
+  //       Swal.fire({title:"방장은 추방될 수 없습니다.",confirmButtonColor:"#FFD68B"})
   //       return
   //     }
   //     else{

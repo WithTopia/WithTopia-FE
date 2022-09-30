@@ -47,14 +47,14 @@ const Registerform = () => {
         email
       })
       if(data.data.data === "인증번호 전송 완료! 이메일을 확인해주세요."){
-        Swal.fire(data.data.data)
+        Swal.fire({title:"인증번호 전송 완료! 이메일을 확인해주세요.",confirmButtonColor:"#FFD68B"})
         setWaiting(true)
       }
       setLoading(false)
     } 
     catch(error){
       console.log("333",error);
-      Swal.fire(error.response.data.errormessage)
+      Swal.fire({title:"이메일 양식을 맞춰주세요",confirmButtonColor:"#FFD68B"})
       if(error.response.data.errormessage === "이메일 양식을 맞춰주세요"){
         setLoading(false)
       }else{
@@ -83,18 +83,18 @@ const Registerform = () => {
       })
       console.log(data.data);
       if (data.data.data === true && authKey !== ""){
-        Swal.fire("인증되었습니다")
+        Swal.fire({title:"인증되었습니다",confirmButtonColor:"#FFD68B"})
         setAuthKey(authKey)
         console.log(data);
         console.log(data.data);
         console.log(data.data.data);
         setAuthKeyCheck({...authKeyCheck, authKeyCheckstatus : true});
       } else if (data.data.data !== true){
-        Swal.fire("인증번호를 확인해주세요")
+        Swal.fire({title:"인증번호를 확인해주세요",confirmButtonColor:"#FFD68B"})
       };
     } catch(error){
       console.log(error)
-      Swal.fire(error.response.data.errormessage)
+      Swal.fire({title:"이메일 인증을 확인해주세요",confirmButtonColor:"#FFD68B"})
     };
   };
   
@@ -117,14 +117,14 @@ const Registerform = () => {
         nickname : nicknameIn
       })
       if(data.data.data === false && nicknameIn !== ""){
-        Swal.fire("사용가능한 닉네임 입니다")
+        Swal.fire({title:"사용가능한 닉네임 입니다",confirmButtonColor:"#FFD68B"})
         console.log(data);
         console.log(data.data);
         console.log(data.data.data);
         setNickname(nicknameIn)
         setNickCheck({...nickCheck, nickCheckStatus : false})
       }else if(data.data.data !== false) {
-        Swal.fire("사용불가한 닉네임 입니다")
+        Swal.fire({title:"사용불가한 닉네임 입니다",confirmButtonColor:"#FFD68B"})
         console.log(data.data.data);
       }
     }catch(error){
@@ -182,22 +182,22 @@ const Registerform = () => {
     const reg = password.search(/[!@#$%^&*]/gi);
 
     if ( email === "" || authKey === "" || nicknameIn === "" || password === "" || passwordConfirm === "" ){
-      Swal.fire("빈칸없이 작성해주세요")
+      Swal.fire({title:"빈칸없이 작성해주세요",confirmButtonColor:"#FFD68B"})
     }else if( authKey.length >= 6 && authKeyCheck.authKeyCheckstatus === true ? false : true ) {
       Swal.fire("이메일 인증을 진행해주세요")
     }else if ( nicknameIn.length < 2 || nicknameIn.length > 6 ) {
-      Swal.fire("닉네임은 2자~6자 입니다")
+      Swal.fire({title:"닉네임은 2자~6자 입니다",confirmButtonColor:"#FFD68B"})
     }else if ( nickCheck.nickCheckStatus !== false ) {
-      Swal.fire("닉네임 중복확인은 필수입니다")
+      Swal.fire({title:"닉네임 중복확인은 필수입니다",confirmButtonColor:"#FFD68B"})
     }else if ( pw < 0 || pw2 < 0 || reg < 0 ) {
-      Swal.fire("비밀번호는 영문, 숫자 조합만 가능합니다.")
+      Swal.fire({title:"비밀번호는 영문, 숫자 조합만 가능합니다.",confirmButtonColor:"#FFD68B"})
     }else if ( password.length < 8 || password.length > 20){
-      Swal.fire("비밀번호는 8자 이상 20자 이하만 가능합니다.")
+      Swal.fire({title:"비밀번호는 8자 이상 20자 이하만 가능합니다.",confirmButtonColor:"#FFD68B"})
     }else if ( password !== passwordConfirm ){
-      Swal.fire("동일한 비밀번호를 입력해주세요")
+      Swal.fire({title:"동일한 비밀번호를 입력해주세요",confirmButtonColor:"#FFD68B"})
     }else if(authKeyCheck.authKeyCheckstatus !== true || nickCheck.nickCheckStatus !== false){
       console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
-      Swal.fire("모든 인증을 완료해주세요")
+      Swal.fire({title:"모든 인증을 완료해주세요",confirmButtonColor:"#FFD68B"})
     }else {
       dispatch(userRegister(data));
       console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)

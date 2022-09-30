@@ -18,7 +18,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     const dispatch = useDispatch();
 
     const checkVoted = () => {
-        Swal.fire("이미 투표 하셨습니다.")
+        Swal.fire({title:"이미 투표 하셨습니다.",confirmButtonColor:"#FFD68B"})
     }
     const handleBan = () => {
         console.log("working !")
@@ -48,17 +48,17 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             if(req.data.errormessage){
-                Swal.fire(req.data.errormessage)
+                Swal.fire({title:"자신에게 투표할 수 없습니다.",confirmButtonColor:"#FFD68B"})
                 return
             }
             if(req.data.statusMsg){
                 setComplete("complete")
-                Swal.fire("인기도 투표 완료")
+                Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
             }
             console.log(req.data.statusMsg)
         }catch(error){
             if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
-                Swal.fire("더 이상 내려갈 인기도가 없습니다.")
+                Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
             }
         }
     }

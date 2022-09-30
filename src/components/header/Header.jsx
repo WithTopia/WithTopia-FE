@@ -16,7 +16,7 @@ const Header = () => {
   const searchPage = (e) => {
     
     if(search.length < 2){
-      Swal.fire("방제목 길이는 최소 2글자 입니다.")
+      Swal.fire({title:"방제목 길이는 최소 2글자 입니다.",confirmButtonColor:"#FFD68B"})
     }else{
       dispatch(addSearching(search))
       // navigate("/main",{state:{search:search}})
@@ -33,7 +33,7 @@ const Header = () => {
   const handleEnter = (e) => {
     if(e.keyCode === 13){
       if(search.length < 2){
-        Swal.fire("방제목 길이는 최소 2글자 입니다.")
+        Swal.fire({title:"방제목 길이는 최소 2글자 입니다.",confirmButtonColor:"#FFD68B"})
       }else{
         dispatch(addSearching(search))
         // navigate("/main",{state:{search:search}})

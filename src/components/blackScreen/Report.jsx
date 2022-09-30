@@ -67,11 +67,11 @@ const Report = ({setReport,nickname,nicknames}) => {
                     className="file-input"></input>
                 <select onChange={handleNickName} value={name}>
                     <option value="">대상자를 선택하세요.</option>
-                    {nicknames.map((name,index)=>{
+                    {nicknames !== undefined || null ? nicknames.map((name,index)=>{
                         return(
                             <option value={name.nickname === nickname ? "" : name.nickname} key={index}>{name.nickname === nickname ? "" : name.nickname}</option>
                         )
-                    })}
+                    }) : null}
                 </select>
                 <textarea value={texts} placeholder="확증을 위해 스크린샷을 첨부해주세요." onChange={handleTexts}></textarea>
                 <button onClick={submitReport}>작성하기</button>

@@ -11,7 +11,7 @@ import blackSearch from "../../assets/black-search.webp";
 import Swal from "sweetalert2"
 
 const ChatList = ({search}) => {
-    Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
+    // Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const [rooms,setRooms] = useState("")
     const [searchRoomCheck,setSearchRoomCheck] = useState(false)

@@ -4,9 +4,6 @@ import axios from 'axios';
 
 const Mainslide = () => {
   const [ topRank, setTopRank ] = useState("");
-  // const [ nickname, setNickname ] = useState('');
-  // const [ profileImage, setProfileImage ] = useState('');
-  // const [ likeCnt, setLikeCnt ] = useState('');
 
   const mainRank = async () => {
     try{
@@ -25,7 +22,7 @@ const Mainslide = () => {
     <>
       <div className='rank'>
         <div className='rank-top'>
-          <div className='top-WithTo'>Today's WithTo</div>
+          <div className='top-WithTo'>오늘의 위토</div>
           <div className='rank-wrap'>
           {topRank ? topRank.map((topRank,index)=>{
             return(

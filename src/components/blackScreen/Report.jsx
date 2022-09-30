@@ -31,14 +31,13 @@ const Report = ({setReport,nickname,nicknames}) => {
         formData.append("content", texts);
         formData.append("toNickname", name);
         if(texts === "" || image===""){
-            Swal.fire("모든 내용을 정확히 입력해주세요.")
+            Swal.fire({title:"모든 내용을 정확히 입력해주세요.",confirmButtonColor:"#FFD68B"})
             return
         }
         try{
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-            console.log(repo)
             if(repo.data.statusMsg === "정상"){
-                Swal.fire("보내기 성공하였습니다.")
+                Swal.fire({title:"보내기 성공하였습니다.",confirmButtonColor:"#FFD68B"})
                 setReport((prev)=>!prev)
                 return
             }
@@ -47,9 +46,8 @@ const Report = ({setReport,nickname,nicknames}) => {
             }
 
         }catch(error){
-            console.log(error)
             if(error.errormessage==="사용자를 찾을 수 없습니다."){
-                Swal.fire("사용자를 찾을 수 없습니다. 재로그인 부탁드립니다.")
+                Swal.fire({title:"사용자를 찾을 수 없습니다. 재로그인 부탁드립니다.",confirmButtonColor:"#FFD68B"})
                 return
             }
         }

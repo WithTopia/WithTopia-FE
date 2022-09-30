@@ -23,18 +23,16 @@ const Sidebar = () => {
       const out = await axios.post(`/member/logout`,{
       headers:{"authorization":token,"refreshtoken":refreshtoken}
     })
-    console.log(out)
     // localStorage.removeItem("authorization");
     localStorage.clear();
     if(out.data.data === "로그아웃에 성공했습니다."){
-      Swal.fire(out.data.data)
+      Swal.fire({title:"로그아웃에 성공했습니다.",confirmButtonColor:"#FFD68B"})
       navigate("/login")
     }if(out.data.errormessage === "로그인을 해주세요."){
-      Swal.fire(out.data.errormessage)
+      Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
       navigate("/login")
     }
     }catch(error){
-    console.log(error);
     }
   };
   const registerUser = async () => {
@@ -48,7 +46,6 @@ const Sidebar = () => {
         setCheck(true)
       }
     }catch(error){
-      console.log(error)
     }
   }
   useEffect(()=>{

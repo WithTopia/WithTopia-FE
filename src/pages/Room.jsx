@@ -42,11 +42,9 @@ const Room = () => {
 
   const deleteSubscriber = (streamManagerId) => {
     try{
-      console.log("지우기")
       setSubscribers(current=>current.filter((sub)=> sub.stream.connection.connectionId !== streamManagerId )); //e.stream.session.options.sessionId
       setCheckMyScreen(false)
     }catch(error){
-      console.log(error)
     }
   };
 
@@ -57,19 +55,15 @@ const Room = () => {
       if(role === "master"){
         setCheckMyScreen(false)
         const getOutRoomMaster = await axios.delete(`/room/${location.state.sessionId}`,{headers:{"authorization":accessToken2,"refreshtoken":refreshtoken}})
-        console.log(getOutRoomMaster)
         leaveSession();
       }else if(role === "user"){
         setCheckMyScreen(false)
         const getOutRoomUser = await axios.post(`/room/${location.state.sessionId}/member`,{},{headers:{"authorization":accessToken2,"refreshtoken":refreshtoken}})
-        console.log("유저 나가",getOutRoomUser)
       }
     }catch(error){
-      console.log(error)
     }
   };
   const leaveSession = () => {
-    console.log("세션 치우기")
     setSubscribers([])
     setOV(undefined)
     setPublisher(null)
@@ -89,7 +83,6 @@ const Room = () => {
         e.stream,
         undefined
       );
-      console.log("입장~")
       setSubscribers(current=>[...current,newSubscriber]);
       setIsConnect(true)
     });
@@ -98,13 +91,11 @@ const Room = () => {
       if (e.stream.typeOfVideo === 'CUSTOM') {
         deleteSubscriber(e.stream.connection.connectionId);
       } else {
-        console.log("지우기 실패 ?")
         // setCheckMyScreen(true);
       }
     });
     // 1-3 예외처리
     newsession.on('exception', (exception) => {
-      console.warn(exception);
     });
     newsession.connect( tokenStuff, { clientData: nickname })    
       .then(async () => {
@@ -148,10 +139,8 @@ const Room = () => {
     setNickNames(null)
     try{
       const repo = await axios.get(`/report?sessionID=${location.state.sessionId}`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-      console.log(repo.data.data)
       setNickNames(repo.data.data)
     }catch(error){
-      console.log(error)
     }
   }
 
@@ -165,18 +154,15 @@ const Room = () => {
   //   publisher.publishAudio(mute)
   // }
   // const handleUserCam = () => {
-  //   console.log(subscriber)
   //   setUserHidden((prev)=>!prev)
   //   subscriber.subscribeToVideo(userHidden);
   // }
   // const handleUserMic = () => {
-  //   console.log(subscriber)
   //   setUserMute((prev)=>!prev)
   //   subscriber.subscribeToAudio(userMute);
   // }
 
   const handleBanUser = () => {
-    console.log("아이디 눌림")
   }
 
   window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
@@ -197,12 +183,10 @@ const Room = () => {
       localStorage.removeItem("accessToken");
       localStorage.setItem("accessToken",repo.headers.authorization)
     }catch(error){
-      console.log(error)
     }
   }
 
   useEffect(()=>{
-    console.log(subscribers)
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
@@ -215,7 +199,6 @@ const Room = () => {
 
   setInterval(()=>{
     reIssue()
-    console.log("reIssue !")
   },60000 * 10)
 
   useEffect(() => {
@@ -228,9 +211,9 @@ const Room = () => {
         <div className='video-header'>
           <h2>{location.state.roomTitle}</h2>
           <div className='video-sets'>
-            <img src={siren} className="siren" onClick={handleReport}></img>
-            <img src={message} className="message-control" onClick={handleChat}></img>
-            <a href='/main'><img src={exit} className="out"></img></a>
+            <img src={siren} className="siren" onClick={handleReport} alt=""></img>
+            <img src={message} className="message-control" onClick={handleChat} alt=""></img>
+            <a href='/main'><img src={exit} className="out" alt=""></img></a>
           </div>
         </div>   
         <hr></hr>

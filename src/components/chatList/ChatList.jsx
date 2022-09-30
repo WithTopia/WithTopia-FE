@@ -9,11 +9,16 @@ import blackRoom from "../../assets/black-room.webp";
 import colorSearch from "../../assets/color-search.webp";
 import blackSearch from "../../assets/black-search.webp";
 import Swal from "sweetalert2"
+import { searchSlice } from '../../redux/modules/searchSlice';
+import { useSelector } from 'react-redux';
 
-const ChatList = ({search}) => {
-    Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
+const ChatList = () => {
+    // Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
+    const searchData = useSelector(state=>state.searchSlice)
+    console.log(searchData.searchSlice)
     const [rooms,setRooms] = useState("")
+    const [searchRooms,setSearchRooms] = useState("")
     const [searchRoomCheck,setSearchRoomCheck] = useState(false)
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false); // use this if you want the box to say "loading...". Forgot this lol.
@@ -22,13 +27,13 @@ const ChatList = ({search}) => {
 
     const searchPage = async () => {
         try{
-            const repo = await axios.get(`/rooms/${pageRef.current}?keyword=${search}`)
+            const repo = await axios.get(`/rooms/${pageRef.current}?keyword=${searchData.searchSlice}`)
             console.log(repo)
             if(repo.data.statusMsg === "정상"){
-                setRooms([...dataRef.current,...repo.data.data.content])
+                setSearchRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
                 setSearchRoomCheck(true)
-        }
+            }
         }catch(error){
             console.log(error)
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
@@ -71,27 +76,15 @@ const ChatList = ({search}) => {
     };
     
     useEffect(()=>{
-        if(search === null || search === ""){
-            findRoom()
-            setPage(pageRef.current + 1);
-            let options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 1.0,
-            };
-            const observer = new IntersectionObserver(handleObserver, options);
-            observer.observe(loadingRef.current);
-        }else{
-            searchPage()
-            setPage(pageRef.current + 1);
-            let options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 1.0,
-            };
-            const observer = new IntersectionObserver(handleObserver, options);
-            observer.observe(loadingRef.current);
-        }
+        findRoom()
+        setPage(pageRef.current + 1);
+        let options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0,
+        };
+        const observer = new IntersectionObserver(handleObserver, options);
+        observer.observe(loadingRef.current);
     },[])
     
     return (
@@ -100,12 +93,17 @@ const ChatList = ({search}) => {
             <div className='main-page-title'>
                 Let's Talk in WITHTOPIA!
             </div>
-            {rooms.length === 0 ?
-                <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{
+            {searchRoomCheck === true && searchRooms.length !== 0 ? 
+                searchRooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
-            })}
+            }) : searchRoomCheck === false && rooms.length !== 0 ?
+                rooms.map((datas,index)=>{
+                    return(
+                        <Mainbar datas={datas} key={index}></Mainbar>
+                    )
+            }) : <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>}
             {/* {searchRoom.length === 0 && search !== null ?
                 null : searchRoom.map((datas,index)=>{
                 return(

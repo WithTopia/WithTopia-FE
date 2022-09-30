@@ -1,16 +1,19 @@
 
 .footer{
+  width: 100vw;
   margin-left: 50px;
   opacity: 0.3;
   display: flex;
-  font-size: 5px;
   position: fixed;
   bottom: 0%;
+  color: black;
   .footer-left{
     margin-right: 30px;
+    font-size: 15px;
     cursor: pointer;
   };
   .footer-right{
+    font-size: 15px;
     margin-left: 30px;
     cursor: pointer;
   };

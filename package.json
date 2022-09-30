@@ -24,11 +24,13 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.4",
     "redux": "^4.2.0",
     "sass": "^1.54.5",
     "sockjs-client": "^1.6.1",
     "stomp": "^0.1.1",
     "stompjs": "^2.3.3",
+    "sweetalert2": "^11.4.35",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

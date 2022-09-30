@@ -8,9 +8,10 @@ import colorRoom from "../../assets/color-room.webp";
 import blackRoom from "../../assets/black-room.webp";
 import colorSearch from "../../assets/color-search.webp";
 import blackSearch from "../../assets/black-search.webp";
+import Swal from "sweetalert2"
 
 const ChatList = ({search}) => {
-    console.log(search)
+    Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const [rooms,setRooms] = useState("")
     const [searchRoomCheck,setSearchRoomCheck] = useState(false)
@@ -31,7 +32,7 @@ const ChatList = ({search}) => {
         }catch(error){
             console.log(error)
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
-                alert("검색 결과가 없습니다.")
+                Swal.fire("검색 결과가 없습니다.")
                 return
             }
         } 
@@ -52,9 +53,7 @@ const ChatList = ({search}) => {
 
     const findRoom = async () => {
         try{
-            console.log("이쪽")
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
-            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
             setSearchRoomCheck(false)

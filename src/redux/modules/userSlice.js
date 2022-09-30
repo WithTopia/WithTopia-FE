@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 //회원가입
 export const userRegister = createAsyncThunk(
@@ -16,10 +17,10 @@ export const userRegister = createAsyncThunk(
       });
       console.log("2222",response.data.data);
       console.log(response)
-      alert("회원가입에 성공했습니다 :)")
+      Swal.fire("회원가입에 성공했습니다 :)")
     }catch (error) {
       console.log("3333",error);
-      alert(error.response.data.errormessage)
+      Swal.fire(error.response.data.errormessage)
     }
     console.log("4444",email);
   }
@@ -45,16 +46,16 @@ export const userLogin = createAsyncThunk(
     } catch (error) {
       console.log(error)
       if(error.response.data.errormessage === "로그인에 실패했습니다."){
-        alert("로그인에 실패했습니다.")
+        Swal.fire("로그인에 실패했습니다.")
       }
       if(error.response.data.errormessage === "사용자가 존재하지않습니다."){
-        alert("사용자가 존재하지않습니다.")
+        Swal.fire("사용자가 존재하지않습니다.")
       }
       if(error.message === "Request failed with status code 500"){
-        alert("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
+        Swal.fire("회원정보가 없습니다. 회원가입 후 다시 시도해주세요")
       }
       if(error.response.data.errormessage === "삭제된 회원입니다."){
-        alert(error.response.data.errormessage)
+        Swal.fire(error.response.data.errormessage)
       }
       // return thunkAPI.rejectWithValue(error);
     }

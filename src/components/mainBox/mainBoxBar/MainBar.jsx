@@ -4,9 +4,9 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import AlertInputPw from '../../blackScreen/AlertInputPw';
 import { useState } from 'react';
+import Swal from "sweetalert2"
 
 const Mainbar = ({ datas }) => {
-  console.log(datas)
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)
@@ -20,7 +20,7 @@ const Mainbar = ({ datas }) => {
     try{
       const repo = await axios.post(`/room/${datas.sessionId}`,{password:""},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
-        alert("로그인을 해주세요 !")
+        Swal.fire("로그인을 해주세요 !")
         navigate("/login")
         return
       }
@@ -37,15 +37,15 @@ const Mainbar = ({ datas }) => {
     catch(error){
       console.log(error)
       if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
-        alert("이미 입장한 멤버입니다.")
+        Swal.fire("이미 입장한 멤버입니다.")
         return
       }
       if(error.response.data.errormessage === "방이 존재하지않습니다."){
-        alert("방이 존재하지 않습니다.")
+        Swal.fire("방이 존재하지 않습니다.")
         return
       }
       if(error.response.data.errormessage === "방이 가득찼습니다."){
-        alert("방이 가득찼습니다.")
+        Swal.fire("방이 가득찼습니다.")
         return
       }
     }

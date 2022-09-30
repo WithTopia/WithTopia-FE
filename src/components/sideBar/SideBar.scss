@@ -5,8 +5,8 @@
   // margin: 31px 30px 10px 90px;
   margin: 46px;
   width: 240px;
-  height: 78vh;
-  min-height: 800px;
+  min-height: 740px;
+  max-height: 740px;
   justify-content: space-between;
   box-shadow: 1px 1px 5px #e5d493;
   display: flex;
@@ -19,7 +19,7 @@
     height: 250px;
     display: inline-block;
     overflow: hidden;
-    margin: 15px 0;
+    margin: 5px 0;
     a{
       text-decoration: none;
       .sideBar-login{
@@ -70,12 +70,12 @@
     .user-name{
       color: rgb(153, 95, 7);
       font-size: 15px;
-      margin-top: 20px;
+      margin-top: 10px;
       text-align: center;
     };
   };
   .menu-box{
-    height: 45vh;
+    height: 43vh;
     .menu-txt{
     font-size: 25px;  
     color: rgb(153, 95, 7);
@@ -91,7 +91,7 @@
       margin-top: 10px;
       margin-left: 5px;
       p{
-        padding: 10px 20px;
+        padding: 7px 22px;
         border-radius: 5px;
         &:hover{
           background-color: rgb(249, 223, 151);

@@ -22,7 +22,7 @@ const MainPage = () => {
           <ChatList search={location.state === null ? null : location.state.search}></ChatList>
         </div>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }

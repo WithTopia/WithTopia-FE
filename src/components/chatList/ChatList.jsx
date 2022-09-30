@@ -98,7 +98,7 @@ const ChatList = ({search}) => {
     <div className='chat-list'>
         <div className='default-page-size'>
             <div className='main-page-title'>
-                함께하는 위토피아!
+                Let's Talk in WITHTOPIA!
             </div>
             {rooms.length === 0 ?
                 <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img> : rooms.map((datas,index)=>{

@@ -31,6 +31,10 @@ const Kakao = () => {
         Swal.fire(error.response.data.errormessage)
         navigate("/")
       }
+      if(error.response.data.errormessage === "동일한 이메일이 이미 존재합니다."){
+        Swal.fire(error.response.data.errormessage)
+        navigate('/login')
+      }
     }
   }
   useEffect(() => {

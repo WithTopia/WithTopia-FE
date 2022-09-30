@@ -1,12 +1,13 @@
 .rank-box{
-  height: 76vh;  
+  height: 830px;  
   max-width: 1260px;
-  width: calc(98vw - 300px);
+  width: calc(100vw - 300px);
   box-shadow: 1px 1px 5px #e5d493;
   border-radius: 20px;
   padding: 12px;
   overflow-y: auto;
   color: #815403;
+  margin: 46px 0;
   .rank-top3{
     font-size: 30px;
     margin: 20px;
@@ -16,7 +17,7 @@
     margin: 0 10px 30px 10px;
   };
   .rankTop{
-    height: 58px;
+    height: 50px;
     max-width: 1240px;
     min-width: 300px;
     display: flex;

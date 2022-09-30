@@ -130,7 +130,7 @@ const Userprofile = () => {
       <div className="profile-set">
         <SideBar/>
         <div className="user-profile-container">
-          <h2>Profile Management</h2>
+          <h2>Profile</h2>
           <div className='profile-container'>
             <div className='profile-manage'>
               <img src={targetImage === "" ? userData.profileImage : targetImage}  className='profile-image' alt=''></img>
@@ -158,7 +158,7 @@ const Userprofile = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
       {page ? <AlertChangePw page={page} setPage={setPage}></AlertChangePw> : null}
     </div>
   );

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
-import GoogleLogin from 'react-google-login';
+import Swal from "sweetalert2";
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
@@ -32,6 +32,14 @@ const Google = ({ onGoogleLogin }) => {
         navigate("/main");
     }catch (error) {
       console.log(error);
+      if(error.response.data.errormessage === "이미 탈퇴한 멤버입니다."){
+        Swal.fire(error.response.data.errormessage)
+        navigate("/")
+      }
+      if(error.response.data.errormessage === "동일한 이메일이 이미 존재합니다."){
+        Swal.fire(error.response.data.errormessage)
+        navigate('/login')
+      }
     }
   };
 

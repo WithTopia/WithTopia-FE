@@ -25,7 +25,7 @@ const Mainslide = () => {
     <>
       <div className='rank'>
         <div className='rank-top'>
-          <div className='top-WithTo'>Today's WithTo</div>
+          <div className='top-WithTo'>Today's WITTO</div>
           <div className='rank-wrap'>
           {topRank ? topRank.map((topRank,index)=>{
             return(

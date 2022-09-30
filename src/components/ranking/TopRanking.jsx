@@ -54,7 +54,7 @@ const Topranking = () => {
   return (
     <div>
       <div className='rank-box'>
-        <div className='rank-top3'>명예의 위토</div>
+        <div className='rank-top3'>WITTO of HONOR</div>
         <hr/>
           {rank !== "" ? rank.map((ranks,index)=>{
             return(
@@ -66,11 +66,11 @@ const Topranking = () => {
 
                   {index === 0 ? <img src={crown} alt="crown" className='crown'/> :
                     index === 1 ? <img src={crown2} alt="crown" className='crown'/> : 
-                    index === 2 ? <img src={crown3} alt="crown" className='crown'/> :
-                    index === 3 ? <img src={crown4} alt="crown" className='crown'/> :
-                    index === 4 ? <img src={crown4} alt="crown" className='crown'/> : null}
+                    index === 2 ? <img src={crown3} alt="crown" className='crown'/> :null}
+                    {/* index === 3 ? <img src={crown4} alt="crown" className='crown'/> :
+                    index === 4 ? <img src={crown4} alt="crown" className='crown'/> :  */}
                   
-                  {index < 5 ? <div className='rank-top-ranking'>{index+1+"등"}</div> : 
+                  {index < 3 ? <div className='rank-top-ranking'>{index+1+"등"}</div> : 
                   <div className='rank-low-ranking'>{index+1+"등"}</div>}
                   
                 </div>

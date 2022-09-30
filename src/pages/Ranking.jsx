@@ -12,7 +12,7 @@ const Ranking = () => {
         <SideBar/>
         <TopRanking></TopRanking>
       </div>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   )
 }

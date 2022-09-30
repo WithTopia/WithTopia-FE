@@ -71,7 +71,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     return (
         <div className='video-content'>
             <div className='video-contents'>
-                <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2]}</h3>
+                <h3 className='video-username'>{streamManager.stream.connection.data.split("%")[2].includes("_google_") ? streamManager.stream.connection.data.split("%")[2].split("_google_")[0] : streamManager.stream.connection.data.split("%")[2].includes("_kakao_") ? streamManager.stream.connection.data.split("%")[2].split("_kakao_")[0] : streamManager.stream.connection.data.split("%")[2]}</h3>
                 <div className='video-likes'>
                     {/* {role === "master" ? <img src={ban} className="video-ban" onClick={handleBan}></img> : null} */}
                     {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}

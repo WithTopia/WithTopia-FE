@@ -19,7 +19,7 @@ const ChatList = () => {
     const [keyWord,setKeyWord] = useState("")
     const [rooms,setRooms] = useState("") // 메인 무한 스크롤용 
     const [searchRooms,setSearchRooms] = useState("") // 검색 무한 스크롤용
-    const [searchRoomCheck,setSearchRoomCheck] = useState(false) // 체크
+    const [searchRoomCheck,setSearchRoomCheck] = useState(false) // 방들 존재 여부 체크
     const [success,setSuccess] = useState(true)
     const [page, setPage] = useState(1);
     const [page2, setPage2] = useState(1);
@@ -27,7 +27,8 @@ const ChatList = () => {
     const [prevY, setPrevY] = useState(0);
     const [prevY2,setPrevY2] = useState(0)
     const [pageOpen,setPageOpen] = useState(false)
-    const [not,setNot] = useState(false)
+    const [not,setNot] = useState(false) // 검색 후 아예 없는 여부 체크
+
     let dataRef = useRef({});
     let data2Ref = useRef({});
     let loadingRef = useRef(null);
@@ -50,7 +51,7 @@ const ChatList = () => {
     const searchPage = async () => {
         try{
             console.log("try")
-            const repo = await axios.get(`/rooms/${page2Ref.current}?keyword=${keyWord}`)
+            const repo = await axios.get(`/rooms/search/${page2Ref.current}?keyword=${keyWord}`)
             console.log(repo)
             if(repo.data.statusMsg === "정상"){
                 setSearchRooms([...data2Ref.current,...repo.data.data.content])
@@ -59,28 +60,33 @@ const ChatList = () => {
                 setSuccess(true)
             }
         }catch(error){
-            setSuccess(false)
-            if(page2Ref.current-1 === 1){
+            if(page2Ref.current-1 === 1 && error.response.data.errormessage==="검색 결과가 없습니다."){
                 setNot(true)
                 Swal.fire("검색 결과가 없습니다.")
             }
+            if(error.response.data.errormessage==="검색 결과가 없습니다."){
+                // setSearchRooms("")
+                console.log("검색 결과가 더 없습니다.")
+            }
             console.log(error)
-            // if(error.response.data.errormessage==="검색 결과가 없습니다."){
-            //     Swal.fire("검색 결과가 없습니다.")
-            //     return
-            // }
+            setSuccess(false)
+            return
         } 
     }
     const findRoom = async () => {
-        try{
-            console.log("nice try")
-            const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
-            console.log(repo)
-            setRooms([...dataRef.current,...repo.data.data.content])
-            setLoading(false);
-            setSearchRoomCheck(false)
-        }catch(error){
-            console.log(error)
+        if(success === true){
+            try{
+                console.log("nice try")
+                const repo = await axios.get(`/rooms/${pageRef.current}`)
+                console.log(repo)
+                setRooms([...dataRef.current,...repo.data.data.content])
+                setLoading(false);
+            }catch(error){
+                console.log(error)
+                setSearchRoomCheck(true)
+            }
+        }else{
+            alert("더는 없어..")
         }
     }
    
@@ -116,7 +122,7 @@ const ChatList = () => {
             const observer = new IntersectionObserver(handleObserver2, options);
             observer.observe(loadingRef.current);  
         }
-    },[])
+    },[keyWord])
 
     useEffect(()=>{ // 메인용
         if(keyWord.length === 0){
@@ -129,33 +135,18 @@ const ChatList = () => {
             };
             const observer = new IntersectionObserver(handleObserver, options);
             observer.observe(loadingRef.current);  
-        }else{
-            if(success === false){
-                searchPage()
-                setPage2(page2Ref.current + 1);
-                let options = {
-                    root: null,
-                    rootMargin: "0px",
-                    threshold: 1.0,
-                };
-                const observer = new IntersectionObserver(handleObserver2, options);
-                observer.observe(loadingRef.current);
-            }
-            
         }
-    },[keyWord])
+    },[])
 
     useEffect(()=>{
         setKeyWord(searchData.searchSlice)
-        if(keyWord.length > 0){
-            setPrevY(0)
-            setPrevY2(0)
-            setSearchRooms("")
-            setRooms("")
-            setPage(1)
-            setPage2(1)
-            setSuccess(true)
-        }
+        setPrevY(0)
+        setPrevY2(0)
+        setSearchRooms("")
+        setRooms("")
+        setPage(1)
+        setPage2(1)
+        setSuccess(true)
     },[searchData.searchSlice])
   
     return (
@@ -164,25 +155,20 @@ const ChatList = () => {
             <div className='main-page-title'>
                 함께하는 위토피아!
             </div>
-            {searchRoomCheck === true && searchRooms.length !== 0 ? 
+            {searchRooms.length !== 0 ? 
                 searchRooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
-            }) : searchRoomCheck === false && rooms.length !== 0 ?
+            }) : rooms.length !== 0 ?
                 rooms.map((datas,index)=>{
                     return(
                         <Mainbar datas={datas} key={index}></Mainbar>
                     )
-            }) : not ? <img src={blackSearch} alt="검색 결과 없음"></img> : <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>}
-            {/* {searchRoom.length === 0 && search !== null ?
-                null : searchRoom.map((datas,index)=>{
-                return(
-                    <Mainbar datas={datas} key={index}></Mainbar>
-                )}
-            )} */}
+            }) : not ? <img src={blackSearch} alt="검색 결과 없음"></img> : 
+            <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>}
             <div
-               className="scrolldown"
+                className="scrolldown"
                 ref={loadingRef}
                 style={{ height: "50px" }}>
                 {loading && "...Loading"}
@@ -197,3 +183,5 @@ const ChatList = () => {
 }
 
 export default ChatList
+
+// const vidData = dayBarData.filter( (arr, index, callback) => index === callback.findIndex((el) => el.vid === arr.vid) );

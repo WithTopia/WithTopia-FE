@@ -13,7 +13,6 @@ import { searchSlice } from '../../redux/modules/searchSlice';
 import { useSelector } from 'react-redux';
 
 const ChatList = () => {
-    // Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const searchData = useSelector(state=>state.searchSlice)
     console.log(searchData.searchSlice)
@@ -59,6 +58,7 @@ const ChatList = () => {
     const findRoom = async () => {
         try{
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
+            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
             setSearchRoomCheck(false)

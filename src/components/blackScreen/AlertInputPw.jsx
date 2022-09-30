@@ -26,7 +26,6 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
       {state:{
         token:repo.data.data.enterRoomToken,
         sessionId:repo.data.data.sessionId,
-        masterId:repo.data.data.nickname,
         roomTitle:datas.roomTitle,
         role:"user"
       }})

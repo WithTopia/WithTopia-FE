@@ -16,8 +16,7 @@ const Kakao = () => {
       const response = await axios.get(kakaoIP);
       const accessToken = response.headers.authorization;
       const refreshToken = response.headers.refreshtoken;
-      console.log(KAKAO_CODE);
-      console.log(response);
+      
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       localStorage.setItem("email", response.data.data.email);

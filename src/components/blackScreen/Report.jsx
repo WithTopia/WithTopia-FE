@@ -36,11 +36,14 @@ const Report = ({setReport,nickname,nicknames}) => {
         }
         try{
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-            console.log(repo.data.statusMsg)
+            console.log(repo)
             if(repo.data.statusMsg === "정상"){
                 Swal.fire("보내기 성공하였습니다.")
                 setReport((prev)=>!prev)
                 return
+            }
+            if(repo.data.errormessage === "자신을 신고할 수 없습니다."){
+                Swal.fire("자신을 신고할 수 없습니다.")
             }
 
         }catch(error){

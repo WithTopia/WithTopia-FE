@@ -16,8 +16,6 @@ const Kakao = () => {
       const response = await axios.get(kakaoIP);
       const accessToken = response.headers.authorization;
       const refreshToken = response.headers.refreshtoken;
-      console.log(KAKAO_CODE);
-      console.log(response);
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       localStorage.setItem("email", response.data.data.email);
@@ -26,13 +24,12 @@ const Kakao = () => {
       
       navigate("/main");
     }catch (error) {
-      console.log(error);
       if(error.response.data.errormessage === "이미 탈퇴한 멤버입니다."){
-        Swal.fire(error.response.data.errormessage)
+        Swal.fire({title:"이미 탈퇴한 멤버입니다.",confirmButtonColor:"#FFD68B"})
         navigate("/")
       }
       if(error.response.data.errormessage === "동일한 이메일이 이미 존재합니다."){
-        Swal.fire(error.response.data.errormessage)
+        Swal.fire({title:"동일한 이메일이 이미 존재합니다.",confirmButtonColor:"#FFD68B"})
         navigate('/login')
       }
     }

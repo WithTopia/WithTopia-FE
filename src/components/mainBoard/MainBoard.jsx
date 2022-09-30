@@ -10,7 +10,6 @@ import Scrolltotop from '../button/scrollToTop';
 const Mainboard = () => {
   const [tokenCheck,setTokenCheck] = useState(false)
   useEffect(()=>{
-    console.log(localStorage.getItem("accessToken"))
     if(localStorage.getItem("accessToken") === undefined || localStorage.getItem("accessToken") === null){
       setTokenCheck(false)
     }else{

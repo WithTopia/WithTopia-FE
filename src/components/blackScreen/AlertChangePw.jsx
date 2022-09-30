@@ -19,21 +19,19 @@ const AlertChangePw = ({page,setPage}) => {
   const submitHandle = async (e) => {
     e.preventDefault()
     try{
-      console.log(password)
       const repo = await axios.put("/member/mypage/changepw",{
       origin:password.origin,
       password:password.newPassword,
       passwordConfirm:password.newPasswordConfirm
     },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-    console.log(repo)
     if(repo.data.statusMsg === "정상"){
-      Swal.fire("변경 되었습니다.")
+      Swal.fire({title:"변경 되었습니다.",confirmButtonColor:"#FFD68B"})
       navigate("/main")
       return
     }
     }catch(error){
       if(error.response.data.errormessage ==="패스워드가 일치하지않습니다."){
-        Swal.fire("패스워드가 일치하지 않습니다.")
+        Swal.fire({title:"패스워드가 일치하지 않습니다.",confirmButtonColor:"#FFD68B"})
       }
     }
   }

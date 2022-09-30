@@ -23,7 +23,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const handlePw = (e) => {
     e.preventDefault();
     if(check === null){
-      Swal.fire("공개 여부를 선택해주세요.")
+      Swal.fire({title:"공개 여부를 선택해주세요.",confirmButtonColor:"#FFD68B"})
       return
     }
     
@@ -35,12 +35,12 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
   const submitRoom = async (e) => {
     e.preventDefault()
     if(sendData.roomTitle==="" || sendData.maxMember==="" || sendData.status === null){
-      Swal.fire("방 설정을 정확히 입력해주세요.")
+      Swal.fire({title:"방 설정을 정확히 입력해주세요.",confirmButtonColor:"#FFD68B"})
       return
     }
     if(check === false){
       if(sendData.password.length < 4 || sendData.password.length > 12){
-        Swal.fire("비밀번호는 영어문자,숫자로 4~12자리를 입력해주세요.")
+        Swal.fire({title:"비밀번호는 영어문자,숫자로 4~12자리를 입력해주세요.",confirmButtonColor:"#FFD68B"})
         return
       }
     }
@@ -55,7 +55,7 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         password:sendData.password
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
-        Swal.fire("로그인을 해주세요 !")
+        Swal.fire({title:"로그인을 해주세요 !",confirmButtonColor:"#FFD68B"})
         navigate("/login")
         return
       }
@@ -70,9 +70,8 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         role:"master"
       }})
     }catch(error){
-      console.log(error)
       if(error){
-        Swal.fire("로그인이 만료되었습니다.")
+        Swal.fire({title:"로그인이 만료되었습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/login")
         return
       }
@@ -103,7 +102,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     unCheck(true)
   }
   useEffect(()=>{
-    console.log(check)
   },[check])
   
   return (

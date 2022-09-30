@@ -5,6 +5,7 @@ import Header from '../components/header/Header'
 import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
 import ChatList from '../components/chatList/ChatList'
+// import ChatList2 from '../components/chatList/ChatList2'
 import Mainslide from '../components/mainSlide/MainSlide'
 import { useLocation } from 'react-router-dom'
 
@@ -19,7 +20,8 @@ const MainPage = () => {
           <div className='main-rank'>
             <Mainslide></Mainslide>
           </div>
-          <ChatList search={location.state === null ? null : location.state.search}></ChatList>
+          <ChatList></ChatList>
+          {/* <ChatList2></ChatList2> */}
         </div>
       </div>
       <Footer/>

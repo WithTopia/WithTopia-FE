@@ -7,7 +7,6 @@ import { useState } from 'react';
 import Swal from "sweetalert2"
 
 const Mainbar = ({ datas }) => {
-  console.log(datas)
   let token = localStorage.getItem("accessToken")
   let refreshtoken = localStorage.getItem("refreshtoken")
   const [alertPwOn,alertPwOff] = useState(false)

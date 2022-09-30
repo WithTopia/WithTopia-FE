@@ -11,7 +11,7 @@ import blackSearch from "../../assets/black-search.webp";
 import Swal from "sweetalert2"
 
 const ChatList = ({search}) => {
-    console.log(search)
+    Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const [rooms,setRooms] = useState("")
     const [searchRoomCheck,setSearchRoomCheck] = useState(false)
@@ -53,9 +53,7 @@ const ChatList = ({search}) => {
 
     const findRoom = async () => {
         try{
-            console.log("이쪽")
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
-            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
             setSearchRoomCheck(false)

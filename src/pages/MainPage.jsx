@@ -15,7 +15,7 @@ const MainPage = () => {
       <Header/>
       <div className='layout'>
         <SideBar/>
-        <div>
+        <div className='group-right'>
           <div className='main-rank'>
             <Mainslide></Mainslide>
           </div>

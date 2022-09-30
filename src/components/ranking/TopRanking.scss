@@ -16,7 +16,9 @@
     margin: 0 10px 30px 10px;
   };
   .rankTop{
-    height: 50px;
+    height: 58px;
+    max-width: 1240px;
+    min-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,6 +77,8 @@
   }
   .rank-piece{
     height: 50px;
+    max-width: 1240px;
+    min-width: 300px;
     display: flex;
     align-items: center;
     justify-content: center;

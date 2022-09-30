@@ -57,7 +57,9 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             }
             console.log(req.data.statusMsg)
         }catch(error){
-            console.log(error)
+            if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
+                Swal.fire("더 이상 내려갈 인기도가 없습니다.")
+            }
         }
     }
     const videoRef = useRef()

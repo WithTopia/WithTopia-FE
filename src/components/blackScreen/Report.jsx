@@ -30,8 +30,8 @@ const Report = ({setReport,nickname,nicknames}) => {
         formData.append("image", image);
         formData.append("content", texts);
         formData.append("toNickname", name);
-        if(texts === ""){
-            Swal.fire("내용을 입력해주세요.")
+        if(texts === "" || image===""){
+            Swal.fire("모든 내용을 정확히 입력해주세요.")
             return
         }
         try{
@@ -71,7 +71,7 @@ const Report = ({setReport,nickname,nicknames}) => {
                         )
                     })}
                 </select>
-                <textarea value={texts} onChange={handleTexts}></textarea>
+                <textarea value={texts} placeholder="확증을 위해 스크린샷을 첨부해주세요." onChange={handleTexts}></textarea>
                 <button onClick={submitReport}>작성하기</button>
             </div>
         </div>

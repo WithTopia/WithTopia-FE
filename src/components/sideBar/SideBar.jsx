@@ -40,7 +40,6 @@ const Sidebar = () => {
   const registerUser = async () => {
     try {
       const repo = await axios.get(`/member/mypage`,{headers:{"authorization":token,"refreshtoken":refreshtoken}});
-      console.log(repo)
       if(repo.data.errormessage === "사용자를 찾을 수 없습니다."){
         setCheck(false)
       }

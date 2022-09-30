@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./AlertInputPw.scss"
 import Swal from "sweetalert2"
-import "sweetalert2/src/sweetalert2.scss"
 
 const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
   const navigate = useNavigate()

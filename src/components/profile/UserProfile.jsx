@@ -18,15 +18,18 @@ const Userprofile = () => {
   const [targetImage,setTargetImage] = useState("")
   const [userData,setUserData] = useState("")
   const [checkPoint,setCheckPoint] = useState(false)
-
-  const imgRef = useRef(null);
+  const [nickName, setNickName] = useState('');
   const [page,setPage] = useState(false)
+  const imgRef = useRef(null);
+
+  
   const handlePage1 = () => {
     setPage((prev)=>!prev)
   }
   const handleBlock = (url) => {
     setTargetImage(url)
   }
+
   const [nickName, setNickName] = useState('');
   const getMyProfile = async () => {
     try {
@@ -87,7 +90,7 @@ const Userprofile = () => {
     }catch(error){
     }
   }
-
+  
   const onExit = async () => {
     try{
       const res = await axios.put(`/member/leave`,{},{
@@ -106,6 +109,11 @@ const Userprofile = () => {
     }catch(error){
     }
   }
+
+  useEffect(()=>{
+    setNickName(userData.nickName)
+  },[userData.nickName])
+
 
   useEffect(()=>{
     getMyProfile()

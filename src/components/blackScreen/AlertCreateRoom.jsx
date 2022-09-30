@@ -59,14 +59,11 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         navigate("/login")
         return
       }
-      localStorage.setItem("masterId",repo.data.data.masterId)
-      
       navigate(`/room/${repo.data.data.sessionId}`,
       {state:{
         token:repo.data.data.token,
         sessionId:repo.data.data.sessionId,
         roomTitle:sendData.roomTitle,
-        // memberId:repo.data.data.roomMemberResponseDtoList[0].member,
         role:"master"
       }})
     }catch(error){

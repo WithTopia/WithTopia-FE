@@ -41,6 +41,9 @@ const Report = ({setReport,nickname,nicknames}) => {
                 setReport((prev)=>!prev)
                 return
             }
+            if(repo.data.errormessage === "자신을 신고할 수 없습니다."){
+                Swal.fire("자신을 신고할 수 없습니다.")
+            }
 
         }catch(error){
             if(error.errormessage==="사용자를 찾을 수 없습니다."){

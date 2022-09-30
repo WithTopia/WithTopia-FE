@@ -35,7 +35,6 @@ const Mainbar = ({ datas }) => {
       }})
     }
     catch(error){
-      console.log(error)
       if(error.response.data.errormessage === "이미 입장한 멤버입니다."){
         Swal.fire({title:"이미 입장한 멤버입니다.",confirmButtonColor:"#FFD68B"})
         return

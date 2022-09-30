@@ -26,12 +26,8 @@ const Userprofile = () => {
   }
   const handleBlock = (url) => {
     setTargetImage(url)
-    console.log(url)
   }
   const [nickName, setNickName] = useState('');
-  console.log(userData);
-  console.log(userData.nickName);
-  // console.log(userData.nickName.split('_',1));
   const getMyProfile = async () => {
     try {
       const data = await axios.get(`/member/mypage`,{headers:{"authorization":token,"refreshtoken":refreshtoken}});
@@ -49,7 +45,6 @@ const Userprofile = () => {
         setUserData(data.data.data)
       }
     }catch(error){
-      console.log(error)
     }
   }
   const handleNickName = (e) => {
@@ -59,10 +54,8 @@ const Userprofile = () => {
   const getImages = async () => {
     try{
       const data = await axios.get(`/mypage/image`);
-      console.log(data.data.data)
       setImages(data.data.data)
     }catch(error){
-      console.log(error)
     }
   }
 
@@ -80,7 +73,6 @@ const Userprofile = () => {
         nickName : nickName,
         profileImage : targetImage,
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-      console.log(repo)
       const accessToken = repo.headers.authorization;
       const refreshToken = repo.headers.refreshtoken;
       localStorage.setItem("accessToken", accessToken);
@@ -89,12 +81,10 @@ const Userprofile = () => {
         Swal.fire({title:"닉네임은 2자 이상 6자 미만입니다",confirmButtonColor:"#FFD68B"})
       }
       if(repo.data.statusMsg === "정상"){
-        .fire({title:"변경되었습니다.",confirmButtonColor:"#FFD68B"})
+        Swal.fire({title:"변경되었습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/main")
       }
     }catch(error){
-      console.log(error)
-      
     }
   }
 
@@ -103,7 +93,6 @@ const Userprofile = () => {
       const res = await axios.put(`/member/leave`,{},{
         headers : {"authorization":token,"refreshtoken":refreshtoken}
       })
-      console.log(res)
       if(res.data.data ==="success"){
         Swal.fire({title:"탈퇴요청이 정상 접수 되었습니다. 보안을 위해 회원정보는 3일 후 완전삭제 됩니다. 이용해주셔서 감사합니다 :)",confirmButtonColor:"#FFD68B"})
         localStorage.clear();
@@ -115,7 +104,6 @@ const Userprofile = () => {
         navigate("/")
       }
     }catch(error){
-      console.log(error)
     }
   }
 

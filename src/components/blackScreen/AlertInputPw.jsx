@@ -11,14 +11,12 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
   const submitPassword = async (e) => {
     e.preventDefault()
     try{
-      console.log(datas)
       const repo = await axios.post(`/room/${datas.sessionId}`,{password:password},{headers:{"authorization":token,"refreshtoken":refreshtoken}})
       if(repo.data.errormessage === "Token이 유효하지 않습니다."){
         Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
       }
       if(repo.data.errormessage==="사용자를 찾을 수 없습니다."){
         Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
-        console.log("??????????")
         navigate("/login")
         return
       }
@@ -32,7 +30,6 @@ const AlertInputPw = ({alertPwOn,alertPwOff,token,refreshtoken,datas}) => {
       }})
     }
     catch(error){
-      console.log(error)
       if(error.response.data.errormessage === "방이 존재하지않습니다."){
         Swal.fire({title:"방이 존재하지 않습니다.",confirmButtonColor:"#FFD68B"})
         alertPwOff((prev)=>!prev)

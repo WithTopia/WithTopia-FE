@@ -19,13 +19,11 @@ const AlertChangePw = ({page,setPage}) => {
   const submitHandle = async (e) => {
     e.preventDefault()
     try{
-      console.log(password)
       const repo = await axios.put("/member/mypage/changepw",{
       origin:password.origin,
       password:password.newPassword,
       passwordConfirm:password.newPasswordConfirm
     },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-    console.log(repo)
     if(repo.data.statusMsg === "정상"){
       Swal.fire({title:"변경 되었습니다.",confirmButtonColor:"#FFD68B"})
       navigate("/main")

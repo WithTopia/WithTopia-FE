@@ -49,9 +49,7 @@ const ChatList = () => {
 
     const searchPage = async () => {
         try{
-            console.log("try")
             const repo = await axios.get(`/rooms/${page2Ref.current}?keyword=${keyWord}`)
-            console.log(repo)
             if(repo.data.statusMsg === "정상"){
                 setSearchRooms([...data2Ref.current,...repo.data.data.content])
                 setLoading(false);
@@ -64,7 +62,6 @@ const ChatList = () => {
                 setNot(true)
                 Swal.fire({title:"검색 결과가 없습니다.",confirmButtonColor:"#FFD68B"})
             }
-            console.log(error)
             // if(error.response.data.errormessage==="검색 결과가 없습니다."){
             //     Swal.fire({title:"검색 결과가 없습니다.",confirmButtonColor:"#FFD68B"})
             //     return
@@ -73,14 +70,11 @@ const ChatList = () => {
     }
     const findRoom = async () => {
         try{
-            console.log("nice try")
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
-            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
             setSearchRoomCheck(false)
         }catch(error){
-            console.log(error)
         }
     }
    
@@ -182,7 +176,7 @@ const ChatList = () => {
                 )}
             )} */}
             <div
-               className="scrolldown"
+                className="scrolldown"
                 ref={loadingRef}
                 style={{ height: "50px" }}>
                 {loading && "...Loading"}

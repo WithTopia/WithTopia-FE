@@ -22,7 +22,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
   // 나가기
   const handleOut = () => {
-    console.log("사실 디스커넥트를 안하고 있었던거라면 ?")
     stompClient.unsubscribe("sub-0")
     if(stompClient){
       let chatMessage = {
@@ -37,7 +36,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       stompClient.disconnect(()=>{   
       })
     }catch(error){
-      console.log(error)
     }
   }
 
@@ -64,7 +62,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
       };
       stompClient.send(`/sub/chat/${roomId}`,{},JSON.stringify(chatMessage));
       setUserData({...userData,"message": ""});
-      console.log(tName.payload.banSlice.targetName,localStorage.getItem("nickname"))
       if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
         Swal.fire({title:"추방 당하셨습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/main")
@@ -87,7 +84,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   // useEffect(()=>{
-  //   console.log(tName.payload.banSlice.targetName)
   //   if(tName.payload.banSlice.targetName !== ""){
   //     if(tName.payload.banSlice.targetName === localStorage.getItem("nickname")){
   //       Swal.fire({title:"방장은 추방될 수 없습니다.",confirmButtonColor:"#FFD68B"})
@@ -107,7 +103,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   },[])
   useEffect(()=>{
     if(except.message === ""){
-      console.log("nothing")
     }else{
       setData([...data,update]) 
     }

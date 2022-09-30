@@ -16,7 +16,6 @@ const ChatList = () => {
     // Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const searchData = useSelector(state=>state.searchSlice)
-    console.log(searchData.searchSlice)
     const [rooms,setRooms] = useState("")
     const [searchRooms,setSearchRooms] = useState("")
     const [searchRoomCheck,setSearchRoomCheck] = useState(false)
@@ -28,14 +27,12 @@ const ChatList = () => {
     const searchPage = async () => {
         try{
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=${searchData.searchSlice}`)
-            console.log(repo)
             if(repo.data.statusMsg === "정상"){
                 setSearchRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
                 setSearchRoomCheck(true)
             }
         }catch(error){
-            console.log(error)
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
                 Swal.fire({title:"검색 결과가 없습니다.",confirmButtonColor:"#FFD68B"})
                 return
@@ -63,7 +60,6 @@ const ChatList = () => {
             setLoading(false);
             setSearchRoomCheck(false)
         }catch(error){
-            console.log(error)
         }
     }
     const handleObserver = (entities, observer) => {

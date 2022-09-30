@@ -14,7 +14,6 @@ const Mainslide = () => {
       setTopRank(repo.data.data)
     }
     catch(error) {
-      console.log(error)
     }
   };
   useEffect(()=>{

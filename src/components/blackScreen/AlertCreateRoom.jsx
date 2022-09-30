@@ -70,7 +70,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
         role:"master"
       }})
     }catch(error){
-      console.log(error)
       if(error){
         Swal.fire({title:"로그인이 만료되었습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/login")
@@ -103,7 +102,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
     unCheck(true)
   }
   useEffect(()=>{
-    console.log(check)
   },[check])
   
   return (

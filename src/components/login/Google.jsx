@@ -14,15 +14,12 @@ const Google = ({ onGoogleLogin }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const GOOGLE_CODE = searchParams.get("code");
   const IP = `https://warmwinter.co.kr/member/login/google?code=${GOOGLE_CODE}`;
-  console.log(GOOGLE_CODE);
 
   const googleLogin = async () => {
     try {
         const response = await axios.get(IP);
         const accessToken = response.headers.authorization;
         const refreshToken = response.headers.refreshtoken;
-        console.log(GOOGLE_CODE);
-        console.log(response);
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshtoken", refreshToken);
 
@@ -31,7 +28,6 @@ const Google = ({ onGoogleLogin }) => {
         // localStorage.setItem("userImgUrl", response.payload);
         navigate("/main");
     }catch (error) {
-      console.log(error);
       if(error.response.data.errormessage === "이미 탈퇴한 멤버입니다."){
         Swal.fire({title:"이미 탈퇴한 멤버입니다.",confirmButtonColor:"#FFD68B"})
         navigate("/")

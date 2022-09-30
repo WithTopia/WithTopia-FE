@@ -42,7 +42,6 @@ const Registerform = () => {
   const onEmailRequest = async () => {
     setLoading(true);
     try{ 
-      console.log("입력값:",email);
       const data = await axios.post(`/member/email/request`, {
         email
       })
@@ -53,7 +52,6 @@ const Registerform = () => {
       setLoading(false)
     } 
     catch(error){
-      console.log("333",error);
       Swal.fire({title:"이메일 양식을 맞춰주세요",confirmButtonColor:"#FFD68B"})
       if(error.response.data.errormessage === "이메일 양식을 맞춰주세요"){
         setLoading(false)
@@ -76,24 +74,18 @@ const Registerform = () => {
   //버튼 onClick을 누르면 실행
   const onConfirmNum = async () => {
     try{
-      console.log("입력값:",authKey);
       const data = await axios.post(`/member/email/confirm`, {
         email: email,
         authKey: authKey
       })
-      console.log(data.data);
       if (data.data.data === true && authKey !== ""){
         Swal.fire({title:"인증되었습니다",confirmButtonColor:"#FFD68B"})
         setAuthKey(authKey)
-        console.log(data);
-        console.log(data.data);
-        console.log(data.data.data);
         setAuthKeyCheck({...authKeyCheck, authKeyCheckstatus : true});
       } else if (data.data.data !== true){
         Swal.fire({title:"인증번호를 확인해주세요",confirmButtonColor:"#FFD68B"})
       };
     } catch(error){
-      console.log(error)
       Swal.fire({title:"이메일 인증을 확인해주세요",confirmButtonColor:"#FFD68B"})
     };
   };
@@ -111,24 +103,17 @@ const Registerform = () => {
   //버튼 onClick을 누르면 실행
   const onNickCheck = async () => {
     try{
-      console.log("잡은 nick:",nicknameIn);
-      console.log(watch());
       const data = await axios.post(`/member/nickname`,{
         nickname : nicknameIn
       })
       if(data.data.data === false && nicknameIn !== ""){
         Swal.fire({title:"사용가능한 닉네임 입니다",confirmButtonColor:"#FFD68B"})
-        console.log(data);
-        console.log(data.data);
-        console.log(data.data.data);
         setNickname(nicknameIn)
         setNickCheck({...nickCheck, nickCheckStatus : false})
       }else if(data.data.data !== false) {
         Swal.fire({title:"사용불가한 닉네임 입니다",confirmButtonColor:"#FFD68B"})
-        console.log(data.data.data);
       }
     }catch(error){
-      console.log(error);
     };
   };
   
@@ -196,12 +181,9 @@ const Registerform = () => {
     }else if ( password !== passwordConfirm ){
       Swal.fire({title:"동일한 비밀번호를 입력해주세요",confirmButtonColor:"#FFD68B"})
     }else if(authKeyCheck.authKeyCheckstatus !== true || nickCheck.nickCheckStatus !== false){
-      console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
       Swal.fire({title:"모든 인증을 완료해주세요",confirmButtonColor:"#FFD68B"})
     }else {
       dispatch(userRegister(data));
-      console.log("인증:",authKeyCheck.authKeyCheckstatus,"닉:",nickCheck.nickCheckStatus)
-      console.log("/member/signup으로 보냄",data);
       navigate("/login");
     }
   }

@@ -29,7 +29,6 @@ const Topranking = () => {
       setRank([...rankRef.current,...repo.data.data.content])
       setLoading(false);
     }catch(error){
-      console.log(error)
     }
   }  
   const handleObserver = (entities, observer) => {

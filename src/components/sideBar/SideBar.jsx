@@ -42,6 +42,9 @@ const Sidebar = () => {
         setCheck(false)
       }
       if(repo.data.statusMsg === "정상"){
+        let nickname = repo.data.data.nickName
+        localStorage.removeItem("nickName")
+        localStorage.setItem("nickname",nickname)
         setData(repo.data.data)
         setCheck(true)
       }
@@ -70,7 +73,7 @@ const Sidebar = () => {
           <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
           <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile</p></a>
           <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
-          <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a>
+          {/* <a href='/'><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a> */}
           <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/> Description</p></a>
         </div>
       </div>

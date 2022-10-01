@@ -22,7 +22,6 @@ const Userprofile = () => {
   const [page,setPage] = useState(false)
   const imgRef = useRef(null);
 
-  
   const handlePage1 = () => {
     setPage((prev)=>!prev)
   }

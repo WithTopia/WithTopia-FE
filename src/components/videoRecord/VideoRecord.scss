@@ -23,9 +23,18 @@
             span{
                 font-size: 22px;
             }
-            img{
-                width: 20px;
-                margin-left: 10px;
+            .plus{
+                width: 12px;
+                margin: 0 4px 11px 5px;
+            }
+            .minus{
+                width: 12px;
+                margin: 0 4px 15px 5px;
+            }
+            .heart{
+                width: 22px;
+                margin-bottom: 5px;
+                margin-right: 5px;
                 cursor: pointer;
             }
         }

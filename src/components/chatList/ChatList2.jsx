@@ -119,17 +119,15 @@ const ChatList = () => {
     },[keyWord])
 
     useEffect(()=>{ // 메인용
-        if(keyWord.length === 0){
-            findRoom()
-            setPage(pageRef.current + 1);
-            let options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 1.0,
-            };
-            const observer = new IntersectionObserver(handleObserver, options);
-            observer.observe(loadingRef.current);  
-        }
+        findRoom()
+        setPage(pageRef.current + 1);
+        let options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1.0,
+        };
+        const observer = new IntersectionObserver(handleObserver, options);
+        observer.observe(loadingRef.current);  
     },[])
 
     useEffect(()=>{
@@ -142,11 +140,7 @@ const ChatList = () => {
         setPage2(1)
         setSuccess(true)
     },[searchData.searchSlice])
-  
-    useEffect(()=>{
-        console.log(rooms)
-    },[rooms])
-    
+
     return (
     <div className='chat-list'>
         <div className='default-page-size'>

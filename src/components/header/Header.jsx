@@ -2,7 +2,6 @@ import './Header.scss';
 import logo_empty from "../../assets/logo_empty.webp";
 import searchIcon from "../../assets/searchIcon.png"
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2"
 import "sweetalert2/src/sweetalert2.scss"
 import { useDispatch } from "react-redux";
@@ -10,7 +9,6 @@ import { searchSlice ,addSearching } from '../../redux/modules/searchSlice';
 
 const Header = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate();
   const [search,setSearch] = useState("")
 
   const searchPage = (e) => {
@@ -44,7 +42,7 @@ const Header = () => {
   return (
     <div className='top-header'>
       <div className='header-wrap'>
-        <a href='/main' onClick={searchReset}><img src={logo_empty} className="wtLogo" alt="wtLogo"></img></a>
+        <a href='/main'><img src={logo_empty} className="wtLogo" alt="wtLogo"></img></a>
         <div className='header-form'>
           <input type="search" className="search-input" value={search} onChange={onChangeSearch} onKeyDown={handleEnter} placeholder="search by chat room"/>
           <img src={searchIcon} onClick={searchPage} className="search" alt="search"></img>

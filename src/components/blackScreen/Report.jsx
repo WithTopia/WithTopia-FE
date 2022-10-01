@@ -36,6 +36,7 @@ const Report = ({setReport,nickname,nicknames}) => {
         }
         try{
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
+            console.log(repo)
             if(repo.data.statusMsg === "정상"){
                 Swal.fire({title:"보내기 성공하였습니다.",confirmButtonColor:"#FFD68B"})
                 setReport((prev)=>!prev)
@@ -66,11 +67,11 @@ const Report = ({setReport,nickname,nicknames}) => {
                     className="file-input"></input>
                 <select onChange={handleNickName} value={name}>
                     <option value="">대상자를 선택하세요.</option>
-                    {nicknames.map((name,index)=>{
+                    {nicknames !== undefined || null ? nicknames.map((name,index)=>{
                         return(
                             <option value={name.nickname} key={index}>{name.nickname}</option>
                         )
-                    })}
+                    }) : null}
                     {/* <option value={name.nickname === nickname ? "" : name.nickname} key={index}>{name.nickname === nickname ? "" : name.nickname}</option> */}
                 </select>
                 <textarea value={texts} placeholder="확증을 위해 스크린샷을 첨부해주세요." onChange={handleTexts}></textarea>

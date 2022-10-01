@@ -77,7 +77,9 @@ const ChatList = () => {
                 const repo = await axios.get(`/rooms/${pageRef.current}`)
                 setRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
+                console.log(pageRef.current)
             }catch(error){
+                console.log(error)
                 setSearchRoomCheck(true)
             }
         }
@@ -87,10 +89,8 @@ const ChatList = () => {
     const handleObserver = (entities, observer) => {
         const y = entities[0].boundingClientRect.y;
         if (prevYRef.current > y) {
-            if(keyWord === null || keyWord === ""){
-                findRoom()
-                setPage(pageRef.current + 1);
-            }
+            findRoom()
+            setPage(pageRef.current + 1);
         }
         setPrevY(y);
     };
@@ -105,6 +105,7 @@ const ChatList = () => {
     };
     
     useEffect(()=>{ // 검색용
+        console.log("3")
         if(keyWord.length !== 0 && success === true){
             searchPage()
             setPage2(page2Ref.current + 1);
@@ -119,6 +120,7 @@ const ChatList = () => {
     },[keyWord])
 
     useEffect(()=>{ // 메인용
+        console.log("2")
         findRoom()
         setPage(pageRef.current + 1);
         let options = {
@@ -131,6 +133,7 @@ const ChatList = () => {
     },[])
 
     useEffect(()=>{
+        console.log("1")
         setKeyWord(searchData.searchSlice)
         setPrevY(0)
         setPrevY2(0)

@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import "../assets/Global.scss"
 import Header from '../components/header/Header'
-import Footer from "../components/footer/Footer"
 import SideBar from "../components/sideBar/SideBar"
 //import ChatList from '../components/chatList/ChatList'
 import ChatList2 from '../components/chatList/ChatList2'

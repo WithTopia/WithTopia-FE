@@ -1,5 +1,4 @@
-
-![waving](https://capsule-render.vercel.app/api?type=waving&height=300&text=WithTopia!&fontAlign=80&fontAlignY=40&color=gradient)
+![readme](https://user-images.githubusercontent.com/103446802/193404269-46b95337-a95d-4120-9b4a-d6cf9034998b.jpg)
 
 
 <h1 style="text-align: center;">🌿 귀여운 동물친구들과 즐기는 화상채팅! 🌿</h1>

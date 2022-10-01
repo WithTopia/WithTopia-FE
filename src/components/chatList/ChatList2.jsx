@@ -143,6 +143,10 @@ const ChatList = () => {
         setSuccess(true)
     },[searchData.searchSlice])
   
+    useEffect(()=>{
+        console.log(rooms)
+    },[rooms])
+    
     return (
     <div className='chat-list'>
         <div className='default-page-size'>

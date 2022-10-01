@@ -155,13 +155,24 @@ const ChatList = () => {
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
+            }) : null}
+            {rooms.length !== 0 ? rooms.map((datas,index)=>{
+                return(
+                    <Mainbar datas={datas} key={index}></Mainbar>
+                )
+            }) : <img src={searchRoomCheck ? blackRoom : blackRoom} className='empty-rooms' alt=''></img>}
+            {/* {searchRooms.length !== 0 ? 
+                searchRooms.map((datas,index)=>{
+                return(
+                    <Mainbar datas={datas} key={index}></Mainbar>
+                )
             }) : rooms.length !== 0 ?
                 rooms.map((datas,index)=>{
                     return(
                         <Mainbar datas={datas} key={index}></Mainbar>
                     )
             }) : not ? <img src={blackSearch} alt="검색 결과 없음"></img> : 
-            <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>}
+            <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>} */}
             <div
                 className="scrolldown"
                 ref={loadingRef}

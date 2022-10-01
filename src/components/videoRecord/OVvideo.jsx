@@ -25,12 +25,12 @@ const OVvideo = ({streamManager,role,nicknames}) => {
         //     targetName:streamManager.stream.connection.data.split("%")[2]
         // }})
     }
-    const handleVoteLike = (e) => {
+    const handleVoteUnlike = (e) => {
         e.preventDefault()
         setVote(true)
         handleVote()
     }
-    const handleVoteUnlike = (e) => {
+    const handleVotelike = (e) => {
         e.preventDefault()
         setVote(false)
         handleVote()
@@ -75,7 +75,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                     {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     <img src={plus} alt="" className='plus'></img>
-                    <img src={like} alt="" onClick={handleVoteLike} className="heart1"></img>
+                    <img src={like} alt="" onClick={handleVotelike} className="heart1"></img>
                     <img src={minus} alt="" className='minus'></img>
                     <img src={like} alt="" onClick={handleVoteUnlike} className="heart2"></img>
 

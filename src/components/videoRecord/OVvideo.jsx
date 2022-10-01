@@ -1,5 +1,6 @@
 import {useRef ,useEffect, useState} from 'react'
 import like from "../../assets/heart.png"
+import unlike from "../../assets/broken-heart.png"
 import plus from "../../assets/plus.png"
 import minus from "../../assets/minus.png"
 import { useDispatch } from "react-redux";
@@ -11,7 +12,7 @@ import Swal from "sweetalert2"
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
-    const [vote,setVote] = useState(false)
+    const [vote,setVote] = useState(null)
     const [complete,setComplete] = useState("")
     const dispatch = useDispatch();
 
@@ -25,14 +26,12 @@ const OVvideo = ({streamManager,role,nicknames}) => {
         //     targetName:streamManager.stream.connection.data.split("%")[2]
         // }})
     }
-    const handleVoteUnlike = (e) => {
-        e.preventDefault()
-        setVote(true)
+    const handleVoteUnlike = () => {
+        setVote(false)
         handleVote()
     }
-    const handleVotelike = (e) => {
-        e.preventDefault()
-        setVote(false)
+    const handleVotelike = () => {
+        setVote(true)
         handleVote()
     }
     const handleVote = async () => {
@@ -48,12 +47,12 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             if(req.data.errormessage){
                 Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
                 return
-
             }
             if(req.data.statusMsg){
                 setComplete("complete")
                 Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
             }
+            setVote(null)
         }catch(error){
             if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
                 Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
@@ -77,7 +76,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                     <img src={plus} alt="" className='plus'></img>
                     <img src={like} alt="" onClick={handleVotelike} className="heart1"></img>
                     <img src={minus} alt="" className='minus'></img>
-                    <img src={like} alt="" onClick={handleVoteUnlike} className="heart2"></img>
+                    <img src={unlike} alt="" onClick={handleVoteUnlike} className="heart2"></img>
 
                     {/* {complete === "" ? <>
                         <img src={likeYet} alt="" onClick={handleVoteLike}></img>

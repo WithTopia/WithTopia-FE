@@ -79,7 +79,9 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
   const handleEnter = (e) =>{
     if (e.key === "Enter") {
-      sendMessage()
+      if(e.nativeEvent.isComposing === false){
+        sendMessage()
+      }
     }
   }
 
@@ -129,6 +131,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
             onChange={handleMessage}
             value={userData.message}
             onKeyDown={handleEnter}
+            // onKeyPress={handleEnter}
         />
           <div className="send">
             <input
@@ -137,9 +140,6 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
             id="file"
             onChange={(e) => setImg(e.target.files[0])}
             />
-            {/* <label htmlFor="file">
-            <img src={Attach} alt="" />
-            </label> */}
             <img src={send} onClick={sendMessage}></img>
           </div>
         </div>

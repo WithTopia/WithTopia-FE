@@ -75,9 +75,9 @@ const ChatList = () => {
         if(success === true){
             try{
                 const repo = await axios.get(`/rooms/${pageRef.current}`)
+                console.log(repo.data)
                 setRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
-                console.log(pageRef.current)
             }catch(error){
                 console.log(error)
                 setSearchRoomCheck(true)
@@ -138,15 +138,11 @@ const ChatList = () => {
         setPrevY(0)
         setPrevY2(0)
         setSearchRooms("")
-        setRooms("")
-        setPage(1)
+        // setRooms("")
+        // setPage(1)
         setPage2(1)
         setSuccess(true)
     },[searchData.searchSlice])
-
-    useEffect(()=>{
-        console.log(rooms)
-    },[rooms])
 
     return (
     <div className='chat-list'>

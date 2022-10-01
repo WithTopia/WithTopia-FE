@@ -22,28 +22,22 @@ const Userprofile = () => {
   const [page,setPage] = useState(false)
   const imgRef = useRef(null);
 
-  
   const handlePage1 = () => {
     setPage((prev)=>!prev)
   }
   const handleBlock = (url) => {
     setTargetImage(url)
-    console.log(url)
   }
-  
-  console.log(userData);
-  console.log(userData.nickName);
-  // console.log(userData.nickName.split('_',1));
   const getMyProfile = async () => {
     try {
       const data = await axios.get(`/member/mypage`,{headers:{"authorization":token,"refreshtoken":refreshtoken}});
       if(data.data.errormessage === "Token이 유효하지 않습니다."){
-        Swal.fire("로그인을 해주세요.")
+        Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
         navigate("/login")
         return
       }
       if(data.data.errormessage === "사용자를 찾을 수 없습니다."){
-        Swal.fire("로그인을 해주세요.")
+        Swal.fire({title:"로그인을 해주세요.",confirmButtonColor:"#FFD68B"})
         navigate("/login")
         return
       }
@@ -51,7 +45,6 @@ const Userprofile = () => {
         setUserData(data.data.data)
       }
     }catch(error){
-      console.log(error)
     }
   }
   const handleNickName = (e) => {
@@ -61,42 +54,37 @@ const Userprofile = () => {
   const getImages = async () => {
     try{
       const data = await axios.get(`/mypage/image`);
-      console.log(data.data.data)
       setImages(data.data.data)
     }catch(error){
-      console.log(error)
     }
   }
 
   const postProfile = async () => {
     try{
       if(nickName.length < 2 || nickName.length > 6){
-        Swal.fire("2자 이상 6자 이하로 입력해주세요.")
+        Swal.fire({title:"2자 이상 6자 이하로 입력해주세요.",confirmButtonColor:"#FFD68B"})
         return
       }
       if(nickName.includes(" ")){
-        Swal.fire("닉네임 형식에 맞지 않습니다.")
+        Swal.fire({title:"닉네임 형식에 맞지 않습니다.",confirmButtonColor:"#FFD68B"})
         return
       }
       const repo = await axios.put(`/member/mypage`,{
         nickName : nickName,
         profileImage : targetImage,
       },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-      console.log(repo)
       const accessToken = repo.headers.authorization;
       const refreshToken = repo.headers.refreshtoken;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshtoken", refreshToken);
       if(repo.data.errormessage === "닉네임 양식에 맞지 않습니다."){
-        Swal.fire("닉네임은 2자 이상 6자 미만입니다")
+        Swal.fire({title:"닉네임은 2자 이상 6자 미만입니다",confirmButtonColor:"#FFD68B"})
       }
       if(repo.data.statusMsg === "정상"){
-        Swal.fire("변경되었습니다.")
+        Swal.fire({title:"변경되었습니다.",confirmButtonColor:"#FFD68B"})
         navigate("/main")
       }
     }catch(error){
-      console.log(error)
-      
     }
   }
   
@@ -105,19 +93,17 @@ const Userprofile = () => {
       const res = await axios.put(`/member/leave`,{},{
         headers : {"authorization":token,"refreshtoken":refreshtoken}
       })
-      console.log(res)
       if(res.data.data ==="success"){
-        Swal.fire("탈퇴요청이 정상 접수 되었습니다. 보안을 위해 회원정보는 3일 후 완전삭제 됩니다. 이용해주셔서 감사합니다 :)")
+        Swal.fire({title:"탈퇴요청이 정상 접수 되었습니다. 보안을 위해 회원정보는 3일 후 완전삭제 됩니다. 이용해주셔서 감사합니다 :)",confirmButtonColor:"#FFD68B"})
         localStorage.clear();
         navigate("/")
       }
       if(res.data.errormessage === "탈퇴한지 3일이 경과하지 않았습니다."){
-        Swal.fire(res.data.errormessage)
+        Swal.fire({title:"탈퇴한지 3일이 경과하지 않았습니다.",confirmButtonColor:"#FFD68B"})
         localStorage.clear();
         navigate("/")
       }
     }catch(error){
-      console.log(error)
     }
   }
 

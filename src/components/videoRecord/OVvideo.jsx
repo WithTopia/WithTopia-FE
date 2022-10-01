@@ -11,16 +11,14 @@ import Swal from "sweetalert2"
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
-    console.log(nicknames)
     const [vote,setVote] = useState(false)
     const [complete,setComplete] = useState("")
     const dispatch = useDispatch();
 
     const checkVoted = () => {
-        Swal.fire("이미 투표 하셨습니다.")
+        Swal.fire({title:"이미 투표 하셨습니다.",confirmButtonColor:"#FFD68B"})
     }
     const handleBan = () => {
-        console.log("working !")
         let nick = streamManager.stream.connection.data.split("%")[2]
         dispatch(addNickName(nick))
         // navigate("/room/:id",{state:{
@@ -48,16 +46,17 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
             console.log(req)
             if(req.data.errormessage){
-                Swal.fire(req.data.errormessage)
+                Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
+                return
+
             }
             if(req.data.statusMsg){
                 setComplete("complete")
-                Swal.fire("인기도 투표 완료")
+                Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
             }
-            console.log(req.data.statusMsg)
         }catch(error){
-            if(error.response.data.errormessage){
-                Swal.fire(error.response.data.errormessage)
+            if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
+                Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
             }
         }
     }

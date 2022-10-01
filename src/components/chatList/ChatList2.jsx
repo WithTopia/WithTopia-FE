@@ -13,7 +13,6 @@ import { searchSlice } from '../../redux/modules/searchSlice';
 import { useSelector } from 'react-redux';
 
 const ChatList = () => {
-    // Swal.fire({title:"응애응애김응애",confirmButtonColor:"#FFD68B"})
     const navigate = useNavigate()
     const searchData = useSelector(state=>state.searchSlice)
     const [keyWord,setKeyWord] = useState("")
@@ -50,9 +49,8 @@ const ChatList = () => {
 
     const searchPage = async () => {
         try{
-            console.log("try")
             const repo = await axios.get(`/rooms/search/${page2Ref.current}?keyword=${keyWord}`)
-            console.log(repo)
+            
             if(repo.data.statusMsg === "정상"){
                 setSearchRooms([...data2Ref.current,...repo.data.data.content])
                 setLoading(false);
@@ -62,7 +60,7 @@ const ChatList = () => {
         }catch(error){
             if(page2Ref.current-1 === 1 && error.response.data.errormessage==="검색 결과가 없습니다."){
                 setNot(true)
-                Swal.fire("검색 결과가 없습니다.")
+                Swal.fire({title:"검색 결과가 없습니다.",confirmButtonColor:"#FFD68B"})
             }
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
                 // setSearchRooms("")
@@ -76,23 +74,15 @@ const ChatList = () => {
     const findRoom = async () => {
         if(success === true){
             try{
-                console.log("nice try")
                 const repo = await axios.get(`/rooms/${pageRef.current}`)
-                console.log(repo)
                 setRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
             }catch(error){
-                console.log(error)
-                // if(error.response.data.error.message === "로그인이 필요합니다."){
-                //     Swal.fire({title:error.response.data.error.message,confirmButtonColor:"#FFD68B"})
-                //     navigate("/login")
-                // }
                 setSearchRoomCheck(true)
             }
-        }else{
-            alert("더는 없어..")
         }
     }
+    
    
     const handleObserver = (entities, observer) => {
         const y = entities[0].boundingClientRect.y;

@@ -41,10 +41,8 @@ const Chat = ({nickname,roomName,success,sessionId,setChat,checkMyScreen,nicknam
     useEffect(() => {
         if(success === true){
             connect()
-            console.log("연결 함 ..")
         }
         else{
-            console.log("연결 중 ...")
         }
     }, []);
     return (

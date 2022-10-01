@@ -67,6 +67,7 @@
   <img src="https://img.shields.io/badge/WebRTC-3F7CF6?style=for-the-badge&logo=WebRTC&logoColor=white">
   <img src="https://img.shields.io/badge/OPEN Vidu-3EF1AC?style=for-the-badge&logo=OPEN Vidu&logoColor=white">
   <img src="https://img.shields.io/badge/NGINX-19D982?style=for-the-badge&logo=NGINX&logoColor=black">
+ <img src="https://img.shields.io/badge/AMAZON AWS-e61919?style=for-the-badge&logo=AMAZON AWS&logoColor=black">
 </p>
 
 
@@ -102,11 +103,6 @@
 
 ### 프로젝트 진행하면서 느낀점📍
 
-<a href="https://github.com/hyunwung" target="_blank"><img src="https://img.shields.io/badge/서현웅🍎-7190FD?style=for-the-badge&logo=SockJS&logoColor=white"></a>
-
-
-<a href="https://github.com/Kim-wonder" target="_blank"><img src="https://img.shields.io/badge/김혜진🥑-49D1A4?style=for-the-badge&logo=SockJS&logoColor=white"></a>
-
 
 <a href="https://github.com/ckstn0225" target="_blank"><img src="https://img.shields.io/badge/조원영🍋-FF4343?style=for-the-badge&logo=SockJS&logoColor=white"></a>
 
@@ -115,6 +111,12 @@
 
 
 <a href="https://github.com/picjoy" target="_blank"><img src="https://img.shields.io/badge/강지영🍒-FFF53C?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/hyunwung" target="_blank"><img src="https://img.shields.io/badge/서현웅🍎-7190FD?style=for-the-badge&logo=SockJS&logoColor=white"></a>
+
+
+<a href="https://github.com/Kim-wonder" target="_blank"><img src="https://img.shields.io/badge/김혜진🥑-49D1A4?style=for-the-badge&logo=SockJS&logoColor=white"></a>
 
 
 

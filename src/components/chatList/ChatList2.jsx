@@ -104,20 +104,20 @@ const ChatList = () => {
         setPrevY2(y);
     };
     
-    useEffect(()=>{ // 검색용
-        console.log("3")
-        if(keyWord.length !== 0 && success === true){
-            searchPage()
-            setPage2(page2Ref.current + 1);
-            let options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 1.0,
-            };
-            const observer = new IntersectionObserver(handleObserver2, options);
-            observer.observe(loadingRef.current);  
-        }
-    },[keyWord])
+    // useEffect(()=>{ // 검색용
+    //     console.log("3")
+    //     if(keyWord.length !== 0 && success === true){
+    //         searchPage()
+    //         setPage2(page2Ref.current + 1);
+    //         let options = {
+    //             root: null,
+    //             rootMargin: "0px",
+    //             threshold: 1.0,
+    //         };
+    //         const observer = new IntersectionObserver(handleObserver2, options);
+    //         observer.observe(loadingRef.current);  
+    //     }
+    // },[keyWord])
 
     useEffect(()=>{ // 메인용
         console.log("2")
@@ -144,13 +144,17 @@ const ChatList = () => {
         setSuccess(true)
     },[searchData.searchSlice])
 
+    useEffect(()=>{
+        console.log(rooms)
+    },[rooms])
+
     return (
     <div className='chat-list'>
         <div className='default-page-size'>
             <div className='main-page-title'>
                 Let's Talk in WITHTOPIA!
             </div>
-            {searchRooms.length !== 0 ? 
+            {/* {searchRooms.length !== 0 ? 
                 searchRooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
@@ -160,8 +164,8 @@ const ChatList = () => {
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
                 )
-            }) : <img src={searchRoomCheck ? blackRoom : blackRoom} className='empty-rooms' alt=''></img>}
-            {/* {searchRooms.length !== 0 ? 
+            }) : <img src={searchRoomCheck ? blackRoom : blackRoom} className='empty-rooms' alt=''></img>} */}
+            {searchRooms.length !== 0 ? 
                 searchRooms.map((datas,index)=>{
                 return(
                     <Mainbar datas={datas} key={index}></Mainbar>
@@ -172,7 +176,7 @@ const ChatList = () => {
                         <Mainbar datas={datas} key={index}></Mainbar>
                     )
             }) : not ? <img src={blackSearch} alt="검색 결과 없음"></img> : 
-            <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>} */}
+            <img src={searchRoomCheck ? blackRoom : blackRoom } className='empty-rooms' alt=''></img>}
             <div
                 className="scrolldown"
                 ref={loadingRef}

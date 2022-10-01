@@ -1,14 +1,13 @@
 import {useRef ,useEffect, useState} from 'react'
-import like from "../../assets/like.png"
-import unlike from "../../assets/unlike.png"
-import likeYet from "../../assets/yetlike.png"
-import unlikeYet from "../../assets/yetunlike.png"
+import like from "../../assets/heart.png"
+import plus from "../../assets/plus.png"
+import minus from "../../assets/minus.png"
 import { useDispatch } from "react-redux";
-import { targetName ,addNickName} from "../../redux/modules/banSlice";
+import { addNickName} from "../../redux/modules/banSlice";
 import "./VideoRecord.scss"
 import axios from 'axios'
-import ban from "../../assets/ban.png"
 import Swal from "sweetalert2"
+// import ban from "../../assets/ban.png"
 // import hiddenVideo from "../../assets/cam-off.png"
 
 const OVvideo = ({streamManager,role,nicknames}) => {
@@ -47,9 +46,9 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 nickname:nick,
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+            console.log(req)
             if(req.data.errormessage){
                 Swal.fire(req.data.errormessage)
-                return
             }
             if(req.data.statusMsg){
                 setComplete("complete")
@@ -57,8 +56,8 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             }
             console.log(req.data.statusMsg)
         }catch(error){
-            if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
-                Swal.fire("더 이상 내려갈 인기도가 없습니다.")
+            if(error.response.data.errormessage){
+                Swal.fire(error.response.data.errormessage)
             }
         }
     }
@@ -76,11 +75,16 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                     {/* {role === "master" ? <img src={ban} className="video-ban" onClick={handleBan}></img> : null} */}
                     {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
-                    {complete === "" ? <>
+                    <img src={plus} alt="" className='plus'></img>
+                    <img src={like} alt="" onClick={handleVoteLike} className="heart"></img>
+                    <img src={minus} alt="" className='minus'></img>
+                    <img src={like} alt="" onClick={handleVoteUnlike} className="heart"></img>
+
+                    {/* {complete === "" ? <>
                         <img src={likeYet} alt="" onClick={handleVoteLike}></img>
                         <img src={unlikeYet} alt="" onClick={handleVoteUnlike}></img></> : <>
                         <img src={like} alt="" onClick={checkVoted}></img>
-                        <img src={unlike} alt="" onClick={checkVoted}></img></> }
+                        <img src={unlike} alt="" onClick={checkVoted}></img></> } */}
                 </div>
             </div>
             {/* {streamManager.stream.videoActive ? null : 

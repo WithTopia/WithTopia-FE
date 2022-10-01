@@ -113,7 +113,6 @@ const AlertCreateRoom = ({pageOpen,setPageOpen}) => {
           <input placeholder=' 비밀번호' type="password" className='create-input' value={sendData.password} onChange={handlePw} disabled={check}></input>
           <select onChange={handleNums} value={sendData.maxMember}>
             <option value="">최대 인원수</option>
-            <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>

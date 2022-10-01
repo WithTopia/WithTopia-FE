@@ -83,6 +83,10 @@ const ChatList = () => {
                 setLoading(false);
             }catch(error){
                 console.log(error)
+                // if(error.response.data.error.message === "로그인이 필요합니다."){
+                //     Swal.fire({title:error.response.data.error.message,confirmButtonColor:"#FFD68B"})
+                //     navigate("/login")
+                // }
                 setSearchRoomCheck(true)
             }
         }else{

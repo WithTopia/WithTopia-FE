@@ -80,6 +80,7 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   const handleEnter = (e) =>{
     if (e.key === "Enter") {
       if(e.nativeEvent.isComposing === false){
+        e.preventDefault()
         sendMessage()
       }
     }

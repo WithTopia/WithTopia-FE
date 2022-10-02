@@ -3,7 +3,6 @@ import "./ChatList.scss"
 import AlertCreateRoom from '../blackScreen/AlertCreateRoom'
 import axios from 'axios'
 import Mainbar from '../mainBox/mainBoxBar/MainBar'
-import { useNavigate } from 'react-router-dom'
 import colorRoom from "../../assets/color-room.webp";
 import blackRoom from "../../assets/black-room.webp";
 import colorSearch from "../../assets/color-search.webp";
@@ -13,7 +12,6 @@ import { searchSlice } from '../../redux/modules/searchSlice';
 import { useSelector } from 'react-redux';
 
 const ChatList = () => {
-    const navigate = useNavigate()
     const searchData = useSelector(state=>state.searchSlice)
     const [keyWord,setKeyWord] = useState("")
     const [rooms,setRooms] = useState("") // 메인 무한 스크롤용 
@@ -104,23 +102,22 @@ const ChatList = () => {
         setPrevY2(y);
     };
     
-    // useEffect(()=>{ // 검색용
-    //     console.log("3")
-    //     if(keyWord.length !== 0 && success === true){
-    //         searchPage()
-    //         setPage2(page2Ref.current + 1);
-    //         let options = {
-    //             root: null,
-    //             rootMargin: "0px",
-    //             threshold: 1.0,
-    //         };
-    //         const observer = new IntersectionObserver(handleObserver2, options);
-    //         observer.observe(loadingRef.current);  
-    //     }
-    // },[keyWord])
+    useEffect(()=>{ // 검색용
+        console.log("3")
+        if(keyWord.length !== 0 && success === true){
+            searchPage()
+            setPage2(page2Ref.current + 1);
+            let options = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 1.0,
+            };
+            const observer = new IntersectionObserver(handleObserver2, options);
+            observer.observe(loadingRef.current);  
+        }
+    },[keyWord])
 
     useEffect(()=>{ // 메인용
-        console.log("2")
         findRoom()
         setPage(pageRef.current + 1);
         let options = {
@@ -133,7 +130,6 @@ const ChatList = () => {
     },[])
 
     useEffect(()=>{
-        console.log("1")
         setKeyWord(searchData.searchSlice)
         setPrevY(0)
         setPrevY2(0)

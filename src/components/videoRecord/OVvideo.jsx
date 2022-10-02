@@ -54,6 +54,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             }
             setVote(null)
         }catch(error){
+            console.log(error)
             if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
                 Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
             }

@@ -26,15 +26,37 @@ const OVvideo = ({streamManager,role,nicknames}) => {
         //     targetName:streamManager.stream.connection.data.split("%")[2]
         // }})
     }
-    const handleVoteUnlike = () => {
-        setVote(false)
-        handleVote()
-    }
-    const handleVotelike = () => {
+    
+    const handleVote1 = async () => {
         setVote(true)
-        handleVote()
+        let nick = streamManager.stream.connection.data.split("%")[2]
+        let token = localStorage.getItem("accessToken")
+        let refreshtoken = localStorage.getItem("refreshtoken")
+        try{
+            const req = await axios.post("/vote",{
+                nickname:nick,
+                vote:vote
+            },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
+            console.log(vote)
+            if(req.data.errormessage){
+                Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
+                return
+            }
+            if(req.data.statusMsg){
+                setComplete("complete")
+                Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
+            }
+            setVote(null)
+        }catch(error){
+            console.log(error)
+            if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
+                Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
+            }
+        }
     }
-    const handleVote = async () => {
+
+    const handleVote2 = async () => {
+        setVote(false)
         let nick = streamManager.stream.connection.data.split("%")[2]
         let token = localStorage.getItem("accessToken")
         let refreshtoken = localStorage.getItem("refreshtoken")
@@ -75,9 +97,9 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                     {/* <img src={ban} className="video-ban" onClick={handleBan}></img> */}
                     {/* {streamManager.stream.audioActive ? "마이크 킴" : "마이크 끔"} */}
                     <img src={plus} alt="" className='plus'></img>
-                    <img src={like} alt="" onClick={handleVotelike} className="heart1"></img>
+                    <img src={like} alt="" onClick={handleVote1} className="heart1"></img>
                     <img src={minus} alt="" className='minus'></img>
-                    <img src={unlike} alt="" onClick={handleVoteUnlike} className="heart2"></img>
+                    <img src={unlike} alt="" onClick={handleVote2} className="heart2"></img>
 
                     {/* {complete === "" ? <>
                         <img src={likeYet} alt="" onClick={handleVoteLike}></img>

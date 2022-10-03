@@ -63,7 +63,7 @@ const Report = ({setReport,nickname,nicknames}) => {
                 <input
                     type="file"
                     onChange={onSelectFile}
-                    accept="image/png , image/jpeg, image/webp"
+                    accept="image/*" 
                     className="file-input"></input>
                 <select onChange={handleNickName} value={name}>
                     <option value="">대상자를 선택하세요.</option>

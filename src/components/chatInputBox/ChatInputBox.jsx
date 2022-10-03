@@ -40,6 +40,10 @@ const ChatInputBox = ({userData,setUserData,roomId,stompClient,except,setChat,ch
   }
 
   const sendMessage = () =>{
+    if(userData.message.length > 200){
+      Swal.fire({title:"채팅이 너무 길어요 !",confirmButtonColor:"#FFD68B"})
+      return
+    }
     if (stompClient) {
       let chatMessage = {
         sender: userData.username,

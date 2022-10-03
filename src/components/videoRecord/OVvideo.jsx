@@ -43,7 +43,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 nickname:nick,
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-            console.log(req)
+            console.log(vote)
             if(req.data.errormessage){
                 Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
                 return

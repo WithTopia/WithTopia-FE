@@ -40,10 +40,8 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             if(req.data.errormessage){
                 Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
             }
-            if(req.data.statusMsg){
-                setComplete("complete")
-                console.log(vote)
-                Swal.fire({title:req.data.statusMsg,confirmButtonColor:"#FFD68B"})
+            if(req.data.statusMsg){                
+                Swal.fire({title:"투표 완료",confirmButtonColor:"#FFD68B"})
             }
         }catch(error){
             console.log(error)
@@ -63,13 +61,11 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 nickname:nick,
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-            console.log(vote)
-            if(req.data.errormessage){
-                Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
+            if(req.data.errormessage === "정상"){
+                Swal.fire({title:"투표 완료",confirmButtonColor:"#FFD68B"})
                 return
             }
             if(req.data.statusMsg){
-                setComplete("complete")
                 Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
             }
         }catch(error){

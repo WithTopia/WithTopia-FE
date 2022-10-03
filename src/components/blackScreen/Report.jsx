@@ -2,14 +2,13 @@ import "./Report.scss"
 import { useState } from "react"
 import axios from "axios"
 import Swal from "sweetalert2"
+import Loding from "../button/Loding"
 
 const Report = ({setReport,nickname,nicknames}) => {
-    let refreshtoken = localStorage.getItem("refreshtoken")
-    let accessToken = localStorage.getItem("accessToken")
-
     const [image,setImage] = useState("")
     const [texts,setTexts] = useState("")
     const [name,setName] = useState("")
+    const [loading,setLoading] = useState(false)
 
     const handleReport = () => {
         setReport((prev)=>!prev)
@@ -34,12 +33,23 @@ const Report = ({setReport,nickname,nicknames}) => {
             Swal.fire({title:"모든 내용을 정확히 입력해주세요.",confirmButtonColor:"#FFD68B"})
             return
         }
+        if(image.type.includes("image")){
+            console.log("이미지")
+        }else{
+            Swal.fire({title:"이미지를 선택해주세요.",confirmButtonColor:"#FFD68B"})
+            return
+        }
+        
         try{
+            let refreshtoken = localStorage.getItem("refreshtoken")
+            let accessToken = localStorage.getItem("accessToken")
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
             console.log(repo)
             if(repo.data.statusMsg === "정상"){
+                setLoading((prev)=>!prev)
                 Swal.fire({title:"보내기 성공하였습니다.",confirmButtonColor:"#FFD68B"})
-                setReport((prev)=>!prev)
+                setLoading((prev)=>!prev)
+                // setReport((prev)=>!prev)
             }
             if(repo.data.errormessage){
                 Swal.fire(repo.data.errormessage)
@@ -72,10 +82,10 @@ const Report = ({setReport,nickname,nicknames}) => {
                             <option value={name.nickname} key={index}>{name.nickname}</option>
                         )
                     }) : null}
-                    {/* <option value={name.nickname === nickname ? "" : name.nickname} key={index}>{name.nickname === nickname ? "" : name.nickname}</option> */}
                 </select>
                 <textarea value={texts} placeholder="확증을 위해 스크린샷을 첨부해주세요." onChange={handleTexts}></textarea>
                 <button onClick={submitReport}>작성하기</button>
+                {loading ? <Loding></Loding> : null} 
             </div>
         </div>
         {/* <div className='report-out' onClick={handleReport}></div> */}

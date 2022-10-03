@@ -2,7 +2,7 @@ import React from 'react';
 import PulseLoader from "react-spinners/PulseLoader";
 const Loding = () => {
   return (
-    <div class="contentWrap">
+    <div className="contentWrap">
       <div
         style={{
           position: "fixed",

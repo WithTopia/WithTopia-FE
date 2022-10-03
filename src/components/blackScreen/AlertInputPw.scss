@@ -1,0 +1,54 @@
+.alertInputpw{
+    
+}
+.input-pw{
+    border-radius: 12px;
+    width: 350px;
+    height: 200px;
+    background-color: white;
+    position: absolute;
+    padding: 30px 0 0 0;
+    right: 42%;
+    transform: translate(-50%,-50%);
+    z-index: 200;
+    .input-password-close{
+        cursor: pointer;
+        float: right;
+        background-color: white;
+        border: none;
+        width: 50px;
+    }
+    .password-form{
+        display: block;
+        .form-notice{
+            margin-left: 65px;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+        .input-password-form{
+            display: flex;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            .create-input{
+                width: 200px;
+                height: 30px;
+                
+            }
+            .input-password-btn{
+                width: 80px;
+            }
+        }
+    }
+}
+.black-out{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+}

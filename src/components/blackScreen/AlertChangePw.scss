@@ -1,0 +1,68 @@
+.alert-change-pw{
+    .change-pw{
+        width: 550px;
+        height: 450px;
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+    }
+    .change-pw-title{
+        margin: 35px auto;
+        font-size: 35px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .change-pw-form{
+        width: 76%;
+        margin: 0 auto;
+        font-size: 35px;
+        text-align: center;
+        font-weight: bold;
+        .change-password-input{
+            min-width:360px;
+            height: 23px;
+            border-radius: 8px;
+            color : #815403;
+            border: 2px solid #c7bca9;
+            margin-bottom: 25px;
+            background: #FFFF;
+            outline: none;
+            padding: 10px;
+        }
+        .change-password-input:hover{
+            border: 2px solid #815403;
+        }
+        .change-password-input:focus{
+            border: 2px solid #815403;
+        }
+        .change-password-input:disabled{
+            background-color: #868e96;
+        }
+        .change-pw-btn{
+            border-radius: 10px;
+            padding: 10px 30px 10px 30px;
+            font-size: 20px;
+            width: 120px;
+            height: 50px;
+            
+            background-color: #815403;
+            border: 1px solid white;
+            color: white;
+        }
+    }
+}
+
+.modal-out{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+}

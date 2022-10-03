@@ -104,6 +104,8 @@
 ### 프로젝트 진행하면서 느낀점📍
 
 
+#### 💻**BE** 
+
 <a href="https://github.com/ckstn0225" target="_blank"><img src="https://img.shields.io/badge/조원영🍋-FF4343?style=for-the-badge&logo=SockJS&logoColor=white"></a></p>
 
 
@@ -117,7 +119,3 @@
 
 
 <a href="https://github.com/Kim-wonder" target="_blank"><img src="https://img.shields.io/badge/김혜진🥑-49D1A4?style=for-the-badge&logo=SockJS&logoColor=white"></a></p>마지막까지 많이 배우고 갑니다. 안녕히계세요 여러분 저는 이 세상에 모든 굴레롸~ 롸롸롸롸~ 롸롸로라롸
-
-
-
-

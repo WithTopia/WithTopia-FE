@@ -1,0 +1,19 @@
+.footer{
+  margin-left: 50px;
+  opacity: 0.5;
+  display: flex;
+  color: black;
+  position : relative;
+  transform : translateY(-200%);
+  .footer-left{
+    margin-right: 30px;
+    font-size: 15px;
+    cursor: pointer;
+  };
+  .footer-right{
+    font-size: 15px;
+    margin-left: 30px;
+    cursor: pointer;
+  };
+}
+

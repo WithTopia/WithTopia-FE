@@ -1,0 +1,24 @@
+.find-container {
+    background-color: #E8F8FF;
+    width: 400px;
+    min-height: 450px;
+    max-height: 650px;
+    margin: 20vh auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .find-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        .confirm-code{
+            display: block;
+            .confirm-btn{
+            
+            }
+        }
+    }
+}
+

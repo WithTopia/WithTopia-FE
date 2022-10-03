@@ -1,0 +1,51 @@
+.rank{
+  // background-color: rgb(230, 221, 155);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  .rank-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    padding-left: 20px;
+  };
+  .top-WithTo{
+    font-size: 36px;
+    font-weight: bold;
+    color: #815403;
+  }
+  .rank-wrap{
+    display: flex;
+    margin-right: 30px;
+    
+    .rank-profile{
+      display: flex;
+      align-items: stretch;
+      // margin: 0px 30px;
+      
+      .rank-profile-img{
+        height: 58px;
+        width: 58px;
+        margin-left:80px;
+        margin-right: 7px;
+        border-radius: 100%;
+        -webkit-user-drag: none;
+      };
+      .rank-text {
+        margin-top: 23px;
+        margin-right: 5px;
+        color: #815403;
+        align-items: stretch;
+      }
+      .rank-nick{
+        margin-top: 25px;
+        color: #815403;
+        margin-right: 25px;
+        align-items: stretch;
+      }
+    }
+  }
+}

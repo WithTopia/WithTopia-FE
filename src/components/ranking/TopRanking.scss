@@ -1,0 +1,153 @@
+.rank-box{
+  height: 740px;  
+  max-width: 1260px;
+  width: calc(100vw - 300px);
+  box-shadow: 1px 1px 5px #e5d493;
+  border-radius: 20px;
+  padding: 12px;
+  overflow-y: auto;
+  color: #815403;
+  margin: 46px 0;
+  .rank-top3{
+    font-size: 30px;
+    margin: 20px;
+  };
+  hr{
+    border: 0.1px solid rgb(214, 214, 214);
+    margin: 0 10px 30px 10px;
+  };
+  .rankTop{
+    height: 50px;
+    max-width: 1240px;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 3px solid #e5d493;
+    border-radius: 10px;
+    padding: 2px 10px;
+    box-shadow: 1px 1px 5px #e5d493;
+    .rank-left{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      .crown{
+        width: 40px;
+      }
+      .border1{
+        border: 2px solid #815403;
+      }
+      .rank-top-ranking{
+        font-size: 18px;
+        margin-left: 9px;
+        margin-top: 4px;
+      }
+      .rank-low-ranking{
+        font-size: 18px;
+        margin-left: 9px;
+      }
+    }
+    .rank-center{
+      display: flex;
+      width: 200px;
+      .rank-nickname{
+        margin-top: 9px;
+        margin-left: 10px;
+      }
+      .bar-profile-img{
+        width: 38px;
+      }
+    }
+    .rank-right{
+      display: flex;
+      width: 150px;
+      .rank-like{
+        width: 20px;
+        color: #FFD68B;
+      }
+      .rank-like-count{
+        margin-top: 4px;
+        margin-left: 6px;
+      }
+    }    
+    .bar-profile-img{
+      margin-left: 10px;
+    }
+  }
+  .rank-piece{
+    height: 50px;
+    max-width: 1240px;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 1px solid #e5d493;
+    border-radius: 10px;
+    padding: 2px 10px;
+    .rank-left{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      .crown{
+        width: 30px;
+      }
+      .border1{
+        border: 2px solid #815403;
+      }
+      .rank-top-ranking{
+        font-size: 18px;
+        margin-left: 9px;
+        margin-top: 4px;
+      }
+      .rank-low-ranking{
+        font-size: 18px;
+        margin-left: 9px;
+      }
+    }
+    .rank-center{
+      display: flex;
+      width: 200px;
+      .rank-nickname{
+        margin-top: 9px;
+        margin-left: 10px;
+      }
+      .bar-profile-img{
+        width: 38px;
+      }
+    }
+    .rank-right{
+      display: flex;
+      width: 150px;
+      .rank-like{
+        width: 20px;
+        color: #FFD68B;
+      }
+      .rank-like-count{
+        margin-top: 4px;
+        margin-left: 6px;
+      }
+    }    
+    .bar-profile-img{
+      margin-left: 10px;
+    }
+  };
+
+  .rank-etc{
+    font-size: 20px;
+    margin-top: 20px;
+  };
+};
+.rank-box::-webkit-scrollbar{
+  width: 5px;
+}
+.rank-box::-webkit-scrollbar-track{
+  background-color: #FFCE75;
+  border-radius:12px ;
+}
+.rank-box::-webkit-scrollbar-thumb{
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}

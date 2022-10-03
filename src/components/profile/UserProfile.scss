@@ -1,0 +1,138 @@
+.user-profile{
+  width: 100vw;
+  height: 100%;
+}
+.profile-set{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    width: 100vw;
+    height: 100%;
+    .user-profile-container{
+        height: 67vh;
+        min-height: 800px;
+        border-radius: 20px;
+        padding: 12px;
+        margin-top: 46px;
+        width: 1260px;
+        min-width: 1260px;
+        box-shadow: 1px 1px 5px #e5d493;
+        display: flex;
+        flex-direction: column;
+        h2{
+            font-size: 36px;
+            font-weight: bold;
+            padding: 40px 0 30px 50px;
+            color: #815403
+        }
+        .profile-container{
+            display: flex;
+            width: 1500px;
+            min-width: 1500px;
+            .profile-manage{
+                min-width: 300px;
+                height: 465px;
+                box-shadow: 1px 1px 5px #E5D493;
+                margin: 0 0 20px 50px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 15px;
+                .profile-image{
+                    margin: 50px auto;
+                    width: 220px;
+                    
+                    border-radius: 50%;
+                    -webkit-user-drag: none;
+                    color: #815403
+                }
+                .manage-container{
+                    width: 80%;
+                    margin: 0 auto;
+                    .profile-nickname{
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-left: 4px;
+                        margin-bottom: 5px;
+                    }
+                    .nickname-input{
+                        height: 38px;
+                        width: 100%;
+                        border-radius: 8px;
+                        outline: none;
+                    }
+                    .withdrawal{
+                      border: none;
+                      color: rgba(207, 197, 186, 0.933);
+                      background-color: transparent;
+                      cursor: pointer;
+                      font-size: 12px;
+                      float: right;
+                      margin: 10px 0px;
+                    }
+                }
+                
+            }
+            .profile-images-cont{
+              -webkit-user-drag: none;
+                // min-width: 900px;
+                width: 800px;
+                height: 450px;
+                box-shadow: 1px 1px 5px #E5D493;
+                margin: 0 44px 20px 50px;
+                border-radius: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                padding-top: 15px;
+                img{
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    height: 170px;
+                    -webkit-user-drag: none;
+                }
+            }
+        }
+        .profile-btns{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            .btns-left{
+                margin-left: 100px;
+                button{
+                    background-color: #FFEBA2;
+                    width: 160px;
+                    height: 40px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                    border:none;
+                    color: #815403;
+                    &:hover{
+                        background-color: #815403;
+                        color: white;
+                    }
+                }
+            }
+            .btns-right{
+                margin-right: 100px;
+                button{
+                    background-color: #FFEBA2;
+                    margin-left: 10px;
+                    width: 160px;
+                    height: 40px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                    border:none;
+                    color: #815403;
+                    &:hover{
+                        background-color: #815403;
+                        color: white;
+                    }
+                }
+                
+            }
+        }
+    }
+}

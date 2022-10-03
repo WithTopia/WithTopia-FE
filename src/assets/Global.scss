@@ -1,0 +1,115 @@
+.mainpage{
+  width: 100vw;
+  height: 100vh;
+}
+.layout{
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  .group-right{
+    height:min-content;
+  }
+  .main-rank{
+    min-width: 97.5%;
+    max-width: 97.5%;
+    height: 110px;
+    box-shadow: 1px 1px 5px #E5D493;
+    border-radius: 20px;
+    margin: 31px 10px 15px 0;
+    padding: 1px;
+    .rank{
+      margin: 25px auto;
+    }
+  };
+};
+.room{
+  width: 100vw;
+  height: 100vh;
+  .video-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 86vh;
+    background-color:#FFEBA3;
+    z-index: 1000;
+    padding: 30px;
+    border-radius: 15px;
+    .video-header{
+      display: flex;
+      justify-content: space-between;
+      h2{
+        margin-left: 10px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .video-sets{
+        a{
+          img{
+            width: 35px;
+          }
+        }
+        .siren{
+          width: 35px;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+        .message-control{
+          height: 31px;
+          width: 35px;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+      }
+    }
+    hr{
+      z-index: 2;
+      background-color: #815403;
+      height: 3px;
+      border: none;
+    }
+    .video-chat{
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      padding: 10px;
+      height: 76vh;
+      align-items: center;
+      .room-chat{
+        
+      }
+      .none{
+        display: none;
+      }
+      .room-video{
+      }
+    }
+    .video-setting{
+      margin: 0 auto;
+      margin-top: 6px;
+      width: 200px;
+      height: 41px;
+      background-color: white;
+      border-radius: 10px;
+      text-align: center;
+      img{
+        margin-left: 14px;
+        margin-right: 14px;
+        height: 42px;
+        cursor: pointer;
+      }
+    }
+    .video-record{
+    }
+  }
+}
+.rankings{
+  width: 100vw;
+  .ranking-layout{
+    display: flex;
+    justify-content: center;
+  }
+}

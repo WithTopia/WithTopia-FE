@@ -1,8 +1,13 @@
 import React from 'react'
+import Mainboard from '../components/mainBoard/MainBoard'
 
 const MainBoard = () => {
   return (
-    <div>MainBoard</div>
+  <>
+    <div className='main-board'>
+      <Mainboard/>
+    </div>
+  </>  
   )
 }
 

@@ -1,0 +1,44 @@
+.top-header{
+  background-color: #FFEBA3;
+  margin: 0 auto;
+  display: flex;
+  box-shadow: -10px -10px -10px #b4a56e inset;
+  
+  .header-wrap{
+    max-width: 1600px;
+    height: 80px;
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .wtLogo{
+    width: 200px;
+    margin: 15px 30px;    
+    -webkit-user-drag: none;
+    };
+
+    .header-form{
+      float: right;
+      display: flex;
+      background-color: rgba(247, 244, 224, 0.933);
+      padding: 1px 15px 1px 10px;
+      border-radius: 15px;
+      box-shadow: 0.5px 0.5px 1px #8d7932;
+
+      .search-input{
+        border: none;
+        outline: none;
+        background-color: rgba(247, 244, 224, 0.933);
+        margin: 5px;
+      };
+      .search{
+        width: 15px;
+        margin: 5px;
+        cursor: pointer;
+      };
+    };
+  };
+}

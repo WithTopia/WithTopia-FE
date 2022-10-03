@@ -28,7 +28,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     }
     
     const handleVote1 = async () => {
-        setVote(true)
+        const vote = true
         let nick = streamManager.stream.connection.data.split("%")[2]
         let token = localStorage.getItem("accessToken")
         let refreshtoken = localStorage.getItem("refreshtoken")
@@ -54,7 +54,7 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     }
 
     const handleVote2 = async () => {
-        setVote(false)
+        const vote = false
         let nick = streamManager.stream.connection.data.split("%")[2]
         let token = localStorage.getItem("accessToken")
         let refreshtoken = localStorage.getItem("refreshtoken")

@@ -3,8 +3,7 @@ import "./TopRanking.scss";
 import crown from '../../assets/crown.png';
 import crown2 from '../../assets/crown2.png';
 import crown3 from '../../assets/crown3.png';
-import crown4 from '../../assets/crown4.png';
-import like from "../../assets/like.png";
+import like from "../../assets/heart.png"
 import axios from 'axios';
 
 const Topranking = () => {

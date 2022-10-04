@@ -2,9 +2,8 @@ import React, { useState ,useEffect ,useCallback} from 'react'
 import Chat from "../components/chat/Chat"
 import Report from "../components/blackScreen/Report"
 import { OpenVidu } from 'openvidu-browser'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import VideoRecord from '../components/videoRecord/VideoRecord'
-import { createBrowserHistory } from 'history';
 import axios from 'axios'
 import "../components/videoRecord/VideoRecord.scss"
 import message from "../assets/messageIcon.png"
@@ -17,7 +16,6 @@ import siren from "../assets/siren.png"
 
 const Room = () => {
   const location = useLocation();
-  const navigate = useNavigate()
   let nickname = localStorage.getItem("nickname")
   let tokenStuff = location.state.token
   let refreshtoken = localStorage.getItem("refreshtoken")

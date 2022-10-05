@@ -25,6 +25,7 @@ const Report = ({setReport,nickname,nicknames}) => {
         setName(e.target.value)
     }
     const submitReport = async () => {
+        setLoading(true)
         const formData = new FormData();
         formData.append("image", image);
         formData.append("content", texts);
@@ -39,16 +40,15 @@ const Report = ({setReport,nickname,nicknames}) => {
             Swal.fire({title:"이미지를 선택해주세요.",confirmButtonColor:"#FFD68B"})
             return
         }
-        
         try{
             let refreshtoken = localStorage.getItem("refreshtoken")
             let accessToken = localStorage.getItem("accessToken")
             const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
             console.log(repo)
+            
             if(repo.data.statusMsg === "정상"){
-                setLoading((prev)=>!prev)
                 Swal.fire({title:"보내기 성공하였습니다.",confirmButtonColor:"#FFD68B"})
-                setLoading((prev)=>!prev)
+                setLoading(false)
                 // setReport((prev)=>!prev)
             }
             if(repo.data.errormessage){
@@ -85,7 +85,7 @@ const Report = ({setReport,nickname,nicknames}) => {
                 </select>
                 <textarea value={texts} placeholder="확증을 위해 스크린샷을 첨부해주세요." onChange={handleTexts}></textarea>
                 <button onClick={submitReport}>작성하기</button>
-                {loading ? <Loding></Loding> : null} 
+                {loading ? <Loding></Loding> : null}
             </div>
         </div>
         {/* <div className='report-out' onClick={handleReport}></div> */}

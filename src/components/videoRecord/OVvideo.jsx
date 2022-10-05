@@ -45,9 +45,6 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             }
         }catch(error){
             console.log(error)
-            if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
-                Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
-            }
         }
     }
 
@@ -61,17 +58,19 @@ const OVvideo = ({streamManager,role,nicknames}) => {
                 nickname:nick,
                 vote:vote
             },{headers:{"authorization":token,"refreshtoken":refreshtoken}})
-            if(req.data.errormessage === "정상"){
+            if(req.data.statusMsg === "정상"){
                 Swal.fire({title:"투표 완료",confirmButtonColor:"#FFD68B"})
-                return
             }
-            if(req.data.statusMsg){
-                Swal.fire({title:"인기도 투표 완료",confirmButtonColor:"#FFD68B"})
+            if(req.data.errormessage === "자신에게 투표할 수 없습니다."){
+                Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
             }
+            
         }catch(error){
             console.log(error)
             if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
                 Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})
+            }else{
+                Swal.fire({title:error.response.data.errormessage,confirmButtonColor:"#FFD68B"})
             }
         }
     }

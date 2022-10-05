@@ -76,7 +76,7 @@ const Sidebar = () => {
           <a href='/main'><p><AiOutlineHome color="rgb(153, 95, 7)"/> Home</p></a>
           <a href='/profile'><p><AiOutlineSmile color="rgb(153, 95, 7)"/> Profile</p></a>
           <a href='/rank'><p><AiOutlineStar color="rgb(153, 95, 7)"/> Rank</p></a>
-          <a onClick={handleWait}><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a>
+          {/* <a onClick={handleWait}><p><AiOutlineTeam color="rgb(153, 95, 7)"/> Friend</p></a> */}
           <a href='/'><p><AiOutlineSend color="rgb(153, 95, 7)"/> Description</p></a>
         </div>
       </div>

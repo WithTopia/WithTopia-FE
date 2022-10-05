@@ -1,5 +1,6 @@
 .alert-change-pw{
     .change-pw{
+        border-radius: 15px;
         width: 550px;
         height: 450px;
         background-color: white;
@@ -25,7 +26,7 @@
         font-weight: bold;
         .change-password-input{
             min-width:360px;
-            height: 23px;
+            height: 40px;
             border-radius: 8px;
             color : #815403;
             border: 2px solid #c7bca9;
@@ -49,7 +50,7 @@
             font-size: 20px;
             width: 120px;
             height: 50px;
-            
+            margin-top: 10px;
             background-color: #815403;
             border: 1px solid white;
             color: white;

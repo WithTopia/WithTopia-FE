@@ -177,6 +177,8 @@ const Room = () => {
 
   const reIssue = async () => {
     try{
+      let refreshtoken = localStorage.getItem("refreshtoken")
+      let accessToken = localStorage.getItem("accessToken")
       const repo = await axios.get(`/member/reissue`,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
       localStorage.removeItem("accessToken");
       localStorage.setItem("accessToken",repo.headers.authorization)

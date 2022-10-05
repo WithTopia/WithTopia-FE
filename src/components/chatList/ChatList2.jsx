@@ -48,7 +48,6 @@ const ChatList = () => {
     const searchPage = async () => {
         try{
             const repo = await axios.get(`/rooms/search/${page2Ref.current}?keyword=${keyWord}`)
-            
             if(repo.data.statusMsg === "정상"){
                 setSearchRooms([...data2Ref.current,...repo.data.data.content])
                 setLoading(false);

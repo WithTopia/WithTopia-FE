@@ -19,13 +19,11 @@ const OVvideo = ({streamManager,role,nicknames}) => {
     const checkVoted = () => {
         Swal.fire({title:"이미 투표 하셨습니다.",confirmButtonColor:"#FFD68B"})
     }
-    const handleBan = () => {
-        let nick = streamManager.stream.connection.data.split("%")[2]
-        dispatch(addNickName(nick))
-        // navigate("/room/:id",{state:{
-        //     targetName:streamManager.stream.connection.data.split("%")[2]
-        // }})
-    }
+
+    // const handleBan = () => { // 밴 기능
+    //     let nick = streamManager.stream.connection.data.split("%")[2]
+    //     dispatch(addNickName(nick))
+    // }
     
     const handleVote1 = async () => {
         const vote = true

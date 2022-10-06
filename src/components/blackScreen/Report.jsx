@@ -43,8 +43,7 @@ const Report = ({setReport,nickname,nicknames}) => {
         try{
             let refreshtoken = localStorage.getItem("refreshtoken")
             let accessToken = localStorage.getItem("accessToken")
-            const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})
-            console.log(repo)
+            const repo = await axios.post(`/report`,formData,{headers:{"authorization":accessToken,"refreshtoken":refreshtoken}})            
             
             if(repo.data.statusMsg === "정상"){
                 Swal.fire({title:"보내기 성공하였습니다.",confirmButtonColor:"#FFD68B"})

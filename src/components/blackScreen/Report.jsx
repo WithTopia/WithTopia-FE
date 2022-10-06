@@ -53,12 +53,13 @@ const Report = ({setReport,nickname,nicknames}) => {
             }
             if(repo.data.errormessage){
                 Swal.fire(repo.data.errormessage)
-                return
+                setLoading(false)
             }
 
         }catch(error){
             if(error.errormessage==="사용자를 찾을 수 없습니다."){
                 Swal.fire({title:"사용자를 찾을 수 없습니다.",confirmButtonColor:"#FFD68B"})
+                setLoading(false)
                 return
             }
         }

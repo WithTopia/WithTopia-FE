@@ -4,7 +4,7 @@ import axios from "axios"
 import Swal from "sweetalert2"
 import Loding from "../button/Loding"
 
-const Report = ({setReport,nickname,nicknames}) => {
+const Report = ({setReport,nicknames}) => {
     const [image,setImage] = useState("")
     const [texts,setTexts] = useState("")
     const [name,setName] = useState("")
@@ -35,7 +35,6 @@ const Report = ({setReport,nickname,nicknames}) => {
             return
         }
         if(image.type.includes("image")){
-            console.log("이미지")
         }else{
             Swal.fire({title:"이미지를 선택해주세요.",confirmButtonColor:"#FFD68B"})
             return
@@ -87,7 +86,6 @@ const Report = ({setReport,nickname,nicknames}) => {
                 {loading ? <Loding></Loding> : null}
             </div>
         </div>
-        {/* <div className='report-out' onClick={handleReport}></div> */}
     </div>
   )
 }

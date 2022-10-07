@@ -61,9 +61,7 @@ const ChatList = () => {
             }
             if(error.response.data.errormessage==="검색 결과가 없습니다."){
                 // setSearchRooms("")
-                console.log("검색 결과가 더 없습니다.")
             }
-            console.log(error)
             setSuccess(false)
             return
         } 
@@ -72,11 +70,9 @@ const ChatList = () => {
         if(success === true){
             try{
                 const repo = await axios.get(`/rooms/${pageRef.current}`)
-                console.log(repo.data)
                 setRooms([...dataRef.current,...repo.data.data.content])
                 setLoading(false);
             }catch(error){
-                console.log(error)
                 setSearchRoomCheck(true)
             }
         }
@@ -102,7 +98,6 @@ const ChatList = () => {
     };
     
     useEffect(()=>{ // 검색용
-        console.log("3")
         if(keyWord.length !== 0 && success === true){
             searchPage()
             setPage2(page2Ref.current + 1);

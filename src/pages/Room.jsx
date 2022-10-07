@@ -31,12 +31,7 @@ const Room = () => {
   const [chat,setChat] = useState(true) // 채팅창
   // 신고 기능 관련
   const [report,setReport] = useState(false)
-  const [nicknames,setNickNames] = useState(null)
-  // 뮤트, 히든 기능 관련
-  // const [mute,setMute] = useState(false)
-  // const [hidden,setHidden] = useState(false)
-  // const [userMute,setUserMute] = useState(false)
-  // const [userHidden,setUserHidden] = useState(false)
+  const [nicknames,setNickNames] = useState(null)  
 
   const deleteSubscriber = (streamManagerId) => {
     try{
@@ -142,27 +137,6 @@ const Room = () => {
     }
   }
 
-  // 보류
-  // const handleCam = () => {
-  //   setHidden((prev)=>!prev)
-  //   publisher.publishVideo(hidden)
-  // }
-  // const handleMic = () => {
-  //   setMute((prev)=>!prev)
-  //   publisher.publishAudio(mute)
-  // }
-  // const handleUserCam = () => {
-  //   setUserHidden((prev)=>!prev)
-  //   subscriber.subscribeToVideo(userHidden);
-  // }
-  // const handleUserMic = () => {
-  //   setUserMute((prev)=>!prev)
-  //   subscriber.subscribeToAudio(userMute);
-  // }
-
-  const handleBanUser = () => {
-  }
-
   window.onbeforeunload=function(){ // 브라우저 삭제 및 새로고침 시 leave
     leaveload()
   }
@@ -190,10 +164,8 @@ const Room = () => {
   },[subscribers])
 
   useEffect(()=>{ // 시작과 종료를 알리는
-    // window.addEventListener("beforeunload", leaveload); 
     joinSession()
     return () => {
-      // window.removeEventListener("beforeunload", leaveload);
     };
   },[])
 

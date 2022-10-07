@@ -55,7 +55,6 @@ const ChatList = () => {
     const findRoom = async () => {
         try{
             const repo = await axios.get(`/rooms/${pageRef.current}?keyword=`)
-            console.log(repo)
             setRooms([...dataRef.current,...repo.data.data.content])
             setLoading(false);
             setSearchRoomCheck(false)

@@ -81,13 +81,25 @@
 
 #### 💻**BE**
 
+ WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
+ 
+ 이메일 인증을 통한 회원가입
+ 
+ 카카오와 구글 소셜로그인
+ 
+ 인기도 투표기능 구현 
+ 
+ 신고기능 구현
+ 
+ 랭킹 기능 구현
+ 
 
 -----
 
 ### 주요 기능 설명📍
 <details>
 <summary> <b>아키텍쳐 바로보기</b> </summary>
-    <img src="https://user-images.githubusercontent.com/103446802/193493437-d7c033fd-5754-4482-9f1e-e6252249a23d.png"> 
+    <img src="https://user-images.githubusercontent.com/103446802/194292784-61fc0f1c-7552-4f48-a2af-487fdfd70f90.jpeg"> 
 </details>
 
 ----
@@ -95,6 +107,13 @@
 ### Trouble Shooting📍
 #### 💻**FE**
 
+##### Teouble
+방 생성 시 방이 곱절로 불러와지는 오류
+- state 관리 상의 문제로 2번 저장되는 문제를 파악 => state 초기화 관리 함수 수정으로 해결
+
+##### Teouble
+Like 버튼 클릭 시 다른 기능이 호툴되는 오류
+- 클릭 시 서버로 true/false가 아닌 null 값이 전달되는 문제를 파악 => state에 담지 않고 일반 상수값에 담아 사용하여 
 
 #### 💻**BE** 
 

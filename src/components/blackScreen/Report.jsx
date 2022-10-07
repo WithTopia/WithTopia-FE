@@ -76,8 +76,7 @@ const Report = ({setReport,nickname,nicknames}) => {
                     accept="image/*" 
                     className="file-input"></input>
                 <select onChange={handleNickName} value={name}>
-                    <option value="">대상자를 선택하세요.</option>
-                    {nicknames === undefined || null ? null : nicknames.map((name,index)=>{
+                    {nicknames === undefined || null ? <option value="">대상자를 선택하세요.</option> : nicknames.map((name,index)=>{
                         return(
                             <option value={name.nickname} key={index}>{name.nickname}</option>
                         )

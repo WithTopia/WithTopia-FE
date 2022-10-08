@@ -3,11 +3,13 @@
 ![readme](https://user-images.githubusercontent.com/103446802/193404269-46b95337-a95d-4120-9b4a-d6cf9034998b.jpg)
 
 # Introduction of Project
-## 프로젝트 설명📍
- - 비대면 활동이 늘어나는 지금 시대, 간단하게 진행하는 화상 채팅 웹앱이 필요하다는 생각이 들어 진행하게 되었습니다!
+ - [서비스 확인하러 가기](https://warmwinter.co.kr)
+ - [팀 노션 주소](https://www.notion.so/WITHTOPIA-WITHTO-61cf100aa57f4f9ba7b0a161416915f8)
+ - [발표 자료](https://docs.google.com/presentation/d/1lvsxPbOU7NUqNDmwWI6aHbP1O1ZOVq4g-PZD5NGICVM/edit?usp=sharing)
+ - [발표 영상](https://www.youtube.com/watch?v=rjlHIKMyEDw)
+## 프로젝트 동기📍
+ - 비대면 활동이 늘어나는 지금 시대, 간단하게 진행하는 화상 채팅 웹앱이 필요하다는 생각이 들어 진행하게 되었습니다 !
 
-### 서비스 확인해보러 가기~
-- [배포 사이트](https://warmwinter.co.kr)
 ### WithTopia 서비스 화면
 - 방생성
   <br/>

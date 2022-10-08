@@ -58,10 +58,9 @@ const OVvideo = ({streamManager,role,nicknames}) => {
             if(req.data.statusMsg === "정상"){
                 Swal.fire({title:"투표 완료",confirmButtonColor:"#FFD68B"})
             }
-            if(req.data.errormessage === "자신에게 투표할 수 없습니다."){
+            if(req.data.errormessage){
                 Swal.fire({title:req.data.errormessage,confirmButtonColor:"#FFD68B"})
             }
-            
         }catch(error){
             if(error.response.data.errormessage==="더이상 내려갈 인기도가 없습니다."){
                 Swal.fire({title:"더 이상 내려갈 인기도가 없습니다.",confirmButtonColor:"#FFD68B"})

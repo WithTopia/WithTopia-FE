@@ -1,23 +1,37 @@
-![readme](https://user-images.githubusercontent.com/103446802/193404269-46b95337-a95d-4120-9b4a-d6cf9034998b.jpg)
-
-
 <h1 style="text-align: center;">🌿 귀여운 동물친구들과 즐기는 화상채팅! 🌿</h1>
 
+![readme](https://user-images.githubusercontent.com/103446802/193404269-46b95337-a95d-4120-9b4a-d6cf9034998b.jpg)
 
-## Introduction of Project
-### What📍
+## 프로젝트 설명📍
+ - 비대면 활동이 늘어나는 지금 시대 ..! 간단하게 진행하는 화상 채팅 웹앱이 필요하다는 생각이 들어 진행하게 되었습니다.
+
+### 서비스 확인해보러 가기~
 - [배포 사이트](https://warmwinter.co.kr)
-
-### When📍
+### WithTopia 서비스 화면
+- 방생성
+  ![방생성](https://user-images.githubusercontent.com/79622280/194699492-65a1dccc-9f61-4be9-a639-dfb7c7299be0.gif)
+- 채팅
+  ![채팅](https://user-images.githubusercontent.com/79622280/194699390-056fe693-df23-47e1-8d75-5c32bf4e3a02.gif)
+- 신고 기능
+  ![유저신고](https://user-images.githubusercontent.com/79622280/194699415-14bfe333-59c9-43f7-86f1-820e79a6c1b0.gif)
+- 좋아요 / 싫어요
+  ![좋아요](https://user-images.githubusercontent.com/79622280/194699402-ce80b46b-1ecd-4401-a089-df3e8bc50db2.gif)
+- 프로필 변경
+  ![프로필 변경](https://user-images.githubusercontent.com/79622280/194699511-c3eaf850-cd91-428b-9511-a995228bbdb6.gif)
+- 비밀번호 변경
+  ![비밀번호변경](https://user-images.githubusercontent.com/79622280/194699520-d35ea28f-a298-4ab2-b6a1-bcaa89790914.gif)
+- 랭킹
+  ![랭킹](https://user-images.githubusercontent.com/79622280/194699503-51ba9419-3fe6-4785-a3a5-7e38a35ad54e.gif)
+- 회원탈퇴
+  ![회원탈퇴](https://user-images.githubusercontent.com/79622280/194699363-383f9cc3-f51f-4e9f-8b4b-795a6bfa29cd.gif)
+### 개발 기간📍
 - 2022.08.26 ~ 2022.10.03
-
-### Who📍
 
 #### FE
  <a href="https://github.com/hyunwung" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=서현웅🍎 &color=61dafb&style=for-the-badge&>"/></a>
  <a href="https://github.com/Kim-wonder" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=React&message=김혜진🥑 &color=61dafb&style=for-the-badge&>"/></a>
  
- #### BE
+#### BE
  <a href="https://github.com/ckstn0225" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=조원영🍋 &color=08CE5D&style=for-the-badge&>"/></a>
  <a href="https://github.com/neya0" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지성🍊 &color=08CE5D&style=for-the-badge&>"/></a>
  <a href="https://github.com/picjoy" target="_blank"><img height="40"  src="https://img.shields.io/static/v1?label=Spring&message=강지영🍒 &color=08CE5D&style=for-the-badge&>"/></a>
@@ -26,7 +40,6 @@
 <img width="180"  src="https://img.shields.io/static/v1?label=Design&message=정지현🥦 &color=FF7F50&style=for-the-badge&>"/></a>
 <br />
 
-### How📍
 #### **FE 🍎 🍇**
 <p>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
@@ -74,24 +87,27 @@
 ### 주요 기능 구현📍
 #### 💻**FE**
 
- WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
+ - WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
 
- Gamification 요소로 도입한 회원간 랭킹 시스템
+ - 회원 랭킹 시스템 페이징 구현
+
+ - 회원 프로필 관리 구현
+
 
 
 #### 💻**BE**
 
- WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
+ - WebRTC & WebSocket을 이용한 화상채팅 서비스 구현
  
- 이메일 인증을 통한 회원가입
+ - 이메일 인증을 통한 회원가입
  
- 카카오와 구글 소셜로그인
+ - 카카오와 구글 소셜로그인
  
- 인기도 투표기능 구현 
+ - 인기도 투표기능 구현 
  
- 신고기능 구현
+ - 신고기능 구현
  
- 랭킹 기능 구현
+ - 랭킹 기능 구현
  
 
 -----
@@ -99,22 +115,16 @@
 ### 주요 기능 설명📍
 <details>
 <summary> <b>아키텍쳐 바로보기</b> </summary>
-    <img src="https://user-images.githubusercontent.com/103446802/194292784-61fc0f1c-7552-4f48-a2af-487fdfd70f90.jpeg"> 
+  <img src="https://user-images.githubusercontent.com/103446802/194292784-61fc0f1c-7552-4f48-a2af-487fdfd70f90.jpeg"> 
 </details>
 
 ----
 
 ### Trouble Shooting📍
-#### 💻**FE**
-
-##### Teouble
-방 생성 시 방이 곱절로 불러와지는 오류
+##### Teouble 1
+방 생성 시 방이 곱절로 불러와지는 이슈
 - state 관리 상의 문제로 2번 저장되는 문제를 파악 => state 초기화 관리 함수 수정으로 해결
 
-##### Teouble
-Like 버튼 클릭 시 다른 기능이 호툴되는 오류
+##### Teouble 2
+Like 버튼 클릭 시 다른 기능이 호툴되는 이슈
 - 클릭 시 서버로 true/false가 아닌 null 값이 전달되는 문제를 파악 => state에 담지 않고 일반 상수값에 담아 사용하여 
-
-#### 💻**BE** 
-
-

@@ -10,22 +10,39 @@
 - [배포 사이트](https://warmwinter.co.kr)
 ### WithTopia 서비스 화면
 - 방생성
+  <br/>
   ![방생성](https://user-images.githubusercontent.com/79622280/194699492-65a1dccc-9f61-4be9-a639-dfb7c7299be0.gif)
+  <br/>
 - 채팅
+  <br/>
   ![채팅](https://user-images.githubusercontent.com/79622280/194699390-056fe693-df23-47e1-8d75-5c32bf4e3a02.gif)
+  <br/>
 - 신고 기능
+  <br/>
   ![유저신고](https://user-images.githubusercontent.com/79622280/194699415-14bfe333-59c9-43f7-86f1-820e79a6c1b0.gif)
+  <br/>
 - 좋아요 / 싫어요
+  <br/>
   ![좋아요](https://user-images.githubusercontent.com/79622280/194699402-ce80b46b-1ecd-4401-a089-df3e8bc50db2.gif)
+  <br/>
 - 프로필 변경
+  <br/>
   ![프로필 변경](https://user-images.githubusercontent.com/79622280/194699511-c3eaf850-cd91-428b-9511-a995228bbdb6.gif)
+  <br/>
 - 비밀번호 변경
+  <br/>
   ![비밀번호변경](https://user-images.githubusercontent.com/79622280/194699520-d35ea28f-a298-4ab2-b6a1-bcaa89790914.gif)
+  <br/>
 - 랭킹
+  <br/>
   ![랭킹](https://user-images.githubusercontent.com/79622280/194699503-51ba9419-3fe6-4785-a3a5-7e38a35ad54e.gif)
+  <br/>
 - 회원탈퇴
+  <br/>
   ![회원탈퇴](https://user-images.githubusercontent.com/79622280/194699363-383f9cc3-f51f-4e9f-8b4b-795a6bfa29cd.gif)
+  <br/>
 ### 개발 기간📍
+
 - 2022.08.26 ~ 2022.10.03
 
 #### FE
